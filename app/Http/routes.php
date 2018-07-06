@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 //后台首页
 Route::get('/admin','admin\IndexController@index');
+
+//测试
