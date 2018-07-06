@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录-X-admin1.1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/admins/css/font.css">
+	<link rel="stylesheet" href="/admins/css/xadmin.css">
+    <link rel="stylesheet" href="/admins/css/swiper.min.css">
+    <script type="text/javascript" src="/admins/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/admins/js/swiper.jquery.min.js"></script>
+    <script src="/admins/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/admins/js/xadmin.js"></script>
+
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="/admins/index.html">X-ADMIN V1.1</a></div>
+        <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
+        <ul class="layui-nav right" lay-filter="">
+          <li class="layui-nav-item">
+            <a href="javascript:;">admin</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              <dd><a href="">个人信息</a></dd>
+              <dd><a href="">切换帐号</a></dd>
+              <dd><a href="/admins/login.html">退出</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+          <div id="side-nav">
+            <ul id="nav">
+                <li class="list" current>
+                    <a href="/admin">
+                        <i class="iconfont">&#xe761;</i>
+                        欢迎页面
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe70b;</i>
+                        用户管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="#">
+                                <i class="iconfont">&#xe6a7;</i>
+                                用户列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加用户
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="iconfont">&#xe6a7;</i>
+                                回收站
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        分类管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="/admins/category.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                分类列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/category.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加分类
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        商品管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品列表
+                            </a>
+                        </li>
+                         <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品添加
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品修改
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品回收站
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        库存管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品库存
+                            </a>
+                        </li>
+                         <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加库存
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                修改库存
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        订单管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单列表
+                            </a>
+                        </li>
+                         <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加订单
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                修改订单
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单回收站
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        评论管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                评论列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                修改评论
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        轮播管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                轮播列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加轮播图
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                修改轮播图
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        推荐商品管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                推荐商品列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加推荐商品
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                修改推荐商品
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                    <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        友情链接管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                友情链接列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加友情链接
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admins/echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                修改友情链接
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe6a3;</i>
+                        系统设置
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admins/banner-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                网站配置
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 左侧菜单结束 -->
+        @section('content')
+
+        
+        @show
+    
+
+
+    <!-- 背景切换开始 -->
+	<div class="bg-changer">
+        <div class="swiper-container changer-list">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img class="item" src="/admins/images/a.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/b.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/c.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/d.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/e.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/f.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/g.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/h.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/i.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/j.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="/admins/images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><span class="reset">初始化</span></div>
+            </div>
+        </div>
+        <div class="bg-out"></div>
+        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
+    </div>
+    <!-- 背景切换结束 -->
+</body>
+</html>
