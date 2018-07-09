@@ -232,15 +232,9 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/echarts1.html">
+                            <a href="/admins/discuss">
                                 <i class="iconfont">&#xe6a7;</i>
                                 评论列表
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/echarts2.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                修改评论
                             </a>
                         </li>
                     </ul>
