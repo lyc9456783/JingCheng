@@ -55,8 +55,15 @@ class CatesController extends Controller
      */
     public function create()
     {
-
-        return view('admin.cates.create',['title'=>'添加分类','cates'=>self::getcates()]);
+         $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
+            foreach($cates as $k=>$v){
+            //统计逗号出现的次数
+            $i = substr_count($v->path,',');
+            //拼接|--
+            $v->classname = str_repeat('|----',$i).$v->classname;
+        }
+        // dump(self::getcates());
+        return view('admin.cates.create',['title'=>'添加分类','cates'=>$cates]);
     }
 
     /**
