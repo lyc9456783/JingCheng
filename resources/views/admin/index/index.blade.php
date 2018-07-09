@@ -1,8 +1,5 @@
 @extends('admin.common.common')
 
-@extends('admin.common.left')
-
-
 @section('content')    
         <!-- 右侧主体开始 -->
         <div class="page-content">

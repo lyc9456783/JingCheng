@@ -65,13 +65,13 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="/admins/category.html">
+                            <a href="/admin/cates">
                                 <i class="iconfont">&#xe6a7;</i>
                                 分类列表
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/category.html">
+                            <a href="/admin/cates/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加分类
                             </a>
@@ -282,7 +282,7 @@
                     <ul class="sub-menu" style="display:none">
                         <li>
                             <a href="/admins/banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
+                                <i class="iconfont">&#xe7ae;</i>
                                 网站配置
                             </a>
                         </li>
@@ -292,6 +292,16 @@
           </div>
         </div>
         <!-- 左侧菜单结束 -->
+            @if (session('success'))
+                 <script type="text/javascript">
+                    alert("{{session('success')}}",{icon: 1});
+                </script>
+            @endif
+            @if (session('error'))
+                <script type="text/javascript">
+                    alert("{{session('error')}}");
+                </script>
+            @endif
         @section('content')
         
         
