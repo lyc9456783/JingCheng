@@ -226,11 +226,7 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-<<<<<<< HEAD
-                            <a href="/admins/discuss">
-=======
                             <a href="/admin/discuss">
->>>>>>> origin/xiaoye
                                 <i class="iconfont">&#xe6a7;</i>
                                 评论列表
                             </a>
