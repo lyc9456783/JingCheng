@@ -233,29 +233,35 @@
                         </li>
                     </ul>
                 </li>
-                <li class="list" >
+                <li class="list" > 
                     <a href="javascript:;">
-                        <i class="layui-icon">&#xe857;</i> 
+                        <i class="iconfont">&#xe6a3;</i>
                         轮播管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/echarts1.html">
+                            <a href="/admin/slids/show">
+                                <i class="iconfont">&#xe6a7;</i>
+                                轮播图效果
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/slids">
                                 <i class="iconfont">&#xe6a7;</i>
                                 轮播列表
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/echarts2.html">
+                            <a href="/admin/slids/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加轮播图
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/echarts2.html">
+                            <a href="/admin/slids/delshow">
                                 <i class="iconfont">&#xe6a7;</i>
-                                修改轮播图
+                                轮播图回收站
                             </a>
                         </li>
                     </ul>
@@ -295,23 +301,18 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/echarts1.html">
+                            <a href="/admin/links">
                                 <i class="iconfont">&#xe6a7;</i>
                                 友情链接列表
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/echarts2.html">
+                            <a href="/admin/links/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加友情链接
                             </a>
                         </li>
-                        <li>
-                            <a href="/admins/echarts2.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                修改友情链接
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
                 <li class="list" >
