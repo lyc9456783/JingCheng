@@ -1,6 +1,5 @@
 @extends('admin.common.common')
 
-@extends('admin.common.left')
 
 @section('content') 
     <div class="page-content">
