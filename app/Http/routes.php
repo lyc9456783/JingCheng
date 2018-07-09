@@ -58,7 +58,7 @@ Route::get('/admin/discuss/delete','admin\DiscussController@delete');
 //后台库存
 Route::get('/admin/entrepot','admin\EntrepotController@index');
 Route::get('/admin/entrepot/create','admin\EntrepotController@create');
-//cesgu;;;
+//cesgu;;;asd
 
 
 
