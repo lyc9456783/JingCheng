@@ -38,19 +38,19 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="/admin/users/index">
                                 <i class="iconfont">&#xe6a7;</i>
                                 用户列表
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/users/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加用户
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/users/destroy/{id}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 回收站
                             </a>
