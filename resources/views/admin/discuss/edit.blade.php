@@ -1,11 +1,9 @@
 @extends('admin.common.common')
-@extends('admin.common.left')
 @section('content')
   <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
           <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
-            <div style="height:40px;"></div>
             <hr>
             <!-- 右侧内容框架，更改从这里开始 -->
             <div><a href="/admin/discuss"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe600;</i>列表</button></a></div>

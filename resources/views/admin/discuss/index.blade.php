@@ -1,11 +1,9 @@
 @extends('admin.common.common')
-@extends('admin.common.left')
 @section('content')
   <!-- 右侧主体开始 -->
         <div class="page-content">
           	<div class="content">
           	<div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
-            <div style="height:40px;"></div>
             <!-- <hr> -->
 			<!-- <h1 style="text-size:50px;">{{$title}}</h1> -->
             <!-- 右侧内容框架，更改从这里开始 -->
@@ -21,6 +19,7 @@
                   </div>
                 </div> 
             </form>
+            <hr> 
             <div><a href="/admin/discuss/delete"><button class="layui-btn layui-btn-danger" ><i class="layui-icon">&#xe640;</i>批量删除</button></a><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_discuss')->count()}} 条</span></div>
             @if(session('success'))
             <div class="alert alert-danger">
@@ -63,10 +62,10 @@
                             {{$v['id']}}
                         </td>
                         <td>
-                        	{{$v->gooddiscuss->name}}
+                        	{{$v['name']}}
                         </td>
                         <td>
-                            {{$v->userdiscuss->userinfo['nickname']}}
+                            {{$v['nickname']}}
                         </td>
                         <td >
                             {{$v['content']}}
@@ -84,9 +83,7 @@
                     @endforeach
                 </tbody>  
             </table>
-          	<div class="layui" style="font-size:40px;width:400px; text-align: right;float:left;">
-                <div id="page">{!! $data->appends(['search' => $req])->render() !!}</div>
-          	</div>
+                <div id="page">{!! $data->render() !!}</div>
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>

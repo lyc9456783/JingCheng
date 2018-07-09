@@ -1,5 +1,4 @@
 @extends('admin.common.common')
-@extends('admin.common.left')
 @section('content')
   <!-- 右侧主体开始 -->
         <div class="page-content">
@@ -21,7 +20,8 @@
                   </div>
                 </div> 
             </form>
-            <div><a href="/admin/discuss/delete"><button class="layui-btn layui-btn-danger" ><i class="layui-icon">&#xe640;</i>批量删除</button></a><a href="/admin/entrepot/create"><button class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</button></a><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_discuss')->count()}} 条</span></div>
+            <hr>
+            <div><a href="/admin/entrepot/delete"><button class="layui-btn layui-btn-danger" ><i class="layui-icon">&#xe640;</i>批量删除</button></a><a href="/admin/entrepot/create"><button class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</button></a><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_discuss')->count()}} 条</span></div>
             @if(session('success'))
             <div class="alert alert-danger">
                 <ul>
