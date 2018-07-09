@@ -20,6 +20,7 @@ Route::get('/admin','admin\IndexController@index');
 
 
 
+
 //分类路由列表
 Route::get('/admin/cates','admin\CatesController@index');
 //分类添加
@@ -46,24 +47,6 @@ Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
 Route::get('/admin/discuss/create','admin\DiscussController@create');
@@ -75,9 +58,6 @@ Route::get('/admin/discuss/delete','admin\DiscussController@delete');
 //后台库存
 Route::get('/admin/entrepot','admin\EntrepotController@index');
 Route::get('/admin/entrepot/create','admin\EntrepotController@create');
-//cesgu;;;asd
-
-
 
 
 
