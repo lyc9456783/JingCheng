@@ -20,11 +20,19 @@ class DiscussController extends Controller
     {
         // $req = $request -> has('search');
             $req = $request -> input('search','');
-            $data1 = Goods::where('name','like','%'.$req.'%')->get();
-            foreach ($data1 as $k => $v)
-            {
-                $data = Discuss::where('gid','=',$v->id)->paginate(3);
-            }
+            $data = DB::table('jc_discuss as d')
+                ->join('jc_goods as g','d.gid','=','g.id')
+                ->join('jc_users as u','d.uid','=','u.id')
+                ->join('jc_user_details as user','user.uid','=','u.id')
+                ->where('g.name','like','%'.$req.'%')
+                ->select('d.id','g.name','user.nickname','d.content')
+                ->paginate(2)->appends($request->input());
+            // dump($data);
+            // $data1 = Goods::where('name','like','%'.$req.'%')->get();
+            // foreach ($data1 as $k => $v)
+            // {
+            //     $data = Discuss::where('gid','=',$v->id)->paginate(10);
+            // }
 
              // return view('admin.discuss.index',['title'=>'评论列表','data'=>$data,'req'=>$req]);
         

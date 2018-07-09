@@ -172,21 +172,15 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/entrepot">
                                 <i class="iconfont">&#xe6a7;</i>
                                 商品库存
                             </a>
                         </li>
                          <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/entrepot/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加库存
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                修改库存
                             </a>
                         </li>
                     </ul>
@@ -232,7 +226,7 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/discuss">
+                            <a href="/admin/discuss">
                                 <i class="iconfont">&#xe6a7;</i>
                                 评论列表
                             </a>

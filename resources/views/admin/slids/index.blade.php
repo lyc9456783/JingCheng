@@ -1,7 +1,6 @@
 @extends('admin.common.common')
 
 
-
 @section('content')
 <!-- 轮播图添加 -->
 <div class="page-content">
