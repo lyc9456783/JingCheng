@@ -11,15 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-//后台首页
-Route::get('/admin','admin\IndexController@index');
 
 
 
+
+<<<<<<< HEAD
 //测试
 
 
@@ -42,6 +38,11 @@ Route::get('/admin/cates/getdel','admin\CatesController@getdel');
 Route::get('/admin/cates/reset/{id}','admin\CatesController@reset');
 //分类永久删除
 Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
+=======
+
+
+
+>>>>>>> origin/qiu
 
 
 
@@ -74,6 +75,7 @@ Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
 
 
 
+<<<<<<< HEAD
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
 Route::get('/admin/discuss/create','admin\DiscussController@create');
@@ -85,6 +87,8 @@ Route::get('/admin/discuss/delete','admin\DiscussController@delete');
 //后台库存
 Route::get('/admin/entrepot','admin\EntrepotController@index');
 Route::get('/admin/entrepot/create','admin\EntrepotController@create');
+=======
+>>>>>>> origin/qiu
 
 
 
@@ -124,6 +128,7 @@ Route::get('/admin/entrepot/create','admin\EntrepotController@create');
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -134,16 +139,40 @@ Route::get('/admin/entrepot/create','admin\EntrepotController@create');
 
 
 
+=======
+//设置引入后台用户列表的模板
+Route::get('/admin/users/index','admin\UsersController@index');
 
+//设置引入后台用户添加的模板
+Route::get('/admin/users/create','admin\UsersController@create');
 
+//设置用户添加到数据库
+Route::post('/admin/users/store','admin\UsersController@store');
 
+//设置用户修改
+Route::get('/admin/users/edit/{id}','admin\UsersController@edit');
 
+//设置用户修改
+Route::get('/admin/users/pass/{id}','admin\UsersController@pass');
 
+//设置用户修改
+Route::post('/admin/users/update/{id}','admin\UsersController@update');
 
+//设置用户删除
+Route::get('/admin/users/del/{id}','admin\UsersController@del');
 
+//设置用户删除
+Route::get('/admin/users/destroy/{id}','admin\UsersController@destroy');
 
+//设置用户信息恢复还原
+Route::get('/admin/users/reset/{id}','admin\UsersController@reset');
 
+//设置永久删除数据
+Route::get('/admin/users/delete/{id}','admin\UsersController@delete');
 
+//设置用户修改密码
+Route::post('admin/users/passupdate/{id}','admin\UsersController@passupdate');
+>>>>>>> origin/qiu
 
 
 
@@ -197,6 +226,17 @@ Route::get('/admin/entrepot/create','admin\EntrepotController@create');
 
 
 
+
+
+
+
+
+
+
+
+
+
+<<<<<<< HEAD
 //路由 李银昌
 //登陆 注册
 Route::get('/admin/login','admin\LoginController@index');
@@ -243,3 +283,10 @@ Route::get('/admin/slids/delshow','admin\slidsController@delshow');
 Route::get('/admin/slids/delOk/{id}','admin\slidsController@delOk');
 Route::get('/admin/slids/restore/{id}','admin\slidsController@restore');
 Route::get('/admin/slids/close/{id}','admin\slidsController@restore');
+=======
+
+
+
+
+
+>>>>>>> origin/qiu
