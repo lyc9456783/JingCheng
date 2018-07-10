@@ -10,15 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-
-
-
-
-<<<<<<< HEAD
-//测试
-
-
+//首页路由
+Route::get('/',function(){
+	return view('welcome');
+});
+//后台主页路由
+Route::get('/admin','admin\IndexController@index');
 
 //分类路由列表
 Route::get('/admin/cates','admin\CatesController@index');
@@ -38,11 +35,6 @@ Route::get('/admin/cates/getdel','admin\CatesController@getdel');
 Route::get('/admin/cates/reset/{id}','admin\CatesController@reset');
 //分类永久删除
 Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
-=======
-
-
-
->>>>>>> origin/qiu
 
 
 
@@ -75,7 +67,7 @@ Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
 
 
 
-<<<<<<< HEAD
+
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
 Route::get('/admin/discuss/create','admin\DiscussController@create');
@@ -87,8 +79,6 @@ Route::get('/admin/discuss/delete','admin\DiscussController@delete');
 //后台库存
 Route::get('/admin/entrepot','admin\EntrepotController@index');
 Route::get('/admin/entrepot/create','admin\EntrepotController@create');
-=======
->>>>>>> origin/qiu
 
 
 
@@ -128,7 +118,6 @@ Route::get('/admin/entrepot/create','admin\EntrepotController@create');
 
 
 
-<<<<<<< HEAD
 
 
 
@@ -139,7 +128,10 @@ Route::get('/admin/entrepot/create','admin\EntrepotController@create');
 
 
 
-=======
+
+
+
+
 //设置引入后台用户列表的模板
 Route::get('/admin/users/index','admin\UsersController@index');
 
@@ -162,7 +154,7 @@ Route::post('/admin/users/update/{id}','admin\UsersController@update');
 Route::get('/admin/users/del/{id}','admin\UsersController@del');
 
 //设置用户删除
-Route::get('/admin/users/destroy/{id}','admin\UsersController@destroy');
+Route::get('/admin/users/destroy','admin\UsersController@destroy');
 
 //设置用户信息恢复还原
 Route::get('/admin/users/reset/{id}','admin\UsersController@reset');
@@ -172,7 +164,6 @@ Route::get('/admin/users/delete/{id}','admin\UsersController@delete');
 
 //设置用户修改密码
 Route::post('admin/users/passupdate/{id}','admin\UsersController@passupdate');
->>>>>>> origin/qiu
 
 
 
@@ -236,7 +227,8 @@ Route::post('admin/users/passupdate/{id}','admin\UsersController@passupdate');
 
 
 
-<<<<<<< HEAD
+
+
 //路由 李银昌
 //登陆 注册
 Route::get('/admin/login','admin\LoginController@index');
@@ -265,28 +257,22 @@ Route::get('/admin/links/destroy/{id}','admin\LinksController@destroy')->where('
 
 
 //轮播图管理
-Route::get('/admin/slids','admin\slidsController@index');
-Route::get('/admin/slids/create','admin\slidsController@create');
+Route::get('/admin/slids','admin\SlidsController@index');
+Route::get('/admin/slids/create','admin\SlidsController@create');
 //保存添加
-Route::post('/admin/slids/store','admin\slidsController@store');
+Route::post('/admin/slids/store','admin\SlidsController@store');
 //编辑修改
-Route::get('/admin/slids/edit/{id}','admin\slidsController@edit');
+Route::get('/admin/slids/edit/{id}','admin\SlidsController@edit');
 //保存更新
-Route::post('/admin/slids/update/{id}','admin\slidsController@update');
+Route::post('/admin/slids/update/{id}','admin\SlidsController@update');
 //保存更新
-Route::get('/admin/slids/show','admin\slidsController@show');
+Route::get('/admin/slids/show','admin\SlidsController@show');
 //删除单条轮播
-Route::get('/admin/slids/destroy/{id}','admin\slidsController@destroy');
+Route::get('/admin/slids/destroy/{id}','admin\SlidsController@destroy');
 //轮播图回收站
-Route::get('/admin/slids/delshow','admin\slidsController@delshow');
+Route::get('/admin/slids/delshow','admin\SlidsController@delshow');
 //彻底删除用户
-Route::get('/admin/slids/delOk/{id}','admin\slidsController@delOk');
-Route::get('/admin/slids/restore/{id}','admin\slidsController@restore');
-Route::get('/admin/slids/close/{id}','admin\slidsController@restore');
-=======
+Route::get('/admin/slids/delOk/{id}','admin\SlidsController@delOk');
+Route::get('/admin/slids/restore/{id}','admin\SlidsController@restore');
+Route::get('/admin/slids/close/{id}','admin\SlidsController@restore');
 
-
-
-
-
->>>>>>> origin/qiu

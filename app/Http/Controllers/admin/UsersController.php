@@ -226,7 +226,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
         //获取被软删除用户的数据
         $data = Users::onlyTrashed()->get();
