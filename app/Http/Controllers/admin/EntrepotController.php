@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Entrepots;
 use App\Models\Goods;
+use App\Models\Cates;
 class EntrepotController extends Controller
 {
     /**
@@ -28,8 +29,15 @@ class EntrepotController extends Controller
      */
     public function create()
     {
+        $cates = Cates::all();
+        foreach($cates as $k=>$v){
+            //统计逗号出现的次数
+            $i = substr_count($v->path,',');
+            //拼接|--
+            $v->classname = str_repeat('|----',$i).$v->classname;
+        }
         $data = Goods::all();
-        return view('admin.entrepot.create',['title'=>'添加库存','data'=>$data]);
+        return view('admin.entrepot.create',['title'=>'添加库存','cates'=>$cates,'data'=>$data]);
     }
 
     /**
@@ -40,7 +48,8 @@ class EntrepotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $req = $request -> except(['_token']); 
+        dump($req);
     }
 
     /**

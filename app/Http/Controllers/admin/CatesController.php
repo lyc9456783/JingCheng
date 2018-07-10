@@ -55,7 +55,7 @@ class CatesController extends Controller
      */
     public function create()
     {
-         $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
+        $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
             foreach($cates as $k=>$v){
             //统计逗号出现的次数
             $i = substr_count($v->path,',');

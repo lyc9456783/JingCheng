@@ -8,15 +8,15 @@
             <div style="height:40px;"></div>
             <hr>
             <div><a href="/admin/entrepot"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe600;</i>列表</button></a></a><a href="/admin/entrepot/create"><button class="layui-btn" ><i class="layui-icon">&#xe608;</i>添加</button></a></div>
-            <form class="layui-form" action="/admin/cates/store" method="post">
+            <form class="layui-form" action="/admin/entrepot/store" method="post">
               {{csrf_field()}}
               <div class="layui-form-item">
                 <label class="layui-form-label">分类名称</label>
                 <div class="layui-input-block" style="width:300px">
                   <select name="pid">
                     <option value="0">--请选择--</option>
-                    @foreach ($data as $k=>$v)
-                      <option value="{{$v->id}}">{{$v->name}}</option>
+                    @foreach ($cates as $k=>$v)
+                      <option value="{{$v->id}}">{{$v->classname}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -30,7 +30,18 @@
                   </select>
                 </div>
               </div>
-
+              <div class="layui-form-item">
+                <label class="layui-form-label">库存数量</label>
+                <div class="layui-input-inline">
+                  <input type="int" name="num" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">开关</label>
+                <div class="layui-input-block">
+                  <input type="checkbox" name="switch" lay-skin="switch" lay-text="上架|下架">
+                </div>
+              </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
                   <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>

@@ -49,7 +49,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="/admins/index.html">京城后台管理 V1.0</a></div>
+        <div class="logo"><a href="/admin">京城后台管理 V1.0</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">

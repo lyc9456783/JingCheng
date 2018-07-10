@@ -49,15 +49,22 @@ Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
 
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
+//评论添加
 Route::get('/admin/discuss/create','admin\DiscussController@create');
 Route::post('/admin/discuss/store','admin\DiscussController@store');
+//评论修改
 Route::get('/admin/discuss/edit/{id}','admin\DiscussController@edit');
 Route::post('/admin/discuss/update/{id}','admin\DiscussController@update');
+//评论删除
 Route::get('/admin/discuss/destroy/{id}','admin\DiscussController@destroy');
 Route::get('/admin/discuss/delete','admin\DiscussController@delete');
 //后台库存
 Route::get('/admin/entrepot','admin\EntrepotController@index');
+//库存添加
 Route::get('/admin/entrepot/create','admin\EntrepotController@create');
+Route::post('/admin/entrepot/store','admin\EntrepotController@store');
+
+
 
 
 
