@@ -1,5 +1,10 @@
 @extends('admin.common.common')
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9fd39c505ee382cf929c7ffc2dbe3e0684798e9e
 @section('content') 
         <!-- 右侧主体开始 -->
         <div class="page-content">
