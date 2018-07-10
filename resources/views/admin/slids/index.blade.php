@@ -4,20 +4,14 @@
 @section('content')
 <!-- 轮播图添加 -->
 <div class="page-content">
-          <div class="content">
+        <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="">
-                <div class="layui-form-pane" style="text-align: center;">
+            <form class="layui-form xbs" action="/admin/slids">
+                <div class="layui-form-pane" >
                   <div class="layui-form-item" style="display: inline-block;">
-                    <label class="layui-form-label xbs768">日期范围</label>
-                    <div class="layui-input-inline xbs768">
-                      <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-                    </div>
-                    <div class="layui-input-inline xbs768">
-                      <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-                    </div>
+
                     <div class="layui-input-inline">
-                      <input type="text" name="search" placeholder="路径关键字" autocomplete="off" class="layui-input">
+                      <input type="text" name="search" placeholder="路径关键词" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon"></i></button>
@@ -25,7 +19,7 @@
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button><button class="layui-btn" onclick="location='/admin/slids/create'"><i class="layui-icon"></i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button><button class="layui-btn" onclick="location='/admin/slids/create'"><i class="layui-icon"></i>添加</button></xblock>
 				<!-- 表格开始 -->
 					<table class="layui-table">
 		                <thead>
@@ -84,8 +78,8 @@
 				<!-- 表格结束 -->
 
             <!-- 右侧内容框架，更改从这里结束 -->
-          </div>
         </div>
+</div>
 <!-- 轮播图结束 -->
 
 

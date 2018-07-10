@@ -5,15 +5,9 @@
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form xbs" action="/admin/links">
-                <div class="layui-form-pane" style="text-align: center;">
+                <div class="layui-form-pane" >
                   <div class="layui-form-item" style="display: inline-block;">
-                    <label class="layui-form-label xbs768">日期范围</label>
-                    <div class="layui-input-inline xbs768">
-                      <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-                    </div>
-                    <div class="layui-input-inline xbs768">
-                      <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-                    </div>
+
                     <div class="layui-input-inline">
                       <input type="text" name="search" placeholder="请输入用户名" autocomplete="off" class="layui-input">
                     </div>
@@ -23,7 +17,7 @@
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button><button class="layui-btn" onclick="location='/admin/links/create'"><i class="layui-icon"></i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button><button class="layui-btn" onclick="location='/admin/links/create'"><i class="layui-icon"></i>添加</button></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>

@@ -225,21 +225,21 @@ Route::get('/admin/links/destroy/{id}','admin\LinksController@destroy')->where('
 
 
 //轮播图管理
-Route::get('/admin/slids','admin\slidsController@index');
-Route::get('/admin/slids/create','admin\slidsController@create');
+Route::get('/admin/slids','admin\SlidsController@index');
+Route::get('/admin/slids/create','admin\SlidsController@create');
 //保存添加
-Route::post('/admin/slids/store','admin\slidsController@store');
+Route::post('/admin/slids/store','admin\SlidsController@store');
 //编辑修改
-Route::get('/admin/slids/edit/{id}','admin\slidsController@edit');
+Route::get('/admin/slids/edit/{id}','admin\SlidsController@edit');
 //保存更新
-Route::post('/admin/slids/update/{id}','admin\slidsController@update');
+Route::post('/admin/slids/update/{id}','admin\SlidsController@update');
 //保存更新
-Route::get('/admin/slids/show','admin\slidsController@show');
+Route::get('/admin/slids/show','admin\SlidsController@show');
 //删除单条轮播
-Route::get('/admin/slids/destroy/{id}','admin\slidsController@destroy');
+Route::get('/admin/slids/destroy/{id}','admin\SlidsController@destroy');
 //轮播图回收站
-Route::get('/admin/slids/delshow','admin\slidsController@delshow');
+Route::get('/admin/slids/delshow','admin\SlidsController@delshow');
 //彻底删除用户
-Route::get('/admin/slids/delOk/{id}','admin\slidsController@delOk');
-Route::get('/admin/slids/restore/{id}','admin\slidsController@restore');
-Route::get('/admin/slids/close/{id}','admin\slidsController@restore');
+Route::get('/admin/slids/delOk/{id}','admin\SlidsController@delOk');
+Route::get('/admin/slids/restore/{id}','admin\SlidsController@restore');
+Route::get('/admin/slids/close/{id}','admin\SlidsController@restore');

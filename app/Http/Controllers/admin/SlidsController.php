@@ -21,8 +21,8 @@ class SlidsController extends Controller
         //获取搜素条件
         $search = $request -> input('search','');
 
-        $data = Slids::where('surl','like','%'.$search.'%')->paginate(10)->appends($request->input());
-        $data = Slids::paginate(10);
+        //搜索分页
+        $data = Slids::where('surl','like','%'.$search.'%')->paginate(5)->appends($request->input());
 
         return view('admin.slids.index',['data'=>$data]);
     }
@@ -165,11 +165,13 @@ class SlidsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delshow()
+    public function delshow(Request $request)
     {
-        
-        //以删除的用户
-        $data = Slids::onlyTrashed() -> paginate(10);
+        //获取搜素条件
+        $search = $request -> input('search','');
+
+        //以删除的用户 
+        $data = Slids::where('surl','like','%'.$search.'%')->onlyTrashed() -> paginate(5)->appends($request->input());
         //dd($data);
 
         return view('admin.slids.delshow',['data'=>$data]);

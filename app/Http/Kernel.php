@@ -35,7 +35,6 @@ class Kernel extends HttpKernel
         'login' => \App\Http\Middleware\DiscussMiddleware::class,
 
 
-        'guest' => \AWWpp\Http\Middleware\RedirectIfAuthenticated::class,
     
     ];
 }
