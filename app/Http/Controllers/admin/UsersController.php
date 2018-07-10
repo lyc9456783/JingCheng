@@ -29,10 +29,10 @@ class UsersController extends Controller
         // $userdetails = DB::table('jc_user_details')->get();
         // dd($userdetails);
         //设置计算数据表中所有信息的数量
-        // $count = DB::table('jc_users')->whereNull('deleted_at')->count();
+        $count = DB::table('jc_users')->whereNull('deleted_at')->count();
 
         //用户列表
-        return view('admin.users.index',['data'=>$data]);
+        return view('admin.users.index',['data'=>$data,'count'=>$count]);
     }
 
     /**

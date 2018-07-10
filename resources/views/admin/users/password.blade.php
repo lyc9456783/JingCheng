@@ -1,8 +1,5 @@
 @extends('admin.common.common')
 
-@extends('admin.common.left')
-
-
 @section('content') 
     <!-- 中部开始 -->
     <div class="wrapper">
