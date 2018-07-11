@@ -1,6 +1,5 @@
 @extends('admin.common.common')
 
-
 @section('content') 
 
 
@@ -50,8 +49,13 @@
                    <div class="layui-form-item">
                     <label class="layui-form-label">性别</label>
                     <div class="layui-input-block">
+                    @if($data->Userdetails->sex == 0)
+                      <input type="radio" name="sex" value="1" title="男">
+                      <input type="radio" name="sex" value="0" title="女" checked="">
+                    @else
                       <input type="radio" name="sex" value="1" title="男" checked="">
                       <input type="radio" name="sex" value="0" title="女">
+                    @endif
                     </div>
                   </div>
                   <div class="layui-form-item">

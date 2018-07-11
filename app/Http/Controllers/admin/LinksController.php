@@ -21,7 +21,7 @@ class LinksController extends Controller
     {
 
        
-           $search = $request -> input('search','');
+        $search = $request -> input('search','');
         
 
         //查询所有数据
