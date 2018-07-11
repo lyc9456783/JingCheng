@@ -6,19 +6,6 @@
           <div class="content">
           <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
           <hr>
-            <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="" >
-                <div class="layui-form-pane" style="text-align: right;">
-                  <div class="layui-form-item" style="display: inline-block;">
-                    <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                    </div>
-                  </div>
-                </div> 
-            </form>
             <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
             <table class="layui-table">
                 <thead>
@@ -50,13 +37,13 @@
                             <td>普通用户</td>
                         @endif
                         <td class="td-manage">
-                            <a title="还原" href="/admin/users/reset/{{ $v['id'] }}" onclick="member_edit('还原','member-edit.html','4','','510')"
+                            <a title="还原" href="/admin/users/reset/{{ $v['id'] }}" 
                             class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-                            <a title="删除" href="/admin/users/delete/{{ $v['id'] }}" onclick="member_del(this,'1')" 
+                                <i class="layui-icon">&#xe63d;</i>还原
+                            </a>&nbsp
+                            <a title="删除" href="/admin/users/delete/{{ $v['id'] }}"  
                             style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
+                                <i class="layui-icon">&#xe640;</i>永久删除
                             </a>
                         </td>
                     </tr>

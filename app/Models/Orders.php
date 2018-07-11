@@ -18,4 +18,10 @@ class Orders extends Model
     	return $this->belongsTo('App\Models\Users','uid');
     }
 
+    //配置商品属于订单关系
+    public function ordersgoods()
+    {
+    	return $this->belongsTo('App\Models\Goods','gid');
+    }
+
 }

@@ -6,6 +6,11 @@
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
+          <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+          <div style="text-align: right;">
+          <button class="layui-btn" onclick="location='/admin/users/index'">返回列表</button>
+          </div> 
+          <hr>
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form" action="/admin/users/passupdate/{{ $data -> id }}" method="post">
                 {{ csrf_field() }}
@@ -35,7 +40,7 @@
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
+                        6-14位字符（支持数字/字母/符号）
                     </div>
                 </div>
                 <div class="layui-form-item">

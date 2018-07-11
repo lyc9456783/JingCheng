@@ -21,16 +21,13 @@ class UsersController extends Controller
     {   
         //获取请求的参数,也就是说需要搜索额参数
         $search = $request -> input('search','');  //表示如果有值就进行搜索,没有值就为空
-        // dd($search);
+
         //设置查询数据库中的信息
         $data = Users::where('username','like','%'.$search.'%')->paginate(3)->appends($request->input());
 
-        //获取详情表的信息
-        // $userdetails = DB::table('jc_user_details')->get();
-        // dd($userdetails);
         //设置计算数据表中所有信息的数量
         $count = DB::table('jc_users')->whereNull('deleted_at')->count();
-        // dd($data);
+        
         //用户列表
         return view('admin.users.index',['data'=>$data,'count'=>$count,'title'=>'用户列表']);
     }
@@ -42,10 +39,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-
         //用户添加
-        return view('admin.users.add',['title'=>'添加用户']);
-        
+        return view('admin.users.add',['title'=>'添加用户']);   
     }
 
     /**
@@ -58,9 +53,9 @@ class UsersController extends Controller
     {   
         // //获取数据
         $data = $request -> all();
-        // dd($data);
+        
         $data['password'] = Hash::make($data['password']);
-        // dd($data);
+        
         //处理保存图片
         if($request -> hasFile('face')){
             
@@ -77,24 +72,40 @@ class UsersController extends Controller
 
             // 保存文件
             $profile -> move('./uploads/hpic/'.$dirname,$filename); 
-            $fileadd = ('/uploads/hpic/'.$dirname.'/'.$filename);  
+            $fileadd = ('/uploads/hpic/'.$dirname.'/'.$filename); 
+
+            //获取最后插入数据的ID号
+            $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'email'=>$data['email'],'password'=>$data['password'],'grade'=>$data['grade']]);
+        
+            //添加用户详情表中的数据
+            $res = DB::table('jc_user_details')->insert(['uid'=>$uid,'face'=>$fileadd,'nickname'=>$data['nickname'],'id_card'=>$data['id_card'],'phone'=>$data['phone'],'sex'=>$data['sex'],'addr'=>$data['addr']]);
+            
+            //对数据的添加进行整体的判断
+            if ($res == true) {
+                return redirect('/admin/users/index')-> with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
+
         } else {
-            return back() -> with('error','图片存储失败');
+
+            //设置用户的默认头像
+            $fileadd = ('/uploads/hpic/mr/'.'CHZEvbLFV707vZ1ONYuT.jpg'); 
+
+            //获取最后插入数据的ID号
+            $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'email'=>$data['email'],'password'=>$data['password'],'grade'=>$data['grade']]);
+        
+            //添加用户详情表中的数据
+            $res = DB::table('jc_user_details')->insert(['uid'=>$uid,'face'=>$fileadd,'nickname'=>$data['nickname'],'id_card'=>$data['id_card'],'phone'=>$data['phone'],'sex'=>$data['sex'],'addr'=>$data['addr']]);
+            
+            //对数据的添加进行整体的判断
+            if ($res == true) {
+                return redirect('/admin/users/index')-> with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
         } 
-
-        //获取最后插入数据的ID号
-        $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'email'=>$data['email'],'password'=>$data['password'],'grade'=>$data['grade']]);
-        // dump($uid);
-        //添加用户详情表中的数据
-        $res = DB::table('jc_user_details')->insert(['uid'=>$uid,'face'=>$fileadd,'nickname'=>$data['nickname'],'id_card'=>$data['id_card'],'phone'=>$data['phone'],'sex'=>$data['sex'],'addr'=>$data['addr']]);
-        // dd($res);
-
-        //对数据的添加进行整体的判断
-        if ($res == true) {
-            return redirect('/admin/users/index')-> with('success','添加成功');
-        }else{
-            return back()->with('error','添加失败');
-        }
+  
     }
 
     /**
@@ -139,7 +150,7 @@ class UsersController extends Controller
         $data = Users::find($id);
         // dd($data);
         //加载视图显示要更改的信息
-        return view('admin.users.edit',['data'=>$data]);
+        return view('admin.users.edit',['data'=>$data,'title'=>'修改信息']);
     }
 
     //设置用户密码的模板显示
@@ -149,7 +160,7 @@ class UsersController extends Controller
         $data = Users::find($id);
         // dd($data);
         //加载视图显示要更改的信息
-        return view('admin.users.password',['data'=>$data]);
+        return view('admin.users.password',['data'=>$data,'title'=>'修改密码']);
     }
 
     //获取用户的密码进行修改
@@ -163,7 +174,7 @@ class UsersController extends Controller
 
         //获取用户修改时上传的密码先与旧密码进行比对
         $word = $request -> all();
-        // dd($word);
+        
         //首先进行原密码输入的是否正确的判断
         if(Hash::check($word['oldpass'], $pass))
         {   
@@ -173,16 +184,13 @@ class UsersController extends Controller
                 // dd($users);
                 $users -> password = Hash::make($word['repass']);
                 $users -> save();
-                return redirect('/admin/users/index')-> with('success','修改成功');
-                
+
+                return redirect('/admin/users/index')-> with('success','修改成功');   
             }else{
-                
-                return back()->with('error','重复密码不正确');
-                
+                return back()->with('error','重复密码不正确'); 
             }
         }else{
             return back()->with('error','原密码不正确');
-
         }   
     }
 
@@ -273,5 +281,20 @@ class UsersController extends Controller
         }else{
             return back()->with('error','删除失败');
         }
+    }
+
+
+    //设置批量删除用户方法
+    public function delall()
+    {   
+        //接受用户传过来的数值组
+        $ids = isset($_GET['ids']) ? $_GET['ids'] : '';
+
+        //对字符串进行拼接成数组形式
+        $id = explode(',',$ids);
+
+        //进行软删除
+        $res = Users::destroy($id);
+
     }
 }

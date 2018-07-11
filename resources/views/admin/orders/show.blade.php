@@ -51,6 +51,8 @@
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
+          <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+            <hr>
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form">
 
