@@ -163,20 +163,39 @@ Route::get('/admin/users/reset/{id}','admin\UsersController@reset');
 Route::get('/admin/users/delete/{id}','admin\UsersController@delete');
 
 //设置用户修改密码
-Route::post('admin/users/passupdate/{id}','admin\UsersController@passupdate');
+Route::post('/admin/users/passupdate/{id}','admin\UsersController@passupdate');
 
 
+//订单管理路由
+//显示订单添加页面
+Route::get('/admin/orders/create','admin\OrdersController@create');
 
+//商品订单添加
+Route::post('/admin/orders/store','admin\OrdersController@store');
 
+//商品订单列表页
+Route::get('/admin/orders/index','admin\OrdersController@index');
 
+//显示用户订单详情
+Route::get('/admin/orders/show/{id}','admin\OrdersController@show');
 
+//用户修改信息
+Route::get('/admin/orders/edit/{id}','admin\OrdersController@edit');
 
+//订单信息修改
+Route::post('/admin/orders/update/{id}','admin\OrdersController@update');
 
+//设置订单删除
+Route::get('/admin/orders/del/{id}','admin\OrdersController@del');
 
+//设置订单删除
+Route::get('/admin/orders/destroy','admin\OrdersController@destroy');
 
+//设置订单信息恢复还原
+Route::get('/admin/orders/reset/{id}','admin\OrdersController@reset');
 
-
-
+//设置永久删除数据
+Route::get('/admin/orders/delete/{id}','admin\OrdersController@delete');
 
 
 

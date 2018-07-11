@@ -1,17 +1,13 @@
 @extends('admin.common.common')
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9fd39c505ee382cf929c7ffc2dbe3e0684798e9e
 @section('content') 
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
+          <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form xbs" action="/admin/users/index" method="get">
-                <div class="layui-form-pane" style="text-left: center;">
+                <div class="layui-form-pane" style="text-align: right;">
                   <div class="layui-form-item" style="display: inline-block;">
                     <div class="layui-input-inline">
                       <input type="text" name="search"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
@@ -51,9 +47,9 @@
                         <td>{{$v->Userdetails['nickname']}}</td>
                         <td>{{$v->Userdetails['phone']}}</td>
                         <td>@if($v->Userdetails['sex'] == 0)女@else男@endif</td>
-                        @if ( $v['grade'] === 1)
+                        @if ( $v['grade'] == 1)
                             <td>超级管理员</td>
-                        @elseif ($v['grade'] === 2)
+                        @elseif ($v['grade'] == 2)
                             <td>普通管理员</td>
                         @else
                             <td>普通用户</td>

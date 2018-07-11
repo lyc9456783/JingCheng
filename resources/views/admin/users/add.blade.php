@@ -1,15 +1,12 @@
 @extends('admin.common.common')
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9fd39c505ee382cf929c7ffc2dbe3e0684798e9e
 @section('content') 
 
 <!-- 右侧主体开始 -->
 <div class="page-content">
     <div class="content">
-        <legend>用户添加</legend>
+        <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+        <hr>
         </fieldset>
         <form class="layui-form layui-form-pane" action="/admin/users/store" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}

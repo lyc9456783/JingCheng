@@ -193,25 +193,19 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/orders/index">
                                 <i class="iconfont">&#xe6a7;</i>
                                 订单列表
                             </a>
                         </li>
                          <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/orders/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加订单
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                修改订单
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/orders/destroy">
                                 <i class="iconfont">&#xe6a7;</i>
                                 订单回收站
                             </a>

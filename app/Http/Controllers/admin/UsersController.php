@@ -30,9 +30,9 @@ class UsersController extends Controller
         // dd($userdetails);
         //设置计算数据表中所有信息的数量
         $count = DB::table('jc_users')->whereNull('deleted_at')->count();
-
+        // dd($data);
         //用户列表
-        return view('admin.users.index',['data'=>$data,'count'=>$count]);
+        return view('admin.users.index',['data'=>$data,'count'=>$count,'title'=>'用户列表']);
     }
 
     /**
@@ -42,8 +42,9 @@ class UsersController extends Controller
      */
     public function create()
     {
+
         //用户添加
-        return view('admin.users.add');
+        return view('admin.users.add',['title'=>'添加用户']);
         
     }
 
@@ -59,7 +60,7 @@ class UsersController extends Controller
         $data = $request -> all();
         // dd($data);
         $data['password'] = Hash::make($data['password']);
-
+        // dd($data);
         //处理保存图片
         if($request -> hasFile('face')){
             
@@ -75,8 +76,8 @@ class UsersController extends Controller
             $dirname = date('Ymd',time());
 
             // 保存文件
-            $profile -> move('./uploads/'.$dirname,$filename); 
-            $fileadd = ('/uploads/'.$dirname.'/'.$filename);  
+            $profile -> move('./uploads/hpic/'.$dirname,$filename); 
+            $fileadd = ('/uploads/hpic/'.$dirname.'/'.$filename);  
         } else {
             return back() -> with('error','图片存储失败');
         } 
@@ -89,10 +90,10 @@ class UsersController extends Controller
         // dd($res);
 
         //对数据的添加进行整体的判断
-        if($res == true){
-            echo '<script>alert("添加成功");location.href="/admin/users/index"</script>';
+        if ($res == true) {
+            return redirect('/admin/users/index')-> with('success','添加成功');
         }else{
-            echo '<script>alert("添加失败");location.href="/admin/users/create"</script>';
+            return back()->with('error','添加失败');
         }
     }
 
@@ -124,10 +125,10 @@ class UsersController extends Controller
         $res = $users -> delete();
 
         //判断软删除是否删除
-        if($res == true){
-            echo '<script>alert("删除成功");location.href="/admin/users/destroy/{{ $id }}"</script>';
+        if ($res == true) {
+            return redirect('/admin/users/destroy')-> with('success','删除成功');
         }else{
-            echo '<script>alert("删除失败");location.href="/admin/users/index"</script>';
+            return back()->with('error','删除失败');
         }
 
     }
@@ -172,14 +173,16 @@ class UsersController extends Controller
                 // dd($users);
                 $users -> password = Hash::make($word['repass']);
                 $users -> save();
-                echo '<script>alert("修改成功");location.href="/admin/users/index"</script>';
+                return redirect('/admin/users/index')-> with('success','修改成功');
+                
             }else{
-                echo '<script>alert("重复密码不正确");location.href="/admin/users/pass/$data["id"]"</script>';
-                return view('admin.users.password',['data'=>$data]);
+                
+                return back()->with('error','重复密码不正确');
+                
             }
         }else{
-            echo '<script>alert("原密码不正确");</script>';
-            return view('admin.users.password',['data'=>$data]);
+            return back()->with('error','原密码不正确');
+
         }   
     }
 
@@ -213,10 +216,10 @@ class UsersController extends Controller
         $res2 = $userdetails -> save();
         // dd($res2);
 
-        if($res || $res2 == true){
-            echo '<script>alert("修改成功");location.href="/admin/users/index"</script>';
+        if ($res || $res2 == true) {
+            return redirect('/admin/users/index')-> with('success','修改成功');
         }else{
-            echo '<script>alert("修改失败");location.href="/admin/users/edit/$data["id"]"</script>';
+            return back()->with('error','修改失败');
         }
     }
 
@@ -233,7 +236,7 @@ class UsersController extends Controller
 
         // dump($data);
         //分配数据到模板
-        return view('admin.users.rdelete',['data'=>$data]);
+        return view('admin.users.rdelete',['data'=>$data,'title'=>'用户回收站']);
     }
 
 
@@ -245,10 +248,11 @@ class UsersController extends Controller
     public function reset($id)
     {
         $res = Users::withTrashed()->where('id','=',$id)->restore();
-        if($res == 1){
-            echo '<script>alert("还原成功");location.href="/admin/users/index"</script>';
+        
+        if ($res == 1) {
+            return redirect('/admin/users/index')-> with('success','还原成功');
         }else{
-            echo '<script>alert("还原失败");location.href="/admin/users/destroy/{$id}"</script>';
+            return back()->with('error','还原失败');
         }
     }
 
@@ -264,10 +268,10 @@ class UsersController extends Controller
         $res = Users::onlyTrashed()->where('id','=',$id)->forceDelete();
 
         //判断是否删除成功
-        if($res && $res2){
-            echo '<script>alert("删除成功");location.href="/admin/users/index"</script>';
+         if ($res && $res2) {
+            return redirect('/admin/users/index')-> with('success','删除成功');
         }else{
-            echo '<script>alert("删除失败");location.href="/admin/users/destroy/{$id}"</script>';
+            return back()->with('error','删除失败');
         }
     }
 }
