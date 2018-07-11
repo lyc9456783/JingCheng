@@ -34,12 +34,12 @@ class Recommendcontroller extends Controller
     public function index(Request $request)
     {
         // 获取搜索内容
-        $req = $request -> input('search');
+        $req = $request -> input('search','');
         $data = DB::table('jc_recommends as r')
-            ->join('jc_goods as g','g.id','=','r.gid')
+            ->join('jc_goods as g','r.gid','=','g.id')
             ->where('g.name','like','%'.$req.'%')
             ->select('r.id','r.rimg','r.rstate','g.name')
-            ->paginate(2)->appends($request->input());
+            ->paginate(5)->appends($request->input());
         // dump($req);
             // dump($data);
         return view('admin.recommend.index',['title'=>'商品推荐列表','data'=>$data]);
