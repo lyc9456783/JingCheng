@@ -12,4 +12,9 @@ class Goods extends Model
     {
     	return $this -> hasMany('App\Models\Discuss','gid');
     }
+
+    public function entrepotsgoods()
+    {
+    	return $this -> hasOne('App\Models\Entrepots','gid');
+    }
 }

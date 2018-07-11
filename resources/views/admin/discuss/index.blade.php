@@ -20,16 +20,7 @@
                 </div> 
             </form>
             <hr> 
-            <div><a href="/admin/discuss/delete"><button class="layui-btn layui-btn-danger" ><i class="layui-icon">&#xe640;</i>批量删除</button></a><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_discuss')->count()}} 条</span></div>
-            @if(session('success'))
-            <div class="alert alert-danger">
-                <ul>
-                    <xblock>
-                        <div class="x-left"style="line-height:40px">{{ session('success') }}</div>
-                    </xblock>  
-                </ul>
-            </div>
-            @endif
+            <div><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_discuss')->count()}} 条</span></div>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -56,7 +47,7 @@
                 @foreach($data as $k=>$v)
                     <tr>
                         <td>
-                            <input type="checkbox" value="" name="che[]">
+                            <input type="checkbox" value="{{ $v['id'] }}" name="ids">
                         </td>
                         <td>
                             {{$v['id']}}
@@ -83,42 +74,39 @@
                     @endforeach
                 </tbody>  
             </table>
-                <div id="page">{!! $data->render() !!}</div>
+            <div id="page">{!! $data->render() !!}</div>
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
-    <!-- 背景切换开始 -->
-    <div class="bg-changer">
-        <div class="swiper-container changer-list">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img class="item" src="./images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/k.jpg" alt=""></div>
-                <div class="swiper-slide"><span class="reset">初始化</span></div>
-            </div>
-        </div>
-        <div class="bg-out"></div>
-        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
-    </div>
-    <!-- 背景切换结束 -->
-    <script type="text/javascript">
-        var error=document.getElementsByTagName('xblock');
-            for(var i = 0;i <= error.length;i++){
-                error[i].onclick = function(){
-                   // this  本对象
-                    this.style.display = 'none';
-                }    
-            }
-    </script>
+<script type="text/javascript">
+    function delAll () {
+            //获取已选中的的选项到数组
+            var time = null;
+            var ids = [];
+            $("input[type='checkbox']:checked").each(function(){
+               ids.push(this.value);
+            });
+            //将被选中的id进行拼接成数组
+            ids = ids.join(',');
+            //发送ajax到方法中进行删除
+            $.get('/admin/discuss/delall',{'ids':ids},function(msg){
+                // console.log(msg);
+                if(msg !== 0){
+                    layer.msg('删除成功', {icon: 1});
+                    $('input:checked').parent().parent().remove();
+                    if(time == null ){
+                        time = setInterval(function(){
+                        location.reload(true);
+                        },3000);
+                    } 
+                    // location.href = "/admin/goodimages";
+                }else{
+                    layer.msg('删除失败', {icon: 2});
+                }
+            });
+        }
+</script>
 @endsection

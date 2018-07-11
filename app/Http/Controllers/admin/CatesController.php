@@ -18,7 +18,7 @@ class CatesController extends Controller
      */
     public static function getcates()
     {
-        $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate(2);
+        $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
         foreach($cates as $k=>$v){
             //统计逗号出现的次数
             $i = substr_count($v->path,',');
@@ -43,9 +43,16 @@ class CatesController extends Controller
             // dump($cates);
             return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates]);
         }else{
-            return view('admin.cates.index',['title'=>'分类列表','cates'=>self::getcates()]); 
-        }
+             $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
+            foreach($cates as $k=>$v){
+            //统计逗号出现的次数
+            $i = substr_count($v->path,',');
+            //拼接|--
+            $v->classname = str_repeat('|----',$i).$v->classname;
+            return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates]); 
+            }
       
+        }
     }
 
     /**
@@ -55,6 +62,7 @@ class CatesController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
             foreach($cates as $k=>$v){
             //统计逗号出现的次数
@@ -62,8 +70,11 @@ class CatesController extends Controller
             //拼接|--
             $v->classname = str_repeat('|----',$i).$v->classname;
         }
+=======
+
+>>>>>>> 9fd39c505ee382cf929c7ffc2dbe3e0684798e9e
         // dump(self::getcates());
-        return view('admin.cates.create',['title'=>'添加分类','cates'=>$cates]);
+        return view('admin.cates.create',['title'=>'添加分类','cates'=>self::getcates()]);
     }
 
     /**
