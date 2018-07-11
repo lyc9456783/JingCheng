@@ -10,10 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*===========================李玉成路由部分==============================*/
 //首页路由
 Route::get('/',function(){
 	return view('welcome');
 });
+// DB::listen(function($sql,$bindigs,$time){
+// 	dump($sql);
+// });
 //后台主页路由
 Route::get('/admin','admin\IndexController@index');
 
@@ -35,6 +39,51 @@ Route::get('/admin/cates/getdel','admin\CatesController@getdel');
 Route::get('/admin/cates/reset/{id}','admin\CatesController@reset');
 //分类永久删除
 Route::get('/admin/cates/delete/{id}','admin\CatesController@delete');
+
+
+//商品路由列表
+Route::get('/admin/goods','admin\GoodsController@index');
+//商品添加页面
+Route::get('/admin/goods/create','admin\GoodsController@create');
+//商品执行添加
+Route::post('/admin/goods/store','admin\GoodsController@store');
+//商品修改页面
+Route::get('/admin/goods/edit/{id}','admin\GoodsController@edit');
+//商品执行修改
+Route::post('/admin/goods/update/{id}','admin\GoodsController@update');
+//商品软删除
+Route::get('/admin/goods/del/{id}','admin\GoodsController@del');
+//商品回收站页面
+Route::get('/admin/goods/destroy','admin\GoodsController@destroy');
+//商品还原
+Route::get('/admin/goods/reset/{id}','admin\GoodsController@reset');
+//商品永久删除
+Route::get('/admin/goods/delete/{id}','admin\GoodsController@delete');
+//商品价格修改
+Route::get('/admin/goods/show/{id}','admin\GoodsController@show');
+//商品价格修改
+Route::post('/admin/goods/pedit','admin\GoodsController@pedit');
+//商品批量软删除
+Route::get('/admin/goods/delall','admin\GoodsController@delall');
+
+//商品图片管理
+Route::get('/admin/goodimages','admin\GoodImagesController@index');
+//商品图片添加页面
+Route::get('/admin/goodimages/create','admin\GoodImagesController@create');
+//商品图片添加
+Route::post('/admin/goodimages/store','admin\GoodImagesController@store');
+//商品图片修改页面
+Route::get('/admin/goodimages/edit/{id}','admin\GoodImagesController@edit');
+//商品图片修改
+Route::post('/admin/goodimages/update/{id}','admin\GoodImagesController@update');
+//商品图片删除
+Route::get('/admin/goodimages/destroy/{id}','admin\GoodImagesController@destroy');
+//批量删除商品图片
+Route::get('/admin/goodimages/delall','admin\GoodImagesController@delall');
+//查看商品大图
+Route::get('/admin/goodimages/show/{id}','admin\GoodImagesController@show');
+
+
 
 
 

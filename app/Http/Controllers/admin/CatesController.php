@@ -18,7 +18,7 @@ class CatesController extends Controller
      */
     public static function getcates()
     {
-        $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
+        $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate();
         foreach($cates as $k=>$v){
             //统计逗号出现的次数
             $i = substr_count($v->path,',');
@@ -36,6 +36,8 @@ class CatesController extends Controller
     public function index(Request $request)
     {
         // dump($cates);
+        //设置计算数据表中所有信息的数量
+        $count = DB::table('jc_cates')->whereNull('deleted_at')->count();
         if($request->has('search')){
             $search = $request->input('search');
 
@@ -43,15 +45,14 @@ class CatesController extends Controller
             // dump($cates);
             return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates]);
         }else{
-             $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(id,',',path) as paths"))->orderBy('paths','asc')->paginate();
+            $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(3);
             foreach($cates as $k=>$v){
-            //统计逗号出现的次数
-            $i = substr_count($v->path,',');
-            //拼接|--
-            $v->classname = str_repeat('|----',$i).$v->classname;
-            return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates]); 
+                //统计逗号出现的次数
+                $i = substr_count($v->path,',');
+                //拼接|--
+                $v->classname = str_repeat('|----',$i).$v->classname; 
             }
-      
+            return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates,'count'=>$count]);
         }
     }
 

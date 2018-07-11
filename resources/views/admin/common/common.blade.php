@@ -139,27 +139,42 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/goods">
                                 <i class="iconfont">&#xe6a7;</i>
                                 商品列表
                             </a>
                         </li>
                          <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/goods/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 商品添加
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/banner-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                商品修改
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/goods/destroy">
                                 <i class="iconfont">&#xe6a7;</i>
                                 商品回收站
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe64a;</i> 
+                        商品详图管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admin/goodimages">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品详图列表
+                            </a>
+                        </li>
+                         <li>
+                            <a href="/admin/goodimages/create">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商品详图添加
                             </a>
                         </li>
                     </ul>
@@ -336,12 +351,18 @@
         <!-- 左侧菜单结束 -->
             @if (session('success'))
                  <script type="text/javascript">
-                    alert("{{session('success')}}",{icon: 1});
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg("{{session('success')}}");
+                    });
                 </script>
             @endif
             @if (session('error'))
                 <script type="text/javascript">
-                    alert("{{session('error')}}");
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg("{{session('error')}}");
+                    }); 
                 </script>
             @endif
         @section('content')
