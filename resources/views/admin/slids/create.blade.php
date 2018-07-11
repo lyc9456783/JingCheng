@@ -5,7 +5,7 @@
    <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-			<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+			<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 				<legend>轮播图添加</legend>
 			</fieldset>
             <xblock><button class="layui-btn" onclick="location='/admin/slids'">
@@ -19,20 +19,14 @@
 							  <div class="layui-form-item">
 							    <label class="layui-form-label">跳转路径</label>
 							    <div class="layui-input-block">
-							      <input type="text" name="surl"  value="{{ old('surl') }}" lay-verify="title" autocomplete="off" placeholder="商品详情链接" class="layui-input">
+							      <input type="text" name="surl"  required value="{{ old('surl') }}" lay-verify="title" autocomplete="off" placeholder="商品详情链接" class="layui-input">
 							    </div>
 							  </div>
-							  
-							  
-								<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-								  <legend>图片管理</legend>
-								</fieldset>				  
-
 							  
 								<div class="layui-form-item">
 								    <label class="layui-form-label">是否展示</label>
 								    <div class="layui-input-block">
-								      <input type="radio" name="state" value="0" title="不展示" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>男</span></div>
+								      <input type="radio" name="state" value="0" title="不展示"  checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>男</span></div>
 								      <input type="radio" name="state" value="1" title="展示"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><span>女</span></div>
 								    </div>
 								</div>

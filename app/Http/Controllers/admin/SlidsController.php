@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Slids;
+use DB;
 
 class SlidsController extends Controller
 {
@@ -61,10 +62,10 @@ class SlidsController extends Controller
             $filename =  $temp_name.'.'.$ext;
             $dirname = date('Ymd',time());
             // 保存文件
-            $profile -> move('./uploads/'.$dirname,$filename);
-            $fileadd = ('/uploads/'.$dirname.'/'.$filename);
+            $profile -> move('./uploads/slideshow/'.$dirname,$filename);
+            $fileadd = ('/uploads/slideshow/'.$dirname.'/'.$filename);
         } else {
-            return back() -> with('error','图片存储失败');
+            return back() -> with('error','没有上传图片!');
         }      
 
         //存储信息
@@ -78,7 +79,7 @@ class SlidsController extends Controller
         if($res){
             return redirect(url('admin/slids')) -> with('success','添加成功');
         }else{
-            return redirect() -> back() -> with('error','添加失败');
+            return back() -> with('error','添加失败');
         }
     }
 
@@ -90,7 +91,9 @@ class SlidsController extends Controller
      */
     public function show()
     {
-        return view('admin.slids.show');
+        $data = Slids::where('state','=','1')->paginate();
+        //dump($data);
+        return view('admin.slids.show',['data'=>$data]);
     }
 
     /**
@@ -190,12 +193,12 @@ class SlidsController extends Controller
         //还原指定用户
         $data = Slids::withTrashed()->where('id','=',$id) -> restore();
         if($data){
-            return redirect( url('admin/slids') ) -> with('success','还原成功');
+            return redirect( url('admin/slids/delshow') ) -> with('success','还原成功');
         } else {
             return back() -> with('error','还原失败');
         }
 
-       return redirect(url('admin/slids'));
+       return redirect(url('admin/slids/delshow'));
 
     }
 
@@ -212,14 +215,125 @@ class SlidsController extends Controller
         //永久删除
          $bool = Slids::where('id','=',$id)->forceDelete();
           if($bool){
-            return redirect('/admin/slids');
+            return redirect('/admin/slids/delshow') -> with('success','删除成功');
            }else{
               //回收站中永久删除
               $bool = Slids:: onlyTrashed()->where('id','=',$id)->forceDelete();
               if($bool);
-              return redirect('/admin/slids');
+              return redirect('/admin/slids/delshow') -> with('success','删除成功');
            }
 
+    }
+
+     /**
+     * 批量删除 列表
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroys(Request $request)
+    {   
+
+       //验证id组 是否存在
+       $ids = isset($_POST['ids']) ? $_POST['ids'] : '';
+
+       //删除指定的所有id用户,永久删除
+       //$res = DB::delete('delete from jc_links where id in('.$ids.')');
+       //$res = App\Models\Links::destroy($ids);
+
+       //对字符串进行拼接成数组形式
+        $id = explode(',',$ids);
+
+
+        //进行软删除
+        $res = Slids::destroy($id);
+
+       //返回ajax 返回值
+       if($res){
+            echo 1;
+       }else{
+            echo 0;
+       }
+
+    }
+
+
+         /**
+     * 批量删除 回收站
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deldelshow(Request $request)
+    {   
+
+       //验证id组 是否存在
+       $ids = isset($_POST['ids']) ? $_POST['ids'] : '';
+
+       //删除指定的所有id用户,永久删除
+       $res = DB::delete('delete from jc_slids where id in('.$ids.')');
+
+       //返回ajax 返回值
+       if($res){
+            echo 1;
+       }else{
+            echo 0;
+       }
+
+    }
+
+
+
+
+
+    /**
+     * ajax开启
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function open(Request $request,$id)
+    {
+        if($request -> has('state')){
+            $slids = Slids::find($id);
+            $slids -> state = 1;
+            $res= $slids -> save();
+
+            if($res){
+                echo 1;
+            }else{
+                echo 0;
+            }
+
+        }else{
+            return back() ->with('error','未知错误');
+        };
+    }
+
+
+    /**
+     * ajax关闭
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function close(Request $request,$id)
+    {
+
+        if($request -> has('state')){
+            $slids = Slids::find($id);
+            $slids -> state = 0;
+            $res= $slids -> save();
+
+            if($res){
+                echo 1;
+            }else{
+                echo 0;
+            }
+
+        }else{
+            return back() ->with('error','未知错误');
+        };
     }
 
 

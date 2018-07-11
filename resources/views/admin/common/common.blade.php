@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>京城后台管理</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/admins/css/font.css">
 	<link rel="stylesheet" href="/admins/css/xadmin.css">
@@ -85,19 +86,19 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="/admin/users/index">
                                 <i class="iconfont">&#xe6a7;</i>
                                 用户列表
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/users/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加用户
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/users/destroy">
                                 <i class="iconfont">&#xe6a7;</i>
                                 回收站
                             </a>
@@ -312,6 +313,12 @@
                                 添加友情链接
                             </a>
                         </li>
+                        <li>
+                            <a href="/admin/links/delshow">
+                                <i class="iconfont">&#xe6a7;</i>
+                                友情链接回收站
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
@@ -323,9 +330,15 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/banner-list.html">
+                            <a href="/admin/config">
                                 <i class="iconfont">&#xe7ae;</i>
                                 网站配置
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/citys/create">
+                                <i class="iconfont">&#xe7ae;</i>
+                                二级联动
                             </a>
                         </li>
                     </ul>

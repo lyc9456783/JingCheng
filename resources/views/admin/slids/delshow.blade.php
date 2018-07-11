@@ -24,7 +24,7 @@
 		                <thead>
 		                    <tr>
 		                        <th>
-		                            <input type="checkbox" name="" value="">
+		                            <input type="checkbox" name="" value="box[]">
 		                        </th>
 		                        <th>id</th>
 		                       	<th>图片</th>
@@ -37,7 +37,7 @@
 		                <tbody>
 		                	@foreach($data as $k => $v)
 		                    <tr>
-		                        <td><input type="checkbox" value="1" name=""></td>
+		                        <td><input type="checkbox" value="{{ $v['id'] }}" name="box[]"></td>
 		                        <td>{{ $v['id'] }}</td>
 		                        <td>
 		                        	<u style="cursor:pointer" onclick="member_show('查看图片','{{ $v['simg'] }}','10000','1000','800')">
@@ -52,12 +52,13 @@
 		                      	@endif
 		                      	<td>{{ $v['deleted_at'] }}</td>
 		                      	<td>
-		                       		<a title="还原" href="/admin/slids/restore/{{ $v->id }}"  class="ml-5" style="text-decoration:none">
-		                                <i class="layui-icon"></i>
-		                            </a>
-		                            <a title="删除"   href="/admin/slids/delOk/{{ $v->id }}"  onclick="return confirm('确定要永久删除吗')" style="text-decoration:none">
-		                                <i class="layui-icon"></i>
-		                            </a>
+
+	                                <a title="还原" href="/admin/slids/restore/{{ $v->id }}"  class="ml-5 " style="text-decoration:none" onclick="return confirm('确定恢复吗?')">
+	                                   <i class="layui-icon">&#xe63d;</i>  还原
+	                                </a>
+	                                <a title="彻底删除"   href="/admin/slids/delOk/{{ $v->id }}"  onclick="return confirm('确定要永久删除吗')" style="text-decoration:none">
+	                                    <i class="layui-icon"></i>  删除
+	                                </a>		                            
 		                        </td>
 		                    </tr>
 		                    @endforeach
@@ -77,6 +78,38 @@
  	/*图片-查看*/
     function member_show(title,url,id,w,h){
         x_admin_show(title,url,w,h);
+    }
+    //点击全选
+    $('thead input[type="checkbox"]').click(function(){
+        $('tbody input').attr('checked',true);
+    })
+
+    //批量删除提交
+    function delAll () {
+      layer.confirm('确认要删除吗？',function(index){
+           //获取已选中的的选项到数组
+           var ids = [];
+            $("input[type='checkbox']:checked").each(function(){
+                ids.push(this.value);
+                });
+
+            //post 验证
+            $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+            //ajax 
+          $.post('/admin/slids/deldelshow',{'ids':ids.join(',')},function(msg){
+              if(msg == 1){
+                  layer.msg('删除成功', {icon: 1});
+                  $('input:checked').parent().parent().remove();
+              }else{
+                  layer.msg('删除失败', {icon: 2});
+              }
+          });
+      });
     }
 
 </script>
