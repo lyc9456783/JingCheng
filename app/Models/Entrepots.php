@@ -12,4 +12,6 @@ class Entrepots extends Model
     {
     	return $this->belongsTo('App\Models\Goods','gid');
     }
+
+ 
 }

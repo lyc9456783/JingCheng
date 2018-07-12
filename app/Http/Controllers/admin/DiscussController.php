@@ -28,6 +28,7 @@ class DiscussController extends Controller
                 ->select('d.id','g.name','user.nickname','d.content')
                 ->paginate(2)->appends($request->input());
             // dump($data);
+            // dump($data);
             // $data1 = Goods::where('name','like','%'.$req.'%')->get();
             // foreach ($data1 as $k => $v)
             // {
@@ -143,10 +144,25 @@ class DiscussController extends Controller
         }
     }
 
-    public function delete(Request $request)
-    {
-        $data[] = $request -> input('')->with('success','删除成功');
-        dump($data);
-    }
+    //批量删除
+    public function delall()
+    {   
+        //接受用户传过来的数值组
+        $ids = isset($_GET['ids']) ? $_GET['ids'] : '';
 
+
+        //对字符串进行拼接成数组形式
+        $id = explode(',',$ids);
+
+
+        //进行软删除
+        $res = Discuss::destroy($id);
+        if($res){
+            return redirect('admin/discuss')->with('success','删除成功');
+        }else{
+            return back()->with('error','删除失败');
+        }
+
+
+    }
 }

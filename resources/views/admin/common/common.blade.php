@@ -49,7 +49,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="/admins/index.html">京城后台管理 V1.0</a></div>
+        <div class="logo"><a href="/admin">京城后台管理 V1.0</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -283,21 +283,15 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="/admins/echarts1.html">
+                            <a href="/admin/recommend">
                                 <i class="iconfont">&#xe6a7;</i>
                                 推荐商品列表
                             </a>
                         </li>
                         <li>
-                            <a href="/admins/echarts2.html">
+                            <a href="/admin/recommend/create">
                                 <i class="iconfont">&#xe6a7;</i>
                                 添加推荐商品
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admins/echarts2.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                修改推荐商品
                             </a>
                         </li>
                     </ul>
