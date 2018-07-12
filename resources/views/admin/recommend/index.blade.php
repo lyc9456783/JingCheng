@@ -18,13 +18,16 @@
                 </div> 
             </form>
             <hr> 
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="location='/admin/recommend/create'"><i class="layui-icon"></i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_recommends')->count()}} 条</span></xblock>
+            <xblock>
+            	<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="location='/admin/recommend/create'"><i class="layui-icon">&#xe608;</i>添加</button>
+            	<span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_recommends')->count()}} 条</span>
+            </xblock>
 				<!-- 表格开始 -->
 					<table class="layui-table">
 		                <thead>
 		                    <tr>
 		                        <th>
-		                            <input type="checkbox" name="" value="">
+		                            <input type="checkbox" disabled>
 		                        </th>
 		                        <th>id</th>
 		                       	<th>商品名称</th>
@@ -114,7 +117,7 @@
             //获取已选中的的选项到数组
             var time = null;
             var ids = [];
-            $("input[type='checkbox']:checked").each(function(){
+            $(" tbady input[type='checkbox']:checked").each(function(){
                ids.push(this.value);
             });
             //将被选中的id进行拼接成数组

@@ -25,7 +25,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <input type="checkbox" name="" value="">
+                            <input type="checkbox" disabled>
                         </th>
                         <th>
                             ID
