@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Orders;
 use App\Models\Users;
+use App\Models\Goods;
 use DB;
 class OrdersController extends Controller
 {
@@ -55,31 +56,48 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-
         //获取上传的订单信息
         $data = $request -> all();
 
-        $uid = $data['uid'];
+        //获取市级
+        $sj = $data['s_sf'];
+        $sq = $data['s_sq'];
+        $xj = $data['s_xj'];
+        $jt = $data['address'];
+        //拼接收货地址
+        $address = $sj.$sq.$xj.$jt;
+        
+        //查询商品表中有没有添加的商品ID
+        $res1= Goods::find($data['gid']);
+        
+        //判断商品中有没有要添加具体商品
+        if(!empty($res1))
+        {
+            //对得到的用户订单进行添加到数据库
+            $orders = new Orders;
+            $orders -> uid = $data['uid'];
+            $orders -> gid = $data['gid'];
+            $orders -> ordersnum = $data['ordersnum'];
+            $orders -> recipients = $data['recipients'];
+            $orders -> phone = $data['phone'];
+            $orders -> address = $address;
+            $orders -> num = $data['num'];
+            $orders -> total = $data['total'];
+            $orders -> status = $data['status'];
+            $res2 = $orders -> save();
 
-        //对得到的用户订单进行添加到数据库
-        $orders = new Orders;
-        $orders -> uid = $uid;
-        $orders -> gid = $data['gid'];
-        $orders -> ordersnum = $data['ordersnum'];
-        $orders -> recipients = $data['recipients'];
-        $orders -> phone = $data['phone'];
-        $orders -> address = $data['address'];
-        $orders -> num = $data['num'];
-        $orders -> total = $data['total'];
-        $orders -> status = $data['status'];
-        $res = $orders -> save();
+            //判断添加订单是否成功
+            if ($res2) {
+                return redirect('/admin/orders/index')-> with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
 
-        //判断添加订单是否成功
-        if ($res) {
-            return redirect('/admin/orders/index')-> with('success','添加成功');
-        }else{
-            return back()->with('error','添加失败');
-        }
+       }else{
+            return back()->with('error','请核对商品ID');
+       }
+
+       
     }
 
     /**
@@ -94,7 +112,7 @@ class OrdersController extends Controller
         $data = Orders::find($id);
         // dd($data);
         //显示订单详情的页面
-        return view('admin.orders.show',['data'=>$data]);
+        return view('admin.orders.show',['data'=>$data,'title'=>'订单详情']);
     }
 
     /**
@@ -135,12 +153,11 @@ class OrdersController extends Controller
 
         //判断添加订单是否成功
         if ($res) {
-            return redirect('/admin/orders/index')-> with('success','添加成功');
+            return redirect('/admin/orders/index')-> with('success','修改成功');
         }else{
-            return back()->with('error','添加失败');
+            return back()->with('error','修改失败');
         }
     }
-
 
 
     //设置软删除数据
@@ -172,9 +189,9 @@ class OrdersController extends Controller
 
         //判断恢复是否成功
         if ($res == 1) {
-            return redirect('/admin/orders/index')-> with('success','删除成功');
+            return redirect('/admin/orders/index')-> with('success','还原成功');
         }else{
-            return back()->with('error','删除失败');
+            return back()->with('error','还原失败');
         }
     }
 
@@ -193,8 +210,6 @@ class OrdersController extends Controller
         }
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      *
@@ -206,7 +221,6 @@ class OrdersController extends Controller
         //获取被软删除用户的数据
         $data = orders::onlyTrashed()->get();
 
-        // dump($data);
         //分配数据到模板
         return view('admin.orders.delete',['data'=>$data,'title'=>'订单回收站']);
     }

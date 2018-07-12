@@ -205,6 +205,9 @@ Route::get('/admin/users/del/{id}','admin\UsersController@del');
 //设置用户删除
 Route::get('/admin/users/destroy','admin\UsersController@destroy');
 
+//设置用户 批量软删除
+Route::get('/admin/users/delall','admin\UsersController@delall');
+
 //设置用户信息恢复还原
 Route::get('/admin/users/reset/{id}','admin\UsersController@reset');
 

@@ -32,6 +32,7 @@
                         <td><b>快递单号</b></td>
                         <td><b>下单用户</b></td>                   
                         <td><b>状态</b></td>
+                        <td><b>详情信息</b></td>
                         <td><b>操作</b></td>
                     </tr>
                 <tbody>
@@ -51,16 +52,17 @@
                         @else
                             <td>交易完成</td>
                         @endif
+                        <td> <a title="查看" href="javascript:;" onclick="member_show('详细信息','/admin/orders/show/{{$v->id}}','4','','510')"
+                            class="ml-5" style="text-decoration:none">
+                                <i class="layui-icon">&#xe63c;</i>查看
+                            </a>
+                        </td>
                         <td class="td-manage">
-                             <a title="详细信息" href="javascript:;" onclick="member_show('详细信息','/admin/orders/show/{{$v->id}}','4','','510')"
-                            class="ml-5" style="text-decoration:none">详细信息
-                                <i class="layui-icon">&#xe63c;</i>
+                            <a title="编辑" href="/admin/orders/edit/{{$v->id}}">
+                                <i class="layui-icon">&#xe642;</i>编辑
                             </a> &nbsp
-                            <a title="编辑" href="/admin/orders/edit/{{$v->id}}">编辑
-                                <i class="layui-icon">&#xe642;</i>
-                            </a> &nbsp
-                            <a title="删除" href="/admin/orders/del/{{$v->id}}">删除
-                                <i class="layui-icon">&#xe640;</i>
+                            <a title="删除" href="/admin/orders/del/{{$v->id}}">
+                                <i class="layui-icon">&#xe640;</i>删除
                             </a>
                         </td>
                     </tr>

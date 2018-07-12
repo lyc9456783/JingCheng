@@ -1,38 +1,16 @@
 @extends('admin.common.common')
 
 @section('content') 
-
-   <div class="page-content">
-    <div class="content">
-        <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
-            <div style="height:40px;"></div>
-            <hr>
-            @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                      <xblock>
-                          <div class="x-left"   style="line-height:40px">{{$error}}</div>
-                      </xblock>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-            <script type="text/javascript">
-            var error=document.getElementsByTagName('xblock');
-                  for(var i = 0;i <= error.length;i++){
-                   error[i].onclick = function(){
-                        // this  本对象
-                        this.style.display = 'none';
-                      }    
-                  } 
-            
-            </script>
  <!-- 中部开始 -->
     <div class="wrapper">
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
+          <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+            <div style="text-align: right;">
+                <button class="layui-btn" onclick="location='/admin/orders/index'">返回列表</button>
+            </div> 
+            <hr>
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form" action="/admin/orders/update/{{ $data -> id }}" method="post">
                 {{ csrf_field() }}
