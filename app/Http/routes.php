@@ -12,9 +12,7 @@
 */
 /*===========================李玉成路由部分==============================*/
 //首页路由
-Route::get('/',function(){
-	return view('welcome');
-});
+Route::get('/','home\IndexController@index');
 // DB::listen(function($sql,$bindigs,$time){
 // 	dump($sql);
 // });
