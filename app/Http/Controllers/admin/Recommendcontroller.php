@@ -89,8 +89,8 @@ class RecommendController extends Controller
                 $filename =  $temp_name.'.'.$ext;
                 $dirname = date('Ymd',time());
                 // 保存文件
-                $v -> move('./uploads/'.$dirname,$filename);
-                $fileadd = ('/uploads/'.$dirname.'/'.$filename);
+                $v -> move('./uploads/rphoto/'.$dirname,$filename);
+                $fileadd = ('/uploads/rphoto/'.$dirname.'/'.$filename);
                 $recommend = new Recommends;
                 $recommend -> gid = $req['gid'];
                 $recommend -> rimg = $fileadd;
@@ -117,15 +117,16 @@ class RecommendController extends Controller
      */
     public function show($id)
     {
+        //执行开关
         $recommend = Recommends::find($id);
         if($recommend->rstate == '1'){
             $recommend -> rstate = '0';
             $recommend -> save();
-            return redirect('/admin/recommend')->with('success','关闭成功');
+            return back()->with('success','关闭成功');
         }else{
             $recommend -> rstate = '1';
             $recommend -> save();
-            return redirect('/admin/recommend')->with('error','启用成功');
+            return back()->with('error','启用成功');
         }
 
     }
@@ -157,6 +158,7 @@ class RecommendController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //获取上传的数据
         $req = $request -> except(['_token']);
         $recommend = Recommends::find($id);
         if($request -> hasFile('rimg')){
@@ -169,9 +171,9 @@ class RecommendController extends Controller
             $filename =  $temp_name.'.'.$ext;
             $dirname = date('Ymd',time());
             // 保存文件
-            $profile -> move('./uploads/'.$dirname,$filename);
-            $fileadd = ('/uploads/'.$dirname.'/'.$filename);
-
+            $profile -> move('./uploads/rphoto/'.$dirname,$filename);
+            $fileadd = ('/uploads/rphoto/'.$dirname.'/'.$filename);
+            //执行数据添加
             $recommend -> rimg = $fileadd;
         }
         
@@ -187,6 +189,7 @@ class RecommendController extends Controller
 
     public function destroy($id)
     {
+        //执行删除
         $data = Recommends::find($id);
         
         $res = $data->delete();
@@ -206,6 +209,7 @@ class RecommendController extends Controller
     //查看图片
     public function img($id)
     {
+        //查看大图片
         $recommend = Recommends::find($id);
         return view('admin.recommend.show',['data'=>$recommend]);
     }

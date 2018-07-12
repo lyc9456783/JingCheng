@@ -470,6 +470,7 @@ Route::get('/admin/orders/delete/{id}','admin\OrdersController@delete');
 //路由 李银昌
 //登陆 注册
 Route::get('/admin/login','admin\LoginController@index');
+Route::get('/admin/dologin','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
 

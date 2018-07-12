@@ -30,7 +30,6 @@ class DiscussController extends Controller
                 ->select('d.id','g.name','user.nickname','d.content')
                 ->paginate(5)->appends($request->input());
             // dump($data);
-            // dump($data);
             // $data1 = Goods::where('name','like','%'.$req.'%')->get();
             // foreach ($data1 as $k => $v)
             // {
@@ -38,10 +37,6 @@ class DiscussController extends Controller
             // }
 
              // return view('admin.discuss.index',['title'=>'评论列表','data'=>$data,'req'=>$req]);
-        
-            // dump($req);
-            
-            // dump($data);
             return view('admin.discuss.index',['title'=>'评论列表','data'=>$data,'req'=>$req]);
         
        
@@ -65,8 +60,10 @@ class DiscussController extends Controller
      */
     public function store(Request $request)
     {
+        //获取除token以外上传的数据
         $data = $request -> except(['_token']);
         // dump($data);
+        //执行添加
         $discuss = new Discuss;
         $discuss->content=$data['content'];
         $res = $discuss->save();
@@ -99,7 +96,6 @@ class DiscussController extends Controller
     public function edit($id)
     {
         $data = Discuss::find($id);
-
         return view('/admin/discuss/edit',['data'=>$data,'title'=>'修改评论']);
     }
 
@@ -112,10 +108,10 @@ class DiscussController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //获取除token以外上传的数据
         $data = $request -> except(['_token']);
-        // dump($req);
+        //执行修改
         $discuss = Discuss::find($id);
-        // dump($data);
         $discuss->content=$data['content'];
         $res = $discuss->save();
         // $res = DB::table('jc_discuss')->where('id',$id)->update(['uid'=>$req['uid'],'gid'=>$req['gid'],'content'=>$req['content']]);
@@ -136,9 +132,10 @@ class DiscussController extends Controller
      */
     public function destroy($id)
     {
+        //执行删除
         $data = Discuss::find($id);
-        
         $res = $data->delete();
+
         if($res){
             return redirect('/admin/discuss')->with('success','删除成功');
         }else{
@@ -149,10 +146,9 @@ class DiscussController extends Controller
     //批量删除
     public function delall()
     {   
+        // 批量删除
         //接受用户传过来的数值组
         $ids = isset($_GET['ids']) ? $_GET['ids'] : '';
-
-
         //对字符串进行拼接成数组形式
         $id = explode(',',$ids);
 

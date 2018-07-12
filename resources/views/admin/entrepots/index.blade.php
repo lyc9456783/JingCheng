@@ -20,12 +20,12 @@
                 </div> 
             </form>
             <hr>
-            <div><button class="layui-btn layui-btn-danger" onclick="delAll()" ><i class="layui-icon">&#xe640;</i>批量删除</button><a href="/admin/entrepot/create"><button class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</button></a><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_entrepots')->count()}} 条</span></div>
+            <div><a href="/admin/entrepot/create"><button class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</button></a><span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_entrepots')->count()}} 条</span></div>
             <table class="layui-table">
                 <thead>
                     <tr>
                         <th>
-                            <input type="checkbox" name="" value="">
+                            <input type="checkbox" name="" value="" disabled>
                         </th>
                         <th>
                             ID
@@ -77,18 +77,12 @@
                             <a title="修改" href="/admin/entrepot/edit/{{$v['id']}}" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;修改</i>
                             </a>
-                            <a title="删除" href="/admin/entrepot/destroy/{{$v['id']}}" style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;删除</i>
-                            </a>
                         @else
                             <a style="text-decoration:none" href="/admin/entrepot/show/{{$v['id']}}" title="是否上架">
                                 <i class="layui-icon">&#xe601;上架</i>
                             </a>
                             <a title="修改" href="/admin/entrepot/edit/{{$v['id']}}" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;修改</i>
-                            </a>
-                            <a title="删除" href="/admin/entrepot/destroy/{{$v['id']}}" style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;删除</i>
                             </a>
                         @endif
                         </td>
@@ -108,7 +102,7 @@
     //获取已选中的的选项到数组
     var time = null;
     var ids = [];
-    $("input[type='checkbox']:checked").each(function(){
+    $("tbody input[type='checkbox']:checked").each(function(){
        ids.push(this.value);
     });
     //将被选中的id进行拼接成数组

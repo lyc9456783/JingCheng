@@ -24,7 +24,7 @@
                         <span class="x-red">*</span>用户名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="" required="" lay-verify="uid" value="{{$data->userdiscuss->userinfo['nickname']}}"
+                        <input type="text" id="L_username" name="" required="" lay-verify="uid" value="{{$data->userdiscuss->Userdetails['nickname']}}"
                         autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
