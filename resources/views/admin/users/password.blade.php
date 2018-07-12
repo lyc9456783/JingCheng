@@ -1,12 +1,16 @@
 @extends('admin.common.common')
 
-
 @section('content') 
     <!-- 中部开始 -->
     <div class="wrapper">
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">
+          <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+          <div style="text-align: right;">
+          <button class="layui-btn" onclick="location='/admin/users/index'">返回列表</button>
+          </div> 
+          <hr>
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form" action="/admin/users/passupdate/{{ $data -> id }}" method="post">
                 {{ csrf_field() }}
@@ -15,7 +19,7 @@
                         昵称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text"  name="username" disabled="" value="{{ $data -> username }}" class="layui-input">
+                        <input type="text"  name="username" value="{{ $data -> username }}" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -23,7 +27,7 @@
                         <span class="x-red">*</span>旧密码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="oldpass" required="" lay-verify="required"
+                        <input type="password" id="L_repass" name="oldpass" required lay-verify="required"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -32,11 +36,11 @@
                         <span class="x-red">*</span>新密码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_pass" name="newpass" required="" lay-verify="required"
+                        <input type="password" id="L_pass" name="newpass" required lay-verify="required"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
+                        6-14位字符（支持数字/字母/符号）
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -44,7 +48,7 @@
                         <span class="x-red">*</span>确认密码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="repass" required="" lay-verify="required"
+                        <input type="password" id="L_repass" name="repass" required lay-verify="required"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>

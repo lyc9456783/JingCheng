@@ -1,12 +1,15 @@
 @extends('admin.common.common')
 
-
 @section('content') 
 
 <!-- 右侧主体开始 -->
 <div class="page-content">
     <div class="content">
-        <legend>用户添加</legend>
+        <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+        <div style="text-align: right;">
+          <button class="layui-btn" onclick="location='/admin/users/index'">返回列表</button>
+        </div>
+        <hr>
         </fieldset>
         <form class="layui-form layui-form-pane" action="/admin/users/store" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -19,7 +22,7 @@
           <div class="layui-form-item">
             <label class="layui-form-label">用户昵称</label>
             <div class="layui-input-block">
-              <input type="nickname" name="nickname" lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+              <input type="nickname" name="nickname" placeholder="请输入昵称" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item">
@@ -42,14 +45,14 @@
           <div class="layui-form-item">
             <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-              <input type="radio" name="sex" value="1" title="男" checked="">
+              <input type="radio" name="sex" value="1" title="男" checked>
               <input type="radio" name="sex" value="0" title="女">
             </div>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label">文件上传</label>
+            <label class="layui-form-label">头像上传</label>
             <div class="layui-input-inline">
-            <input type="file" name="face" lay-verify="title" autocomplete="off"  class="layui-input">
+              <input type="file" name="face" lay-verify="title" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item">
@@ -61,7 +64,7 @@
           <div class="layui-form-item">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-block">
-              <input type="password" name="password" placeholder="用于登录 请输入6-18位密码" autocomplete="off" class="layui-input">
+              <input type="password" name="password" lay-verify="required" placeholder="用于登录 请输入6-17位密码" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item">

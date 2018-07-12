@@ -21,18 +21,15 @@ class UsersController extends Controller
     {   
         //获取请求的参数,也就是说需要搜索额参数
         $search = $request -> input('search','');  //表示如果有值就进行搜索,没有值就为空
-        // dd($search);
+
         //设置查询数据库中的信息
         $data = Users::where('username','like','%'.$search.'%')->paginate(3)->appends($request->input());
 
-        //获取详情表的信息
-        // $userdetails = DB::table('jc_user_details')->get();
-        // dd($userdetails);
         //设置计算数据表中所有信息的数量
-        // $count = DB::table('jc_users')->whereNull('deleted_at')->count();
-
+        $count = DB::table('jc_users')->whereNull('deleted_at')->count();
+        
         //用户列表
-        return view('admin.users.index',['data'=>$data]);
+        return view('admin.users.index',['data'=>$data,'count'=>$count,'title'=>'用户列表']);
     }
 
     /**
@@ -43,8 +40,7 @@ class UsersController extends Controller
     public function create()
     {
         //用户添加
-        return view('admin.users.add');
-        
+        return view('admin.users.add',['title'=>'添加用户']);   
     }
 
     /**
@@ -57,9 +53,9 @@ class UsersController extends Controller
     {   
         // //获取数据
         $data = $request -> all();
-        // dd($data);
+        
         $data['password'] = Hash::make($data['password']);
-
+        
         //处理保存图片
         if($request -> hasFile('face')){
             
@@ -75,25 +71,41 @@ class UsersController extends Controller
             $dirname = date('Ymd',time());
 
             // 保存文件
-            $profile -> move('./uploads/'.$dirname,$filename); 
-            $fileadd = ('/uploads/'.$dirname.'/'.$filename);  
+            $profile -> move('./uploads/hpic/'.$dirname,$filename); 
+            $fileadd = ('/uploads/hpic/'.$dirname.'/'.$filename); 
+
+            //获取最后插入数据的ID号
+            $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'email'=>$data['email'],'password'=>$data['password'],'grade'=>$data['grade']]);
+        
+            //添加用户详情表中的数据
+            $res = DB::table('jc_user_details')->insert(['uid'=>$uid,'face'=>$fileadd,'nickname'=>$data['nickname'],'id_card'=>$data['id_card'],'phone'=>$data['phone'],'sex'=>$data['sex'],'addr'=>$data['addr']]);
+            
+            //对数据的添加进行整体的判断
+            if ($res == true) {
+                return redirect('/admin/users/index')-> with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
+
         } else {
-            return back() -> with('error','图片存储失败');
+
+            //设置用户的默认头像
+            $fileadd = ('/uploads/hpic/mr/'.'CHZEvbLFV707vZ1ONYuT.jpg'); 
+
+            //获取最后插入数据的ID号
+            $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'email'=>$data['email'],'password'=>$data['password'],'grade'=>$data['grade']]);
+        
+            //添加用户详情表中的数据
+            $res = DB::table('jc_user_details')->insert(['uid'=>$uid,'face'=>$fileadd,'nickname'=>$data['nickname'],'id_card'=>$data['id_card'],'phone'=>$data['phone'],'sex'=>$data['sex'],'addr'=>$data['addr']]);
+            
+            //对数据的添加进行整体的判断
+            if ($res == true) {
+                return redirect('/admin/users/index')-> with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
         } 
-
-        //获取最后插入数据的ID号
-        $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'email'=>$data['email'],'password'=>$data['password'],'grade'=>$data['grade']]);
-        // dump($uid);
-        //添加用户详情表中的数据
-        $res = DB::table('jc_user_details')->insert(['uid'=>$uid,'face'=>$fileadd,'nickname'=>$data['nickname'],'id_card'=>$data['id_card'],'phone'=>$data['phone'],'sex'=>$data['sex'],'addr'=>$data['addr']]);
-        // dd($res);
-
-        //对数据的添加进行整体的判断
-        if($res == true){
-            echo '<script>alert("添加成功");location.href="/admin/users/index"</script>';
-        }else{
-            echo '<script>alert("添加失败");location.href="/admin/users/create"</script>';
-        }
+  
     }
 
     /**
@@ -124,10 +136,10 @@ class UsersController extends Controller
         $res = $users -> delete();
 
         //判断软删除是否删除
-        if($res == true){
-            echo '<script>alert("删除成功");location.href="/admin/users/destroy/{{ $id }}"</script>';
+        if ($res == true) {
+            return redirect('/admin/users/destroy')-> with('success','删除成功');
         }else{
-            echo '<script>alert("删除失败");location.href="/admin/users/index"</script>';
+            return back()->with('error','删除失败');
         }
 
     }
@@ -138,7 +150,7 @@ class UsersController extends Controller
         $data = Users::find($id);
         // dd($data);
         //加载视图显示要更改的信息
-        return view('admin.users.edit',['data'=>$data]);
+        return view('admin.users.edit',['data'=>$data,'title'=>'修改信息']);
     }
 
     //设置用户密码的模板显示
@@ -148,7 +160,7 @@ class UsersController extends Controller
         $data = Users::find($id);
         // dd($data);
         //加载视图显示要更改的信息
-        return view('admin.users.password',['data'=>$data]);
+        return view('admin.users.password',['data'=>$data,'title'=>'修改密码']);
     }
 
     //获取用户的密码进行修改
@@ -162,7 +174,7 @@ class UsersController extends Controller
 
         //获取用户修改时上传的密码先与旧密码进行比对
         $word = $request -> all();
-        // dd($word);
+        
         //首先进行原密码输入的是否正确的判断
         if(Hash::check($word['oldpass'], $pass))
         {   
@@ -172,14 +184,13 @@ class UsersController extends Controller
                 // dd($users);
                 $users -> password = Hash::make($word['repass']);
                 $users -> save();
-                echo '<script>alert("修改成功");location.href="/admin/users/index"</script>';
+
+                return redirect('/admin/users/index')-> with('success','修改成功');   
             }else{
-                echo '<script>alert("重复密码不正确");location.href="/admin/users/pass/$data["id"]"</script>';
-                return view('admin.users.password',['data'=>$data]);
+                return back()->with('error','重复密码不正确'); 
             }
         }else{
-            echo '<script>alert("原密码不正确");</script>';
-            return view('admin.users.password',['data'=>$data]);
+            return back()->with('error','原密码不正确');
         }   
     }
 
@@ -213,10 +224,10 @@ class UsersController extends Controller
         $res2 = $userdetails -> save();
         // dd($res2);
 
-        if($res || $res2 == true){
-            echo '<script>alert("修改成功");location.href="/admin/users/index"</script>';
+        if ($res || $res2 == true) {
+            return redirect('/admin/users/index')-> with('success','修改成功');
         }else{
-            echo '<script>alert("修改失败");location.href="/admin/users/edit/$data["id"]"</script>';
+            return back()->with('error','修改失败');
         }
     }
 
@@ -233,7 +244,7 @@ class UsersController extends Controller
 
         // dump($data);
         //分配数据到模板
-        return view('admin.users.rdelete',['data'=>$data]);
+        return view('admin.users.rdelete',['data'=>$data,'title'=>'用户回收站']);
     }
 
 
@@ -245,10 +256,11 @@ class UsersController extends Controller
     public function reset($id)
     {
         $res = Users::withTrashed()->where('id','=',$id)->restore();
-        if($res == 1){
-            echo '<script>alert("还原成功");location.href="/admin/users/index"</script>';
+        
+        if ($res == 1) {
+            return redirect('/admin/users/index')-> with('success','还原成功');
         }else{
-            echo '<script>alert("还原失败");location.href="/admin/users/destroy/{$id}"</script>';
+            return back()->with('error','还原失败');
         }
     }
 
@@ -264,10 +276,25 @@ class UsersController extends Controller
         $res = Users::onlyTrashed()->where('id','=',$id)->forceDelete();
 
         //判断是否删除成功
-        if($res && $res2){
-            echo '<script>alert("删除成功");location.href="/admin/users/index"</script>';
+         if ($res && $res2) {
+            return redirect('/admin/users/index')-> with('success','删除成功');
         }else{
-            echo '<script>alert("删除失败");location.href="/admin/users/destroy/{$id}"</script>';
+            return back()->with('error','删除失败');
         }
+    }
+
+
+    //设置批量删除用户方法
+    public function delall()
+    {   
+        //接受用户传过来的数值组
+        $ids = isset($_GET['ids']) ? $_GET['ids'] : '';
+
+        //对字符串进行拼接成数组形式
+        $id = explode(',',$ids);
+
+        //进行软删除
+        $res = Users::destroy($id);
+
     }
 }

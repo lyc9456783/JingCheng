@@ -20,7 +20,7 @@
             <xblock>
                 <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
                 <a href="/admin/cates/create" class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</a>
-                <span class="x-right" style="line-height:40px">共有数据88 条</span>
+                <span class="x-right" style="line-height:40px">共有数据{{$count}}条</span>
             </xblock>
             <table class="layui-table">
                     <tr>
