@@ -28,7 +28,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <input type="checkbox" name="" value="">
+                            <input type="checkbox" disabled>
                         </th>
                         <th>ID</th>
                         <th>用户名</th>
@@ -92,6 +92,8 @@
                ids.push(this.value);
             });
             var time = null;
+        });
+
             //将被选中的id进行拼接成数组
             ids = ids.join(',');
 

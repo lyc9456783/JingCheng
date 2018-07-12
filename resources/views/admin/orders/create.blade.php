@@ -158,10 +158,10 @@
         	      <label class="radiobox"><input type="radio" name="status" value="2" title="交易完成">交易完成</label>
         	    </div>
         	  </div>
-                <div class="layui-form-item">
-
+                <div class="layui-inline" style="margin-left:100px ">
                   <button class="layui-btn" lay-submit="" lay-filter="demo2">确认提交</button>
-                  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                  &nbsp
+                  <button type="reset" class="layui-btn layui-btn-primary" style="margin-left:50px">重置</button>
                 </div>
             </form>
           <!-- 右侧内容框架，更改从这里结束 -->
