@@ -2,51 +2,50 @@
 
 
 @section('content')
-	<!-- 轮播图添加 -->
-   <div class="page-content">
-          <div class="content">
-            <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="">
-                <div class="layui-form-pane" style="text-align: center;">
-                  <div class="layui-form-item" style="display: inline-block;">
-                    <label class="layui-form-label xbs768">日期范围</label>
-                    <div class="layui-input-inline xbs768">
-                      <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-                    </div>
-                    <div class="layui-input-inline xbs768">
-                      <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-                    </div>
-                    <div class="layui-input-inline">
-                      <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon"></i></button>
-                    </div>
-                  </div>
-                </div> 
-            </form>
-            <xblock><button class="layui-btn" onclick="location='/admin/slids'">
-            <i class="layui-icon"></i>列表显示</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
-            
-				<div class="page-content">
-				  <div class="content">
-            <!-- 轮播图展示 -->
-
-
-            <!-- 轮播图展示结束 -->
-
-
-            <!-- 右侧内容框架，更改从这里结束 -->
-          </div>
-        </div>
-
-
-
-
-
-
-
-
+  <xblock>
+    <button class="layui-btn layui-btn-normal" onclick="location='/admin'"><i class="layui-icon"></i>返回后台首页</button>
+    <button class="layui-btn" onclick="location='/admin/slids'"><i class="layui-icon"></i>返回</button>
+    <button class="layui-btn" onclick="location='/admin/slids/create'"><i class="layui-icon"></i>添加</button>
+  </xblock>
+  
+  <!-- 轮播图预览区 -->
+  <div class="layui-carousel" id="test1">
+    <div carousel-item>
+    @foreach($data as $v)
+      <div><img src="{{ url($v['simg']) }}" alt="" width="100%" height="500px"></div>
+    @endforeach
     </div>
-	<!-- 轮播图结束 -->
+  </div>
+  <!-- 轮播图预览器结束 -->
+  <!-- 后台操作栏开始 -->
+<!--   <div class="construct">
+    <button class="layui-btn layui-btn-radius layui-btn-warm">全屏预览</button>
+  </div> -->
+
+  <!-- 后台操作栏结束 -->
+
+
+ 
+<script src="/static/build/layui.js"></script>
+<script>
+  layui.use('carousel', function(){
+    var carousel = layui.carousel;
+    //建造实例
+    carousel.render({
+      elem: '#test1'
+      ,width: '100%' 
+      ,height: '400px'
+      ,arrow: 'always' 
+     // ,full: 'true' 
+      //,anim: 'updown'
+      //interval:3000
+    });
+  });
+
+  // 全屏预览
+  $('.construct button').eq(0).click(function(){
+
+  });
+
+</script>
 @endsection('content')

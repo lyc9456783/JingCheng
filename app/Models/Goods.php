@@ -14,7 +14,6 @@ class Goods extends Model
     {
     	return $this -> hasMany('App\Models\Discuss','gid');
     }
-<<<<<<< HEAD
     //与商品分类的属于关系
     public function catesgoods()
     {
@@ -32,11 +31,10 @@ class Goods extends Model
     	return $this -> hasMany('App\Models\GoodImages','gid');
     }
 
-=======
-
+    //商品对应库存的关系一对一
     public function entrepotsgoods()
     {
     	return $this -> hasOne('App\Models\Entrepots','gid');
     }
->>>>>>> origin/xiaoye
+
 }
