@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use DB;
-
+use Hash;
 class LoginController extends Controller
 {
     /**
@@ -23,30 +23,48 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
+
+
+
+
     /**
-     * 核查用户名和密码
+     * 找回密码
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function change()
+    {
+        // 
+        return view('admin.change');
+        
+    }
+
+
+
+
+
+    /**
+     * 核查密码
      *
      * @return \Illuminate\Http\Response
      */
     public function check(Request $request)
     {
-        // 
-      //$request -> isMethod('post');
+        // 接收用户名和密码
         $username = $request -> input('username');
-        //dump($username);
         $password = $request -> input('password');
-        //dd($password);
-        $data = DB::table('jc_users')->where('username','=',$username)->first();
-        if($data['password'] == $password)
-        {
-            session(['username'=>$username],10);
-            return redirect( url('admin/users') );
+     
+        //查找用户名用户
+        $data = DB::table('jc_users')->where('grade','>','1')->where('username','=',$username)->first();
+
+        //检查密码
+        if(Hash::check($password, $data['password'])){
+            session(['username'=>$username]);
+            return redirect( url('admin') )->with('success','管理员登陆');
         } else {
-            return redirect() -> back();
+            return back() ->with('error','密码错误');
         }
      
-
-        
     }
 
 
