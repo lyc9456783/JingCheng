@@ -19,14 +19,16 @@ class DiscussController extends Controller
     public function index(Request $request)
     {
         // $req = $request -> has('search');
+            //获取需要搜索的数据
             $req = $request -> input('search','');
+            //获取列表需要的所有的数据
             $data = DB::table('jc_discuss as d')
                 ->join('jc_goods as g','d.gid','=','g.id')
                 ->join('jc_users as u','d.uid','=','u.id')
                 ->join('jc_user_details as user','user.uid','=','u.id')
                 ->where('g.name','like','%'.$req.'%')
                 ->select('d.id','g.name','user.nickname','d.content')
-                ->paginate(2)->appends($request->input());
+                ->paginate(5)->appends($request->input());
             // dump($data);
             // dump($data);
             // $data1 = Goods::where('name','like','%'.$req.'%')->get();

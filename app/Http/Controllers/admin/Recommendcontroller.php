@@ -10,7 +10,7 @@ use App\Models\Recommends;
 use App\Models\Cates;
 use App\Models\Goods; 
 use DB;
-class Recommendcontroller extends Controller
+class RecommendController extends Controller
 {
 
     public static function getcates()
