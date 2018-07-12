@@ -19,7 +19,6 @@ Route::get('/','home\IndexController@index');
 //后台主页路由
 Route::get('/admin','admin\IndexController@index');
 
-
 //分类路由列表
 Route::get('/admin/cates','admin\CatesController@index');
 //分类添加
