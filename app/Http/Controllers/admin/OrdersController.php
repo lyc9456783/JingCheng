@@ -216,10 +216,11 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
         //获取被软删除用户的数据
-        $data = orders::onlyTrashed()->get();
+        $data = orders::onlyTrashed()->paginate(3)->appends($request->input());
+
 
         //分配数据到模板
         return view('admin.orders.delete',['data'=>$data,'title'=>'订单回收站']);
