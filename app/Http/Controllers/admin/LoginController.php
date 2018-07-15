@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use DB;
+use App\Models\Users;
 use Hash;
 class LoginController extends Controller
 {
@@ -24,25 +25,6 @@ class LoginController extends Controller
     }
 
 
-
-
-
-    /**
-     * 找回密码
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function change()
-    {
-        // 
-        return view('admin.change');
-        
-    }
-
-
-
-
-
     /**
      * 核查密码
      *
@@ -54,7 +36,7 @@ class LoginController extends Controller
         $username = $request -> input('username');
         $password = $request -> input('password');
      
-        //查找用户名用户
+        //查找用户名用户 并且权限是管理员
         $data = DB::table('jc_users')->where('grade','>','1')->where('username','=',$username)->first();
 
         //检查密码
@@ -63,8 +45,7 @@ class LoginController extends Controller
             return redirect( url('admin') )->with('success','管理员登陆');
         } else {
             return back() ->with('error','密码错误');
-        }
-     
+        } 
     }
 
 

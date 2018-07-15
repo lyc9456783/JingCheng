@@ -471,8 +471,7 @@ Route::get('/mail/send','MailController@send');
 //登陆 注册  验证用户名和密码
 Route::get('/admin/login','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
-//密码找回{未完成}
-Route::get('/admin/login/change','admin\LoginController@change');
+
 //后台登陆中间件
 Route::group(['middleware'=>'login'],function(){
 	//路由存放------------>
@@ -547,3 +546,15 @@ Route::get('/admin/slids/close/{id}','admin\SlidsController@close');
 Route::get('/admin/config','admin\ConfigController@index');
 //保存
 Route::post('/admin/config/store','admin\ConfigController@store');
+
+
+
+
+
+
+/**  前台路由  李银昌
+*
+*/
+
+//商品详情页
+Route::get('/product','home\ProductController@index');

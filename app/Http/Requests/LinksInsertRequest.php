@@ -25,7 +25,7 @@ class LinksInsertRequest extends Request
     {
         return [
         'lname' => 'required|unique:jc_links',  //公司名称不为空 公司名称已经存在
-        'lurl' => 'required|unique:jc_links',  //
+        'lurl' => 'required|unique:jc_links|url',  //
         'lsay' => 'required',
         ];
     }
@@ -42,6 +42,7 @@ class LinksInsertRequest extends Request
         'lname.required' => '名称未填写',
         'lurl.required' => '公司网站为填写',
         'lurl.unique' => '路径已经存在',
+        'lurl.url' => '路径格式不对%>_<%',
         'lname.unique' => '公司名称已经存在',
         'lsay.required' => '描述不能为空',
         ];
