@@ -7,14 +7,10 @@
             <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
             <div style="height:40px;"></div>
             <hr>
-<<<<<<< HEAD
-            <div><a href="/admin/entrepot"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe600;</i>列表</button></a>&nbsp;<a href="/admin/entrepot/create"><button class="layui-btn" ><i class="layui-icon">&#xe608;</i>添加</button></a></div>
-=======
             <div>
               <a href="/admin/entrepot"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe63c;</i>列表</button></a>&nbsp
               <a href="/admin/entrepot/create"><button class="layui-btn" ><i class="layui-icon">&#xe608;</i>添加</button></a>
             </div>
->>>>>>> origin/qiu
             <form class="layui-form" action="/admin/entrepot/store" method="post">
               {{csrf_field()}}
               <div class="layui-form-item" id="nav">

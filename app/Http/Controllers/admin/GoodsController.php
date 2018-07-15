@@ -75,12 +75,12 @@ class GoodsController extends Controller
         $gcid = $request->input('gcid','');
         if(empty($gcid)){
              $goods = Goods::where('name','like','%'.$search.'%')
-                    ->paginate(3)
+                    ->paginate(8)
                     ->appends($request->input());
         }else{
             $goods = Goods::where('name','like','%'.$search.'%')
                     ->where('gcid',$gcid)
-                    ->paginate(3)
+                    ->paginate(8)
                     ->appends($request->input());
         }
        
@@ -111,6 +111,7 @@ class GoodsController extends Controller
         //添加
         $data = $request->except('_token');
         // dump($data);
+        
         $filedir = self::uploads($request);
         // dd($filedir);
         //将数据分开存入两张表中
@@ -198,7 +199,12 @@ class GoodsController extends Controller
         //添加
         $data = $request->except('_token');
         // dump($data);
-        $filedir = self::uploads($request);
+        if($request -> hasFile('pic')){
+            $filedir = self::uploads($request);
+        }else{
+            $goods = Goods::find($id);
+            $filedir = $goods->pic;
+        }
         //将数据分开存入两张表中
         $goods = [
             'gcid'=>$data['gcid'],
