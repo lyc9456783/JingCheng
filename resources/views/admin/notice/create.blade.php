@@ -35,7 +35,7 @@
               <div class="layui-inline">
                 <label class="layui-form-label">发表人员</label>
                 <div class="layui-input-inline">
-                  <select name="uid">
+                  <select name="uid" lay-verify="required" required>
                     <option value="">请选择</option>
                     <optgroup label="超级管理员">
                     @foreach($users as $k=>$v)

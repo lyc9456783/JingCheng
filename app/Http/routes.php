@@ -12,11 +12,15 @@
 */
 /*===========================李玉成路由部分==============================*/
 //首页路由
+
 Route::get('/','home\IndexController@index');
 // DB::listen(function($sql,$bindigs,$time){
 // 	dump($sql);
 // });
 //后台主页路由
+Route::group(['middleware'=>'login'],function(){
+	
+});
 Route::get('/admin','admin\IndexController@index');
 
 //分类路由列表
@@ -440,8 +444,7 @@ Route::post('/admin/login/check','admin\LoginController@check');
 
 
 //后台登陆中间件
-Route::group(['middleware'=>'login'],function(){
-});
+
 
 
 
