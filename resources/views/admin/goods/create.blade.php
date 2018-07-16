@@ -34,7 +34,8 @@
                   <select name="type">
                     <option value="">--请选择--</option>
                     <option value="2G+8G">2G+8G</option>
-                    <option value="4G+16G">4G+16G</option>
+                    <option value="2G+8G">3G+16G</option>
+                    <option value="4G+16G">4G+32G</option>
                     <option value="6G+64G">6G+64G</option>
                   </select>
                 </div>
@@ -45,7 +46,10 @@
                   <select name="color">
                     <option value="">--请选择--</option>
                     <option value="土豪金">土豪金</option>
-                    <option value="原谅绿">原谅绿</option>
+                    <option value="美腿白">美腿白</option>
+                    <option value="皇家绿">皇家绿</option>
+                    <option value="魔力蓝">魔力蓝</option>
+                    <option value="帝王粉">帝王粉</option>
                     <option value="尊贵黑">尊贵黑</option>
                   </select>
                 </div>

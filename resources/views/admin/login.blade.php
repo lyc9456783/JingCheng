@@ -47,10 +47,6 @@
     }
     </style>
 </head> 
-@section('login')
-        
-        
-
 <div class="login-logo"><h1>后台登陆  X-ADMIN V1.1</h1></div>
 
 
@@ -58,7 +54,7 @@
 
         <!-- 后台首页登录界面 -->
         <form class="layui-form layui-form-pane" action="{{ url('admin/login/check') }}" method="post">
-            {{ csrf_field() }}
+              {{ csrf_field() }}
             <h3>登录你的帐号</h3>
             <label class="login-title" for="username">帐号</label>
             <div class="layui-form-item" >
@@ -74,64 +70,33 @@
                 <div class="layui-input-inline login-inline">
                   <input type="password" name="password" lay-verify="required" placeholder="请输入你的密码" autocomplete="off" class="layui-input" >
                 </div>
+
             </div>
 
-            <div class="form-actions">
+            <div class="login-title" style="text-align: center;">
                 <button class="btn btn-warning pull-right" lay-submit="" lay-filter="login" type="submit">登录</button> 
-                <div class="forgot"><a href="javascript:viod(0);" class="forgot">忘记帐号或者密码</a></div>  
+                <!-- <div class="forgot"><a href="{{ url('admin/login/change') }}" class="forgot">忘记帐号或者密码</a></div>   -->
+
             </div>
         </form>
         <!-- 后台登录结束 -->
-@show
 
+        <!-- ajax验证用户名 -->
+        <script>
+           $('form').submit(function(){
+                // $.ajax({
+                //     url:'/admin/links/close/'+id,
+                //     type:'get',
+                //     data:'state=0',
+                //     success:function(msg){
+                //         if(msg ==0){
+                //            return false;
+                //         }
+                //     },
+                //     async:false
+                // });
+           })
+        </script>
 
-
-
-
-
-
-
-
-
-
-
-    <!-- 背景动画 -->
-    <div class="bg-changer">
-        <div class="swiper-container changer-list">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img class="item" src="/admins/images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="/admins/images/k.jpg" alt=""></div>
-                <div class="swiper-slide"><span class="reset">初始化</span></div>
-            </div>
-        </div>
-        <div class="bg-out"></div>
-        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
-    </div>
-    <script>
-        $(function  () {
-            layui.use('form', function(){
-              var form = layui.form();
-              //监听提交
-              form.on('submit(login)', function(data){
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='index.html'
-                });
-                return false;
-              });
-            });
-        })
-        
-    </script>
 
     </div>
- 
-

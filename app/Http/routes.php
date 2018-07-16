@@ -12,14 +12,12 @@
 */
 /*===========================李玉成路由部分==============================*/
 //首页路由
-Route::get('/',function(){
-	return view('welcome');
-});
+Route::get('/','home\IndexController@index');
+Route::get('/com','home\IndexController@show');
 // DB::listen(function($sql,$bindigs,$time){
 // 	dump($sql);
 // });
 //后台主页路由
-Route::get('/admin','admin\IndexController@index');
 
 
 //分类路由列表
@@ -476,7 +474,7 @@ Route::post('/admin/login/check','admin\LoginController@check');
 Route::group(['middleware'=>'login'],function(){
 	//路由存放------------>
 
-
+Route::get('/admin','admin\IndexController@index');
 
 	//<--------------------
 });
@@ -557,4 +555,4 @@ Route::post('/admin/config/store','admin\ConfigController@store');
 */
 
 //商品详情页
-Route::get('/product','home\ProductController@index');
+Route::get('/product/{id}','home\ProductController@index');

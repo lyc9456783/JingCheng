@@ -36,5 +36,10 @@ class Goods extends Model
     {
     	return $this -> hasOne('App\Models\Entrepots','gid');
     }
+    //商品对应推荐 关系 一对一
+    public function recommendgoods()
+    {
+        return $this -> hasOne('App\Models\Recommends','gid');
+    }
 
 }

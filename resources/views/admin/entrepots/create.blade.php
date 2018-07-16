@@ -7,7 +7,10 @@
             <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
             <div style="height:40px;"></div>
             <hr>
-            <div><a href="/admin/entrepot"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe600;</i>列表</button></a></a><a href="/admin/entrepot/create"><button class="layui-btn" ><i class="layui-icon">&#xe608;</i>添加</button></a></div>
+            <div>
+              <a href="/admin/entrepot"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe63c;</i>列表</button></a>&nbsp
+              <a href="/admin/entrepot/create"><button class="layui-btn" ><i class="layui-icon">&#xe608;</i>添加</button></a>
+            </div>
             <form class="layui-form" action="/admin/entrepot/store" method="post">
               {{csrf_field()}}
               <div class="layui-form-item" id="nav">
@@ -32,8 +35,8 @@
               <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">库存状态</label>
                 <div>
-                  <label class="radiobox"><input name="rstate" value="1" type="radio">上架</label>
-                  <label class="radiobox"><input name="rstate" value="0" type="radio" checked>下架</label>
+                  <label class="radiobox"><input name="flag" value="1" type="radio">上架</label>
+                  <label class="radiobox"><input name="flag" value="0" type="radio" checked>下架</label>
                 </div>
               </div>
               <div class="layui-form-item">

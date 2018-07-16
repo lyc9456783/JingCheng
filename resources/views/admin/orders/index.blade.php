@@ -25,7 +25,7 @@
             <table class="layui-table">
                     <tr>
                         <td style="text-align:center">
-                            <input type="checkbox" name="" id="check" value="">
+                            <input type="checkbox" disabled>
                         </td>
                         <td><b>订单ID</b></td>
                         <td><b>商品ID</b></td>

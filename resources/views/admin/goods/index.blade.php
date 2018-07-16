@@ -10,7 +10,7 @@
                 <div class="layui-form-item" style="text-align:left;float:left;">
                   <label class="layui-form-label">商品类别</label>
                     <div class="layui-input-block" style="width:200px">
-                      <select lay-verify="required" name="gcid">
+                      <select name="gcid">
                         <option value="">--请选择--</option>
                         @foreach ($cates as $k=>$v)
                         <option value="{{$v['id']}}">{{$v['classname']}}</option>
@@ -37,7 +37,7 @@
             <table class="layui-table">
                     <tr>
                         <td style="text-align:center">
-                            <input type="checkbox" name="" id="check" value="">
+                            <input type="checkbox" disabled id="check">
                         </td>
                         <td><b>ID</b></td>
                         <td><b>分类名称</b></td>

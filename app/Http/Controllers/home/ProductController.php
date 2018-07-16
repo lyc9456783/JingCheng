@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Goods;
+
 class ProductController extends Controller
 {
     /**
@@ -14,11 +16,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
-        echo '商品详情页';
-        return view('home.product');
+        //单品商品详情[替换id]
+        $goods = Goods::find(4);
+        //dump($goods);
+
+
+        return view('home.product.index',['goods'=>$goods]);
     }
 
     /**
