@@ -37,7 +37,7 @@ class EntrepotController extends Controller
                 ->join('jc_goods as g','e.gid','=','g.id')
                 ->where('g.name','like','%'.$req.'%')
                 ->select('e.id','g.name','e.num','e.flag')
-                ->paginate(2)->appends($request->input());
+                ->paginate(5)->appends($request->input());
                 // dump($data);
         //获取库存所有数据
         // $data = Entrepots::all();
@@ -66,11 +66,13 @@ class EntrepotController extends Controller
     public function store(Request $request)
     {
         //判断数据是否上传
-        $req = $request -> has('flag','num','gid');
         $res = $request -> except(['_token']);
         // 如果上传则执行第一个，不上传则执行第二个
-        dump($res);
-        if($req){
+        if($res['gid'] == '0'){
+            return back()->with('error','请选择商品');
+        }
+
+        if($res['flag'] == '1'){
             //获取除了token以外所有上传的数据
             // $req = $request -> except(['_token']);
             //执行添加数据
@@ -78,7 +80,7 @@ class EntrepotController extends Controller
                 return back()->with('error','库存数量不得少于0');
             }else{
                 $entrepots = new Entrepots;
-                $entrepots -> gid = $res['gicd'];
+                $entrepots -> gid = $res['gid'];
                 $entrepots -> num = $res['num'];
                 $entrepots -> flag = '1';
                 $res = $entrepots -> save();
@@ -115,15 +117,16 @@ class EntrepotController extends Controller
      */
     public function show($id)
     {
+        //执行上下架功能
         $data = Entrepots::find($id);
         if($data->flag == '0'){
             $data -> flag = '1';
             $data -> save();
-            return redirect('admin/entrepot')->with('success','上架成功');
+            return back()->with('success','上架成功');
         }else{
             $data -> flag = '0';
             $res = $data -> save();
-            return redirect('admin/entrepot')->with('success','下架成功');
+            return back()->with('success','下架成功');
         }
     }
 
@@ -150,7 +153,7 @@ class EntrepotController extends Controller
      */
     public function update(Request $request, $id)
     { 
-        $req = $request -> has('flag','num','gid');
+        $req = $request -> has('flag');
         //如果上传则执行第一个，不上传则执行第二个
         //获取除了token以外所有上传的数据
         $res = $request -> except(['_token']);
@@ -161,7 +164,6 @@ class EntrepotController extends Controller
             }else{
                 //执行修改数据
                 $entrepots = Entrepots::find($id);
-                $entrepots -> gid = $res['gid'];
                 $entrepots -> num = $res['num'];
                 $entrepots -> flag = '1';
                 $res = $entrepots -> save();
@@ -173,7 +175,6 @@ class EntrepotController extends Controller
             }else{
             //执行修改数据
                 $entrepots = Entrepots::find($id);
-                $entrepots -> gid = $res['gid'];
                 $entrepots -> num = $res['num'];
                 $entrepots -> flag = '0';
                 $res = $entrepots -> save();
@@ -197,6 +198,7 @@ class EntrepotController extends Controller
      */
     public function destroy($id)
     {
+        //执行删除
         $data = Entrepots::find($id);
         $res = $data -> delete();
         if($res){
@@ -208,6 +210,7 @@ class EntrepotController extends Controller
         }
     }
 
+    //批量删除
     public function delall()
     {   
         //接受用户传过来的数值组
@@ -218,7 +221,7 @@ class EntrepotController extends Controller
         $id = explode(',',$ids);
 
 
-        //进行软删除
+        //进行删除
         $res = Entrepots::destroy($id);
         if($res){
             return redirect('admin/recommend')->with('success','删除成功');

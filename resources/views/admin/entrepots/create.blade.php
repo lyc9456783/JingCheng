@@ -35,8 +35,8 @@
               <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">库存状态</label>
                 <div>
-                  <label class="radiobox"><input name="rstate" value="1" type="radio">上架</label>
-                  <label class="radiobox"><input name="rstate" value="0" type="radio" checked>下架</label>
+                  <label class="radiobox"><input name="flag" value="1" type="radio">上架</label>
+                  <label class="radiobox"><input name="flag" value="0" type="radio" checked>下架</label>
                 </div>
               </div>
               <div class="layui-form-item">
