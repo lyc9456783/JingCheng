@@ -30,7 +30,8 @@
 		                            <input type="checkbox" name="" value="box[]">
 		                        </th>
 		                        <th>id</th>
-		                       	<th>图片</th>
+		                       	<th style="text-align: center;width:100px;">图片</th>
+                            <th>查看</th>
 		                       	<td>跳转路径</td>
 		                       	<td>添加时间</td>
 		                        <td>当前状态</td>
@@ -43,9 +44,10 @@
 		                    <tr>
 		                        <td><input type="checkbox" value="{{ $v['id'] }}" name="box[]"></td>
 		                        <td>{{ $v['id'] }}</td>
+                            <td><img src="{{ $v['simg'] }}" alt="" width="100px" height="40px" ></td>
 		                        <td>
-		                        	<u style="cursor:pointer" onclick="member_show('查看图片','{{ $v['simg'] }}','10000','1280','800')">
-		                                查看图片
+		                        	   <u style="cursor:pointer" onclick="member_show('查看图片','{{ $v['simg'] }}','1000','800','500')">
+		                                查看原图
 		                            </u>
 		                        </td>
 		                        <td>{{ $v['surl'] }}</td>
@@ -149,13 +151,13 @@
         $('input').attr('checked',true);
     })
 
-
+    var time = null;
     //批量删除提交
     function delAll () {
       layer.confirm('确认要删除吗？',function(index){
            //获取已选中的的选项到数组
            var ids = [];
-            $("input[type='checkbox']:checked").each(function(){
+            $("tbody input[type='checkbox']:checked").each(function(){
                 ids.push(this.value);
                 });
 
@@ -171,6 +173,12 @@
               if(msg == 1){
                   layer.msg('删除成功', {icon: 1});
                   $('input:checked').parent().parent().remove();
+
+                    if(time == null ){
+                        time = setInterval(function(){
+                        location.reload(true);
+                        },2000);
+                    } 
               }else{
                   layer.msg('删除失败', {icon: 2});
               }
