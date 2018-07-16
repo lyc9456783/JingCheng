@@ -18,10 +18,14 @@ Route::get('/','home\IndexController@index');
 // 	dump($sql);
 // });
 //后台主页路由
+<<<<<<< HEAD
 Route::group(['middleware'=>'login'],function(){
 	
 });
 Route::get('/admin','admin\IndexController@index');
+=======
+
+>>>>>>> origin/liyinchang
 
 //分类路由列表
 Route::get('/admin/cates','admin\CatesController@index');
@@ -434,20 +438,28 @@ Route::get('/admin/notice/delete/{id}','admin\NoticeController@delete');
 
 
 
-
-
+//测试
+Route::get('/mail/send','MailController@send');
 
 //路由 李银昌
-//登陆 注册
+//登陆 注册  验证用户名和密码
 Route::get('/admin/login','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
-
 //后台登陆中间件
+<<<<<<< HEAD
 
+=======
+Route::group(['middleware'=>'login'],function(){
+	//路由存放------------>
+>>>>>>> origin/liyinchang
 
+Route::get('/admin','admin\IndexController@index');
 
+	//<--------------------
+});
 
+//友情链接管理
 //友情链接列表
 Route::get('/admin/links','admin\LinksController@index'); 
  //添加友情链接
@@ -455,11 +467,11 @@ Route::get('/admin/links/create','admin\LinksController@create');
 //保存
 Route::post('/admin/links/store','admin\LinksController@store');
 //修改
-Route::get('/admin/links/edit/{id}','admin\LinksController@edit')->where('id','[0-9]+');
+Route::get('/admin/links/edit/{id}','admin\LinksController@edit');
 //更新修改
-Route::post('/admin/links/update/{id}','admin\LinksController@update')->where('id','[0-9]+');
+Route::post('/admin/links/update/{id}','admin\LinksController@update');
 //删除单条
-Route::get('/admin/links/destroy/{id}','admin\LinksController@destroy')->where('id','[0-9]+');
+Route::get('/admin/links/destroy/{id}','admin\LinksController@destroy');
 //批量删除
 Route::post('/admin/links/destroys','admin\LinksController@destroys');
 //批量删除回收站
@@ -507,8 +519,20 @@ Route::get('/admin/slids/open/{id}','admin\SlidsController@open');
 Route::get('/admin/slids/close/{id}','admin\SlidsController@close');
 
 
-//网站配置
+//网站配置管理
 //网站配置首页
 Route::get('/admin/config','admin\ConfigController@index');
 //保存
 Route::post('/admin/config/store','admin\ConfigController@store');
+
+
+
+
+
+
+/**  前台路由  李银昌
+*
+*/
+
+//商品详情页
+Route::get('/product/{id}','home\ProductController@index');

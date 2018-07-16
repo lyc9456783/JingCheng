@@ -3,13 +3,24 @@
 @section('content')
 	<!-- 轮播图添加 -->
    <div class="page-content">
+     <!-- 显示错误模板信息 -->
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                  <xblock><div class="x-left" style="line-height:40px;color:orange">{{ $error }} ×</div></xblock>
+                @endforeach
+            </ul>
+        </div>
+    @endif
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-		                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-                        <legend>轮播图修改</legend>
-                      </fieldset>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+            <legend>轮播图修改</legend>
+         	</fieldset>
+
             <xblock><button class="layui-btn" onclick="location='/admin/slids'">
-            <i class="layui-icon"></i>列表显示</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <i class="layui-icon"></i>列表显示</button></xblock>
             
 				<div class="page-content">
 				          <div class="content">

@@ -176,6 +176,8 @@
 		    </div>
 		</div>
 		<script type="text/javascript" src="/home/js/xiaomi_category.js"></script>
+		
+@section('content')
 
 
 
@@ -185,6 +187,26 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@show
 
 
 	<div class="site-footer">
