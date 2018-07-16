@@ -13,11 +13,7 @@
               <div class="layui-form-item">
                 <label class="layui-form-label">商品名称</label>
                 <div class="layui-input-block" style="width:300px">
-                  <select name="gid">
-                    @foreach ($goods as $k=>$v)
-                      <option value="{{$v['id']}}">{{$v['name']}}</option>
-                    @endforeach
-                  </select>
+                    <input type="int"  value="{{$data->goodrecommend->name}}" class="layui-input" readonly>
                 </div>
               </div>
               <div class="layui-form-item layui-form-text">

@@ -212,6 +212,17 @@ Route::get('/admin/recommend/destroy/{id}','admin\RecommendController@destroy');
 //批量删除
 Route::get('/admin/recommend/delall','admin\RecommendController@delall');
 
+//前台
+//前台密码修改
+Route::get('/home/pass/{id}','home\PassController@pass');
+Route::post('/home/passupdate/{id}','home\PassController@passupdate');
+//前台收货人信息
+Route::get('/home/address/{id}','home\PassController@address');
+Route::post('/home/addressupdate/{id}','home\PassController@addressupdate');
+
+
+
+
 
 
                                                                                                                                       

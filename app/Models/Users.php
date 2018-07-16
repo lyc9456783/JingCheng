@@ -18,4 +18,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;  //引入软删除
         	return $this->hasOne('App\Models\Userdetails','uid');
 
         }
+
     }
