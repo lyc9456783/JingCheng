@@ -297,7 +297,7 @@
                         </li>
                     </ul>
                 </li>
-                    <li class="list" >
+                <li class="list" >
                     <a href="javascript:;">
                         <i class="layui-icon">&#xe64c;</i> 
                         友情链接管理
@@ -320,6 +320,34 @@
                             <a href="/admin/links/delshow">
                                 <i class="iconfont">&#xe6a7;</i>
                                 友情链接回收站
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe62a;</i> 
+                        商城公告管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admin/notice/index">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商城公告列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/notice/create">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加商城公告
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/notice/destroy">
+                                <i class="iconfont">&#xe6a7;</i>
+                                商城公告回收站
                             </a>
                         </li>
 
