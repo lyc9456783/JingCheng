@@ -1,16 +1,11 @@
 //商品小图切换
 $(function(){
-	//单击切换
-	$("#item-thumbs").slide({mainCell:".bd ul",autoPage:true,effect:"top",vis:5,scroll:1,autoPlay:true,pnLoop:true});
-	$(".taocan_bd").slide({mainCell:"#taocan_panels",titCell:"#taocan_tabs li",trigger:"click",effect:"fold"});
-	var goods_imgs = $('#item-thumbs img');
-
+	//图片切换
 	$("#item-thumbs li a").click(function(){
 		$("#item-thumbs li").removeClass("current");
 		$(this).parent().addClass("current");
-		console.log($(this).first());
-	})
 
+	})
 
 
 })
