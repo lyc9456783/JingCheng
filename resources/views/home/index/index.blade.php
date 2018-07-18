@@ -142,7 +142,7 @@
                                         <!-- {{$k = $key+1}} -->
                                         @if($k%6 == 0)
                                           <li>
-                                                <a href="" class="link">
+                                                <a href="/product/{{$v->id}}" class="link">
                                                     <img class="thumb" src="{{$val->pic}}" width="40" height="40">
                                                     <span>{{$val->name}}</span>
                                                  </a>
@@ -175,11 +175,11 @@
                               @foreach($v->categoods as $key=>$val)
                               <li class="first">
                                   <div class="figure figure-thumb">
-                                  <a href="javascript:;">
+                                  <a href="/product/{{$v->id}}">
                                     <img src="{{$val->pic}}">
                                     </a>
                                   </div>
-                                  <div class="title"><a href="goods.php?id=27">{{$val->name}}</a></div>
+                                  <div class="title"><a href="/product/{{$v->id}}">{{$val->name}}</a></div>
                                   <p class="price">{{$val->discount}}<em>元</em>元</p>
                               </li>
                               @endforeach

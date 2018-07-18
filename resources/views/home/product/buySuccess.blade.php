@@ -21,8 +21,4 @@
     
     </div>
 
-
-
-
-
 @endsection('content')

@@ -20,18 +20,11 @@
                 </div> 
             </form>
             <hr>
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/liyinchang
             <div>
                 <button class="layui-btn layui-btn-danger" onclick="delAll()" ><i class="layui-icon">&#xe640;</i>批量删除</button>&nbsp
                 <a href="/admin/entrepot/create"><button class="layui-btn"><i class="layui-icon">&#xe608;</i>添加</button></a>
                 <span class="x-right" style="line-height:40px">共有数据：{{DB::table('jc_entrepots')->count()}} 条</span></div>
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/liyinchang
             <table class="layui-table">
                 <thead>
                     <tr>

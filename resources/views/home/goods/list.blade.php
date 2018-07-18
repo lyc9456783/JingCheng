@@ -1,7 +1,7 @@
 @extends('home.common.common')
 @section('content')
 	<div class="container">
-    	<a href="/">首页</a> <code>&gt;</code> <a href="/home/goods/list/{{$id}}">{{$dir}}</a></div>
+    	<a href="/">首页</a> <code>&gt;</code> <a href="/home/goods/list/{{$id}}?dir={{$dir}}">{{$dir}}</a></div>
 	</div>
 	<div class="container">
 		<div class="filter-box">
@@ -37,7 +37,7 @@
                         <dd class="active">全部</dd>
                             <dd><a href="/home/goods/list/{{$id}}?dir={{$dir}}&price=0-500">0&nbsp;-&nbsp;500</a></dd>
                             <dd><a href="/home/goods/list/{{$id}}?dir={{$dir}}&price=500-1500">500&nbsp;-&nbsp;1500</a></dd>
-                            <dd><a href="/home/goods/list/{{$id}}?dir={{$dir}}&price=2000-3000">1500&nbsp;-&nbsp;3000</a></dd>
+                            <dd><a href="/home/goods/list/{{$id}}?dir={{$dir}}&price=1500-3000">1500&nbsp;-&nbsp;3000</a></dd>
                             <dd><a href="/home/goods/list/{{$id}}?dir={{$dir}}&price=3000-5000">3000&nbsp;-&nbsp;5000</a></dd>
             	</dl>
 	             <a  href="javascript:;" class="more J_filterToggle">更多<i class="layui-icon">&#xe61a;</i></a>

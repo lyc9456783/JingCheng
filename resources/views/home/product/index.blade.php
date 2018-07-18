@@ -51,8 +51,7 @@
 <!-- 导航历史记录 -->
 <div class="breadcrumbs">
 	<div class="container">
-    	<a href="{{ url('/') }}">首页</a> <code>&gt;</code> 
-    	<a href="javascript:viod(0);">{{ $goods->catesgoods->classname }}</a> <code>&gt;</code> {{ $goods->name }}         
+    	<a href="{{ url('/') }}">首页</a> <code>&gt;</code>         
     </div>
 </div>
 <!-- 导航历史记录结束 -->
@@ -72,8 +71,8 @@
          	<div class="goods-pic-box" id="detail_img">
 	          <!-- 商品中间的大图 -->
 	          <div class="goods-big-pic"> 
-	          	<a href="{{ $goods->pic }}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;" > 
-	            	<img  alt="{{ $goods->name }}" src="{{ $goods->pic }}"> 
+	          	<a href="{{ $goods['pic'] }}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;" > 
+	            	<img  alt="{{ $goods['name'] }}" src="{{ $goods['pic'] }}"> 
 	            </a> 
 	          </div>
 
@@ -85,8 +84,8 @@
 			          <!-- 商品小图左边 -->
 			          <!--  -->
 			          <li class="current"> 
-			          	<a href="{{ $goods->pic }}" rel="zoom-id: Zoomer" rev="{{ $goods->pic }}"> 
-			            	<img alt="{{ $goods->name }}" src="{{ $goods->pic }}"> 
+			          	<a href="{{ $goods['pic'] }}" rel="zoom-id: Zoomer" rev="{{ $goods['pic'] }}"> 
+			            	<img alt="{{ $goods['name'] }}" src="{{ $goods['pic'] }}"> 
 			            </a>
 			          </li>
 			          @foreach($goods->goodimages as $gk=>$gv)
