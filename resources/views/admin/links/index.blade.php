@@ -26,11 +26,7 @@
                         </th>
                         <th> ID </th>
                         <th> 链接名称 </th>
-<<<<<<< HEAD
-                        <th> 网站链接 </th>
-=======
                         <th style="width:200px;"> 网站链接 </th>
->>>>>>> origin/liyinchang
                         <th> 描述 </th>
                         <th> 添加时间 </th>
                         <th> 状态 </th>
@@ -45,11 +41,7 @@
                         </td>
                         <td> {{ $v->id }} </td>
                         <td> {{ $v->lname }} </td>
-<<<<<<< HEAD
                         <td> <a href="{{ $v->lurl }}" target="_blank">{{ $v->lurl }} </a></td>
-=======
-                        <td > <a href="{{ $v->lurl }}" target="_blank">{{ $v->lurl }} </a></td>
->>>>>>> origin/liyinchang
                         <td> {{ $v->lsay }} </td>
                         <td> {{ $v->created_at }} </td>
 						    @if( $v['lstate'] == 0 )

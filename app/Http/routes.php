@@ -11,21 +11,29 @@
 |
 */
 /*===========================李玉成路由部分==============================*/
-//首页路由
+//前台首页路由
 
 Route::get('/','home\IndexController@index');
 // DB::listen(function($sql,$bindigs,$time){
 // 	dump($sql);
 // });
+
+
+//前台路由
+//前台公告列表
+Route::get('/home/notice','home\IndexController@noticelist');
+//前台公告详情页面
+Route::get('/home/notice/detail/{id}','home\IndexController@noticedetail');
+//前台商品列表页路由
+Route::get('/home/goods/list/{id}','home\GoodsController@index');
+
+
+
 //后台主页路由
-<<<<<<< HEAD
 Route::group(['middleware'=>'login'],function(){
 	
 });
 Route::get('/admin','admin\IndexController@index');
-=======
-
->>>>>>> origin/liyinchang
 
 //分类路由列表
 Route::get('/admin/cates','admin\CatesController@index');
@@ -141,33 +149,6 @@ Route::get('/admin/goodimages/show/{id}','admin\GoodImagesController@show');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*===========================叶尚君路由部分==============================*/
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
@@ -217,8 +198,6 @@ Route::get('/admin/recommend/delall','admin\RecommendController@delall');
 
 
                                                                                                                                       
-
-
 
 
 
@@ -438,6 +417,36 @@ Route::get('/admin/notice/delete/{id}','admin\NoticeController@delete');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //测试
 Route::get('/mail/send','MailController@send');
 
@@ -447,16 +456,14 @@ Route::get('/admin/login','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
 //后台登陆中间件
-<<<<<<< HEAD
 
-=======
 Route::group(['middleware'=>'login'],function(){
 	//路由存放------------>
->>>>>>> origin/liyinchang
 
-Route::get('/admin','admin\IndexController@index');
 
-	//<--------------------
+// Route::get('/admin','admin\IndexController@index');
+
+
 });
 
 //友情链接管理

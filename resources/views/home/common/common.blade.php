@@ -21,6 +21,36 @@
 		<script type="text/javascript" src="/home/js/utils.js"></script>
 		<script type="text/javascript" src="/home/js/jquery.superslide.js"></script>
 		<script type="text/javascript" src="/home/js/xiaomi_common.js"></script>
+		<style type="text/css">
+			.pagination li{
+		        width:35px;
+		        height:25px;
+		        line-height:25px; 
+		        border:1px solid #ddd;
+		        border-radius:5px;
+		        float:left; 
+		        margin:3px;  
+		        text-align:center;    
+		    	}
+		    .pagination li:hover{
+		        background:#5B604E; 
+		    	}
+		    .pagination {
+		        width:500px; 
+		        margin:auto;
+		        padding-left:15%;    
+		    	}
+		    .pagination span {
+		            position: relative;
+		            padding: 5px 14px;
+		            margin-left:-0.5px; 
+		            line-height: 1.42857143;
+		            color: #fff;
+		            text-decoration: none;
+		            background-color:#6D5C43;
+		            border-radius:5px; 
+		   	 	}
+		</style>
 	</head>
 	<body>
 		<script type="text/javascript">
@@ -95,17 +125,17 @@
 		<div class="site-header" style="clear:both;">
 			<div class="container">
 		    	<div class="header-logo">
-		        	<a href="index.php" title="diaoyu666"><img src="/home/picture/logo.gif" /></a>
+		        	<a href="/" title="京城"><img src="/home/picture/logo.gif" /></a>
 		        </div>
 		        <div class="header-nav">
 		        	<ul class="nav-list">
 		            	<li class="nav-category">
-		                	<a class="btn-category-list" href="catalog.php" >全部商品分类</a>
+		                	<a class="btn-category-list" href="javascript:;" >全部商品分类</a>
 		                	<div class="site-category category-hidden ">
 		                    	<ul class="site-category-list clearfix" id="site-category-list">
 		                            @foreach ($common_cates_data as $k=>$v)
 		                            <li class="category-item ">
-		                              <a class="title" href="">{{$v->classname}}<i class="layui-icon">&#xe602;</i></a>
+		                              <a class="title" href="/home/goods/list/{{$v->id}}?dir={{$v->classname}}">{{$v->classname}}<i class="layui-icon">&#xe602;</i></a>
 		                                <div class="children clearfix ">
 		                                    <ul class="children-list children-col-3">
 		                                      @foreach($v->categoods as $key=>$val)
@@ -137,8 +167,9 @@
 		                    </div>
 		                </li>
 		                 @foreach ($common_cates_data as $k=>$v)
+		                 	@if($k<5)
 			                <li class="nav-item">
-			                  <a class="link" href="category.php?id=76"  ><span>{{$v->classname}}</span></a>
+			                  <a class="link" href="/home/goods/list/{{$v->id}}?dir={{$v->classname}}"  ><span>{{$v->classname}}</span></a>
 			                  <div class='item-children'>
 			                      <div class="container">
 			                          <ul class="children-list clearfix">
@@ -157,6 +188,7 @@
 			                      </div>
 			                  </div>
 			                </li>
+			                @endif
 			                @endforeach
 		            </ul>
 		        </div>
@@ -328,8 +360,11 @@
 	        <div class="logo ir">京城商城</div>
 	        <div class="info-text">
 	            <p class="sites">
-	              <a href="#" target="_blank" title="京城商城">四骑士小组</a>
-	            </p>
+		            <a href="javascript:;" target="_blank" title="京城商城">友情链接</a> |
+		            @foreach ($common_links_data as $k=>$v)
+		            <a href="{{$v->lurl}}" target="_blank" title="{{$v->lsay}}">{{$v->lname}}</a> |
+		            @endforeach
+            	</p>
 	            <p>
 	                ©<a href='javascript:;'>京城仿小米商城</a> 北京市昌平区回龙观育荣教育 <a href='#'>歡迎來电183-055-198-18本網站由 四骑士小组www.lzyc.com 製作。</a>    
 	            </p>

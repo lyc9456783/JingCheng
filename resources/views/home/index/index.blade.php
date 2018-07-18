@@ -19,6 +19,34 @@
         <script type="text/javascript" src="/home/js/utils.js"></script>
         <script type="text/javascript" src="/home/js/jquery.superslide.js"></script>
         <script type="text/javascript" src="/home/js/xiaomi_common.js"></script>
+        <style type="text/css">
+        .gg li{
+          border-bottom:1px dashed #ccc;
+          height:20px;
+          line-height:20px; 
+        }
+        .gg li span{
+          display:block;
+          padding:3px;
+          margin-left:2px;
+          margin-top:1px; 
+          border:1px solid red;
+          background:orange; 
+          width:10px;
+          height:10px;
+          line-height:10px;
+          border-radius:5px;
+          color:blue;
+          float:left;          
+        }
+        .gg li a{
+          margin-left:6px;
+          color:#666;
+        }
+        .gg li a:hover{
+          color:orange;
+        }
+        </style>
     </head>
     <body>
         <script type="text/javascript">
@@ -41,23 +69,23 @@
     </script>
     <div class="site-topbar">
       <div class="container">
-                <div class="topbar-nav">
-                          <a href="mobile"  class="snc-link snc-order">手机版</a>
+          <div class="topbar-nav">
+                <a href="mobile"  class="snc-link snc-order">手机版</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">MIUI</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">米聊</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">游戏</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">多看阅读</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">云服务</a>
-                <span class="sep">|</span>                        <a href="/mobile"  target="_blank"  class="snc-link snc-order">移动版商城</a>
+                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">移动版商城</a>
                 <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">Select region</a>
-                <span class="sep">|</span>                        <a href="article_cat.php?id=3"  class="snc-link snc-order">网店帮助分类</a>
-                <span class="sep">|</span>                        <a href="message.php"  target="_blank"  class="snc-link snc-order">留言板</a>
-                <span class="sep">|</span>                        <a href="goods.php?id=104"  class="snc-link snc-order">会员等级商品测试</a>
-                                    </div>
-                    <div class="topbar-cart" id="ECS_CARTINFO">
-                <a class="cart-mini " href="flow.php">
-      <i class="layui-icon">&#xe657;</i>   
-        购物车
+                <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">网店帮助分类</a>
+                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">留言板</a>
+                <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">会员等级</a>
+          </div>
+          <div class="topbar-cart" id="ECS_CARTINFO">
+            <a class="cart-mini " href="flow.php">
+            <i class="layui-icon">&#xe657;</i>   
+            购物车
         <span class="mini-cart-num J_cartNum" id="hd_cartnum">(0)</span>
     </a>
     <div id="J_miniCartList" class="cart-menu">
@@ -97,17 +125,17 @@
     <div class="site-header" style="clear:both;">
       <div class="container">
           <div class="header-logo">
-              <a href="index.php" title="diaoyu666"><img src="/home/picture/logo.gif" /></a>
+              <a href="/" title="京城"><img src="/home/picture/logo.gif" /></a>
             </div>
             <div class="header-nav">
               <ul class="nav-list">
                   <li class="nav-category">
-                      <a class="btn-category-list" href="catalog.php" style="display:none;">全部商品分类</a>
+                      <a class="btn-category-list" href="javascript:;" style="display:none;">全部商品分类</a>
                       <div class="site-category ">
                           <ul class="site-category-list clearfix" id="site-category-list">
                             @foreach ($cates as $k=>$v)
                             <li class="category-item">
-                              <a class="title" href="category.php?id=76">{{$v->classname}}<i class="layui-icon">&#xe602;</i></a>
+                              <a class="title" href="/home/goods/list/{{$v->id}}?dir={{$v->classname}}">{{$v->classname}}<i class="layui-icon">&#xe602;</i></a>
                                 <div class="children clearfix">
                                     <ul class="children-list">   
                                   @foreach($v->categoods as $key=>$val)
@@ -140,7 +168,7 @@
                 </li>
                 @foreach ($cates as $k=>$v)
                 <li class="nav-item">
-                  <a class="link" href="category.php?id=76"  ><span>{{$v->classname}}</span></a>
+                  <a class="link" href="/home/goods/list/{{$v->id}}?dir={{$v->classname}}" ><span>{{$v->classname}}</span></a>
                   <div class='item-children'>
                       <div class="container">
                           <ul class="children-list clearfix">
@@ -169,9 +197,9 @@
             <input type="hidden" value="k1" name="dataBi">
             <button type="submit" class="search-btn iconfont"><i class="layui-icon">&#xe615;</i> </button>
               <div class="hot-words" >
-                <a href="search.php?keywords=%E5%B0%8F%E7%B1%B3%E6%89%8B%E7%8E%AF" target="_blank">小米手环</a>  
-                <a href="search.php?keywords=%E8%80%B3%E6%9C%BA" target="_blank">耳机</a>  
-                <a href="search.php?keywords=%E6%8F%92%E7%BA%BF%E6%9D%BF" target="_blank">插线板</a>                 
+                <a href="" target="_blank">小米手环</a>  
+                <a href="" target="_blank">耳机</a>  
+                <a href="" target="_blank">插线板</a>                 
               </div>
           </form>
         </div>
@@ -210,9 +238,39 @@
       </div>
     </div>    
         <div class="home-hero-sub row">
-            <div  style="border:1px solid blue;width:234px;height:170px;margin-left:12px;float:left">
-                公告区域 
+            <div  style="border:1px solid #ccc;width:234px;height:170px;margin-left:12px;float:left;overflow:hidden;">
+                <div style="width:100%;height:30px;line-height:30px;background:#ccc;color:black;font-size:20px">商城公告&nbsp;　&nbsp;　&nbsp;　&nbsp;&nbsp;
+                  　<a style="font-size:15px;text-align:right" href="/home/notice">更多</a>
+                </div>
+                <ul class="gg">
+                @foreach ($notices as $k=>$v)
+                  <li><span>{{$k+1}}</span>.<a href="/home/notice/detail/{{$v->id}}">{{$v->title}}</a>　@if($k<3)<img src="/home/images/appnew.png">@endif</li>
+                @endforeach
+                </ul> 
             </div>
+              <script type="text/javascript">
+                $(function(){
+                  var time = null;
+                  function run(){
+                     if(time == null){
+                      time = setInterval(function(){
+                        $('.gg li').first().slideUp('show',function(){
+                          $('.gg').append($(this).show());
+                        });
+                      },2000);
+                    }
+                  }
+                 run();
+               $('.gg').mouseover(function(){
+                  clearInterval(time);
+                  // 显示选中元素
+                  time = null;
+                }).mouseout(function(){
+                    run();
+                });
+                
+                });
+              </script>
             <div class="span16" style="float:left;">
   	           <ul class="home-promo-list clearfix">
                   @foreach ($recommend1 as $k=>$v)
@@ -271,7 +329,7 @@
 	<div class="box-hd">
         <h2 class="title">小米手机</h2>
         <div class="more J_brickNav">
-            <a class="more-link" href="category.php?id=80" style=" display:inline-block;">
+            <a class="more-link" href="/home/goods/list/1?dir=小米手机" style=" display:inline-block;">
                 查看全部<i class="layui-icon">&#xe602;</i>
             </a>
             <ul class="tab-list J_brickTabSwitch">
@@ -353,7 +411,7 @@
 	<div class="box-hd">
         <h2 class="title">智能家电</h2>
         <div class="more J_brickNav">
-            <a class="more-link" href="category.php?id=101" style=" display:inline-block;">
+            <a class="more-link" href="/home/goods/list/18?dir=智能家电" style=" display:inline-block;">
                 查看全部<i class="layui-icon">&#xe602;</i>
             </a>
             <ul class="tab-list J_brickTabSwitch">
@@ -407,7 +465,7 @@
 	<div class="box-hd">
         <h2 class="title">小米平板 笔记本</h2>
         <div class="more J_brickNav">
-            <a class="more-link" href="category.php?id=94" style=" display:inline-block;">
+            <a class="more-link" href="/home/goods/list/14?dir=小米平板笔记本" style=" display:inline-block;">
                 查看全部<i class="layui-icon">&#xe602;</i>
             </a>
             <ul class="tab-list J_brickTabSwitch">
@@ -457,7 +515,7 @@
 	<div class="box-hd">
         <h2 class="title">小米生活方式</h2>
         <div class="more J_brickNav">
-            <a class="more-link" href="category.php?id=118" style=" display:inline-block;">
+            <a class="more-link" href="/home/goods/list/14?dir=小米生活方式" style=" display:inline-block;">
                 查看全部<i class="layui-icon">&#xe602;</i>
             </a>
             <ul class="tab-list J_brickTabSwitch">
@@ -732,7 +790,10 @@
         <div class="logo ir">京城商城</div>
         <div class="info-text">
             <p class="sites">
-              <a href="http://www.ecshop119.com" target="_blank" title="京城商城">四骑士小组</a>
+              <a href="javascript:;" target="_blank" title="京城商城">友情链接</a> |
+              @foreach ($links as $k=>$v)
+              <a href="{{$v->lurl}}" target="_blank" title="{{$v->lsay}}">{{$v->lname}}</a> |
+              @endforeach
             </p>
             <p>
                 ©<a href='javascript:;'>京城仿小米商城</a> 北京市昌平区回龙观育荣教育 <a href='#'>歡迎來电183-055-198-18本網站由 四骑士小组www.lzyc.com 製作。</a>    

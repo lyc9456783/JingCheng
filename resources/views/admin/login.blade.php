@@ -46,8 +46,9 @@
             border-radius:5px; 
     }
     </style>
-</head> 
-<div class="login-logo"><h1>后台登陆  X-ADMIN V1.1</h1></div>
+</head>
+<body>
+<div class="login-logo"><h1>京城后台登陆</h1></div>
 
 
     <div class="login-box">
@@ -55,7 +56,7 @@
         <!-- 后台首页登录界面 -->
         <form class="layui-form layui-form-pane" action="{{ url('admin/login/check') }}" method="post">
               {{ csrf_field() }}
-            <h3>登录你的帐号</h3>
+            <h3>登录后台帐号</h3>
             <label class="login-title" for="username">帐号</label>
             <div class="layui-form-item" >
                 <label class="layui-form-label login-form"><i class="iconfont"></i></label>
@@ -74,29 +75,12 @@
             </div>
 
             <div class="login-title" style="text-align: center;">
-                <button class="btn btn-warning pull-right" lay-submit="" lay-filter="login" type="submit">登录</button> 
+                <button class="btn btn-warning pull-right" lay-submit="" lay-filter="login" style="width:35%" type="submit">登录</button> 
                 <!-- <div class="forgot"><a href="{{ url('admin/login/change') }}" class="forgot">忘记帐号或者密码</a></div>   -->
 
             </div>
         </form>
         <!-- 后台登录结束 -->
-
-        <!-- ajax验证用户名 -->
-        <script>
-           $('form').submit(function(){
-                // $.ajax({
-                //     url:'/admin/links/close/'+id,
-                //     type:'get',
-                //     data:'state=0',
-                //     success:function(msg){
-                //         if(msg ==0){
-                //            return false;
-                //         }
-                //     },
-                //     async:false
-                // });
-           })
-        </script>
-
-
     </div>
+</body>
+</html>

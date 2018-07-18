@@ -10,6 +10,8 @@ use App\Models\Cates;
 use App\Models\Goods;
 use App\Models\Slids;
 use App\Models\Recommends;
+use App\Models\Notice;
+use App\Models\Links;
 
 class IndexController extends Controller
 {
@@ -42,6 +44,11 @@ class IndexController extends Controller
         $slids = Slids::where('state','1')->get();
         // 分类数据
         $cates = Cates::where('path','!=','0')->get();
+        //商城公告数据
+        $notices = Notice::orderBy('created_at','desc')->take(9)->get();
+        //友情链接数据
+        $links = links::where('lstate','1')->get();
+        // dump($links);
         return view('home.index.index',
             [
                     'cates'=>$cates,
@@ -51,6 +58,8 @@ class IndexController extends Controller
                     'pgood'=>$pgood,
                     'shgood'=>$shgood,
                     'slids'=>$slids,
+                    'notices'=>$notices,
+                    'links'=>$links,
                     'recommend1'=>$recommend1,
                     'recommend2'=>$recommend2,
                     'recommend3'=>$recommend3,
@@ -64,29 +73,31 @@ class IndexController extends Controller
      */
     public function goodlist($id)
     {
-        
+        return view('home.goods.list');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function gooddetails($id)
-    {
-        //
-    }
 
     /**
-     * Display the specified resource.
+     * 商城公告列表页
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 
      */
-    public function show()
+    public function noticelist(Request $request)
     {
-        
+        if($request->has('search')){
+            $_GET['page'] = empty($_GET['page'])?1:$_GET['page'];
+            $search = $request->input('search');
+            // dump($search);
+            $notices = Notice::where('title','like','%'.$search.'%')->paginate(5);
+            
+        }else{
+              //商城公告数据
+        $notices = Notice::orderBy('created_at','desc')
+                ->paginate(5)
+                ->appends($request->input());
+        }
+      
+        return view('home.notice.list',['notices'=>$notices]);
     }
 
     /**
@@ -95,9 +106,10 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function noticedetail($id)
     {
-        //
+        $detail = Notice::find($id);
+        return view('home.notice.detail',['detail'=>$detail]); 
     }
 
     /**
