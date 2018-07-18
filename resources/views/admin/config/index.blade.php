@@ -19,10 +19,17 @@
 	         	<form action="/admin/config/store" method="post" enctype="multipart/form-data" class="layui-form"> 
 	         		 	{{ csrf_field() }}
 		           
-						<div class="layui-form-item">
+					  <div class="layui-form-item">
 					    <label class="layui-form-label">网站名称</label>
 					    <div class="layui-input-block">
 					      <input type="text" name="net_name" value="{{ $data['net_name'] or old('net_name') }}" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+					    </div>
+					  </div>
+
+					  <div class="layui-form-item">
+					    <label class="layui-form-label">官网联系方式</label>
+					    <div class="layui-input-block">
+					      <input type="text" name="net_phone" value="{{ $data['net_phone'] or old('net_phone') }}" lay-verify="title" autocomplete="off" placeholder="官网电话" class="layui-input">
 					    </div>
 					  </div>
 

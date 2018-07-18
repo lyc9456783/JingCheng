@@ -543,3 +543,9 @@ Route::post('/admin/config/store','admin\ConfigController@store');
 
 //商品详情页
 Route::get('/product/{id}','home\ProductController@index');
+//保存评论
+Route::get('/discuss/store','home\ProductController@store');
+//确认库存
+Route::post('/discuss/create','home\ProductController@create');
+//购物车
+Route::post('/discuss/shopcar','home\ProductController@shopcar');

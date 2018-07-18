@@ -21,6 +21,7 @@
 		<script type="text/javascript" src="/home/js/utils.js"></script>
 		<script type="text/javascript" src="/home/js/jquery.superslide.js"></script>
 		<script type="text/javascript" src="/home/js/xiaomi_common.js"></script>
+<<<<<<< HEAD
 		<style type="text/css">
 			.pagination li{
 		        width:35px;
@@ -51,6 +52,9 @@
 		            border-radius:5px; 
 		   	 	}
 		</style>
+=======
+		    <script src="/admins/lib/layui/layui.js" charset="utf-8"></script>
+>>>>>>> origin/liyinchang
 	</head>
 	<body>
 		<script type="text/javascript">
