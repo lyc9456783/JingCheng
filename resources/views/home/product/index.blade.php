@@ -1,6 +1,48 @@
 @extends('home.common.common')
 
 @section('content')
+<style type="text/css">
+	/*评论区选项卡的样式*/
+	#discuss1 ul{
+		display: none;
+	}
+	#discuss1 ul:first-of-type{
+		display: block;
+		}
+
+	.pagination li{
+        width:35px;
+        height:25px;
+        line-height:25px; 
+        border:1px solid #ddd;
+        border-radius:5px;
+        float:left; 
+        margin:3px;  
+        text-align:center;    
+    }
+    .pagination li:hover{
+        background:#ccc;
+        size:orange; 
+    }
+    .pagination {
+        width:500px; 
+        margin:auto;
+        padding-left:15%;    
+    }
+    .pagination span{
+        position: relative;
+        padding: 5px 14px;
+        margin-left:-0.5px; 
+        line-height: 1.42857143;
+        color: #fff;
+        text-decoration: none;
+        background-color:#ccc;
+        border-radius:5px; 
+    }
+
+
+</style>
+
 <link href="/home/css/goods.css" rel="stylesheet" type="text/css" />
 <link href="/home/css/consultations.css" rel="stylesheet" type="text/css" />
 <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
@@ -128,8 +170,9 @@
                         <dd class="goods-info-head-cart">
                         <input type="hidden" name="gid" value="{{ $goods->id }}">
                         <input type="hidden" name="discount" value="{{ $goods->discount}}">
+                        <input type="hidden" name="goods_kc" value="{{$goods->entrepotsgoods->num or '0'}}">
                         <button class="btn  btn-primary goods-add-cart-btn" id="buy_btn"> 加入购物车</button>
-                       
+                       		
                           <!-- <a href="javascript:addToCart(27,1)" class="btn  btn-primary goods-add-cart-btn" id="buy_btn">加入购物车</a> -->
                         </dd>
                     </dl>
@@ -158,34 +201,8 @@
 		alert('暂时缺货');
 		return false;
 	}
-
-	//post 验证
-    // $.ajaxSetup({
-    //       headers: {
-    //           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //       }
-    //   });
-	//ajax 验证库存
-// 	$.ajax({
-//                 url:'/discuss/create',
-//                 type:'post',
-//                 data:cmt,
-//                 success:function(msg){
-//                    alert(msg); 
-//                 },
-//                 async:false,
-//             });
-
-// return false;
   })
   </script>
-
-
-  <!-- 推荐组合 -->
-  <div> </div>
-
-  <!-- 推荐组合结束 -->
-
 
 
 
@@ -199,7 +216,7 @@
           <ul class="detail-list">
             <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
             <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
-            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ $discuss_count }}</em>)</a></li>
+            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
             <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">商品咨询</a></li>
           </ul>
         </div>
@@ -213,15 +230,11 @@
             <div class="shape-container">
                 @foreach($goods->goodimages as $gk=>$gv)
                 <p><img  style="margin-top:50px;" alt="" src="{{ $gv->images }}" /></p>
-                @endforeach
-<!--                 <p>&nbsp;</p>
-                <p><img width="720" height="572" alt="" src="/home/picture/20150818160916.png" /></p>
-                <p><img width="1351" height="762" alt="" src="/home/picture/er08150123.png" /></p>
-                <p><img width="1138" height="867" alt="" src="/home/picture/ger908150140.png" /></p>    -->                        
+                @endforeach                       
              </div>
         </div>
       </div>
-      <!-- 详情描述 -->
+      <!-- 详情描述结束 -->
 
 
 
@@ -263,24 +276,24 @@
       <div class="container">
           <ul class="main-block clearfix">
               <li class="percent">
-                  <div class="per-num"><i>83</i>%</div>
+                  <div class="per-num"><i>{{ round($discuss_count_good/$discuss_count*100)}}</i>%</div>
                   <div class="per-title">购买后满意</div>
-                  <div class="per-amount"><i>{{ $discuss_count }}</i>名用户投票</div>
+                  <div class="per-amount"><i>{{ round($discuss_count) }}</i>名用户投票</div>
               </li>
               <li>
               	  <ul class="z-point-list" id="min_points">
                     <li>
                       <label>好评：</label>
-                      <p> <span style="width: 83%;"></span> </p>
-                      <em>83%</em> </li>
+                      <p> <span style="width: {{ round($discuss_count_good/$discuss_count*100)}}%;"></span> </p>
+                      <em>{{ round($discuss_count_good/$discuss_count*100)}}%</em> </li>
                     <li>
                       <label>中评：</label>
-                      <p> <span style="width: 17%;"></span> </p>
-                      <em>17%</em> </li>
+                      <p> <span style="width: {{ round($discuss_count_between/$discuss_count*100)}}%;"></span> </p>
+                      <em>{{ round($discuss_count_between/$discuss_count*100)}}%</em> </li>
                     <li>
                       <label>差评：</label>
-                      <p> <span style="width: 0%;"></span> </p>
-                      <em>17%</em> </li>
+                      <p> <span style="width: {{ round($discuss_count_bad/$discuss_count*100)}}%;"></span> </p>
+                      <em>{{ round($discuss_count_bad/$discuss_count*100)}}%</em> </li>
                   </ul>
               </li>
               <li class="i-want-comment">
@@ -297,17 +310,38 @@
 
 <div class="goods-detail-comment-content">
 	<div class="container">
-    	<div class="row">
+
+
+    	<div class="row" id="discuss">
         	<div class="span20 goods-detail-comment-list">
-            	<div class="comment-order-title">
-                	<div class="left-title"><h3 class="comment-name">最有帮助的评价（{{ $discuss_count }}） </h3></div>
-                	<!-- <div class="right-title J_showImg"><i class="iconfont">√</i> 只显示带图评价</div> -->
+            	<div class="comment-order-title" id="dis_title">
+      	
+               		<form action="/product/{{ $goods->id }}" id="form_search">
+               			<label><input type="radio" name="search" value="">全部评价（{{ round($discuss_count)}}）</label>
+               			<label><input type="radio" name="search" value="3">好评({{ $discuss_count_good }})</label>
+               			<label><input type="radio" name="search" value="2">中评({{ $discuss_count_between }})</label>
+               			<label><input type="radio" name="search" value="1" class="search">差评({{ $discuss_count_bad }})</label>
+               			<button id="search" class="btn btn-danger">查看</button>
+               		</form>
+
                 </div>
+                <script>
+                
+                for(var i =0; i< $('#form_search input').length;i++){
+                	$('#form_search input').eq(i).click(function(){
+                	this.attr('checked',true);
+                })
+                }
+                
+
+                </script>
 
 
-                <!-- 评论的内容 以及分页 -->
-                <ul class="comment-box-list" id="discuss">
-                	@foreach($discuss as $gk=>$gv)   	 
+                <!-- 全部 -->
+                <ul class="comment-box-list" id="discuss1">
+                	@foreach($discuss as $gk=>$gv) 
+
+
                    <li class="item-rainbow-1">
                       <div class="user-image"> <img class="face_img" src="{{ $gv->userdiscuss->Userdetails->face or 'no' }}"> </div>
                       <div class="user-emoj">
@@ -330,13 +364,15 @@
                     </li> 
 					@endforeach	
                 </ul>
-                <!-- 需要修改样式!!!!!!!!!! -->
-				<div id="page"> {!! $discuss->render() !!} </div>
+				
 				
                 <!-- 评论块结束 -->
-
             </div>
+		
         </div>
+			<div id="page" class="center" style="margin-left:40%;"> {!! $discuss->render() !!}</div>
+ 
+
     </div> 
 </div>
 
@@ -374,7 +410,7 @@
 	          差评<img src="/home/picture/stars1.gif" />
 	          <input name="comment_rank" type="radio" value="2" id="comment_rank2" />
 	          中评<img src="/home/picture/stars2.gif" />
-	          <input name="comment_rank" type="radio" value="3" id="comment_rank3" />
+	          <input name="comment_rank" type="radio" value="3" id="comment_rank3" checked />
 	          好评<img src="/home/picture/stars3.gif" />
 	    </li>
         <li>

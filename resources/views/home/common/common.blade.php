@@ -21,6 +21,7 @@
 		<script type="text/javascript" src="/home/js/utils.js"></script>
 		<script type="text/javascript" src="/home/js/jquery.superslide.js"></script>
 		<script type="text/javascript" src="/home/js/xiaomi_common.js"></script>
+		    <script src="/admins/lib/layui/layui.js" charset="utf-8"></script>
 	</head>
 	<body>
 		<script type="text/javascript">

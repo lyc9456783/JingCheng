@@ -71,6 +71,7 @@ class ConfigController extends Controller
        $config -> copyright= $data['copyright'];
        $config -> onoff= $data['onoff'];
        $config -> logo= $data['logo'];
+       $config -> net_phone= $data['net_phone'];
        $res = $config -> save();
        
         //处理返回值
