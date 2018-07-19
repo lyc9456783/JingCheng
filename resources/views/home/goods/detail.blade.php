@@ -46,6 +46,10 @@
         background-color:#ccc;
         border-radius:5px; 
     }
+/*    a:link{
+      color:#fff;
+    }*/
+
 </style>
 <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 <!-- <link rel="stylesheet" href="/admins/lib/layui/css/layui.css" media="all"> -->
@@ -174,9 +178,17 @@
                           <dd class="goods-info-head-cart">
                             <input type="hidden" name="gid" value="{{ $goods->id }}">
                             <input type="hidden" name="discount" value="{{ $goods->discount}}">
-                            <input type="hidden" name="goods_kc" value="{{$goods->entrepotsgoods->num or '0'}}">
-                            <button class="btn  btn-primary goods-add-cart-btn" id="buy_btn"> 加入购物车</button>
-                         		
+                            <input type="hidden" name="goods_kc" value="{{$goods->entrepotsgoods['num'] or '0'}}">                            
+                            @if(($goods->entrepotsgoods['num'])>0)
+                             <button class="btn  btn-primary goods-add-cart-btn" id="buy_btn"> 加入购物车</button>
+                            @else
+                             <!-- <button class="btn  btn-gray goods-add-cart-btn" id="buy_btn"></button> -->
+                             <a href="javascript:viod(0)"  class="btn  btn-gray goods-add-cart-btn" id="buy_btn"> 暂时缺货 </a>
+                            @endif
+                            <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
+                            <a href="javascript:viod(0)" class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</a>
+                            <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
+                         		<!-- <a href="javascript:collect(27)" class=" btn btn-gray  goods-collect-btn " id="fav-btn"><i class="iconfont"></i>喜欢</a> -->
                             <!-- <a href="javascript:addToCart(27,1)" class="btn  btn-primary goods-add-cart-btn" id="buy_btn">加入购物车</a> -->
                           </dd>
                       </dl>
@@ -279,7 +291,7 @@
             	<li class="goods-img"><img src="{{ $goods->pic }}" alt="{{ $goods->name }}" /></li>
                 <li class="goods-tech-spec">
                 	<ul>
-                        <li>{{   $goods->detailsgoods->describe }}</li>
+                        <li>  {{   $goods->detailsgoods->describe }}</li>
                     </ul>
                 </li>
             </ul>
@@ -347,7 +359,7 @@
 
             
           	<div class="row" id="discuss">
-              	<div class="span20 goods-detail-comment-list">
+              	<div class="span20 goods-detail-comment-list" @if(round($discuss_count)==0)  style="display:none;"@endif>
                   	  <div class="comment-order-title" id="dis_title">
             	           <!-- 评价搜索表单 -->
                      		<form action="/home/goods/detail/{{ $goods->id }}" id="form_search">
