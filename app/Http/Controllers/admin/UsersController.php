@@ -55,10 +55,9 @@ class UsersController extends Controller
         //查询用户表中的所有用户
          $this->validate($request, [
 
-            'username' => 'required|unique:jc_users|regex:/[a-zA-z]{1}[\w]{5,16}/',
+            'username' => 'required|unique:jc_users',
         ],[
             'username.unique' => '用户名已存在',
-            'username.regex' => '用户名格式不正确',
         ]);
 
           //获取数据

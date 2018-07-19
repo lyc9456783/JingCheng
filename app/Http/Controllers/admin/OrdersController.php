@@ -59,6 +59,9 @@ class OrdersController extends Controller
         //获取上传的订单信息
         $data = $request -> all();
 
+        //生成订单号
+        $time= date('YmdHis',time());
+
         //获取市级
         $sj = $data['s_sf'];
         $sq = $data['s_sq'];
@@ -77,7 +80,7 @@ class OrdersController extends Controller
             $orders = new Orders;
             $orders -> uid = $data['uid'];
             $orders -> gid = $data['gid'];
-            $orders -> ordersnum = $data['ordersnum'];
+            $orders -> ordersnum = $time;
             $orders -> recipients = $data['recipients'];
             $orders -> phone = $data['phone'];
             $orders -> address = $address;
