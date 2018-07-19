@@ -71,10 +71,10 @@
     		@foreach ($goods as $k=>$v)
             <div class="goods-item">
 	    	 <div class="figure figure-img">
-	           <a href="goods.php?id=29"><img src="{{$v->pic}}" alt="{{$v->name}}" class="goodsimg" /></a>
+	           <a href="/home/goods/detail/{{$v->id}}"><img src="{{$v->pic}}" alt="{{$v->name}}" class="goodsimg" /></a>
 	         </div>
 	           <p class="desc">{{$v->intro}}</p>
-	          <h2 class="title"><a href="goods.php?id=29" title="{{$v->name}}">{{$v->name}}</a></h2>
+	          <h2 class="title"><a href="/home/goods/detail/{{$v->id}}" title="{{$v->name}}">{{$v->name}}</a></h2>
 	           <p class="price">
 	                        本店价<font class="shop_s">{{$v->discount}}<em>元</em></font>
 	                                    <del>专柜价<font class="market_s">{{$v->price}}<em>元</em></font></del>

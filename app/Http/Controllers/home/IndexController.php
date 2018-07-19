@@ -71,9 +71,14 @@ class IndexController extends Controller
      *
      * 
      */
-    public function goodlist($id)
+    public function searchs(Request $request)
     {
-        return view('home.goods.list');
+        if($request->has('search')){
+            $search = $request->input('search');
+            $goods = Goods::where('name','like','%'.$search.'%')->paginate(8)->appends($request->input());
+            $recommend = Recommends::where('rstate','1')->take(10)->skip(3)->get();
+            return view('home.goods.list',['goods'=>$goods,'id'=>0,'dir'=>'搜索','recommend'=>$recommend]);
+        }
     }
 
 

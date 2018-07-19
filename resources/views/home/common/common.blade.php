@@ -3,7 +3,7 @@
 	<head>
 		<meta name="Generator" content="" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="Keywords" content="" />
+		<meta name="Keywords" content="{{$common_configs_data->net_keyword}}" />
 		<meta name="Description" content="" />
 		<title>京城</title>
 		<link rel="shortcut icon" href="/home/logo/favicon.ico" />
@@ -82,10 +82,9 @@
 		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">多看阅读</a>
 		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">云服务</a>
 		            <span class="sep">|</span>                        <a href="/mobile"  target="_blank"  class="snc-link snc-order">移动版商城</a>
-		            <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">Select region</a>
 		            <span class="sep">|</span>                        <a href="article_cat.php?id=3"  class="snc-link snc-order">网店帮助分类</a>
 		            <span class="sep">|</span>                        <a href="message.php"  target="_blank"  class="snc-link snc-order">留言板</a>
-		            <span class="sep">|</span>                        <a href="goods.php?id=104"  class="snc-link snc-order">会员等级商品测试</a>
+		            <span class="sep">|</span>                        <a href="goods.php?id=104"  class="snc-link snc-order">会员等级测试</a>
 		        </div>
 		<div class="topbar-cart" id="ECS_CARTINFO">
 			<a class="cart-mini " href="flow.php">
@@ -128,7 +127,7 @@
 		<div class="site-header" style="clear:both;">
 			<div class="container">
 		    	<div class="header-logo">
-		        	<a href="/" title="京城"><img src="/home/picture/logo.gif" /></a>
+		        	<a href="/" title="京城"><img width="55px" height="55px" src="{{$common_configs_data->logo}}" /></a>
 		        </div>
 		        <div class="header-nav">
 		        	<ul class="nav-list">
@@ -145,7 +144,7 @@
 		                                        <!-- {{$k = $key+1}} -->
 		                                        @if($k%6 == 0)
 			                                        <li>
-			                                              <a href="" class="link">
+			                                              <a href="/home/goods/detail/{{$val->id}}" class="link">
 			                                                  <img class="thumb" src="{{$val->pic}}" width="40" height="40">
 			                                                  <span>{{$val->name}}</span>
 			                                               </a>
@@ -155,7 +154,7 @@
 		                                            
 		                                        @else
 		                                         <li style="text-left;">
-		                                          <a href="" class="link">
+		                                          <a href="/home/goods/detail/{{$val->id}}" class="link">
 		                                              <img class="thumb" src="{{$val->pic}}" width="40" height="40">
 		                                              <span>{{$val->name}}</span>
 		                                            </a>
@@ -179,11 +178,11 @@
 			                              @foreach($v->categoods as $key=>$val)
 			                              <li class="first">
 			                                  <div class="figure figure-thumb">
-			                                  <a href="javascript:;">
+			                                  <a href="/home/goods/detail/{{$val->id}}">
 			                                    <img src="{{$val->pic}}">
 			                                    </a>
 			                                  </div>
-			                                  <div class="title"><a href="goods.php?id=27">{{$val->name}}</a></div>
+			                                  <div class="title"><a href="/home/goods/detail/{{$val->id}}">{{$val->name}}</a></div>
 			                                  <p class="price">{{$val->discount}}<em>元</em>元</p>
 			                              </li>
 			                              @endforeach
@@ -196,13 +195,15 @@
 		            </ul>
 		        </div>
 		        <div class="header-search">
-		        	<form action="search.php" method="get" id="searchForm" name="searchForm" onSubmit="return checkSearchForm()" class="search-form clearfix">
+		        	<form action="/home/goods/search" method="get" id="searchForm"  class="search-form clearfix">
 		            	<label class="hide">站内搜索</label>
-		        		<input class="search-text" type="text" name="keywords" id="keyword" value="" autocomplete="off">
-		        		<input type="hidden" value="k1" name="dataBi">
+		        		<input class="search-text" type="text" name="search" id="keyword" value="" autocomplete="off">
 		        		<button type="submit" class="search-btn iconfont"><i class="layui-icon">&#xe615;</i></button>
-		                                <div class="hot-words" >
-		                	 <a href="search.php?keywords=%E5%B0%8F%E7%B1%B3%E6%89%8B%E7%8E%AF" target="_blank">小米手环</a>  <a href="search.php?keywords=%E8%80%B3%E6%9C%BA" target="_blank">耳机</a>  <a href="search.php?keywords=%E6%8F%92%E7%BA%BF%E6%9D%BF" target="_blank">插线板</a>                 </div>
+		                <div class="hot-words" >
+		                	<a href="/home/goods/detail/33" target="_blank">小米8</a>  
+			                <a href="/home/goods/detail/42" target="_blank">蓝牙耳机</a>  
+			                <a href="/home/goods/detail/43" target="_blank">小米手环</a>                  
+			            </div>
 		           	</form>
 		        </div>
 		    </div>
@@ -349,7 +350,7 @@
 	       
 	    </dl>
 	            <div class="col-contact">
-	                <p class="phone">183-055-198-18</p>
+	                <p class="phone">{{$common_configs_data->net_phone}}</p>
 	                <p>周一至周日 8:00-18:00<br>（仅收市话费）</p>
 	                <a rel="nofollow" class="btn btn-line-primary btn-small">
 	                    <i class="layui-icon">&#xe6fc;</i>24小时在线客服
@@ -360,16 +361,16 @@
 	</div>
 	<div class="site-info">
 	    <div class="container">
-	        <div class="logo ir">京城商城</div>
+	        <div style="float:left;margin:0px 4px;"><img src="{{$common_configs_data->logo}}" width="36px" height="36px"></div>
 	        <div class="info-text">
 	            <p class="sites">
-		            <a href="javascript:;" target="_blank" title="京城商城">友情链接</a> |
+		            <a target="_blank" title="京城商城">友情链接</a> |
 		            @foreach ($common_links_data as $k=>$v)
 		            <a href="{{$v->lurl}}" target="_blank" title="{{$v->lsay}}">{{$v->lname}}</a> |
 		            @endforeach
             	</p>
 	            <p>
-	                ©<a href='javascript:;'>京城仿小米商城</a> 北京市昌平区回龙观育荣教育 <a href='#'>歡迎來电183-055-198-18本網站由 四骑士小组www.lzyc.com 製作。</a>    
+	                ©<a href='javascript:;'>{{$common_configs_data->net_name}}</a> 北京市昌平区回龙观育荣教育 <a href='#'>歡迎來电{{$common_configs_data->net_phone}}本網站由 四骑士小组www.lzyc.com 製作。</a>    
 	            </p>
 	        </div>
 	        <div class="info-links">
