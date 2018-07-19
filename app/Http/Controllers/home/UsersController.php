@@ -67,16 +67,20 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //查询数据
+        //查询session中的数据
+        $data = session('homeuser');
+        // dump($data);
+        $uid = $data['id'];
+
         //查询用户表
-        $users = Users::where('id','=',$id)->first();
+        $users = Users::where('id','=',$uid)->first();
         //查询用户详情表
-        $details = Userdetails::where('uid','=',$id)->first();
+        $details = Userdetails::where('uid','=',$uid)->first();
         // dump($details);
         //加载修改用户信息模板
-        return view('home.users.edit',['users'=>$users,'details'=>$details]);
+        return view('home.users.edit',['users'=>$users,'details'=>$details,'id'=>$uid]);
     }
 
     /**

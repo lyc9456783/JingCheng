@@ -213,19 +213,19 @@ Route::get('/home/users/pass/{id}','home\PassController@pass');
 Route::post('/home/users/passupdate/{id}','home\PassController@passupdate');
 
 //前台收货人信息列表
-Route::get('/home/users/address/{id}','home\PassController@address');
+Route::get('/home/address/index','home\AddressController@index');
 //前台收货人地址添加
-Route::get('/home/users/addressadd/{id}','home\PassController@addressadd');
-Route::post('/home/users/addressstore/{id}','home\PassController@addressstore');
+// Route::get('/home/orders/addressadd','home\AddressController@addressadd');
+Route::post('/home/address/store/{id}','home\AddressController@store');
 //前台收货人地址修改
-Route::get('/home/users/addressedit/{id}','home\PassController@addressedit');
-Route::post('/home/users/addressupdate/{id}','home\PassController@addressupdate');
+Route::get('/home/address/edit/{id}','home\AddressController@edit');
+Route::post('/home/address/update/{id}','home\AddressController@update');
 //删除前台收货人地址
-Route::get('/home/users/addressdelete/{id}','home\PassController@addressdelete');
+Route::get('/home/address/delete/{id}','home\AddressController@delete');
 
 //前台评论列表
-Route::get('/home/users/discuss/{id}','home\PassController@discuss');
-Route::get('/home/users/discussdelete/{id}','home\PassController@discussdelete');
+Route::get('/home/discuss/index','home\DiscussController@index');
+Route::get('/home/discuss/delete/{id}','home\DiscussController@delete');
 //收货人信息
 Route::get('/home/users/consignee','home\ConsigneeController@consignee');
 Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestore');
@@ -425,7 +425,7 @@ Route::post('/home/login/store','home\LoginController@store');
 //设置用户中心
 Route::get('/home/users/index','home\UsersController@index');
 //设置用户信息修改
-Route::get('/home/users/edit/{id}','home\UsersController@edit');
+Route::get('/home/users/edit','home\UsersController@edit');
 //设置用户提交信息修改
 Route::post('/home/users/update/{id}','home\UsersController@update');
 //设置用户订单查看

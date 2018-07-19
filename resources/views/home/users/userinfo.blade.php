@@ -3,13 +3,14 @@
 @section('content')
 <link href="/home/css/style.css" rel="stylesheet" type="text/css">
 <link href="/home/css/user.css" rel="stylesheet" type="text/css">
-<div id="wrapper" class="container">
-   <div class="breadcrumbs">
+<div id="wrapper" class="container">    
+<div class="breadcrumbs">
     <div class="container">
         <a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
 </div>
-    
- <div class="my_nala_main">
+ 
+    <div class="my_nala_main">
+        
 <div class="slidebar">
     <ul class="slide_item">
 
@@ -19,7 +20,7 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     
-                    <a class="" href="">收货地址</a>
+                    <a class="" href="/home/address/index">收货地址</a>
                      
                     <a class="" href="">缺货登记</a>
                      
@@ -34,7 +35,7 @@
                 <li>
                     <a class="" href="/home/users/index">我的个人中心</a>
                     
-                    <a class="" href="/home/users/edit/{{$data['id']}}">用户信息</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
                     
                     <a class="" href="">我的收藏</a>
 
@@ -42,15 +43,15 @@
                       
                     <a class="" href="">我的推荐</a>
                        
-                    <a class="" href="">我的评论</a>
+                    <a class="" href="/home/discuss/index">我的评论</a>
                      
                 </li>
                
             </ul>
         </li>
     </ul>
-
 </div>
+
         <div class="my_nala_centre ilizi_centre">
             <div class="ilizi cle">
             <div class="box">
@@ -63,7 +64,7 @@
                         <div class="user-card">
                             <h2 class="username">{{$data['username']}}</h2>
                             <p class="tip">欢迎您回到 京城商城</p>
-                            <a class="link" href="/home/users/edit/{{$data['id']}}">修改个人资料&gt;</a>
+                            <a class="link" href="/home/users/edit">修改个人资料&gt;</a>
                             <img class="avatar" src="{{$users['face']}}">
                         </div>
                         <div class="user-actions">

@@ -6,45 +6,37 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Users;
-use App\Models\Address;
 use App\Models\Discuss;
-use Hash;
-class PassController extends Controller
+use App\Models\Users;
+use App\Models\Goods;
+use App\Models\Userdetails;
+class DiscussController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function passupdate(Request $request,$id)
+    public function index()
     {
-        //查询用于的所有信息
-        $data= Users::find($id);
-        // dd($data['id']);
-        //晒找出用户的单独密码进行解密判断
-        $pass = $data['password'];
-        //获取用户修改时上传的密码先与旧密码进行比对
-        $word = $request -> all();
-        // dump($word);
-        //首先进行原密码输入的是否正确的判断
-        if(Hash::check($word['old_password'], $pass))
-        {   
-            if($word['new_password'] == $word['comfirm_password'])
-            {
-                $users = Users::find($id);
-                // dd($users);
-                $users -> password = Hash::make($word['comfirm_password']);
-                $users -> save();
+        //查询session中的数据
+        $data = session('homeuser');
+        // dump($data);
+        $uid = $data['id'];
 
-                return redirect('home/users/edit/'.$id)-> with('success','修改成功');   
-            }else{
-                return back()->with('error','重复密码不正确'); 
-            }
-        }else{
-            return back()->with('error','原密码不正确');
-        }   
+        $data = Discuss::where('uid',$uid)->get();
+        // dump($data);
+        return view('home.discuss.discuss',['title'=>'我的评论','data'=>$data,'id'=>$uid]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -98,8 +90,14 @@ class PassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $data = Discuss::find($id);
+        $res = $data -> delete();
+        if($res){
+            return redirect('home/discuss/index')-> with('success','删除成功');
+        }else{
+            return back()->with('error','删除失败');
+        }
     }
 }

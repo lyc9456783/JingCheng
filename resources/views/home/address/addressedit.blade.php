@@ -62,7 +62,7 @@
   <div class="box">
   <div class="box_1">
     <div class="text-info" style="font-size:20px;width:400px;margin:center;">{{$title}}</div>
-    <form action="/home/users/addressupdate/{{$id}}" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+    <form action="/home/orders/addressupdate/{{$id}}" method="post" name="theForm" onsubmit="return checkConsignee(this)">
       {{ csrf_field() }}
       <table width="60%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tbody>
