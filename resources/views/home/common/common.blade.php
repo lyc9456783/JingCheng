@@ -151,11 +151,7 @@
 		<div class="site-header" style="clear:both;">
 			<div class="container">
 		    	<div class="header-logo">
-
 		        	<a href="/" title="京城"><img width="55px" height="55px" src="{{$common_configs_data->logo}}" /></a>
-
-		        	<a href="/" title="京城商城"><img src="/home/picture/logo.gif" /></a>
-
 		        </div>
 		        <div class="header-nav">
 		        	<ul class="nav-list">
@@ -240,20 +236,7 @@
 		    </div>
 		</div>
 		<script type="text/javascript" src="/home/js/xiaomi_category.js"></script>
-<<<<<<< HEAD
-		
-@section('content')
-
-
-
-
-
-
-
-
-
-=======
-		    @if (session('success'))
+				 @if (session('success'))
 		         <script type="text/javascript">
 		            layui.use('layer', function(){
 		                var layer = layui.layer;
@@ -269,25 +252,14 @@
 		            }); 
 		        </script>
 		    @endif
-		@section('content')
-        
->>>>>>> origin/qiu
+
+			@section('content')
 
 
+			        
 
 
-
-		@show
-
-
-
-
-
-
-
-
-
-@show
+			@show
 
 
 	<div class="site-footer">

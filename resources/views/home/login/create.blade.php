@@ -1,21 +1,22 @@
 ﻿<!DOCTYPE html>
 <html xmlns="">
 <head>
-<meta name="Generator" content="ECSHOP v2.7.3" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="Keywords" content="" />
-<meta name="Description" content="" />
-<style type="text/css">
-    span{
-      font-size: 14px;
-      opacity: 0.7;
-      padding-left: 8px;
-    }
+    <title>用户注册</title>
+    <meta name="Generator" content="ECSHOP v2.7.3" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="{{$common_configs_data->net_keyword}}" />
+    <meta name="Description" content="" />
+    <style type="text/css">
+        span{
+          font-size: 14px;
+          opacity: 0.7;
+          padding-left: 8px;
+        }
 
-  </style>
+      </style>
 </head>
 
-<title>用户注册</title>
+
 
 
 
@@ -107,14 +108,14 @@
 <div class="register_wrap">
     <div class="bugfix_ie6 dis_none">
         <div class="n-logo-area clearfix">
-            <a href="/" class="fl-l"><img src="/home/picture/logo.gif" width="55" /></a>
+            <a href="/" class="fl-l"><img src="{{$common_configs_data->logo}}" width="60" /></a>
         </div>
     </div>
     <div id="main">
       <div class="n-frame device-frame reg_frame">
       
         <div class="title-item dis_bot35 t_c">
-          <h4 class="title-big">注册小米帐号</h4>
+          <h4 class="title-big">注册商城帐号</h4>
         </div>
         <div class="regbox" id="register_box">
           <form action="/home/login/store" method="post" name="formUser" onsubmit="return register();">

@@ -811,7 +811,7 @@
        
     </dl>
             <div class="col-contact">
-                <p class="phone">15105955077</p>
+                <p class="phone">{{$common_configs_data->net_phone}}</p>
                 <p>周一至周日 8:00-18:00<br>（仅收市话费）</p>
                 <a rel="nofollow" class="btn btn-line-primary btn-small">
                     <i class="layui-icon">&#xe6fc;</i>24小时在线客服
