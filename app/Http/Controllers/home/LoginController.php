@@ -100,12 +100,12 @@ class LoginController extends Controller
     public function show(Request $request)
     {   
         //验证验证码
-        $this->validate($request, [
+        // $this->validate($request, [
 
-        'captcha' => 'required|captcha'
-        ],[
-            'captcha.captcha' => '验证码不正确',
-        ]);
+        // 'captcha' => 'required|captcha'
+        // ],[
+        //     'captcha.captcha' => '验证码不正确',
+        // ]);
 
         //获取用户输入的数据
         $data = $request -> all();

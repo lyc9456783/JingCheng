@@ -197,6 +197,33 @@ Route::get('/admin/recommend/destroy/{id}','admin\RecommendController@destroy');
 //批量删除
 Route::get('/admin/recommend/delall','admin\RecommendController@delall');
 
+//前台
+//前台密码修改
+Route::get('/home/users/pass/{id}','home\PassController@pass');
+Route::post('/home/users/passupdate/{id}','home\PassController@passupdate');
+
+//前台收货人信息列表
+Route::get('/home/address/index','home\AddressController@index');
+//前台收货人地址添加
+// Route::get('/home/orders/addressadd','home\AddressController@addressadd');
+Route::post('/home/address/store/{id}','home\AddressController@store');
+//前台收货人地址修改
+Route::get('/home/address/edit/{id}','home\AddressController@edit');
+Route::post('/home/address/update/{id}','home\AddressController@update');
+//删除前台收货人地址
+Route::get('/home/address/delete/{id}','home\AddressController@delete');
+
+//前台评论列表
+Route::get('/home/discuss/index','home\DiscussController@index');
+Route::get('/home/discuss/delete/{id}','home\DiscussController@delete');
+//收货人信息
+Route::get('/home/users/consignee','home\ConsigneeController@consignee');
+Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestore');
+
+
+
+
+
 
 
                                                                                                                                       
@@ -386,7 +413,7 @@ Route::post('/home/login/store','home\LoginController@store');
 //设置用户中心
 Route::get('/home/users/index','home\UsersController@index');
 //设置用户信息修改
-Route::get('/home/users/edit/{id}','home\UsersController@edit');
+Route::get('/home/users/edit','home\UsersController@edit');
 //设置用户提交信息修改
 Route::post('/home/users/update/{id}','home\UsersController@update');
 //设置用户订单查看
@@ -471,6 +498,7 @@ Route::get('/mail/send','MailController@send');
 //路由 李银昌
 //登陆 注册  验证用户名和密码
 Route::get('/admin/login','admin\LoginController@index');
+Route::get('/admin/dologin','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
 //后台登陆中间件

@@ -21,7 +21,7 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     
-                    <a class="" href="">收货地址</a>
+                    <a class="" href="/home/address/index">收货地址</a>
                      
                     <a class="" href="">缺货登记</a>
                      
@@ -36,7 +36,7 @@
                 <li>
                 	<a class="" href="/home/users/index">我的个人中心</a>
                     
-                    <a class="" href="/home/users/edit/{{$data['id']}}">用户信息</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
                     
                     <a class="" href="">我的收藏</a>
 
@@ -44,7 +44,7 @@
                       
                     <a class="" href="">我的推荐</a>
                        
-                    <a class="" href="">我的评论</a>
+                    <a class="" href="/home/discuss/index">我的评论</a>
                      
                 </li>
                

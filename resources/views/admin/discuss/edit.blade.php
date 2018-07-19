@@ -16,7 +16,7 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_uname" name="" required="" lay-verify="gid" value="{{$data->gooddiscuss->name}}"
-                        autocomplete="off" class="layui-input" disabled>
+                        autocomplete="off" class="layui-input" readonly>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -25,7 +25,8 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_username" name="" required="" lay-verify="uid" value="{{$data->userdiscuss->Userdetails['nickname']}}"
-                        autocomplete="off" class="layui-input" disabled>
+                        autocomplete="off" class="layui-input" readonly>
+
                     </div>
                 </div>
                 <div class="layui-form-item">

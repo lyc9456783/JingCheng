@@ -4,9 +4,10 @@
 
 <link href="/home/css/style.css" rel="stylesheet" type="text/css">
 <link href="/home/css/user.css" rel="stylesheet" type="text/css">
-<div id="wrapper" class="container">	<div class="breadcrumbs">
-	<div class="container">
-    	<a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
+<div id="wrapper" class="container">    
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
 </div>
  
     <div class="my_nala_main">
@@ -20,7 +21,7 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     
-                    <a class="" href="">收货地址</a>
+                    <a class="" href="/home/address/index">收货地址</a>
                      
                     <a class="" href="">缺货登记</a>
                      
@@ -33,25 +34,25 @@
             <div class="root_node">会员中心</div>
             <ul>
                 <li>
-                  <a class="" href="/home/users/index">我的个人中心</a>
+                    <a class="" href="/home/users/index">我的个人中心</a>
                     
-                  <a class="" href="/home/users/edit/{{$users['id']}}">用户信息</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
                     
-                  <a class="" href="">我的收藏</a>
+                    <a class="" href="">我的收藏</a>
 
-                  <a class="" href="">我的留言</a>
+                    <a class="" href="">我的留言</a>
                       
-                  <a class="" href="">我的推荐</a>
+                    <a class="" href="">我的推荐</a>
                        
-                  <a class="" href="">我的评论</a>
+                    <a class="" href="/home/discuss/index">我的评论</a>
                      
                 </li>
                
             </ul>
         </li>
     </ul>
-
 </div>
+
 
 
 
@@ -132,7 +133,8 @@
        </table>
     <h1>修改密码</h1>
     </form>
-     <form name="formPassword" action="" method="post" onsubmit="return editPassword()">
+     <form name="formPassword" action="/home/users/passupdate/{{ $id }}" method="post" onsubmit="return editPassword()">
+     {{ csrf_field() }}
      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tbody><tr>
           <td width="28%" align="right" bgcolor="#FFFFFF">原密码：</td>
