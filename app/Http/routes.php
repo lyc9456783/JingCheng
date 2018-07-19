@@ -371,16 +371,32 @@ Route::get('/admin/notice/reset/{id}','admin\NoticeController@reset');
 //设置永久删除数据
 Route::get('/admin/notice/delete/{id}','admin\NoticeController@delete');
 
+//设置前台用户登录
+//显示前台用户登录模板
+Route::get('/home/login/index','home\LoginController@index');
+//设置用户登录信息的验证
+Route::post('/home/login/show','home\LoginController@show');
+//设置用户退出登录
+Route::get('/home/login/logout','home\LoginController@logout');
+//设置前台用户注册
+Route::get('/home/login/create','home\LoginController@create');
+//设置用户注册信息提交
+Route::post('/home/login/store','home\LoginController@store');
 
-
-
-
-
-
-
-
-
-
+//设置用户中心
+Route::get('/home/users/index','home\UsersController@index');
+//设置用户信息修改
+Route::get('/home/users/edit/{id}','home\UsersController@edit');
+//设置用户提交信息修改
+Route::post('/home/users/update/{id}','home\UsersController@update');
+//设置用户订单查看
+Route::get('/home/orders/index','home\OrdersController@index');
+//设置订单修改路由
+Route::get('/home/orders/update/{id}','home\OrdersController@update');
+//设置订单详情
+Route::get('/home/orders/show/{id}','home\OrdersController@show');
+//设置更新用户收货详情的路由
+Route::post('/home/orders/store/{id}','home\OrdersController@store');
 
 
 

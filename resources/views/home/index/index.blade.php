@@ -11,6 +11,7 @@
         <link href="/home/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/home/css/index.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
+        <script src="/admins/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="/home/js/common.js"></script>
         <script type="text/javascript" src="/home/js/index.js"></script>
         <script type="text/javascript" src="/home/js/jquery-1.9.1.min.js"></script>
@@ -111,16 +112,59 @@
         $("#ECS_CARTINFO").html(res.content);
       }
     }
-    </script>         </div>
+    </script>
+
+    @if (session('success'))
+         <script type="text/javascript">
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("{{session('success')}}");
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script type="text/javascript">
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("{{session('error')}}");
+            }); 
+        </script>
+    @endif         
+    </div>
             <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
-              <a class="link" href="user.php" rel="nofollow">登录</a>
-    <span class="sep">|</span>
-    <a class="link" href="user.php?act=register" rel="nofollow">注册</a>
-            
-                
+              
+            @if(!session('homeflag') == true)
+              <a class="link" href="/home/login/index" rel="nofollow">登录</a>
+              <span class="sep">|</span>
+              <a class="link" href="/home/login/create" rel="nofollow">注册</a>
+            @else
+                  @if(session("homeuser")['grade'] <= 2)
+                  <span class="user">
+                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                      <ul class="user-menu" style="display: none;">
+                          <li><a target="_blank" href="/admin">后台管理</a></li>
+                          <li><a href="/home/login/logout">退出登录</a></li>
+                      </ul>
+                  </span>  
+                  @else
+                  <span class="user">
+                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                    <ul class="user-menu" style="display: none;">
+                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
+                        <li><a target="_blank" href="">我的收藏</a></li>
+                        <li><a target="_blank" href="">我的评论</a></li>
+                        <li><a href="/home/login/logout">退出登录</a></li>
+                    </ul>
+                </span>
+                <span class="sep">|</span>
+                <a href="/home/orders/index" class="link">我的订单</a> 
+                </div>
+                  @endif  
+              @endif
             </div>
         </div>
     </div>
+
     <div class="site-header" style="clear:both;">
       <div class="container">
           <div class="header-logo">

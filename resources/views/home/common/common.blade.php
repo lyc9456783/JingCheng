@@ -21,6 +21,7 @@
 		<script type="text/javascript" src="/home/js/utils.js"></script>
 		<script type="text/javascript" src="/home/js/jquery.superslide.js"></script>
 		<script type="text/javascript" src="/home/js/xiaomi_common.js"></script>
+		<script src="/admins/lib/layui/layui.js" charset="utf-8"></script>
 		<style type="text/css">
 			.pagination li{
 		        width:35px;
@@ -51,9 +52,6 @@
 		            border-radius:5px; 
 		   	 	}
 		</style>
-
-		    
-
 	</head>
 	<body>
 		<script type="text/javascript">
@@ -118,16 +116,46 @@
 		</script>         
 		</div>
 		<div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
-		    <a class="link" href="user.php" rel="nofollow">登录</a>
-		<span class="sep">|</span>
-		<a class="link" href="user.php?act=register" rel="nofollow">注册</a>      
+              
+            @if(!session('homeflag') == true)
+              <a class="link" href="/home/login/index" rel="nofollow">登录</a>
+              <span class="sep">|</span>
+              <a class="link" href="/home/login/create" rel="nofollow">注册</a>
+            @else
+                  @if(session("homeuser")['grade'] <= 2)
+                  <span class="user">
+                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                      <ul class="user-menu" style="display: none;">
+                          <li><a target="_blank" href="/admin">后台管理</a></li>
+                          <li><a href="/home/login/logout">退出登录</a></li>
+                      </ul>
+                  </span>  
+                  @else
+                  <span class="user">
+                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                    <ul class="user-menu" style="display: none;">
+                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
+                        <li><a target="_blank" href="">我的收藏</a></li>
+                        <li><a target="_blank" href="">我的评论</a></li>
+                        <li><a href="/home/login/logout">退出登录</a></li>
+                    </ul>
+                </span>
+                <span class="sep">|</span>
+                <a href="/home/orders/index" class="link">我的订单</a> 
+                </div>
+                  @endif  
+              @endif
 		    </div>
 		    </div>
 		</div>
 		<div class="site-header" style="clear:both;">
 			<div class="container">
 		    	<div class="header-logo">
+
 		        	<a href="/" title="京城"><img width="55px" height="55px" src="{{$common_configs_data->logo}}" /></a>
+
+		        	<a href="/" title="京城商城"><img src="/home/picture/logo.gif" /></a>
+
 		        </div>
 		        <div class="header-nav">
 		        	<ul class="nav-list">
@@ -212,6 +240,7 @@
 		    </div>
 		</div>
 		<script type="text/javascript" src="/home/js/xiaomi_category.js"></script>
+<<<<<<< HEAD
 		
 @section('content')
 
@@ -223,16 +252,32 @@
 
 
 
+=======
+		    @if (session('success'))
+		         <script type="text/javascript">
+		            layui.use('layer', function(){
+		                var layer = layui.layer;
+		                layer.msg("{{session('success')}}");
+		            });
+		        </script>
+		    @endif
+		    @if (session('error'))
+		        <script type="text/javascript">
+		            layui.use('layer', function(){
+		                var layer = layui.layer;
+		                layer.msg("{{session('error')}}");
+		            }); 
+		        </script>
+		    @endif
+		@section('content')
+        
+>>>>>>> origin/qiu
 
 
 
 
 
-
-
-
-
-
+		@show
 
 
 

@@ -93,14 +93,6 @@
                 </div>
               </div>
             </div>
-
-              <div class="layui-form-item">
-                <label class="layui-form-label">快递单号</label>
-                <div class="layui-input-block">
-                  <input type="text" name="ordersnum" lay-verify="title" autocomplete="off" required placeholder="请输入快递单号,请联系快递服务" class="layui-input">
-                </div>
-              </div>
-
               <div class="layui-form-item">
                 <label class="layui-form-label">收件人</label>
                 <div class="layui-input-block">
