@@ -4,11 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
     "content-hash": "eade5ad5186363ec409745790327406c",
-=======
-    "content-hash": "ff2ac287d0c163e8e90107063180af4c",
->>>>>>> origin/qiu
+
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2626,7 +2624,7 @@
         },
         {
             "name": "fzaninotto/faker",
-<<<<<<< HEAD
+
             "version": "dev-master",
             "source": {
                 "type": "git",
@@ -2637,18 +2635,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9c9e33857cf41bb9cbc8c1830e4d817fbacb03a2",
                 "reference": "9c9e33857cf41bb9cbc8c1830e4d817fbacb03a2",
-=======
-            "version": "v1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
-                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
->>>>>>> origin/qiu
                 "shasum": ""
             },
             "require": {
@@ -2685,10 +2671,9 @@
                 "faker",
                 "fixtures"
             ],
-<<<<<<< HEAD
+
             "time": "2018-07-13T06:28:23+00:00"
-=======
-            "time": "2018-07-12T10:23:15+00:00"
+
         },
         {
             "name": "gregwar/captcha",
@@ -2737,7 +2722,6 @@
                 "spam"
             ],
             "time": "2017-09-27T06:58:14+00:00"
->>>>>>> origin/qiu
         },
         {
             "name": "hamcrest/hamcrest-php",
