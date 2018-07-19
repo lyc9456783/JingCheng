@@ -114,7 +114,7 @@
       <div class="n-frame device-frame reg_frame">
       
         <div class="title-item dis_bot35 t_c">
-          <h4 class="title-big">注册小米帐号</h4>
+          <h4 class="title-big">注册京城帐号</h4>
         </div>
         <div class="regbox" id="register_box">
           <form action="/home/login/store" method="post" name="formUser" onsubmit="return register();">
@@ -165,7 +165,7 @@
                   </label>
                   <span class="t_text">验证码</span>
                   <span class="error_icon"></span> 
-                  <img src="{{captcha_src()}}" onclick="rand_code(this)" title="点击更换">
+                  &nbsp; &nbsp;<img src="{{captcha_src()}}" onclick="rand_code(this)" title="点击更换">
                   <script type="text/javascript">
                     function rand_code(obj){
                       obj.src = obj.src+'?a='+Math.random();  
@@ -183,7 +183,7 @@
                 <div class="law">
                   <label>
                     <input name="agreement" type="checkbox" value="1" checked="checked"  tabindex="5" class="remember-me"/>
-                    我已看过并接受《<a href="article.php?cat_id=-1" style="color:blue" target="_blank">用户协议</a>》</label>
+                    我已看过并接受《<a href="javascript:;" style="color:blue" target="_blank">用户协议</a>》</label>
                 </div>
                 <div class="err_tip"> <em></em> </div>
                 <div class="fixed_bot mar_phone_dis1">

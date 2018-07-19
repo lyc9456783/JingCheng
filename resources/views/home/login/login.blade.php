@@ -138,19 +138,7 @@ $(function(){
                         @endif
                 </div>
                 <input type="submit" name="submit" class="button orange" value="立即登录">
-                <div class="ng-foot clearfix">
-                	<div class="ng-cookie-area"><label><input type="checkbox" value="1" name="remember" id="remember" class="remember-me">请保存我这次的登录信息.</label></div>
-                    <div class="ng-link-area">
-                    	<a href="">其它登录方式</a>|<a href="">忘记密码?</a>
-                        <div class="third-area hide">
-                            <a class="ta-weibo" target="_blank" href="user.php?act=oath&amp;type=weibo" title="weibo">weibo</a> 
-                            <a class="ta-qq" target="_blank" href="user.php?act=oath&amp;type=qq" title="qq">qq</a> 
-                            <a class="ta-alipay" target="_blank" href="user.php?act=oath&amp;type=alipay" title="alipay">alipay</a> 
-                        	<em class="corner"></em>
-                            <em class="corner-inner"></em>
-                        </div>
-                    </div>
-                </div>
+                
                 <a class="button" href="/home/login/create">注册账号</a>
             </form>
         </div>
