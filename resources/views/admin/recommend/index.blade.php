@@ -117,7 +117,7 @@
             //获取已选中的的选项到数组
             var time = null;
             var ids = [];
-            $("input[type='checkbox']:checked").each(function(){
+            $(" tbady input[type='checkbox']:checked").each(function(){
                ids.push(this.value);
             });
             //将被选中的id进行拼接成数组

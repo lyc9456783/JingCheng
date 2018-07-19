@@ -12,15 +12,13 @@
 */
 /*===========================李玉成路由部分==============================*/
 //首页路由
-Route::get('/',function(){
-	return view('welcome');
-});
+Route::get('/','home\IndexController@index');
+Route::get('/com','home\IndexController@show');
 // DB::listen(function($sql,$bindigs,$time){
 // 	dump($sql);
 // });
 //后台主页路由
 Route::get('/admin','admin\IndexController@index');
-
 
 //分类路由列表
 Route::get('/admin/cates','admin\CatesController@index');
@@ -214,11 +212,27 @@ Route::get('/admin/recommend/delall','admin\RecommendController@delall');
 
 //前台
 //前台密码修改
-Route::get('/home/pass/{id}','home\PassController@pass');
-Route::post('/home/passupdate/{id}','home\PassController@passupdate');
-//前台收货人信息
-Route::get('/home/address/{id}','home\PassController@address');
-Route::post('/home/addressupdate/{id}','home\PassController@addressupdate');
+Route::get('/home/users/pass/{id}','home\PassController@pass');
+Route::post('/home/users/passupdate/{id}','home\PassController@passupdate');
+
+//前台收货人信息列表
+Route::get('/home/users/address/{id}','home\PassController@address');
+//前台收货人地址添加
+Route::get('/home/users/addressadd/{id}','home\PassController@addressadd');
+Route::post('/home/users/addressstore/{id}','home\PassController@addressstore');
+//前台收货人地址修改
+Route::get('/home/users/addressedit/{id}','home\PassController@addressedit');
+Route::post('/home/users/addressupdate/{id}','home\PassController@addressupdate');
+//删除前台收货人地址
+Route::get('/home/users/addressdelete/{id}','home\PassController@addressdelete');
+
+//前台评论列表
+Route::get('/home/users/discuss/{id}','home\PassController@discuss');
+Route::get('/home/users/discussdelete/{id}','home\PassController@discussdelete');
+//收货人信息
+Route::get('/home/users/consignee','home\ConsigneeController@consignee');
+Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestore');
+
 
 
 

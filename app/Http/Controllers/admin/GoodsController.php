@@ -10,6 +10,7 @@ use DB;
 use App\Models\Cates;
 use App\Models\Goods;
 use App\Models\GoodsDetails;
+use App\Models\GoodImages;
 
 class GoodsController extends Controller
 {
@@ -74,12 +75,12 @@ class GoodsController extends Controller
         $gcid = $request->input('gcid','');
         if(empty($gcid)){
              $goods = Goods::where('name','like','%'.$search.'%')
-                    ->paginate(3)
+                    ->paginate(8)
                     ->appends($request->input());
         }else{
             $goods = Goods::where('name','like','%'.$search.'%')
                     ->where('gcid',$gcid)
-                    ->paginate(3)
+                    ->paginate(8)
                     ->appends($request->input());
         }
        
@@ -110,6 +111,7 @@ class GoodsController extends Controller
         //添加
         $data = $request->except('_token');
         // dump($data);
+        
         $filedir = self::uploads($request);
         // dd($filedir);
         //将数据分开存入两张表中
@@ -197,7 +199,12 @@ class GoodsController extends Controller
         //添加
         $data = $request->except('_token');
         // dump($data);
-        $filedir = self::uploads($request);
+        if($request -> hasFile('pic')){
+            $filedir = self::uploads($request);
+        }else{
+            $goods = Goods::find($id);
+            $filedir = $goods->pic;
+        }
         //将数据分开存入两张表中
         $goods = [
             'gcid'=>$data['gcid'],
@@ -272,15 +279,18 @@ class GoodsController extends Controller
     //设置永久删除数据
     public function delete($id)
     {   
-        $data = GoodsDetails::where('gid',$id)->first();
-        // dd($res2);
-        $res1 = $data->delete();
+
+        //永久删除商品时删除详情
+        $res1 = GoodsDetails::where('gid',$id)->delete();
+
+        //永久删除商品同时删除商品对应的所有详细图片
+        $res2 = GoodImages::where('gid',$id)->delete();
 
         //设置永久删除回收站中的数据
         $res = Goods::onlyTrashed()->where('id','=',$id)->forceDelete();
 
         //判断是否删除成功
-        if($res&&$res1){
+        if($res&&$res1&&$res2){
             return redirect('/admin/goods')->with('success','商品永久删除完成');
         }else{
             return back()->with('error','商品删除失败');
