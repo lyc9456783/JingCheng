@@ -51,9 +51,20 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {   
-        // //获取数据
+
+        //查询用户表中的所有用户
+         $this->validate($request, [
+
+            'username' => 'required|unique:jc_users',
+        ],[
+            'username.unique' => '用户名已存在',
+        ]);
+
+          //获取数据
         $data = $request -> all();
-        
+        // dd($data);
+
+
         $data['password'] = Hash::make($data['password']);
         
         //处理保存图片
@@ -237,10 +248,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
         //获取被软删除用户的数据
-        $data = Users::onlyTrashed()->get();
+        $data = Users::onlyTrashed()->paginate(3)->appends($request->input());
 
         // dump($data);
         //分配数据到模板

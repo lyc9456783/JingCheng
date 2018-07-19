@@ -5,8 +5,11 @@
         <div class="page-content">
           <div class="content">
           <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
+          <div style="text-align: right;">
+            <button class="layui-btn" onclick="location='/admin/users/index'">返回列表</button>
+          </div>
           <hr>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -51,9 +54,7 @@
                 </tbody>
             </table>
             <!-- 右侧内容框架，更改从这里结束 -->
+            <div id="page">{!! $data -> render()!!}</div>
           </div>
         </div>
-        <!-- 右侧主体结束 -->
-    </div>
-    <!-- 中部结束 -->
 @endsection  

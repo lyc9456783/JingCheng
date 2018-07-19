@@ -10,13 +10,22 @@
           <button class="layui-btn" onclick="location='/admin/users/index'">返回列表</button>
         </div>
         <hr>
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+            </div>
+         @endif
         </fieldset>
         <form class="layui-form layui-form-pane" action="/admin/users/store" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}
           <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-              <input type="username" name="username" lay-verify="required" placeholder="用于登录 请输入用户名" autocomplete="off" class="layui-input">
+              <input type="text" name="username" lay-verify="required" placeholder="用于登录 请输入6-17位用户名,以字母开头" value="{{ old('username') }}" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item">

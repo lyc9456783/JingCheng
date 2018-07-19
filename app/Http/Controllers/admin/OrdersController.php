@@ -59,6 +59,9 @@ class OrdersController extends Controller
         //获取上传的订单信息
         $data = $request -> all();
 
+        //生成订单号
+        $time= date('YmdHis',time());
+
         //获取市级
         $sj = $data['s_sf'];
         $sq = $data['s_sq'];
@@ -77,7 +80,7 @@ class OrdersController extends Controller
             $orders = new Orders;
             $orders -> uid = $data['uid'];
             $orders -> gid = $data['gid'];
-            $orders -> ordersnum = $data['ordersnum'];
+            $orders -> ordersnum = $time;
             $orders -> recipients = $data['recipients'];
             $orders -> phone = $data['phone'];
             $orders -> address = $address;
@@ -216,10 +219,11 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
         //获取被软删除用户的数据
-        $data = orders::onlyTrashed()->get();
+        $data = orders::onlyTrashed()->paginate(3)->appends($request->input());
+
 
         //分配数据到模板
         return view('admin.orders.delete',['data'=>$data,'title'=>'订单回收站']);

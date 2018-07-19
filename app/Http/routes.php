@@ -161,9 +161,6 @@ Route::get('/admin/goodimages/show/{id}','admin\GoodImagesController@show');
 
 
 
-
-
-
 /*===========================叶尚君路由部分==============================*/
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
@@ -346,111 +343,99 @@ Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestor
 //设置用户 批量软删除
 //设置引入后台用户列表的模板
 Route::get('/admin/users/index','admin\UsersController@index');
-
-
 //设置引入后台用户添加的模板
 Route::get('/admin/users/create','admin\UsersController@create');
-
-
 //设置用户添加到数据库
 Route::post('/admin/users/store','admin\UsersController@store');
-
-
 //设置用户修改
 Route::get('/admin/users/edit/{id}','admin\UsersController@edit');
-
-
 //设置用户修改
 Route::get('/admin/users/pass/{id}','admin\UsersController@pass');
-
-
 //设置用户修改
 Route::post('/admin/users/update/{id}','admin\UsersController@update');
-
-
 //设置用户删除
 Route::get('/admin/users/del/{id}','admin\UsersController@del');
-
-
 //设置用户删除
 Route::get('/admin/users/destroy','admin\UsersController@destroy');
-
-
 //设置用户 批量软删除
 Route::get('/admin/users/delall','admin\UsersController@delall');
-
-
 //设置用户信息恢复还原
 Route::get('/admin/users/reset/{id}','admin\UsersController@reset');
-
-
 //设置永久删除数据
 Route::get('/admin/users/delete/{id}','admin\UsersController@delete');
-
-
 //设置用户修改密码
 Route::post('/admin/users/passupdate/{id}','admin\UsersController@passupdate');
-
 
 
 //订单管理路由
 //显示订单添加页面
 Route::get('/admin/orders/create','admin\OrdersController@create');
-
-
 //商品订单添加
 Route::post('/admin/orders/store','admin\OrdersController@store');
-
-
 //商品订单列表页
 Route::get('/admin/orders/index','admin\OrdersController@index');
-
-
 //显示用户订单详情
 Route::get('/admin/orders/show/{id}','admin\OrdersController@show');
-
-
 //用户修改信息
 Route::get('/admin/orders/edit/{id}','admin\OrdersController@edit');
-
-
 //订单信息修改
 Route::post('/admin/orders/update/{id}','admin\OrdersController@update');
-
-
 //设置订单删除
 Route::get('/admin/orders/del/{id}','admin\OrdersController@del');
-
-
 //设置订单删除
 Route::get('/admin/orders/destroy','admin\OrdersController@destroy');
-
-
 //设置订单信息恢复还原
 Route::get('/admin/orders/reset/{id}','admin\OrdersController@reset');
-
-
 //设置永久删除数据
 Route::get('/admin/orders/delete/{id}','admin\OrdersController@delete');
 
 
+//商城公告路由开始
+//设置商城公告添加路由
+Route::get('/admin/notice/create','admin\NoticeController@create');
+//设置公告提交路由
+Route::post('/admin/notice/store','admin\NoticeController@store');
+//设置公告部分进行显示
+Route::get('/admin/notice/index','admin\NoticeController@index');
+//设置公告修改路由
+Route::get('/admin/notice/edit/{id}','admin\NoticeController@edit');
+//设置信息修改提交路由
+Route::post('/admin/notice/update/{id}','admin\NoticeController@update');
+//设置订单删除
+Route::get('/admin/notice/del/{id}','admin\NoticeController@del');
+//设置订单删除
+Route::get('/admin/notice/destroy','admin\NoticeController@destroy');
+//设置订单信息恢复还原
+Route::get('/admin/notice/reset/{id}','admin\NoticeController@reset');
+//设置永久删除数据
+Route::get('/admin/notice/delete/{id}','admin\NoticeController@delete');
 
+//设置前台用户登录
+//显示前台用户登录模板
+Route::get('/home/login/index','home\LoginController@index');
+//设置用户登录信息的验证
+Route::post('/home/login/show','home\LoginController@show');
+//设置用户退出登录
+Route::get('/home/login/logout','home\LoginController@logout');
+//设置前台用户注册
+Route::get('/home/login/create','home\LoginController@create');
+//设置用户注册信息提交
+Route::post('/home/login/store','home\LoginController@store');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//设置用户中心
+Route::get('/home/users/index','home\UsersController@index');
+//设置用户信息修改
+Route::get('/home/users/edit/{id}','home\UsersController@edit');
+//设置用户提交信息修改
+Route::post('/home/users/update/{id}','home\UsersController@update');
+//设置用户订单查看
+Route::get('/home/orders/index','home\OrdersController@index');
+//设置订单修改路由
+Route::get('/home/orders/update/{id}','home\OrdersController@update');
+//设置订单详情
+Route::get('/home/orders/show/{id}','home\OrdersController@show');
+//设置更新用户收货详情的路由
+Route::post('/home/orders/store/{id}','home\OrdersController@store');
 
 
 
