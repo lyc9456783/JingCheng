@@ -57,6 +57,7 @@ $(function(){
 			$("body,html").animate({scrollTop:arr[i]});
 		}
 	}
+	
 	tabs();	
 	
 	//评论列表回复框

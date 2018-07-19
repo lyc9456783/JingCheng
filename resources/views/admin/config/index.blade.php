@@ -27,7 +27,7 @@
 					  </div>
 
 					  <div class="layui-form-item">
-					    <label class="layui-form-label">官网联系方式</label>
+					    <label class="layui-form-label">公示电话</label>
 					    <div class="layui-input-block">
 					      <input type="text" name="net_phone" value="{{ $data['net_phone'] or old('net_phone') }}" lay-verify="title" autocomplete="off" placeholder="官网电话" class="layui-input">
 					    </div>
@@ -36,13 +36,12 @@
 					  <div class="layui-form-item layui-form-text">
 					    <label class="layui-form-label">关键字设置</label>
 					    <div class="layui-input-block">
-					      <textarea placeholder="词句之间用一个空格隔开!" value="{{ $data['net_keyword'] }}" class="layui-textarea keyword" name="net_keyword">{{ $data['net_keyword'] }}</textarea>
-					    	
+					      <textarea placeholder="词句之间用一个空格隔开!" value="{{ $data['net_keyword'] }}" class="layui-textarea keyword" name="net_keyword">{{ $data['net_keyword'] }}</textarea>	
 					    </div>
 					  </div>
 
 					  <div class="layui-form-item layui-form-text">
-					    <label class="layui-form-label">版权声明</label>
+					    <label class="layui-form-label">网站版权</label>
 					    <div class="layui-input-block">
 					      <textarea placeholder=""  value="{{ $data['copyright'] }}" class="layui-textarea" name="copyright">{{ $data['copyright'] }}</textarea>
 					    </div>

@@ -26,6 +26,8 @@ Route::get('/home/notice','home\IndexController@noticelist');
 Route::get('/home/notice/detail/{id}','home\IndexController@noticedetail');
 //前台商品列表页路由
 Route::get('/home/goods/list/{id}','home\GoodsController@index');
+//首页搜索
+Route::get('/home/goods/search','home\IndexController@searchs');
 
 
 
@@ -542,6 +544,16 @@ Route::post('/admin/config/store','admin\ConfigController@store');
 */
 
 //商品详情页
+Route::get('/home/goods/detail/{id}','home\GoodsController@goodsdetail');
+//保存评论
+Route::get('/home/discuss/store','home\GoodsController@store');
+//确认库存
+Route::post('/home/discuss/create','home\GoodsController@create');
+//购物车
+Route::post('/home/discuss/shopcar','home\GoodsController@shopcar');
+
+
+//商品详情页 用完删除
 Route::get('/product/{id}','home\ProductController@index');
 //保存评论
 Route::get('/discuss/store','home\ProductController@store');
