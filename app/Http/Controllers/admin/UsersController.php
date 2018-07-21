@@ -280,7 +280,6 @@ class UsersController extends Controller
     public function delete($id)
     {   
         $data = Userdetails::where('uid',$id)->first();
-        // dd($res2);
         $res2 = $data->delete();
 
         //设置永久删除回收站中的数据
@@ -306,6 +305,6 @@ class UsersController extends Controller
 
         //进行软删除
         $res = Users::destroy($id);
-
+            
     }
 }

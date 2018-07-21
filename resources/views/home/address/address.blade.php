@@ -8,55 +8,38 @@
 <div id="wrapper" class="container">    
 <div class="breadcrumbs">
     <div class="container">
-        <a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
-</div>
- 
-    <div class="my_nala_main">
-        
+        <a href="/">首页</a> <code>&gt;</code>用户中心
+    </div>
+</div>        
 <div class="slidebar">
     <ul class="slide_item">
-
         <li class="item">
             <div class="root_node">订单中心</div>
             <ul>
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
-                    
                     <a class="" href="/home/address/index">收货地址</a>
-                     
                     <a class="" href="">缺货登记</a>
-                     
                 </li>
-               
             </ul>
         </li>
-        
         <li class="item">
             <div class="root_node">会员中心</div>
             <ul>
                 <li>
                     <a class="" href="/home/users/index">我的个人中心</a>
-                    
-                    <a class="" href="/home/users/edit/$data['uid']">用户信息</a>
-                    
-                    <a class="" href="">我的收藏</a>
-
+                    <a class="" href="/home/pass/index">修改密码</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
+                    <a class="" href="/home/collect/index">我的收藏</a>
                     <a class="" href="">我的留言</a>
-                      
                     <a class="" href="">我的推荐</a>
-                       
                     <a class="" href="/home/discuss/index">我的评论</a>
-                     
                 </li>
-               
             </ul>
         </li>
     </ul>
-
 </div>
 
-
-            
 <div class="span16">
     <!-- 右侧主体结束 -->
     <div class="my_nala_centre ilizi_centre">
@@ -120,30 +103,29 @@
     <div class="box_1">
     <div style="font-size:20px;width:400px;margin:center;">{{$title}}</div>
       <!-- <h1 style="text-size:50px;">{{$title}}</h1> -->
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-          <tbody>
-          <tr align="center">
-            <td bgcolor="#ffffff">姓名</td>
-            <td bgcolor="#ffffff">手机号</td>
-            <td bgcolor="#ffffff">详细地址</td>
-            <td bgcolor="#ffffff">邮政编码</td>
-            <td bgcolor="#ffffff">地址标签</td>
-            <td bgcolor="#ffffff">操作</td>
-          </tr>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd"><tbody>
+            <tr align="center">
+                <td bgcolor="#ffffff">姓名</td>
+                <td bgcolor="#ffffff">手机号</td>
+                <td bgcolor="#ffffff">详细地址</td>
+                <td bgcolor="#ffffff">邮政编码</td>
+                <td bgcolor="#ffffff">地址标签</td>
+                <td bgcolor="#ffffff">操作</td>
+            </tr>
             @foreach($data as $k=>$v)
-          <tr>
-            <td align="center" bgcolor="#ffffff"><a href="/home/orders/show/{{$v->id}}" class="f6">{{$v['name']}}</a></td>
-            <td align="center" bgcolor="#ffffff">{{$v['phone']}}</td>
-            <td align="center" bgcolor="#ffffff">{{$v['address']}}</td>
-            <td align="center" bgcolor="#ffffff">{{$v['postcode']}}</td>
-            <td align="center" bgcolor="#ffffff">{{$v['label']}}</td>
-            <td align="center" bgcolor="#ffffff">
-                <font class="f6">
-                    <a href="/home/address/edit/{{$v['id']}}" onclick="if (!confirm(&#39;您确认要删除该订单吗？确认后此订单将被删除&#39;)) return false;">删除订单</a>
-                    <a href="/home/address/delete/{{$v['id']}}" onclick="if (!confirm(&#39;您确认要删除该订单吗？确认后此订单将被删除&#39;)) return false;">删除订单</a>
-                </font>
-            </td>
-          </tr>
+            <tr>
+                <td align="center" bgcolor="#ffffff">{{$v['name']}}</td>
+                <td align="center" bgcolor="#ffffff">{{$v['phone']}}</td>
+                <td align="center" bgcolor="#ffffff">{{$v['address']}}</td>
+                <td align="center" bgcolor="#ffffff">{{$v['postcode']}}</td>
+                <td align="center" bgcolor="#ffffff">{{$v['label']}}</td>
+                <td align="center" bgcolor="#ffffff">
+                    <font class="f6">
+                        <a href="/home/address/edit/{{$v['id']}}">修改地址</a>
+                        <a href="/home/address/delete/{{$v['id']}}">删除地址</a>
+                    </font>
+                </td>
+            </tr>
           @endforeach
         </tbody>
     </table>       
@@ -154,20 +136,20 @@
     </div>
 </div>
 
-    <script class="resources library" src="/admins/js/area.js" type="text/javascript"></script>
-    <script type="text/javascript">_init_area();</script>
-    <script type="text/javascript">
-        var Gid  = document.getElementById ;
+<script class="resources library" src="/admins/js/area.js" type="text/javascript"></script>
+<script type="text/javascript">_init_area();</script>
+<script type="text/javascript">
+    var Gid  = document.getElementById ;
 
-        var showArea = function(){
+    var showArea = function(){
 
-          Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +  
+      Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +  
 
-          Gid('s_city').value + " - 县/区" + 
+      Gid('s_city').value + " - 县/区" + 
 
-          Gid('s_county').value + "</h3>"
-          }
-        Gid('s_county').setAttribute('onchange','showArea()');
-    </script>
+      Gid('s_county').value + "</h3>"
+      }
+    Gid('s_county').setAttribute('onchange','showArea()');
+</script>
 
 @endsection 

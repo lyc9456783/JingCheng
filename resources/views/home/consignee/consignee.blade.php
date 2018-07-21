@@ -1,14 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 @extends('home.common.common')
 @section('content') 
-
-<br><br><br>
-<link href="/checkbox/right/consignee/style.css" rel="stylesheet" type="text/css">
-<link href="/checkbox/right/consignee/cart.css" rel="stylesheet" type="text/css">
+<link href="/checkbox/consignee/style.css" rel="stylesheet" type="text/css">
+<link href="/checkbox/consignee/cart.css" rel="stylesheet" type="text/css"> 
+<link rel="stylesheet" href="/home/lib/layui/css/layui.css">
 </head>
 <body> 
   <div class="container">
-    <form action="/home/users/consignee" method="post" name="theForm" id="theForm">
+    <form action="/home/consignee/store" method="post" name="theForm" id="theForm">
       {{ csrf_field() }}
       <div class="checkout-box">
       <h2 class="aui_title" style="cursor: move;">{{ $title }}</h2>
@@ -18,7 +16,8 @@
       <div class="section-body section-address">
         <div class="dropdown">
           <label class="iconfont"></label>
-          <select class="input-select" id="s_province" class="city" name="s_sf"></select>
+          <select class="input-select" id="s_province" class="city" name="s_sf">
+          </select>
         </div>
         <div class="dropdown">
           <label class="iconfont"></label>
@@ -54,7 +53,7 @@
           </div>
         </li>
         <li class="section-options clearfix">
-          <label class="section-header">邮政编码</label>
+          <label class="section-header"><em>*</em>邮政编码</label>
           <div class="section-body">
             <input name="postcode" type="text" class="input-text" id="zipcode_0" value="">
           </div>
@@ -87,4 +86,7 @@
     Gid('s_county').value + "</h3>"
     }
 </script>
+
+
+
 @endsection  

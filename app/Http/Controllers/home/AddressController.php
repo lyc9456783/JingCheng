@@ -85,7 +85,7 @@ class AddressController extends Controller
     public function edit($id)
     {
         $data = Address::find($id);
-        return view('home.orders.addressedit',['title'=>'修改收货地址','title2'=>'添加收货地址','id'=>$id,'data'=>$data]);
+        return view('home.address.addressedit',['title'=>'修改收货地址','title2'=>'添加收货地址','id'=>$id,'data'=>$data]);
     }
 
     /**
