@@ -209,11 +209,24 @@ Route::post('/admin/recommend/update/{id}','admin\RecommendController@update');
 Route::get('/admin/recommend/destroy/{id}','admin\RecommendController@destroy');
 //批量删除
 Route::get('/admin/recommend/delall','admin\RecommendController@delall');
+//商品收藏
+Route::get('/admin/collect','admin\CollectController@index');
+//添加收藏
+Route::get('/admin/collect/create','admin\CollectController@create');
+//执行添加
+Route::post('/admin/collect/store','admin\CollectController@store');
+//删除收藏
+Route::get('/admin/collect/destroy/{id}','admin\CollectController@destroy');
+//批量删除收藏
+Route::get('/admin/collect/delall','admin\CollectController@delall');
+
+
+
 
 //前台
 //前台密码修改
-Route::get('/home/users/pass/{id}','home\PassController@pass');
-Route::post('/home/users/passupdate/{id}','home\PassController@passupdate');
+Route::get('/home/pass/index','home\PassController@index');
+Route::post('/home/pass/update/{id}','home\PassController@update');
 
 //前台收货人信息列表
 Route::get('/home/address/index','home\AddressController@index');
@@ -230,8 +243,12 @@ Route::get('/home/address/delete/{id}','home\AddressController@delete');
 Route::get('/home/discuss/index','home\DiscussController@index');
 Route::get('/home/discuss/delete/{id}','home\DiscussController@delete');
 //收货人信息
-Route::get('/home/users/consignee','home\ConsigneeController@consignee');
-Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestore');
+Route::get('/home/consignee/index','home\ConsigneeController@index');
+Route::post('/home/consignee/store','home\ConsigneeController@store');
+//我的收藏
+Route::get('/home/collect/index','home\CollectController@index');
+//删除收藏
+Route::get('/home/collect/delete/{id}','home\CollectController@delete');
 
 
 

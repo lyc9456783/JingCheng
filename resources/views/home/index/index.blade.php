@@ -186,7 +186,7 @@
                     <ul class="user-menu" style="display: none;">
                         <li><a target="_blank" href="/home/users/index">个人中心</a></li>
                         <li><a target="_blank" href="">我的收藏</a></li>
-                        <li><a target="_blank" href="">我的评论</a></li>
+                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>
                 </span>
