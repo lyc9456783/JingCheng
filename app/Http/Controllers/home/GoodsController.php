@@ -10,6 +10,7 @@ use DB;
 use App\Models\Discuss;
 use App\Models\Cates;
 use App\Models\Goods;
+use App\Models\Shields;
 use App\Models\Recommends;
 
 class GoodsController extends Controller
@@ -20,7 +21,7 @@ class GoodsController extends Controller
      * 
      */
     public function index(Request $request,$id)
-    {
+    {     
         $data = Cates::find($id);
         $dir = $request->input('dir');
         //当没有查询条件时查询分类下的所有商品
@@ -75,7 +76,7 @@ class GoodsController extends Controller
                      foreach($data as $v){
                     $seach[] = $v->id;
                     }
-              $goods = Goods::whereIn('id',$seach)->orderBy('created_at','asc')->paginate(8)->appends($request->input());
+              $goods = Goods::whereIn('id',$seach)->orderBy('id','desc')->paginate(8)->appends($request->input());
                 }
             }else{
                  foreach($data as $v){
@@ -93,7 +94,7 @@ class GoodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function goodsdetail(Request $request,$id)
-    {
+    {   
          $search = $request -> input('search','');  
 
         
@@ -155,10 +156,24 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-       
-       $data = $request->only(['email','content','gid','uid','rank']);
-       //dump($data);
-       //存储
+
+        //验证码验证
+         $this->validate($request, [
+
+        'captcha' => 'required|captcha',
+        ],[
+            'captcha.captcha' => '验证码不正确',
+        ]);
+
+       $data = $request->only(['content','gid','uid','rank']);
+
+        $aaa = Shields::where('onoff','=','1')->find(1);
+        
+        // dump(explode(",", $aaa['content']));
+
+       $data['weijinzi'] = explode(",", $aaa['content']);
+       $data['content'] = str_replace($data['weijinzi'],'***',$data['content']);
+
        $discuss =new Discuss;
        //$discuss -> email = $data['email'];
        $discuss -> content = $data['content'];

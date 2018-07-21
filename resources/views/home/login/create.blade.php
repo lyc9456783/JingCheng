@@ -21,7 +21,6 @@
 
 
 <link rel="shortcut icon" href="favicon.ico" />
-<link rel="icon" href="/home/animated_favicon.gif" type="image/gif" />
 <link href="/home/css/login.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
 

@@ -9,7 +9,7 @@
 
             <xblock><button class="layui-btn" onclick="location='/admin/config'">
             <i class="layui-icon"></i>网站配置</button>
-			<button class="layui-btn" style="cursor:pointer" onclick="member_show('查看图片','{{ $data['logo'] }}','10000','700','700')">点击查看LOGO</button>
+			<button class="layui-btn" style="cursor:pointer" onclick="member_show('查看图片','{{ $data['logo'] }}','10000','200','200')">点击查看LOGO</button>
             </xblock>
             
 			

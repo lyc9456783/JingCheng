@@ -42,7 +42,6 @@ body, button, input, select, textarea {
 .site-mini-header .header-logo .logo {
 	width: 55px;
 	height: 55px;
-	background: #ff6700 url(../images/logo.gif) no-repeat center center;
 }
 .site-mini-header .header-title {
 	float: left;
@@ -302,7 +301,7 @@ body, button, input, select, textarea {
 	height: 273px;
 	padding-left: 558px;
 	margin: 65px 0 130px;
-	background: url("../images/cart-empty.png") no-repeat 124px 0;
+	background: url("../images/cart-empty_1.png") no-repeat 124px 0;
 	color: #b0b0b0;
 	overflow: hidden;
 	_zoom: 1;
@@ -463,10 +462,10 @@ body, button, input, select, textarea {
 	height:18px;
 }
 .form-list li .icon-user{
-	background:url(../images/login_user.png) no-repeat left top;
+	background:url(../images/login_user_1.png) no-repeat left top;
 }
 .form-list li .icon-pwd{
-	background:url(../images/login_pwd.png) no-repeat left top;
+	background:url(../images/login_pwd_1.png) no-repeat left top;
 }
 .form-list li.security_code {
 	width: 100px;
@@ -621,7 +620,7 @@ body, button, input, select, textarea {
 	overflow: hidden
 }
 .register_infor ul li.input_box .error_icon {
-	background: url(../images/error_icon.png) 0 -50px no-repeat;
+	background: url(../images/error_icon_1.png) 0 -50px no-repeat;
 	position: absolute;
 	width: 14px;
 	height: 14px;
@@ -830,7 +829,7 @@ body, button, input, select, textarea {
 	width: 13px;
 	height: 13px;
 	overflow: hidden;
-	background: url(../images/user_purchase20150409154845.gif) 0 -73px no-repeat;
+	background: url(../images/user_purchase20150409154845_1.gif) 0 -73px no-repeat;
 	display: inline-block;
 	vertical-align: -2px;
 	*vertical-align: 2px;

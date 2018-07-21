@@ -25,11 +25,11 @@
                 <tbody>
                     <tr>
                         <td>总数</td>
-                        <td>92</td>
-                        <td>9</td>
-                        <td>0</td>
-                        <td>8</td>
-                        <td>20</td>
+                        <td>{{$notices}}</td>
+                        <td>{{$goodImages}}</td>
+                        <td>{{$goods}}</td>
+                        <td>{{$users}}</td>
+                        <td>{{$admins}}</td>
                     </tr>
                     <tr>
                         <td>今日</td>
@@ -93,8 +93,8 @@
                         <td>{{$_SERVER['DOCUMENT_ROOT']}}</td>
                     </tr>
                     <tr>
-                        <td>服务器当前时间 </td>
-                        <td>{{date('Y:m:d H:i:s',time())}}</td>
+                        <td>服务器当前日期 </td>
+                        <td>{{date('Y-m-d',time())}}</td>
                     </tr>
                 </tbody>
             </table>

@@ -6,17 +6,33 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Notice;
+use App\Models\GoodImages;
+use App\Models\Goods;
+use App\Models\Users;
+
 
 class IndexController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 后台首页
      */
     public function index()
     {
-        return view('admin.index.index');
+        $notices = Notice::count();
+        $goodImages = GoodImages::whereNull('deleted_at')->count();
+        $goods  = Goods::whereNull('deleted_at')->count();
+        $users = Users::where('grade','3')->whereNull('deleted_at')->count();
+        $admins  = Users::where('grade','<','3')->whereNull('deleted_at')->count();
+       
+        return view('admin.index.index',[
+            'notices'=>$notices,
+            'goodImages'=>$goodImages, 
+            'goods'=>$goods, 
+            'admins'=>$admins, 
+            'users'=>$users 
+            ]
+        );
     }
 
     /**

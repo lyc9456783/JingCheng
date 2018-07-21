@@ -28,6 +28,19 @@ Route::get('/home/notice/detail/{id}','home\IndexController@noticedetail');
 Route::get('/home/goods/list/{id}','home\GoodsController@index');
 //首页搜索
 Route::get('/home/goods/search','home\IndexController@searchs');
+//购物车页面
+Route::get('/home/goods/shopcar','home\ShopCarController@index');
+//添加购物车
+Route::get('/home/goods/shopadd','home\ShopCarController@create');
+//ajax增加数量
+Route::get('/home/goods/addcar','home\ShopCarController@addcar');
+//ajax 减少数量
+Route::get('/home/goods/minuscar','home\ShopCarController@minuscar');
+//ajax 移除购物车
+Route::get('/home/goods/delcar','home\ShopCarController@delcar');
+//ajax 清空购物车
+Route::get('/home/goods/delallcar','home\ShopCarController@delallcar');
+
 
 
 
