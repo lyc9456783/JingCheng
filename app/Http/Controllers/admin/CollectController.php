@@ -39,7 +39,6 @@ class CollectController extends Controller
         }else{
             $data = Collect::paginate(4)->appends($request->input());
         }
-        
         $collect = Collect::all();
         return view('admin.collect.index',['title'=>'商品收藏列表','data'=>$data,'collect'=>$collect]);
     }

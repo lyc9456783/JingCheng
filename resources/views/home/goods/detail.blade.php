@@ -291,12 +291,8 @@
           $input.val(num);
           break;
     }
-    changePrice();
   }
   </script>
-
-
-
 
   <!-- 本也商品详情开始 -->
   <div class="full-screen-border"></div>
@@ -583,14 +579,6 @@
 </div>
 
 
-
-
-
-
-
-
-
- 
       <!-- 商品评论弹框js验证 -->
       <script type="text/javascript">
         // 表单提交事件
@@ -711,6 +699,14 @@
           easyDialog.close();
         }
       </script>
+
+
+
+
+
+
+ 
+
 
       </div>
     </div>

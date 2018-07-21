@@ -24,7 +24,7 @@
                 <select lay-verify="required" id="uid"  name="uid">
                   <option value="0">--请选择--</option>
                   @foreach ($users as $k=>$v)
-                  <option value="{{ $v['id'] }}">{{ $v->Userdetails['nickname'] }}</option>
+                  <option value="{{ $v['id'] }}">{{ $v['username'] }}</option>
                   @endforeach    
                 </select>
               </div>

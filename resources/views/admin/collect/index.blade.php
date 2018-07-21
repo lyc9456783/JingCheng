@@ -12,7 +12,7 @@
                         <select name="search" lay-verify="" lay-search>
                             <option value=""></option>
                             @foreach($collect as $k => $v)
-                            <option value="{{$v['uid']}}">{{$v->collectusers->Userdetails['nickname']}}</option>
+                            <option value="{{$v['uid']}}">{{$v->collectusers['username']}}</option>
                             @endforeach
                         </select>  
                     </div>
@@ -38,14 +38,10 @@
                     </tr>
                     @foreach($data as $k => $v)
                     <tr>
-                        <td><input type="checkbox" value="{{ $v['id'] }}" name="ids"></td>
+                         <td><input type="checkbox" value="{{ $v['id'] }}" name="ids"></td>
                         </td>
                         <td>{{ $v['id'] }}</td>
-                        @if($v->collectusers->Userdetails['nickname'] == '')
                         <td>{{ $v->collectusers['username'] }}</td>
-                        @else(!$v->collectusers->Userdetails['nickname'] == '')
-                        <td>{{ $v->collectusers->Userdetails['nickname'] }}</td>
-                        @endif
                         <td>{{ $v->collectgoods['name'] }}</td>
                         <td>
                             <a title="删除" href="/admin/collect/destroy/{{$v['id']}}">删除

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collect extends Model
 {
-    public $table = 'jc_users_goods';
+    public $table = 'jc_collects';
     //收藏属于用户
     public function collectusers()
     {
