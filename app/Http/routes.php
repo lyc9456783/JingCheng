@@ -197,6 +197,33 @@ Route::get('/admin/recommend/destroy/{id}','admin\RecommendController@destroy');
 //批量删除
 Route::get('/admin/recommend/delall','admin\RecommendController@delall');
 
+//前台
+//前台密码修改
+Route::get('/home/users/pass/{id}','home\PassController@pass');
+Route::post('/home/users/passupdate/{id}','home\PassController@passupdate');
+
+//前台收货人信息列表
+Route::get('/home/address/index','home\AddressController@index');
+//前台收货人地址添加
+// Route::get('/home/orders/addressadd','home\AddressController@addressadd');
+Route::post('/home/address/store/{id}','home\AddressController@store');
+//前台收货人地址修改
+Route::get('/home/address/edit/{id}','home\AddressController@edit');
+Route::post('/home/address/update/{id}','home\AddressController@update');
+//删除前台收货人地址
+Route::get('/home/address/delete/{id}','home\AddressController@delete');
+
+//前台评论列表
+Route::get('/home/discuss/index','home\DiscussController@index');
+Route::get('/home/discuss/delete/{id}','home\DiscussController@delete');
+//收货人信息
+Route::get('/home/users/consignee','home\ConsigneeController@consignee');
+Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestore');
+
+
+
+
+
 
 
                                                                                                                                       
@@ -371,16 +398,32 @@ Route::get('/admin/notice/reset/{id}','admin\NoticeController@reset');
 //设置永久删除数据
 Route::get('/admin/notice/delete/{id}','admin\NoticeController@delete');
 
+//设置前台用户登录
+//显示前台用户登录模板
+Route::get('/home/login/index','home\LoginController@index');
+//设置用户登录信息的验证
+Route::post('/home/login/show','home\LoginController@show');
+//设置用户退出登录
+Route::get('/home/login/logout','home\LoginController@logout');
+//设置前台用户注册
+Route::get('/home/login/create','home\LoginController@create');
+//设置用户注册信息提交
+Route::post('/home/login/store','home\LoginController@store');
 
-
-
-
-
-
-
-
-
-
+//设置用户中心
+Route::get('/home/users/index','home\UsersController@index');
+//设置用户信息修改
+Route::get('/home/users/edit','home\UsersController@edit');
+//设置用户提交信息修改
+Route::post('/home/users/update/{id}','home\UsersController@update');
+//设置用户订单查看
+Route::get('/home/orders/index','home\OrdersController@index');
+//设置订单修改路由
+Route::get('/home/orders/update/{id}','home\OrdersController@update');
+//设置订单详情
+Route::get('/home/orders/show/{id}','home\OrdersController@show');
+//设置更新用户收货详情的路由
+Route::post('/home/orders/store/{id}','home\OrdersController@store');
 
 
 
@@ -455,13 +498,16 @@ Route::get('/mail/send','MailController@send');
 //路由 李银昌
 //登陆 注册  验证用户名和密码
 Route::get('/admin/login','admin\LoginController@index');
+Route::get('/admin/dologin/login','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
+Route::get('/admin/login/loginOut','admin\LoginController@loginOut');//后台管理员退出用户
+Route::get('/admin/login/change','admin\LoginController@change');//修改密码页面
+Route::post('/admin/login/changepass','admin\LoginController@changepass');//密码修改判断层
 //后台登陆中间件
 
 Route::group(['middleware'=>'login'],function(){
 	//路由存放------------>
-
 
 // Route::get('/admin','admin\IndexController@index');
 
@@ -534,6 +580,11 @@ Route::get('/admin/config','admin\ConfigController@index');
 //保存
 Route::post('/admin/config/store','admin\ConfigController@store');
 
+//shield 网站屏蔽字
+//后台设置页面
+Route::get('/admin/shield/index','admin\ShieldController@index');
+//屏蔽字设置
+Route::post('/admin/shield/store','admin\ShieldController@store');
 
 
 
@@ -545,6 +596,7 @@ Route::post('/admin/config/store','admin\ConfigController@store');
 
 //商品详情页
 Route::get('/home/goods/detail/{id}','home\GoodsController@goodsdetail');
+
 //保存评论
 Route::get('/home/discuss/store','home\GoodsController@store');
 //确认库存
@@ -553,11 +605,15 @@ Route::post('/home/discuss/create','home\GoodsController@create');
 Route::post('/home/discuss/shopcar','home\GoodsController@shopcar');
 
 
-//商品详情页 用完删除
-Route::get('/product/{id}','home\ProductController@index');
-//保存评论
-Route::get('/discuss/store','home\ProductController@store');
-//确认库存
-Route::post('/discuss/create','home\ProductController@create');
-//购物车
-Route::post('/discuss/shopcar','home\ProductController@shopcar');
+
+
+//生成订单页面
+Route::get('/home/orders/ordercreate','home\OrdersController@orderCreate');
+//添加地址
+Route::get('/home/orders/createsite','home\OrdersController@createSite');
+//保存地址
+Route::post('/home/orders/sitestore/{id}','home\OrdersController@siteStore');
+//提交订单最后一步[业务逻辑判断]
+Route::get('/home/orders/sitesubmit','home\OrdersController@siteSubmit');
+//成功submitOk
+Route::get('/home/orders/submitOk','home\OrdersController@submitOk');

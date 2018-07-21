@@ -11,6 +11,7 @@
         <link href="/home/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/home/css/index.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
+        <script src="/admins/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="/home/js/common.js"></script>
         <script type="text/javascript" src="/home/js/index.js"></script>
         <script type="text/javascript" src="/home/js/jquery-1.9.1.min.js"></script>
@@ -77,7 +78,6 @@
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">多看阅读</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">云服务</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">移动版商城</a>
-                <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">Select region</a>
                 <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">网店帮助分类</a>
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">留言板</a>
                 <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">会员等级</a>
@@ -112,20 +112,63 @@
         $("#ECS_CARTINFO").html(res.content);
       }
     }
-    </script>         </div>
+    </script>
+
+    @if (session('success'))
+         <script type="text/javascript">
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("{{session('success')}}");
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script type="text/javascript">
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("{{session('error')}}");
+            }); 
+        </script>
+    @endif         
+    </div>
             <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
-              <a class="link" href="user.php" rel="nofollow">登录</a>
-    <span class="sep">|</span>
-    <a class="link" href="user.php?act=register" rel="nofollow">注册</a>
-            
-                
+              
+            @if(!session('homeflag') == true)
+              <a class="link" href="/home/login/index" rel="nofollow">登录</a>
+              <span class="sep">|</span>
+              <a class="link" href="/home/login/create" rel="nofollow">注册</a>
+            @else
+                  @if(session("homeuser")['grade'] <= 2)
+                  <span class="user">
+                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                      <ul class="user-menu" style="display: none;">
+                          <li><a target="_blank" href="/admin">后台管理</a></li>
+                          <li><a href="/home/login/logout">退出登录</a></li>
+                      </ul>
+                  </span>  
+                  @else
+                  <span class="user">
+                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                    <ul class="user-menu" style="display: none;">
+                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
+                        <li><a target="_blank" href="">我的收藏</a></li>
+                        <li><a target="_blank" href="">我的评论</a></li>
+                        <li><a href="/home/login/logout">退出登录</a></li>
+                    </ul>
+                </span>
+                <span class="sep">|</span>
+                <a href="/home/orders/index" class="link">我的订单</a> 
+                </div>
+                  @endif  
+              @endif
             </div>
         </div>
     </div>
+
     <div class="site-header" style="clear:both;">
       <div class="container">
           <div class="header-logo">
-              <a href="/" title="京城"><img src="/home/picture/logo.gif" /></a>
+              <a href="/" title="京城"><img src="{{$common_configs_data->logo}}" /></a>
             </div>
             <div class="header-nav">
               <ul class="nav-list">
@@ -142,7 +185,7 @@
                                         <!-- {{$k = $key+1}} -->
                                         @if($k%6 == 0)
                                           <li>
-                                                <a href="/product/{{$v->id}}" class="link">
+                                                <a href="/home/goods/detail/{{$val->id}}" class="link">
                                                     <img class="thumb" src="{{$val->pic}}" width="40" height="40">
                                                     <span>{{$val->name}}</span>
                                                  </a>
@@ -152,7 +195,7 @@
                                             
                                         @else
                                          <li style="text-left;">
-                                          <a href="" class="link">
+                                          <a href="/home/goods/detail/{{$val->id}}" class="link">
                                               <img class="thumb" src="{{$val->pic}}" width="40" height="40">
                                               <span>{{$val->name}}</span>
                                             </a>
@@ -175,11 +218,11 @@
                               @foreach($v->categoods as $key=>$val)
                               <li class="first">
                                   <div class="figure figure-thumb">
-                                  <a href="/product/{{$v->id}}">
+                                  <a href="/home/goods/detail/{{$val->id}}">
                                     <img src="{{$val->pic}}">
                                     </a>
                                   </div>
-                                  <div class="title"><a href="/product/{{$v->id}}">{{$val->name}}</a></div>
+                                  <div class="title"><a href="/home/goods/detail/{$val->id}}">{{$val->name}}</a></div>
                                   <p class="price">{{$val->discount}}<em>元</em>元</p>
                               </li>
                               @endforeach
@@ -191,16 +234,15 @@
               </ul>
           </div>
         <div class="header-search">
-          <form action="search.php" method="get" id="searchForm" name="searchForm" onSubmit="return checkSearchForm()" class="search-form clearfix">
-              <label class="hide">站内搜索</label>
-            <input class="search-text" type="text" name="keywords" id="keyword" value="" autocomplete="off">
-            <input type="hidden" value="k1" name="dataBi">
-            <button type="submit" class="search-btn iconfont"><i class="layui-icon">&#xe615;</i> </button>
-              <div class="hot-words" >
-                <a href="" target="_blank">小米手环</a>  
-                <a href="" target="_blank">耳机</a>  
-                <a href="" target="_blank">插线板</a>                 
-              </div>
+          <form action="/home/goods/search" method="get" id="searchForm"  class="search-form clearfix">
+                  <label class="hide">站内搜索</label>
+                <input class="search-text" type="text" name="search" id="keyword" value="" autocomplete="off">
+                <button type="submit" class="search-btn iconfont"><i class="layui-icon">&#xe615;</i></button>
+                    <div class="hot-words" >
+                      <a href="/home/goods/detail/33" target="_blank">小米8</a>  
+                      <a href="/home/goods/detail/42" target="_blank">蓝牙耳机</a>  
+                      <a href="/home/goods/detail/43" target="_blank">小米手环</a>                  
+                  </div>
           </form>
         </div>
  
@@ -226,8 +268,8 @@
                   @endforeach
             </div>
           </div>
-          <a class="xm-slider-previous xm-slider-navigation icon-slides icon-slides-prev prev" href="#" style="display:none;">上一张</a>
-      	<a class="xm-slider-next xm-slider-navigation icon-slides icon-slides-next next" href="#" style="display: none;">下一张</a>
+          <a class="xm-slider-previous xm-slider-navigation icon-slides icon-slides-prev prev" href="javascript:;" style="display:none;">上一张</a>
+      	<a class="xm-slider-next xm-slider-navigation icon-slides icon-slides-next next" href="javascript:;" style="display: none;">下一张</a>
           <ul class="xm-slider-pagination">
               @foreach ($slids as $k=>$v)
           	  <li class="xm-slider-pagination-item">
@@ -275,7 +317,7 @@
   	           <ul class="home-promo-list clearfix">
                   @foreach ($recommend1 as $k=>$v)
                   <li class="first" style="margin-left:9px;">
-                    <a href='#' target='_blank'>
+                    <a href='/home/goods/detail/{{$v->id}}' target='_blank'>
                       <img src='{{$v->rimg}}' width='316' height='170' border='0' />
                     </a>
                   </li>
@@ -304,11 +346,11 @@
         	<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
             	      @foreach ($recommend2 as $k=>$v)
                     <li class="rainbow-item-1">
-                    	<a class="thumb" href="goods.php?id=27" target="_blank">
+                    	<a class="thumb" href="/home/goods/detail/{{$v->id}}" target="_blank">
                         	<img src="{{$v->rimg}}" />
                         </a>
                         <h3 class="title">
-                        	<a href="#" target="_blank">{{$v->goodrecommend['name']}}</a>
+                        	<a href="/home/goods/detail/{{$v->id}}" target="_blank">{{$v->goodrecommend['name']}}</a>
                         </h3>
                         <p class="desc">{{$v->goodrecommend['intro']}}</p>
                     </li>
@@ -345,7 +387,7 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                     <li class="brick-item brick-item-l">
-                      <a target="_blank" href="#"> <img src="/home/picture/shouji.jpg" width="234" height="614"/></a>
+                      <a target="_blank" href="/home/goods/detail/27"><img src="/home/picture/shouji.jpg" width="234" height="614"/></a>
                     </li>
                 </ul>
           </div>
@@ -354,12 +396,12 @@
                 @foreach ($sgood as $k=>$v)
                 <li class="brick-item brick-item-m">
                       <div class="figure figure-img">
-                          <a href="goods.php?id=35">
+                          <a href="/home/goods/detail/{{$v->id}}">
                               <img src="{{$v->pic}}" width="160" height="160">
                           </a>
                       </div>
                       <h3 class="title">
-                          <a href="goods.php?id=35">{{$v->name}}</a>
+                          <a href="/home/goods/detail/{{$v->id}}">{{$v->name}}</a>
                       </h3>
                       <p class="desc"></p>
                       <p class="price">
@@ -372,12 +414,12 @@
                   @foreach ($scate[0]->categoods as $k=>$v)
                   <li class="brick-item brick-item-m">
                       <div class="figure figure-img">
-                          <a href="goods.php?id=67">
+                          <a href="/home/goods/detail/{{$v->id}}">
                               <img src="{{$v->pic}}" width="160" height="160" alt="">
                           </a>
                       </div>
                       <h3 class="title">
-                          <a href="goods.php?id=67">{{$v->name}}</a>
+                          <a href="/home/goods/detail/{{$v->id}}">{{$v->name}}</a>
                       </h3>
                       <p class="desc"></p>
                       <p class="price">
@@ -390,12 +432,12 @@
                   @foreach ($scate[1]->categoods as $k=>$v)
                   <li class="brick-item brick-item-m">
                       <div class="figure figure-img">
-                          <a href="goods.php?id=33">
+                          <a href="/home/goods/detail/{{$v->id}}">
                               <img src="{{$v->pic}}" width="160" height="160" alt="">
                           </a>
                       </div>
                       <h3 class="title">
-                          <a href="goods.php?id=33">{{$v->name}}</a>
+                          <a href="/home/goods/detail/{{$v->id}}">{{$v->name}}</a>
                       </h3>
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
@@ -425,10 +467,10 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                     <li class="brick-item brick-item-m">
-                      <a target="_blank" href="#"><img src="/home/picture/jiadian1.jpg" width="234" height="300"/></a>                    
+                      <a target="_blank" href="/home/goods/detail/41"><img src="/home/picture/jiadian1.jpg" width="234" height="300"/></a>                    
                     </li>
                     <li class="brick-item brick-item-m">
-                      <a target="_blank" href="#"><img src="/home/picture/jiadian2.jpg" width="234" height="300"/></a>                     
+                      <a target="_blank" href="/home/goods/detail/32"><img src="/home/picture/jiadian2.jpg" width="234" height="300"/></a>                     
                     </li>
                 </ul>   
             </div>
@@ -437,12 +479,12 @@
                   @foreach($jgood as $k=>$v)
                   <li class="brick-item brick-item-m">
                       <div class="figure figure-img">
-                          <a href="goods.php?id=38">
+                          <a href="/home/goods/detail/{{$v->id}}">
                               <img src="{{$v->pic}}" width="160" height="160" alt="小米活塞耳机 炫彩版">
                           </a>
                       </div>
                       <h3 class="title">
-                          <a href="goods.php?id=38">{{$v->name}}</a>
+                          <a href="/home/goods/detail/{{$v->id}}">{{$v->name}}</a>
                       </h3>
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
@@ -479,10 +521,10 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                    <li class="brick-item brick-item-m">
-                      <a target="_blank" href="affiche.php?ad_id=17&amp;uri=http%3A%2F%2Fwww.ecshop119.com"> <img src="/home/picture/jhphc.jpg" width="234" height="300"/> </a>                     
+                      <a target="_blank" href="/home/goods/detail/44"> <img src="/home/picture/jhphc.jpg" width="234" height="300"/> </a>                     
                     </li>
                     <li class="brick-item brick-item-m">
-                        <a target="_blank" href="affiche.php?ad_id=18&amp;uri=http%3A%2F%2Fwww.ecshop119.com"> <img src="/home/picture/xqej.jpg" width="234" height="300"/> </a>                     
+                        <a target="_blank" href="/home/goods/detail/45"> <img src="/home/picture/xqej.jpg" width="234" height="300"/> </a>                     
                     </li>
                 </ul>
                 
@@ -494,12 +536,12 @@
                 @foreach ($pgood as $k=>$v)
                   <li class="brick-item brick-item-m">
                       <div class="figure figure-img">
-                          <a href="goods.php?id=44">
+                          <a href="/home/goods/detail/{{$v->id}}">
                               <img src="{{$v->pic}}" width="160" height="160">
                           </a>
                       </div>
                       <h3 class="title">
-                          <a href="goods.php?id=44">{{$v->name}}</a>
+                          <a href="/home/goods/detail/{{$v->id}}">{{$v->name}}</a>
                       </h3>
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
@@ -529,10 +571,10 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                   <li class="brick-item brick-item-m">
-                      <a target="_blank" href=""> <img src="/home/picture/xdd.jpg" width="234" height="300"/> </a>                     
+                      <a target="_blank" href="/home/goods/detail/46"> <img src="/home/picture/xdd.jpg" width="234" height="300"/> </a>                     
                   </li>
                   <li class="brick-item brick-item-m">
-                      <a target="_blank" href=""> <img src="/home/picture/lsh.jpg" width="234" height="300"/> </a>                     
+                      <a target="_blank" href="/home/goods/detail/47"> <img src="/home/picture/lsh.jpg" width="234" height="300"/> </a>                     
                   </li>
                 </ul>   
             </div>
@@ -541,12 +583,12 @@
                 @foreach ($shgood as $k=>$v)
                   <li class="brick-item brick-item-m">
                       <div class="figure figure-img">
-                          <a href="goods.php?id=94">
+                          <a href="/home/goods/detail/{{$v->id}}">
                               <img src="{{$v->pic}}" width="160" height="160" alt="猫的秘密">
                           </a>
                       </div>
                       <h3 class="title">
-                          <a href="goods.php?id=94">{{$v->name}}</a>
+                          <a href="/home/goods/detail/{{$v->id}}">{{$v->name}}</a>
                       </h3>
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
@@ -583,11 +625,11 @@
         	<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
         	@foreach ($recommend3 as $k=>$v)
             <li>
-                	<a class="thumb" href="goods.php?id=27" target="_blank">
+                	<a class="thumb" href="/home/goods/detail/{{$v->id}}" target="_blank">
                     	<img src="{{$v->rimg}}" />
                     </a>
                     <h3 class="title">
-                    	<a href="goods.php?id=27" target="_blank">{{$v->goodrecommend['name']}}</a>
+                    	<a href="/home/goods/detail/{{$v->id}}" target="_blank">{{$v->goodrecommend['name']}}</a>
                     </h3>
                     <p class="price">{{$v->goodrecommend['price']}}<em>元</em></p>
             </li>
@@ -606,8 +648,8 @@
 </div>
 <div class="box-bd J_brickBd">
 	<ul class="review-list clearfix">
-    	            	<li class="review-item review-item-first">
-        	<div class="figure figure-img"><a href="goods.php?id=45"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
+    	 <li class="review-item review-item-first">
+        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->id}}"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
             <p class="review"><a href="goods.php?id=45">dsad</a></p>
             <p class="author">来自于 匿名用户 的评价</p>
             <div class="info">
@@ -616,7 +658,7 @@
                 <p class="price">89.00</p>
             </div>
         </li>
-                            	<li class="review-item">
+        <li class="review-item">
         	<div class="figure figure-img"><a href="goods.php?id=45"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
             <p class="review"><a href="goods.php?id=45">dddd</a></p>
             <p class="author">来自于 匿名用户 的评价</p>
@@ -626,7 +668,7 @@
                 <p class="price">89.00</p>
             </div>
         </li>
-                            	<li class="review-item">
+        <li class="review-item">
         	<div class="figure figure-img"><a href="goods.php?id=93"><img src="/home/picture/93_thumb_g_1441056767939.jpg" width="296" height="220" alt="小米百变随身杯"></a></div>
             <p class="review"><a href="goods.php?id=93">刚买就掉地上了，但是质量很坚固，没有摔坏</a></p>
             <p class="author">来自于 vip 的评价</p>
@@ -636,7 +678,7 @@
                 <p class="price">39.00</p>
             </div>
         </li>
-                            	<li class="review-item">
+        <li class="review-item">
         	<div class="figure figure-img"><a href="goods.php?id=39"><img src="/home/picture/39_thumb_g_1437082747983.jpg" width="296" height="220" alt="小米水质TDS检测笔"></a></div>
             <p class="review"><a href="goods.php?id=39">方便实用</a></p>
             <p class="author">来自于 vip 的评价</p>
@@ -646,12 +688,10 @@
                 <p class="price">39.00</p>
             </div>
         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+    </ul>
 </div>
- 
-      </div>
-      
-    </div>
+</div>
+</div>
 </div>
 <div id="J_modalVideo" class="modal modal-video fade modal-hide">
 	<div class="modal-hd">
@@ -770,13 +810,8 @@
       </dd>
        
     </dl>
-     
-     
-     
-     
- 
             <div class="col-contact">
-                <p class="phone">15105955077</p>
+                <p class="phone">{{$common_configs_data->net_phone}}</p>
                 <p>周一至周日 8:00-18:00<br>（仅收市话费）</p>
                 <a rel="nofollow" class="btn btn-line-primary btn-small">
                     <i class="layui-icon">&#xe6fc;</i>24小时在线客服
@@ -787,7 +822,7 @@
 </div>
 <div class="site-info">
     <div class="container">
-        <div class="logo ir">京城商城</div>
+        <div style="float:left;margin:0px 4px;"><img src="{{$common_configs_data->logo}}" width="36px" height="36px"></div>
         <div class="info-text">
             <p class="sites">
               <a href="javascript:;" target="_blank" title="京城商城">友情链接</a> |
