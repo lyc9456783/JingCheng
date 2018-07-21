@@ -6,24 +6,38 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\home\ConsgineeRequest;
-class ConsigneeController extends Controller
+use App\Models\Users;
+use App\Models\Goods;
+use App\Models\Collect;
+class CollectController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
+        //查询session中的数据
         $data = session('homeuser');
-        if($data){
-            return view('home.consignee.consignee',['title'=>'收货人信息']);
+        // dump($data);
+        $uid = $data['id'];
+        $data = Collect::where('uid',$uid)->get();
+        return view('home.collect.index',['title'=>'我的收藏列表','data'=>$data]);
+    }
+
+
+    //删除
+    public function delete($id)
+    {
+        $data = Collect::find($id);
+        $res = $data -> delete();
+        if($res){
+            return redirect('/home/collect/index')->with('success','删除成功');
         }else{
-            return redirect('/home/login/index')->with('success','需要登录');
+            return back()->with('error','删除成功');
         }
-        
+
     }
 
     /**
@@ -33,7 +47,7 @@ class ConsigneeController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -44,26 +58,7 @@ class ConsigneeController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'email' => 'required|regex:/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/',
-        //     'phone' => 'required|regex:/^[1][3,4,5,7,8,9][0-9]{9}$/',
-        //     'postcode' => 'required|regex:/^[\d]{6}$/',
-
-        // ],[
-        //     'name.required' => '收货人姓名必填',
-        //     'email.required' => '收货人邮箱必填',
-        //     'email.regex' => '请输入正确邮箱',
-        //     'phone.required' => '手机号必填',
-        //     'phone.regex' => '请输入11位手机号码',
-        //     'postcode.required' => '邮政编码必填',
-        //     'postcode.regex' => '邮政编码必须为6位数字'
-
-        // ]);
-
-        $req = $request -> all();
-        dump($req);
-
+        //
     }
 
     /**

@@ -7,55 +7,37 @@
 <div id="wrapper" class="container">    
 <div class="breadcrumbs">
     <div class="container">
-        <a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
-</div>
- 
-    <div class="my_nala_main">
-        
+        <a href="/">首页</a> <code>&gt;</code>用户中心
+    </div>
+</div>        
 <div class="slidebar">
     <ul class="slide_item">
-
         <li class="item">
             <div class="root_node">订单中心</div>
             <ul>
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
-                    
                     <a class="" href="/home/address/index">收货地址</a>
-                     
                     <a class="" href="">缺货登记</a>
-                     
                 </li>
-               
             </ul>
         </li>
-        
         <li class="item">
             <div class="root_node">会员中心</div>
             <ul>
                 <li>
                     <a class="" href="/home/users/index">我的个人中心</a>
-                    
+                    <a class="" href="/home/pass/index">修改密码</a>
                     <a class="" href="/home/users/edit">用户信息</a>
-                    
-                    <a class="" href="">我的收藏</a>
-
+                    <a class="" href="/home/collect/index">我的收藏</a>
                     <a class="" href="">我的留言</a>
-                      
                     <a class="" href="">我的推荐</a>
-                       
                     <a class="" href="/home/discuss/index">我的评论</a>
-                     
                 </li>
-               
             </ul>
         </li>
     </ul>
 </div>
-
-
-
-
  
 			
     <div class="my_nala_centre ilizi_centre">
