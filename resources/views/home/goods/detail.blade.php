@@ -187,16 +187,11 @@
                             <input type="hidden" name="discount" value="{{ $goods->discount}}">
                             <input type="hidden" name="goods_kc" value="{{$goods->entrepotsgoods['num'] or '0'}}">                            
                             @if(($goods->entrepotsgoods['num'])>0)
-                             <a href="javascript:;" class="btn  btn-primary goods-add-cart-btn" id="buy_btn"> 加入购物车</a>
+                              <a href="javascript:onclick=car_btn();" class="btn  btn-primary goods-add-cart-btn" > 加入购物车</a>
                             @else
-                             <!-- <button class="btn  btn-gray goods-add-cart-btn" id="buy_btn"></button> -->
-                             <a href="javascript:viod(0)"  class="btn  btn-gray goods-add-cart-btn" id="buy_btn"> 暂时缺货 </a>
+                              <a href="javascript:onclick=car_btn();"  class="btn  btn-gray goods-add-cart-btn"> 暂时缺货 </a>
                             @endif
-                            <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
                             <a href="javascript:onclick=collect({{ $goods->id }});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class=" btn btn-gray  goods-collect-btn ">收藏</a>
-                            <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
-                            <!-- <a href="javascript:collect(27)" class=" btn btn-gray  goods-collect-btn " id="fav-btn"><i class="iconfont"></i>喜欢</a> -->
-                            <!-- <a href="javascript:addToCart(27,1)" class="btn  btn-primary goods-add-cart-btn" id="buy_btn">加入购物车</a> -->
                           </dd>
                       </dl>
                   </dt> 
@@ -220,8 +215,48 @@
         <a href="/home/goods/shopcar" class="btn">去结算</a>
     </div>
 </div>
+  <!-- 本也商品详情开始 -->
+  <div class="full-screen-border"></div>
+  <div class="goods-detail-main">
+  
+  <!-- 详情导航栏 -->
+    <div class="goods-detail-nav" id="goodsDetail">
+      <div class="container">
+          <ul class="detail-list">
+            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
+            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
+            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
+            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
+          </ul>
+        </div>
+    </div>
 
-  <!-- 库存是否为空 -->
+    <!-- 跟随页面滚动的 头部导航 -->
+    <div class="goods-sub-bar" id="goodsDetail" style="z-index: 999999; top: -80px;">
+      <div class="container">
+          <ul class="detail-list">
+            <li class="on"> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
+            <li class=""> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
+            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
+            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
+          </ul>
+          <dl class="goods-sub-bar-info clearfix">
+          <dt><img src="{{ $goods->pic }}" alt="{{ $goods['name'] }}"></dt>
+            <dd>
+              <strong>{{ $goods['name'] }}</strong>
+                <p><em>{{ $goods->detailsgoods['type'] or '有货' }}  @if($goods->entrepotsgoods['num'] >0) 现货购买@else 暂时缺货 @endif</em></p>
+            </dd>
+        </dl>
+        @if(($goods->entrepotsgoods['num'])>0)
+          <a href="javascript:onclick=car_btn();" class="btn  btn-primary goods-add-cart-btn" > 加入购物车</a>
+        @else
+          <a href="javascript:onclick=car_btn();"  class="btn  btn-gray goods-add-cart-btn"> 暂时缺货 </a>
+        @endif
+        </div>
+    </div>
+    <!-- 详情导航栏结束 -->
+    <div class="product_tabs">
+      <!-- 库存是否为空 -->
   <script>
   // 定义函数作为显示弹框
     function carshows(){
@@ -229,7 +264,7 @@
       $('#overlay').css('display','block');
     }
 
-    $('#buy_btn').click(function(){ 
+    function car_btn(){ 
   
     //初始化laiyui
       var  gid =  $('#goods-id').text();
@@ -254,7 +289,7 @@
         });
         
       }
-    });
+    }
 
 
     //增加减少商品数量
@@ -327,44 +362,6 @@
   }
 
   </script>
-
-  <!-- 本也商品详情开始 -->
-  <div class="full-screen-border"></div>
-  <div class="goods-detail-main">
-  
-  <!-- 详情导航栏 -->
-    <div class="goods-detail-nav" id="goodsDetail">
-      <div class="container">
-          <ul class="detail-list">
-            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
-            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
-            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
-            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
-          </ul>
-        </div>
-    </div>
-
-    <!-- 跟随页面滚动的 头部导航 -->
-    <div class="goods-sub-bar" id="goodsDetail" style="z-index: 999999; top: -80px;">
-      <div class="container">
-          <ul class="detail-list">
-            <li class="on"> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
-            <li class=""> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
-            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
-            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
-          </ul>
-          <dl class="goods-sub-bar-info clearfix">
-          <dt><img src="{{ $goods->pic }}" alt="{{ $goods['name'] }}"></dt>
-            <dd>
-              <strong>{{ $goods['name'] }}</strong>
-                <p><em>{{ $goods->detailsgoods['type'] or '有货' }}  @if($goods->entrepotsgoods['num'] >0) 现货购买@else 暂时缺货 @endif</em></p>
-            </dd>
-        </dl>
-        <a href="javascript:viod(0)" class="btn btn-primary goods-add-cart-btn"> 加入购物车</a>
-        </div>
-    </div>
-    <!-- 详情导航栏结束 -->
-    <div class="product_tabs">
       
       
       <!-- 详情描述 -->

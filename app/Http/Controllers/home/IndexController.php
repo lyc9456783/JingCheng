@@ -12,7 +12,7 @@ use App\Models\Slids;
 use App\Models\Recommends;
 use App\Models\Notice;
 use App\Models\Links;
-
+use App\Models\Discuss;
 class IndexController extends Controller
 {
     /**
@@ -34,7 +34,6 @@ class IndexController extends Controller
         $sgood = Goods::whereIn('gcid',['2','3'])->take(8)->get();
         //获取所有智能家电商品
         $jgood = Goods::where('gcid','18')->take(8)->get();
-       
         //获取平板笔记本的所有商品
         $pgood = Goods::where('gcid','14')->take(8)->get();
         //获取小米生活方式的所有商品
@@ -49,6 +48,7 @@ class IndexController extends Controller
         //友情链接数据
         $links = links::where('lstate','1')->get();
         // dump($links);
+        $discuss = Discuss::where('id','<','100')->orderBy('id','desc')->take(4)->get();
         return view('home.index.index',
             [
                     'cates'=>$cates,
@@ -63,6 +63,7 @@ class IndexController extends Controller
                     'recommend1'=>$recommend1,
                     'recommend2'=>$recommend2,
                     'recommend3'=>$recommend3,
+                    'discuss'=>$discuss,
             ]);
     }
 

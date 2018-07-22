@@ -89,8 +89,8 @@
         <i class="layui-icon">&#xe657;</i>  
           购物车
           <span class="mini-cart-num J_cartNum" id="hd_cartnum">
-          @if(session('carcount'))
-            ({{session('carcount')}})
+          @if(session('goods'))
+            ({{count(session('goods'))}})
           @else
             (0)
           @endif 
@@ -107,8 +107,8 @@
                       <img width="60" height="60" src="{{$v['info']->pic}}">
                   </a>
                   <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
-                  <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
-                  <a class="btn-del delItem" href="javascript:deleteCartGoods({{$v['id']}});">
+                  <span class="price" nums="{{$v['num']}}" prices="{{$v['info']->discount}}">{{$v['info']->discount}} x {{$v['num']}}</span>
+                  <a class="btn-del delItem" href="javascript:;" onclick="car_del(this,{{$v['id']}});">
                       <i class="iconfont"></i>
                   </a>
                 </div>
@@ -117,8 +117,8 @@
           </ul>
           <div class="count clearfix">
               <span class="total">
-                  共计<em id="hd_cart_count">{{session('carcount')}}</em>件商品
-                  <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}元</em></strong>
+                  共计<em id="hd_cart_count">{{ count(session('goods')) }}</em>件商品
+                  <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}</em><em>元</em></strong>
               </span>
               <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
           </div>   
@@ -129,6 +129,33 @@
       </div>
       @endif        
     </div>
+    <script type="text/javascript">
+      //获取总计
+      var tot = 0;
+      $('.cart-item .price').each(function(){
+          var prices = Number($(this).attr('prices'));
+          console.log(prices);
+          var nums = Number($(this).attr('nums'));
+          var sums = Number(prices*nums);
+          tot += sums;
+      });
+        $('#hd_cart_total').html(tot);
+
+       //移除购物车
+       function car_del(obj,id){
+        var ul = obj.parentNode.parentNode.parentNode;
+        var li = obj.parentNode.parentNode;
+        // obj.parent();
+        // console.log(obj);
+        $.get('/home/goods/delcar',{'id':id},function(data){
+             if(data){
+                ul.removeChild(li);
+                location.reload(true);
+             }
+        });
+      };
+    </script>
+    
             <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
               
             @if(!session('homeflag') == true)
@@ -258,7 +285,7 @@
           	<div class="xm-slider-control">
                   @foreach ($slids as $k=>$v)
                   <div class="slide xm-slider-slide">
-                      <a target="_blank" href="{{$v['surl']}}">
+                      <a target="_blank" href="javascript:;">
                           <img src="{{$v['simg']}}"/>
                       </a>
                   </div>
@@ -486,12 +513,17 @@
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
                           {{$v->discount}}<em>元</em></p>
+                      
                       <p class="rank">7人评价</p>
                       <div class="review-wrapper">
+                          @foreach($v->discussgoods as $kk=>$vv)
+                          @if($kk == 0)
                           <a href="javascript:void(0)">
-                              <span class="review"> 跟女神版超配的。颜值高。</span>
-                              <span class="author"> 来自于 匿名用户 的评价 </span>
+                              <span class="review" style="text-align:center">{{$vv->content}}</span>
+                              <span class="author" style="text-align:center"> 来自于 {{ $vv->userdiscuss['username'] }} 的评价 </span>
                           </a>
+                          @endif
+                          @endforeach
                       </div>
                   </li>
                   @endforeach
@@ -645,47 +677,19 @@
 </div>
 <div class="box-bd J_brickBd">
 	<ul class="review-list clearfix">
+    @foreach($discuss as $k=>$v)
     	 <li class="review-item review-item-first">
-        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->id}}"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
-            <p class="review"><a href="goods.php?id=45">dsad</a></p>
-            <p class="author">来自于 匿名用户 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=45">小米活塞耳机标准版</a></h3>
+        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->id}}"><img src="{{ $v->gooddiscuss['pic'] }}" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
+            <p class="review" style="text-align:center"><a href="goods.php?id=45"></a>{{ $v->content }}</p>
+            <p class="author" style="text-align:center">来自于 {{ $v->userdiscuss['username'] }} 的评价</p>
+            <div class="info" style="text-align:center">
+            	<h3 class="title"><a href="goods.php?id=45">{{ $v->gooddiscuss['name'] }}</a></h3>
                 <span class="sep">|</span>
-                <p class="price">89.00</p>
+                <p class="price">{{ $v->gooddiscuss['price'] }}</p>
             </div>
         </li>
-        <li class="review-item">
-        	<div class="figure figure-img"><a href="goods.php?id=45"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
-            <p class="review"><a href="goods.php?id=45">dddd</a></p>
-            <p class="author">来自于 匿名用户 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=45">小米活塞耳机标准版</a></h3>
-                <span class="sep">|</span>
-                <p class="price">89.00</p>
-            </div>
-        </li>
-        <li class="review-item">
-        	<div class="figure figure-img"><a href="goods.php?id=93"><img src="/home/picture/93_thumb_g_1441056767939.jpg" width="296" height="220" alt="小米百变随身杯"></a></div>
-            <p class="review"><a href="goods.php?id=93">刚买就掉地上了，但是质量很坚固，没有摔坏</a></p>
-            <p class="author">来自于 vip 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=93">小米百变随身杯</a></h3>
-                <span class="sep">|</span>
-                <p class="price">39.00</p>
-            </div>
-        </li>
-        <li class="review-item">
-        	<div class="figure figure-img"><a href="goods.php?id=39"><img src="/home/picture/39_thumb_g_1437082747983.jpg" width="296" height="220" alt="小米水质TDS检测笔"></a></div>
-            <p class="review"><a href="goods.php?id=39">方便实用</a></p>
-            <p class="author">来自于 vip 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=39">小米水质TDS检测笔</a></h3>
-                <span class="sep">|</span>
-                <p class="price">39.00</p>
-            </div>
-        </li>
-    </ul>
+    @endforeach
+  </ul>
 </div>
 </div>
 </div>

@@ -13,7 +13,7 @@ class Discuss extends Model
     {
     	return $this->belongsTo('App\Models\Users','uid');
     }
-
+    //评论属于 商品
     public function gooddiscuss()
     {
     	return $this->belongsTo('App\Models\Goods','gid');

@@ -105,36 +105,6 @@
               </tbody>
        </table>
     </form>
-<<<<<<< HEAD
-=======
-     <form name="formPassword" action="/home/users/passupdate/{{ $id }}" method="post" onsubmit="return editPassword()">
-     {{ csrf_field() }}
-     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-        <tbody><tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">原密码：</td>
-          <td width="76%" align="left" bgcolor="#FFFFFF"><input name="old_password" type="password" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
-        </tr>
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">新密码：</td>
-          <td align="left" bgcolor="#FFFFFF"><input name="new_password" type="password" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
-        </tr>
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">确认密码：</td>
-          <td align="left" bgcolor="#FFFFFF"><input name="comfirm_password" type="password" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_password">
-            <input name="submit" type="submit" class="btn btn-primary" style="border:none;" value="确认修改">
-          </td>
-        </tr>
-      </tbody></table>
-    </form>
-          
-
-
-      </div>
-     </div>
->>>>>>> origin/qiu
     </div>
     </div>
     </div>

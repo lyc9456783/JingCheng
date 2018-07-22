@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Goods;
+use App\Models\ShopCars;
 
 class ShopCarController extends Controller
 {
@@ -16,24 +17,32 @@ class ShopCarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    { 
+        $good_car = session('goods');
+        $uid = session('homeuser')['id'];
         $zsum = 0;
         $shops = session('goods')?session('goods'):null;
         if(session('homeflag')){
             if($shops){
-                
+                $uid = session('homeuser')['id'];
+                $good_car = $request->session()->pull('goods');
+                foreach ($good_car as $k => $v) {
+                    $shops = new Shopcars;
+                    $shops -> uid = $uid;
+                    $shops -> gid = $v['id'];
+                    $shops -> gname = $v['info']->name;
+                    $shops -> gnum = $v['num'];
+                    $shops -> gprice = $v['info']->discount;
+                    $shops -> gcolor = $v['color'];
+                    $shops -> gcolor = $v['info']->pic;
+                    $shops -> gtype = $v['info']->detailsgoods->type;
+                    $shops -> save();   
+                }
             }
-        }
-        // dump($shops);
-        if($shops){
-            foreach ($shops as $key => $value) {
-                $zsum += $value['xsum'];
-            }
+            $shops = ShopCars::where('uid',$uid)->get();
+            // dump($shops);
         }
         //将商品的个数存入session
-        //将商品总价 存入session
-        $request->session()->put('carcount',count($shops));
-        $request->session()->put('carzsum',$zsum);
         return view('home.goods.shopcar')->with(['shops'=>$shops,'zsum'=>$zsum]);
     }
 
@@ -45,36 +54,37 @@ class ShopCarController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        // dd($data);
-        $goods = session('goods')?session('goods'):array();
-        $a = 0;
-        if($goods){
-            foreach ($goods as $key => &$value) {
-                if($value['id'] == $data['id']){
-                    $value['num'] = $value['num']+$data['num'];
-                    $value['xsum'] = $value['num']*($value['info']->discount);
-                    $a = 1;
-                }
-            }
+        if(session('homeflag')){
             
+        }else{
+
+            $goods = session('goods')?session('goods'):array();
+            $a = 0;
+            if($goods){
+                foreach ($goods as $key => &$value) {
+                    if($value['id'] == $data['id']){
+                        $value['num'] = $value['num']+$data['num'];
+                        $value['xsum'] = $value['num']*($value['info']->discount);
+                        $a = 1;
+                    }
+                } 
+            }
+            //使用标记位判断是否存在
+            if(!$a){
+                $good = Goods::where('id',$data['id'])->first();
+                $goods[] = [ 
+                'id'  => $data['id'],
+                'num' => $data['num'],
+                'info'=> $good,
+                'color'=> $good->detailsgoods['color'],
+                'xsum' => $data['num']*($good->discount),
+                ]; 
+            }  
+            //得到的值存入session中
+            session(['goods'=>$goods]);
+            echo 1;
         }
-        //使用标记位判断是否存在
-        if(!$a){
-            $good = Goods::where('id',$data['id'])->first();
-            $goods[] = [ 
-            'id'  => $data['id'],
-            'num' => $data['num'],
-            'info'=> $good,
-            'color'=> $good->detailsgoods['color'],
-            'xsum' => $data['num']*($good->discount),
-            ]; 
-        }  
-        //得到的值存入session中
-        session(['goods'=>$goods]);
-        echo 1;
-
-        
-
+    
     }
 
     /**
@@ -135,6 +145,9 @@ class ShopCarController extends Controller
         }
         //写入session
         $request->session()->put('goods',$shops);
+        if(empty(session('goods'))){
+           $request->session()->put('goods',null); 
+        }
         echo 1;
     }
 

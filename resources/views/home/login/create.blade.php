@@ -35,52 +35,52 @@
 
 <script>
   $(function(){
-  	
-  	//加载清空文本框
-  	$("input:text,input:password").val("");
-  	
-  	//提示文字隐藏显示效果
-  	//登录界面
-  	$(".enter-area .enter-item").focus(function(){
-  		if($(this).val().length==0){
-  			$(this).siblings(".placeholder").addClass("hide");
-  		}
-  	}).blur(function(){
-  		if($(this).val().length==0){
-  			$(this).siblings(".placeholder").removeClass("hide");
-  		}
-  	}).keyup(function(){
-  		if($(this).val().length>0){
-  			$(this).siblings(".placeholder").addClass("hide");
-  		}else{
-  			$(this).siblings(".placeholder").removeClass("hide");
-  		}
-  	});
-  	//注册界面
-  	$(".inputbg input").focus(function(){
-  		if($(this).val().length>0){
-  			$(this).parent().siblings(".t_text").addClass("hide");
-  		}
-  	}).blur(function(){
-  		if($(this).val().length==0){
-  			$(this).parent().siblings(".t_text").removeClass("hide");
-  		}
-  	}).keyup(function(){
-  		if($(this).val().length>0){
-  			$(this).parent().siblings(".t_text").addClass("hide");
-  		}else{
-  			$(this).parent().siblings(".t_text").removeClass("hide");
-  		}
-  	});
-  	
-  	//其它登录方式
-  	$("#other_method").click(function(){
-  		if($(".third-area").hasClass("hide")){
-  			$(".third-area").removeClass("hide");
-  		}else{
-  			$(".third-area").addClass("hide");
-  		}
-  	})
+    
+    //加载清空文本框
+    $("input:text,input:password").val("");
+    
+    //提示文字隐藏显示效果
+    //登录界面
+    $(".enter-area .enter-item").focus(function(){
+      if($(this).val().length==0){
+        $(this).siblings(".placeholder").addClass("hide");
+      }
+    }).blur(function(){
+      if($(this).val().length==0){
+        $(this).siblings(".placeholder").removeClass("hide");
+      }
+    }).keyup(function(){
+      if($(this).val().length>0){
+        $(this).siblings(".placeholder").addClass("hide");
+      }else{
+        $(this).siblings(".placeholder").removeClass("hide");
+      }
+    });
+    //注册界面
+    $(".inputbg input").focus(function(){
+      if($(this).val().length>0){
+        $(this).parent().siblings(".t_text").addClass("hide");
+      }
+    }).blur(function(){
+      if($(this).val().length==0){
+        $(this).parent().siblings(".t_text").removeClass("hide");
+      }
+    }).keyup(function(){
+      if($(this).val().length>0){
+        $(this).parent().siblings(".t_text").addClass("hide");
+      }else{
+        $(this).parent().siblings(".t_text").removeClass("hide");
+      }
+    });
+    
+    //其它登录方式
+    $("#other_method").click(function(){
+      if($(".third-area").hasClass("hide")){
+        $(".third-area").removeClass("hide");
+      }else{
+        $(".third-area").addClass("hide");
+      }
+    })
   })
 </script> 
   @if (session('success'))
@@ -126,7 +126,7 @@
                   <span class="error_icon" id="usersspan"></span>
                 </div>
                 <div class="err_tip" id="username_notice"> <em></em> </div>
-              	
+                
                 <div class="inputbg"> 
                   <label class="labelbox">
                       <input name="email" type="text" id="email" onblur="" onkeyup="" placeholder="邮箱号">
@@ -135,7 +135,7 @@
                   <span class="err_tip">{{ $errors->first('email') }}</span> 
                 </div>
                 <div class="err_tip" id="email_notice"></div>
-              	
+                
                 <div class="inputbg">
                   <label class="labelbox">
                   <input type="password" name="password" id="password1" onblur="" onkeyup=""  placeholder="密码 不少于6位">
@@ -144,7 +144,7 @@
                   <span class="err_tip">{{ $errors->first('password') }}</span> 
                 </div>
                 <div class="err_tip" id="password_notice"></div>
-              	
+                
                 <div class="inputbg"> 
                   <label class="labelbox">
                     <input name="confirm_password" type="password" id="conform_password" onblur="" onkeyup="" placeholder="确认密码">
@@ -231,7 +231,7 @@
  
 
 
-	
+  
  
  
 

@@ -34,43 +34,20 @@
           <h2>我的购物车</h2>
         </div>
         <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
-              
-            @if(!session('homeflag') == true)
+
+            <!-- 当用没有登录时 数据从session中取  -->
+        @if(!session('homeflag') == true)
               <a class="link" href="/home/login/index" rel="nofollow">登录</a>
               <span class="sep">|</span>
               <a class="link" href="/home/login/create" rel="nofollow">注册</a>
-            @else
-                  @if(session("homeuser")['grade'] <= 2)
-                  <span class="user">
-                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
-                      <ul class="user-menu" style="display: none;">
-                          <li><a target="_blank" href="/admin">后台管理</a></li>
-                          <li><a href="/home/login/logout">退出登录</a></li>
-                      </ul>
-                  </span>  
-                  @else
-                  <span class="user">
-                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
-                    <ul class="user-menu" style="display: none;">
-                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
-                        <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
-                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
-                        <li><a href="/home/login/logout">退出登录</a></li>
-                    </ul>
-                </span>
-                <span class="sep">|</span>
-                <a href="/home/orders/index" class="link">我的订单</a> 
-                </div>
-                  @endif  
-              @endif
+            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
-  </div>
- @if(session('goods')) 
+    @if(session('goods')) 
   <div class="page-main" id="cart-box">
-    	<div class="container">
+      <div class="container">
         <div class="page-main" id="cart-box">
       <div class="container">
                 <div class="cart-goods-list">
@@ -145,10 +122,134 @@
                   </span>
                   <a href="/home/orders/ordercreate" class="btn btn-pay btn-primary">去结算</a>
                 </div>
+              </div>
+            </div>
+          </div>
+
+    @else      
+        <div class="cart-empty" style="background:url('/home/images/cart-empty.png')no-repeat 124px 0">
+        <h2>您的购物车还是空的!</h2>
+          <a href="/" class="btn btn-primary">马上去购物</a>
+        </div>
+    @endif
+    </div>
+    @else
+        @if(session("homeuser")['grade'] <= 2)
+          <span class="user">
+            <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+              <ul class="user-menu" style="display: none;">
+                  <li><a target="_blank" href="/admin">后台管理</a></li>
+                  <li><a href="/home/login/logout">退出登录</a></li>
+              </ul>
+          </span>  
+          @else
+          <span class="user">
+          <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+            <ul class="user-menu" style="display: none;">
+                <li><a target="_blank" href="/home/users/index">个人中心</a></li>
+                <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
+                <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
+                <li><a href="/home/login/logout">退出登录</a></li>
+            </ul>
+        </span>
+        <span class="sep">|</span>
+        <a href="/home/orders/index" class="link">我的订单</a> 
+        </div>
+        @endif  
         </div>
       </div>
     </div>
-          <script type="text/javascript">
+    </div>
+    </div>
+     @if($common_shopcars_data) 
+      <div class="page-main" id="cart-box">
+        	<div class="container">
+            <div class="page-main" id="cart-box">
+          <div class="container">
+                    <div class="cart-goods-list">
+                    <div class="list-head clearfix"> 
+                        <div class="col col-check">
+                            &nbsp; 
+                        </div>
+                        <div class="col col-img" id="itemsnum-top">图片</div> 
+                        <div class="col col-name">商品名称</div>
+                        <div class="col col-price" >单价</div>
+                        <div class="col col-num">数量</div>
+                        <div class="col col-total">小计</div> 
+                        <div class="col col-action">操作</div>
+                    </div>
+                    <div class="list-body"> 
+                    @foreach ($common_shopcars_data as $val) 
+                      <div class="item-box">
+                        <div class="item-table">
+                          <div class="item-row clearfix"> 
+                            <div class="col col-check"> 
+                              <input type="checkbox" name="check[]"  checked class="car_check"  />
+                            </div>           
+                            <div class="col col-img"> 
+                              <a href="/home/goods/detail/{{$val['gid']}}" target="_blank"> <img alt="{{$val['gname']}}" src="{{$val['gpic']}}"></a>
+                            </div>
+                            <div class="col col-name"> 
+                                <h3 class="name">
+                                  <a href="/home/goods/detail/{{$val['gid']}}" target="_blank">{{$val['gname']}}</a>
+                                </h3>
+                                <span>最低起订数量：<em class="ys">1</em>
+                                （请按最低起订数<em class="ys">1</em>的倍数购买）
+                                </span>
+                                <p class="desc">
+                                  <span>{{$val['gcolor']}}</span> 
+                                </p>
+                            </div> 
+                            <div class="col col-price">
+                                <span>{{$val['gprice']}}</span><em>元</em>                  
+                            </div>
+                            <div class="col col-num"> 
+                                <div class="change-goods-num clearfix">
+                                  <a href="javascript:void(0)" class="minus" money="{{$val['gprice']}}"  style="background:#bbb" title="减少1个数量";>
+                                    <i class="iconfont">-</i>
+                                  </a> 
+                                  <input type="text" class="good_num" ids="{{$val['gid']}}"  value="{{$val['gnum']}}">
+                                  <a href="javascript:void(0)" class="add" money="{{$val['gprice']}}" style="background:#bbb" title="增加1个数量">
+                                    <i class="iconfont">+</i>
+                                  </a> 
+                                </div>
+                            </div>
+                            <div class="col col-total">
+                                <span id="money{{$val['gid']}}">{{$val['gnum']*$val['gprice']}}</span><em>元</em>
+                            </div>
+                            <div class="col col-action"> 
+                                <a class="del" ids="{{$val['gid']}}" href="javascript:if (confirm('您确实要把该商品移出购物车吗？'));">
+                                <i class="iconfont"></i></a> 
+                            </div>
+                        </div>
+                      </div>
+                    </div> 
+                    @endforeach
+                    <p class="clear-cart">
+                      <a id="delallcar" href="/home/goods/delallcar">清空购物车</a>
+                    </p> 
+                    <div class="cart-bar clearfix">
+                      <div class="section-left">
+                        <a class="back-shopping btn btn-gray" href="/">继续购物</a>
+                      </div>
+                      <span class="total-price">
+                        <span class="total-num"></span>
+                        &nbsp;&nbsp;&nbsp;合计：<b><span id="tot">0</span><em>元</em></b>
+                      </span>
+                      <a href="/home/orders/ordercreate" class="btn btn-pay btn-primary">去结算</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        @else      
+      	    <div class="cart-empty" style="background:url('/home/images/cart-empty.png')no-repeat 124px 0">
+          	<h2>您的购物车还是空的!</h2>
+              <a href="/" class="btn btn-primary">马上去购物</a>
+            </div>
+        @endif
+        </div>
+    @endif
+    <script type="text/javascript">
             var zsum = 0;
             //获取商品的小计
            $('.good_num').each(function(){
@@ -264,16 +365,6 @@
                       });
 
                 </script>
-    @else      
-  	    <div class="cart-empty" style="background:url('/home/images/cart-empty.png')no-repeat 124px 0">
-      	<h2>您的购物车还是空的!</h2>
-          <a href="/" class="btn btn-primary">马上去购物</a>
-        </div>
-    @endif
-    </div>
-    <script type="text/javascript">
-   
-    </script>
 
 
       <div class="site-footer">

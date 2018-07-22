@@ -1,7 +1,5 @@
 @extends('home.common.common')
 @section('content') 
-
-<br><br><br>
 <link href="/home/css/style.css" rel="stylesheet" type="text/css">
 <link href="/home/css/user.css" rel="stylesheet" type="text/css">
 <div id="wrapper" class="container">    
