@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\SlidsInsertRequest;
 use App\Models\Slids;
 use DB;
 
@@ -44,7 +44,7 @@ class SlidsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SlidsInsertRequest $request)
     {
         //接收数据
         $data = $request -> except('_token');
@@ -132,9 +132,9 @@ class SlidsController extends Controller
 
         //处理返回值
         if($res){
-            return redirect(url('admin/slids')) -> with('success','添加成功');
+            return redirect(url('admin/slids')) -> with('success','修改成功');
         }else{
-            return redirect() -> back() -> with('error','添加失败');
+            return back() -> with('error','修改失败');
         }
     }
 

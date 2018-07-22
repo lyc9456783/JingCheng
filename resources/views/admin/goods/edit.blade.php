@@ -45,10 +45,10 @@
                   <select name="color">
                     <option value="">--请选择--</option>
                     <option value="土豪金" @if($goods->detailsgoods->color == '土豪金')selected @endif >土豪金</option>
-                    <option value="皇家绿" @if($goods->detailsgoods->color == '皇家绿')selected @endif >皇家绿</option>
-                    <option value="美腿白" @if($goods->detailsgoods->color == '美腿白')selected @endif>美腿白</option>
+                    <option value="荣耀绿" @if($goods->detailsgoods->color == '荣耀绿')selected @endif >荣耀绿</option>
+                    <option value="珍珠白" @if($goods->detailsgoods->color == '珍珠白')selected @endif>珍珠白</option>
                     <option value="魔力蓝" @if($goods->detailsgoods->color == '魔力蓝')selected @endif>魔力蓝</option>
-                    <option value="帝王粉" @if($goods->detailsgoods->color == '帝王粉')selected @endif>帝王粉</option>
+                    <option value="梦幻粉" @if($goods->detailsgoods->color == '梦幻粉')selected @endif>梦幻粉</option>
                     <option value="尊贵黑" @if($goods->detailsgoods->color == '尊贵黑')selected @endif >尊贵黑</option>
                   </select>
                 </div>

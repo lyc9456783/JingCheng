@@ -1,22 +1,20 @@
 ﻿<!DOCTYPE html>
 <html xmlns="">
 <head>
-<meta name="Generator" content="ECSHOP v2.7.3" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="Keywords" content="" />
-<meta name="Description" content="" />
-<style type="text/css">
-    span{
-      font-size: 14px;
-      opacity: 0.7;
-      padding-left: 8px;
-    }
+    <title>用户注册</title>
+    <meta name="Generator" content="ECSHOP v2.7.3" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="{{$common_configs_data->net_keyword}}" />
+    <meta name="Description" content="" />
+    <style type="text/css">
+        span{
+          font-size: 14px;
+          opacity: 0.7;
+          padding-left: 8px;
+        }
 
-  </style>
+      </style>
 </head>
-
-<title>用户注册</title>
-
 
 
 <link rel="shortcut icon" href="favicon.ico" />
@@ -107,15 +105,16 @@
 <div class="register_wrap">
     <div class="bugfix_ie6 dis_none">
         <div class="n-logo-area clearfix">
-            <a href="/" class="fl-l"><img src="/home/picture/logo.gif" width="55" /></a>
+            <a href="/" class="fl-l"><img src="{{$common_configs_data->logo}}" width="60" /></a>
         </div>
     </div>
     <div id="main">
       <div class="n-frame device-frame reg_frame">
       
         <div class="title-item dis_bot35 t_c">
+
           <h4 class="title-big">注册京城帐号</h4>
-        </div>
+      </div>
         <div class="regbox" id="register_box">
           <form action="/home/login/store" method="post" name="formUser" onsubmit="return register();">
           {{ csrf_field() }}
@@ -131,55 +130,47 @@
               	
                 <div class="inputbg"> 
                   <label class="labelbox">
-                      <input name="email" type="text" id="email" onblur="" onkeyup="" placeholder="email">
+                      <input name="email" type="text" id="email" onblur="" onkeyup="" placeholder="邮箱号">
                   </label>
-                  <span class="t_text">email</span>
-                  <span class="error_icon"></span> 
+                  <span class="t_text">邮箱</span>
+                  <span class="err_tip">{{ $errors->first('email') }}</span> 
                 </div>
-                <div class="err_tip" id="email_notice"><em></em> </div>
+                <div class="err_tip" id="email_notice"></div>
               	
                 <div class="inputbg">
                   <label class="labelbox">
-                  <input type="password" name="password" id="password1" onblur="" onkeyup=""  placeholder="密码">
+                  <input type="password" name="password" id="password1" onblur="" onkeyup=""  placeholder="密码 不少于6位">
                   </label>
                   <span class="t_text">密码</span>
-                  <span class="error_icon"></span> 
+                  <span class="err_tip">{{ $errors->first('password') }}</span> 
                 </div>
-                <div class="err_tip" id="password_notice"> <em></em> </div>
+                <div class="err_tip" id="password_notice"></div>
               	
                 <div class="inputbg"> 
                   <label class="labelbox">
                     <input name="confirm_password" type="password" id="conform_password" onblur="" onkeyup="" placeholder="确认密码">
                   </label>
                   <span class="t_text">确认密码</span>
-                  <span class="error_icon"></span>
+                  <span class="err_tip">{{ $errors->first('password') }}</span>
                 </div>
-                <div class="err_tip" id="conform_password_notice"> <em></em> </div>
+                <div class="err_tip" id="conform_password_notice"></div>
                 
                  
                 
                 <div class="inputbg inputcode dis_box clearfix"> 
                   <label class="labelbox label-code">
                       <input type="text" class="code" name="captcha" maxlength="6" placeholder="验证码">
-                      
+
                   </label>
                   <span class="t_text">验证码</span>
-                  <span class="error_icon"></span> 
                   &nbsp; &nbsp;<img src="{{captcha_src()}}" onclick="rand_code(this)" title="点击更换">
-                  <script type="text/javascript">
-                    function rand_code(obj){
-                      obj.src = obj.src+'?a='+Math.random();  
-                    }
-
-
-                  </script>
+                    <script type="text/javascript">
+                      function rand_code(obj){
+                        obj.src = obj.src+'?a='+Math.random();  
+                      }
+                    </script>
+                  <span class="err_tip">{{ $errors->first('captcha') }}</span> 
                 </div>
-                @if (count($errors) > 0)
-                        @foreach ($errors->all() as $error)
-                        <div class="err_tip">{{ $error }}</div> 
-                        @endforeach
-                        @endif
-                
                 <div class="law">
                   <label>
                     <input name="agreement" type="checkbox" value="1" checked="checked"  tabindex="5" class="remember-me"/>

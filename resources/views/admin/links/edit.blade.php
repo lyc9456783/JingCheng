@@ -17,7 +17,7 @@
             {{ csrf_field() }}
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">公司名称</label>
+                    <label class="layui-form-label">链接名称</label>
                     <div class="layui-input-block">
                         <input type="text" name="lname" required value="{{ $data->lname }}" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
                     </div>

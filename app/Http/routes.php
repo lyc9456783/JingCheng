@@ -11,13 +11,30 @@
 |
 */
 /*===========================李玉成路由部分==============================*/
-//首页路由
+//前台首页路由
+
 Route::get('/','home\IndexController@index');
-Route::get('/com','home\IndexController@show');
 // DB::listen(function($sql,$bindigs,$time){
 // 	dump($sql);
 // });
+
+
+//前台路由
+//前台公告列表
+Route::get('/home/notice','home\IndexController@noticelist');
+//前台公告详情页面
+Route::get('/home/notice/detail/{id}','home\IndexController@noticedetail');
+//前台商品列表页路由
+Route::get('/home/goods/list/{id}','home\GoodsController@index');
+//首页搜索
+Route::get('/home/goods/search','home\IndexController@searchs');
+
+
+
 //后台主页路由
+Route::group(['middleware'=>'login'],function(){
+	
+});
 Route::get('/admin','admin\IndexController@index');
 
 //分类路由列表
@@ -134,33 +151,6 @@ Route::get('/admin/goodimages/show/{id}','admin\GoodImagesController@show');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*===========================叶尚君路由部分==============================*/
 //后台评论
 Route::get('/admin/discuss','admin\DiscussController@index');
@@ -207,11 +197,36 @@ Route::get('/admin/recommend/destroy/{id}','admin\RecommendController@destroy');
 //批量删除
 Route::get('/admin/recommend/delall','admin\RecommendController@delall');
 
+//前台
+//前台密码修改
+Route::get('/home/users/pass/{id}','home\PassController@pass');
+Route::post('/home/users/passupdate/{id}','home\PassController@passupdate');
+
+//前台收货人信息列表
+Route::get('/home/address/index','home\AddressController@index');
+//前台收货人地址添加
+// Route::get('/home/orders/addressadd','home\AddressController@addressadd');
+Route::post('/home/address/store/{id}','home\AddressController@store');
+//前台收货人地址修改
+Route::get('/home/address/edit/{id}','home\AddressController@edit');
+Route::post('/home/address/update/{id}','home\AddressController@update');
+//删除前台收货人地址
+Route::get('/home/address/delete/{id}','home\AddressController@delete');
+
+//前台评论列表
+Route::get('/home/discuss/index','home\DiscussController@index');
+Route::get('/home/discuss/delete/{id}','home\DiscussController@delete');
+//收货人信息
+Route::get('/home/users/consignee','home\ConsigneeController@consignee');
+Route::post('/home/users/consigneestore','home\ConsigneeController@consigneestore');
+
+
+
+
+
 
 
                                                                                                                                       
-
-
 
 
 
@@ -398,7 +413,7 @@ Route::post('/home/login/store','home\LoginController@store');
 //设置用户中心
 Route::get('/home/users/index','home\UsersController@index');
 //设置用户信息修改
-Route::get('/home/users/edit/{id}','home\UsersController@edit');
+Route::get('/home/users/edit','home\UsersController@edit');
 //设置用户提交信息修改
 Route::post('/home/users/update/{id}','home\UsersController@update');
 //设置用户订单查看
@@ -409,6 +424,10 @@ Route::get('/home/orders/update/{id}','home\OrdersController@update');
 Route::get('/home/orders/show/{id}','home\OrdersController@show');
 //设置更新用户收货详情的路由
 Route::post('/home/orders/store/{id}','home\OrdersController@store');
+//设置头像修改路由
+Route::post('/home/users/uploads/{id}','home\UsersController@uploads');
+//设置用户绑定邮箱的路由
+Route::get('/home/users/store/{id}','home\UsersController@store');
 
 
 
@@ -449,19 +468,54 @@ Route::post('/home/orders/store/{id}','home\OrdersController@store');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//测试
+Route::get('/mail/send','MailController@send');
 
 //路由 李银昌
-//登陆 注册
+//登陆 注册  验证用户名和密码
 Route::get('/admin/login','admin\LoginController@index');
+Route::get('/admin/dologin','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
-
 //后台登陆中间件
+
 Route::group(['middleware'=>'login'],function(){
+	//路由存放------------>
+
+
+// Route::get('/admin','admin\IndexController@index');
+
+
 });
 
-
-
+//友情链接管理
 //友情链接列表
 Route::get('/admin/links','admin\LinksController@index'); 
  //添加友情链接
@@ -469,11 +523,11 @@ Route::get('/admin/links/create','admin\LinksController@create');
 //保存
 Route::post('/admin/links/store','admin\LinksController@store');
 //修改
-Route::get('/admin/links/edit/{id}','admin\LinksController@edit')->where('id','[0-9]+');
+Route::get('/admin/links/edit/{id}','admin\LinksController@edit');
 //更新修改
-Route::post('/admin/links/update/{id}','admin\LinksController@update')->where('id','[0-9]+');
+Route::post('/admin/links/update/{id}','admin\LinksController@update');
 //删除单条
-Route::get('/admin/links/destroy/{id}','admin\LinksController@destroy')->where('id','[0-9]+');
+Route::get('/admin/links/destroy/{id}','admin\LinksController@destroy');
 //批量删除
 Route::post('/admin/links/destroys','admin\LinksController@destroys');
 //批量删除回收站
@@ -521,8 +575,26 @@ Route::get('/admin/slids/open/{id}','admin\SlidsController@open');
 Route::get('/admin/slids/close/{id}','admin\SlidsController@close');
 
 
-//网站配置
+//网站配置管理
 //网站配置首页
 Route::get('/admin/config','admin\ConfigController@index');
 //保存
 Route::post('/admin/config/store','admin\ConfigController@store');
+
+
+
+
+
+
+/**  前台路由  李银昌
+*
+*/
+
+//商品详情页
+Route::get('/home/goods/detail/{id}','home\GoodsController@goodsdetail');
+//保存评论
+Route::get('/home/discuss/store','home\GoodsController@store');
+//确认库存
+Route::post('/home/discuss/create','home\GoodsController@create');
+//购物车
+Route::post('/home/discuss/shopcar','home\GoodsController@shopcar');

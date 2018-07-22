@@ -1,22 +1,16 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="Generator" content="ECSHOP v2.7.3" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="Keywords" content="" />
-<meta name="Description" content="" />
-
-<title>用户登录</title>
-
-
-
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="icon" href="animated_favicon.gif" type="image/gif" />
-<link href="/home/css/login.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
-
-<script type="text/javascript" src="/home/js/common.js"></script>
-<script type="text/javascript" src="/home/js/user.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="Keywords" content="{{$common_configs_data->net_keyword}}" />
+  <meta name="Description" content="" />
+  <title>用户登录</title>
+  <link rel="shortcut icon" href="/home/logo/favicon.ico" />
+  <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+  <link href="/home/css/login.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
+  <script type="text/javascript" src="/home/js/common.js"></script>
+  <script type="text/javascript" src="/home/js/user.js"></script>
 <body>
 <script type="text/javascript" src="/home/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/home/js/jquery.json.js"></script>
@@ -97,9 +91,9 @@ $(function(){
 <div id="main" class="layout">
   <div class="nl-content">
   	<div class="nl-logo-area">
-    	<a href="/"><img src="/home/picture/logo.gif" width="55" /></a>
+    	<a href="/"><img src="{{$common_configs_data->logo}}" width="60" /></a>
     </div>
-    <h1 class="nl-login-title">一个帐号，玩转所有服务！</h1>
+    <h1 class="nl-login-title">登陆商城</h1>
     <p class="nl-login-intro"></p>
     <div id="login-box" class="nl-frame-container">
         <div class="ng-form-area show-place">
@@ -125,8 +119,6 @@ $(function(){
                           function rand_code(obj){
                             obj.src = obj.src+'?a='+Math.random();  
                           }
-
-
                         </script>
 
                         @if (count($errors) > 0)
@@ -138,7 +130,6 @@ $(function(){
                         @endif
                 </div>
                 <input type="submit" name="submit" class="button orange" value="立即登录">
-                
                 <a class="button" href="/home/login/create">注册账号</a>
             </form>
         </div>

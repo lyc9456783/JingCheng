@@ -10,15 +10,27 @@
           <button class="layui-btn" onclick="location='/admin/users/index'">返回列表</button>
         </div>
         <hr>
-        @if (count($errors) > 0)
+          @if (count($errors) > 0)
             <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                      <xblock>
+                          <div class="x-left"   style="line-height:40px">{{$error}}</div>
+                      </xblock>
+                    @endforeach
+                </ul>
             </div>
-         @endif
+            @endif
+            <script type="text/javascript">
+            var error=document.getElementsByTagName('xblock');
+                  for(var i = 0;i <= error.length;i++){
+                   error[i].onclick = function(){
+                        // this  本对象
+                        this.style.display = 'none';
+                      }    
+                  } 
+            
+            </script>
         </fieldset>
         <form class="layui-form layui-form-pane" action="/admin/users/store" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}

@@ -4,7 +4,7 @@
 <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="/admin/links">
+            <form class="layui-form xbs" action="/admin/links/delshow">
                 <div class="layui-form-pane" >
                   <div class="layui-form-item" style="display: inline-block;">
 
@@ -25,7 +25,7 @@
                             <input type="checkbox" name="" value="box[]">
                         </th>
                         <th> ID </th>
-                        <th> 公司名称 </th>
+                        <th> 链接名称 </th>
                         <th> 网站链接 </th>
                         <th> 描述 </th>
                         <th> 删除时间 </th>
@@ -73,12 +73,13 @@
         $('input').attr('checked',true);
     })
 
+    var time = null;
     //批量删除提交
     function delAll () {
       layer.confirm('确认要删除吗？',function(index){
            //获取已选中的的选项到数组
            var ids = [];
-            $("input[type='checkbox']:checked").each(function(){
+            $("tbody input[type='checkbox']:checked").each(function(){
                 ids.push(this.value);
                 });
 
@@ -94,6 +95,12 @@
               if(msg == 1){
                   layer.msg('删除成功', {icon: 1});
                   $('input:checked').parent().parent().remove();
+
+                    if(time == null ){
+                        time = setInterval(function(){
+                        location.reload(true);
+                        },2000);
+                    } 
               }else{
                   layer.msg('删除失败', {icon: 2});
               }

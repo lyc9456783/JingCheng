@@ -46,10 +46,10 @@
                   <select name="color">
                     <option value="">--请选择--</option>
                     <option value="土豪金">土豪金</option>
-                    <option value="美腿白">美腿白</option>
-                    <option value="皇家绿">皇家绿</option>
+                    <option value="珍珠白">珍珠白</option>
+                    <option value="荣耀绿">荣耀绿</option>
                     <option value="魔力蓝">魔力蓝</option>
-                    <option value="帝王粉">帝王粉</option>
+                    <option value="梦幻粉">梦幻粉</option>
                     <option value="尊贵黑">尊贵黑</option>
                   </select>
                 </div>

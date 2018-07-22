@@ -128,17 +128,10 @@
                 </div>
               </div>
 
-              <div class="layui-inline">
+              <div class="layui-form-item">
                 <label class="layui-form-label">商品数量</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-block">
                   <input type="number" name="num" lay-verify="num" autocomplete="off" required placeholder="商品数量"  class="layui-input">
-                </div>
-              </div>
-              
-              <div class="layui-inline">
-                <label class="layui-form-label">订单金额</label>
-                <div class="layui-input-inline">
-                  <input type="text" name="total" lay-verify="title" autocomplete="off" required placeholder="总金额" class="layui-input">
                 </div>
               </div>
 

@@ -21,7 +21,7 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     
-                    <a class="" href="">收货地址</a>
+                    <a class="" href="/home/address/index">收货地址</a>
                      
                     <a class="" href="">缺货登记</a>
                      
@@ -34,9 +34,9 @@
             <div class="root_node">会员中心</div>
             <ul>
                 <li>
-                	<a class="" href="/home/users/index">我的个人中心</a>
+                	<a class="" target="_self" href="/home/users/index">我的个人中心</a>
                     
-                    <a class="" href="/home/users/edit/{{$data['id']}}">用户信息</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
                     
                     <a class="" href="">我的收藏</a>
 
@@ -44,7 +44,7 @@
                       
                     <a class="" href="">我的推荐</a>
                        
-                    <a class="" href="">我的评论</a>
+                    <a class="" href="/home/discuss/index">我的评论</a>
                      
                 </li>
                
@@ -79,7 +79,7 @@
           </tr>
           @foreach($orders as $k=>$v)
           <tr>
-            <td align="center" bgcolor="#ffffff"><a href="/home/orders/show/{{$v->id}}" class="f6">{{$v->ordersnum}}</a></td>
+            <td align="center" bgcolor="#ffffff">{{$v->ordersnum}}</td>
             <td align="center" bgcolor="#ffffff">{{$v->created_at}}</td>
             <td align="center" bgcolor="#ffffff">{{$v->total}}元</td>
             @if($v->status == 0)
@@ -91,6 +91,7 @@
             @endif
             <td align="center" bgcolor="#ffffff">
                 <font class="f6">
+                    <a href="/home/orders/show/{{$v->id}}" class="f6">订单详情</a> &nbsp; || &nbsp;
                     <a href="/home/orders/update/{{$v->id}}" onclick="if (!confirm(&#39;您确认要删除该订单吗？确认后此订单将被删除&#39;)) return false;">删除订单</a>
                 </font>
             </td>

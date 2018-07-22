@@ -4,9 +4,10 @@
 
 <link href="/home/css/style.css" rel="stylesheet" type="text/css">
 <link href="/home/css/user.css" rel="stylesheet" type="text/css">
-<div id="wrapper" class="container">	<div class="breadcrumbs">
-	<div class="container">
-    	<a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
+<div id="wrapper" class="container">    
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="/">首页</a> <code>&gt;</code> 用户中心    </div>
 </div>
  
     <div class="my_nala_main">
@@ -20,7 +21,7 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     
-                    <a class="" href="">收货地址</a>
+                    <a class="" href="/home/address/index">收货地址</a>
                      
                     <a class="" href="">缺货登记</a>
                      
@@ -33,25 +34,25 @@
             <div class="root_node">会员中心</div>
             <ul>
                 <li>
-                  <a class="" href="/home/users/index">我的个人中心</a>
+                    <a class=""  target="_self" href="/home/users/index">我的个人中心</a>
                     
-                  <a class="" href="/home/users/edit/{{$users['id']}}">用户信息</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
                     
-                  <a class="" href="">我的收藏</a>
+                    <a class="" href="">我的收藏</a>
 
-                  <a class="" href="">我的留言</a>
+                    <a class="" href="">我的留言</a>
                       
-                  <a class="" href="">我的推荐</a>
+                    <a class="" href="">我的推荐</a>
                        
-                  <a class="" href="">我的评论</a>
+                    <a class="" href="/home/discuss/index">我的评论</a>
                      
                 </li>
                
             </ul>
         </li>
     </ul>
-
 </div>
+
 
 
 
@@ -82,15 +83,16 @@
                 <tbody>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">用户昵称： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="nickname" type="text" value="{{$details['nickname']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="nickname" type="text" value="{{$details['nickname']}}" size="25" class="inputBg"></td>
                 </tr>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">手机号： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="phone" type="text" value="{{$details['phone']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="phone" type="text" value="{{$details['phone']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span> &nbsp; <span class="err_tip">{{ $errors->first('phone') }}</span> </td>
+                  
                 </tr>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">身份证号： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="id_card" type="text" value="{{$details['id_card']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="id_card" type="text" value="{{$details['id_card']}}" size="25" class="inputBg"></td>
                 </tr>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">家庭住址： </td>
@@ -113,12 +115,6 @@
                   </td>
                 </tr>
                 <tr>
-                  <td width="28%" align="right" bgcolor="#FFFFFF">用户头像： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input type="file" name="face" size="25" class="inputBg">
-                </tr>
-                
-                <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">电子邮件地址： </td>
                   <td width="72%" align="left" bgcolor="#FFFFFF"><input name="email" type="text" value="{{$users['email']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
                 </tr>
@@ -132,7 +128,8 @@
        </table>
     <h1>修改密码</h1>
     </form>
-     <form name="formPassword" action="" method="post" onsubmit="return editPassword()">
+     <form name="formPassword" action="/home/users/passupdate/{{ $id }}" method="post" onsubmit="return editPassword()">
+     {{ csrf_field() }}
      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tbody><tr>
           <td width="28%" align="right" bgcolor="#FFFFFF">原密码：</td>
@@ -154,21 +151,6 @@
       </tbody></table>
     </form>
           
-        
-      
-             
-       
-          
-     
-          
-    
-                                                   
-      
-          
-      
-               
-
-
 
 
       </div>

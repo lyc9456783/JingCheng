@@ -18,20 +18,20 @@
                   </div>
                 </div> 
             </form>
-             <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button><button class="layui-btn" onclick="location='/admin/slids'"><i class="layui-icon"></i>返回列表</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+             <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button><button class="layui-btn" onclick="location='/admin/slids'"><i class="layui-icon"></i>返回列表</button></xblock>
 				<!-- 表格开始 -->
 					<table class="layui-table">
 		                <thead>
 		                    <tr>
 		                        <th>
-		                            <input type="checkbox" name="" value="box[]">
-		                        </th>
+                                <input type="checkbox" name="" value="box[]">
+                            </th>
 		                        <th>id</th>
 		                       	<th>图片</th>
-		                       	<td>跳转路径</td>
-		                        <td>当前状态</td>
-		                        <td>删除时间</td>
-		                        <td>操作</td>
+		                       	<th>跳转路径</th>
+		                        <th>当前状态</th>
+		                        <th>删除时间</th>
+		                        <th>操作</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -52,13 +52,12 @@
 		                      	@endif
 		                      	<td>{{ $v['deleted_at'] }}</td>
 		                      	<td>
-
-	                                <a title="还原" href="/admin/slids/restore/{{ $v->id }}"  class="ml-5 " style="text-decoration:none" onclick="return confirm('确定恢复吗?')">
-	                                   <i class="layui-icon">&#xe63d;</i>  还原
-	                                </a>
-	                                <a title="彻底删除"   href="/admin/slids/delOk/{{ $v->id }}"  onclick="return confirm('确定要永久删除吗')" style="text-decoration:none">
-	                                    <i class="layui-icon"></i>  删除
-	                                </a>		                            
+                                <a title="还原" href="/admin/slids/restore/{{ $v->id }}"  class="ml-5 " style="text-decoration:none" onclick="return confirm('确定恢复吗?')">
+                                   <i class="layui-icon">&#xe63d;</i>  还原
+                                </a>
+                                <a title="彻底删除"   href="/admin/slids/delOk/{{ $v->id }}"  onclick="return confirm('确定要永久删除吗')" style="text-decoration:none">
+                                    <i class="layui-icon"></i>  删除
+                                </a>		                            
 		                        </td>
 		                    </tr>
 		                    @endforeach
@@ -84,12 +83,13 @@
         $('tbody input').attr('checked',true);
     })
 
+    var time = null;
     //批量删除提交
     function delAll () {
       layer.confirm('确认要删除吗？',function(index){
            //获取已选中的的选项到数组
            var ids = [];
-            $("input[type='checkbox']:checked").each(function(){
+            $("tbody input[type='checkbox']:checked").each(function(){
                 ids.push(this.value);
                 });
 
@@ -104,7 +104,13 @@
           $.post('/admin/slids/deldelshow',{'ids':ids.join(',')},function(msg){
               if(msg == 1){
                   layer.msg('删除成功', {icon: 1});
-                  $('input:checked').parent().parent().remove();
+                  $('tbody input:checked').parent().parent().remove();
+
+                    if(time == null ){
+                        time = setInterval(function(){
+                        location.reload(true);
+                        },2000);
+                    } 
               }else{
                   layer.msg('删除失败', {icon: 2});
               }
