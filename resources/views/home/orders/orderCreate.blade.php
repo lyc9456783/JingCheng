@@ -38,7 +38,7 @@
                             <dd class="uaddress">{{ $val['address'] }}</dd>
                          </dl>
                          <div class="actions">
-                           <a href="javascript:void(0);" class="modify J_addressModify" data-stat-id="8a158e0ee8f2f343" onclick="_msq.push(['trackEvent', '17a1f380b9d4cd2e-8a158e0ee8f2f343', 'javascript:void0', 'pcpid', '']);">修改</a>
+                           <a href="/home/orders/siteedit/{{$val['id'] }}" class="modify J_addressModify" data-stat-id="8a158e0ee8f2f343">修改</a>
                          </div> 
                         </div>
 					@endforeach

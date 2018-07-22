@@ -21,22 +21,64 @@
                     </div>
                     <!-- 倒计时定时器 -->
                     <script>
-                        // function run(){
-                        //      var date = new Date;
-                        //      var f = date.getMinutes();
-                        //      if(f < 10){
-                        //         f = '0'+f;
-                        //      }
-                        //      var m = date.getSeconds();
-                        //      if(m < 10){
-                        //         m = '0'+m;
-                        //      }
-                        //      var str =f+'：'+m;
-                        //      // 赋值
-                        //      var text_time = $('.pay-time-tip').text(str);
-                        // }
-                        // run();   
-                        // setInterval("run()",1000);
+
+                    //获取时间转换格式
+                    var old_time = $('.pay-time-tip').text();
+                    old_time = old_time.replace(/-/g,',');
+                    old_time = old_time.replace(/ /g,',');
+                    old_time = old_time.replace(/:/g,',');
+                    old_time = old_time.split(",");  
+                    // var date = new Date(old_time[0],old_time[1],old_time[2],old_time[3],old_time[4],old_time[5]);
+                    //添加到订单的时候的时间戳
+                    // var history_time = date.getTime(); 
+                    old_time[4] = (parseInt(old_time[4])+1);
+
+
+
+         
+
+                   // console.log(timestampToTime(fourthOfJuly););
+
+                    //倒计时时间
+                    // var str_str = 10*1000;
+                    // // console.log(str_str);
+                    // //最大时间戳
+                    // var big_time = history_time+str_str;
+                    // console.log(str_str+'倒计时');
+                    // console.log(history_time+'添加时间');
+                    // console.log(big_time+'终止时间');
+
+                    // //当前的时间戳
+                    // var now = Date.parse(new Date());
+                    // console.log(big_time-now);
+
+                        function run(){
+                              const fourthOfJuly = new Date(old_time[0],old_time[1],old_time[2],old_time[3],old_time[4],old_time[5]).getTime();
+                              const today = new Date().getTime();
+                              // get the difference
+                              const diff = fourthOfJuly - today;
+
+                              // math
+                              hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                              minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                              seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                             if(minutes < 10){
+                                minutes = '0'+minutes;
+                             }
+                             if(seconds < 10){
+                                seconds = '0'+seconds;
+                             }
+                             if(minutes == 00 && seconds == 00 && hours == 00){
+                                clearInterval(time);
+                                location.replace('/home/orders/index');
+                             }
+                              var str =hours+'小时 '+minutes+'分钟 '+seconds+'秒';
+                                //      // 赋值
+                              var text_time = $('.pay-time-tip').text(str);
+                        }
+                        run();   
+                        var time = setInterval("run()",1000);
 
 
                     </script>
