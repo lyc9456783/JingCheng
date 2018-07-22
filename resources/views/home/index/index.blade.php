@@ -82,16 +82,50 @@
                 <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">留言板</a>
                 <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">会员等级</a>
           </div>
-          <div class="topbar-cart" id="ECS_CARTINFO">
-            <a class="cart-mini " href="flow.php">
-            <i class="layui-icon">&#xe657;</i>   
-            购物车
-        <span class="mini-cart-num J_cartNum" id="hd_cartnum">(0)</span>
-    </a>
-    <div id="J_miniCartList" class="cart-menu">
-          <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
-         
-    </div>
+       <div class="topbar-cart" id="ECS_CARTINFO">
+        <a class="cart-mini " href="/home/goods/shopcar">
+        <i class="layui-icon">&#xe657;</i>  
+          购物车
+          <span class="mini-cart-num J_cartNum" id="hd_cartnum">
+          @if(session('carcount'))
+            ({{session('carcount')}})
+          @else
+            (0)
+          @endif 
+          </span>
+      </a>
+      
+        @if(session('goods'))
+        <div id="J_miniCartList" class="cart-menu">
+           <ul>
+            @foreach(session('goods') as $v)
+                <li class="clearfix first">
+                  <div class="cart-item">
+                    <a class="thumb" target="_blank" href="/home/goods/detail/{{$v['id']}}">
+                        <img width="60" height="60" src="{{$v['info']->pic}}">
+                    </a>
+                    <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
+                    <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
+                    <a class="btn-del delItem" href="javascript:deleteCartGoods(176);">
+                        <i class="iconfont"></i>
+                    </a>
+                  </div>
+              </li>
+          @endforeach
+          </ul>
+          <div class="count clearfix">
+              <span class="total">
+                  共计<em id="hd_cart_count">{{session('carcount')}}</em>件商品
+                  <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}元</em></strong>
+              </span>
+              <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
+          </div>   
+      </div>
+      @else
+      <div id="J_miniCartList" class="cart-menu">
+            <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
+      </div>
+      @endif
     <script type="text/javascript">
     function deleteCartGoods(rec_id)
     {
@@ -152,7 +186,7 @@
                     <ul class="user-menu" style="display: none;">
                         <li><a target="_blank" href="/home/users/index">个人中心</a></li>
                         <li><a target="_blank" href="">我的收藏</a></li>
-                        <li><a target="_blank" href="">我的评论</a></li>
+                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>
                 </span>
@@ -164,7 +198,6 @@
             </div>
         </div>
     </div>
-
     <div class="site-header" style="clear:both;">
       <div class="container">
           <div class="header-logo">
@@ -317,7 +350,7 @@
   	           <ul class="home-promo-list clearfix">
                   @foreach ($recommend1 as $k=>$v)
                   <li class="first" style="margin-left:9px;">
-                    <a href='/home/goods/detail/{{$v->id}}' target='_blank'>
+                    <a href='/home/goods/detail/{{$v->gid}}' target='_blank'>
                       <img src='{{$v->rimg}}' width='316' height='170' border='0' />
                     </a>
                   </li>
@@ -346,11 +379,11 @@
         	<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
             	      @foreach ($recommend2 as $k=>$v)
                     <li class="rainbow-item-1">
-                    	<a class="thumb" href="/home/goods/detail/{{$v->id}}" target="_blank">
-                        	<img src="{{$v->rimg}}" />
+                    	<a class="thumb" href="/home/goods/detail/{{$v->gid}}" target="_blank">
+                        	<img src="{{$v->rimg}}"/>
                         </a>
                         <h3 class="title">
-                        	<a href="/home/goods/detail/{{$v->id}}" target="_blank">{{$v->goodrecommend['name']}}</a>
+                        	<a href="/home/goods/detail/{{$v->gid}}" target="_blank">{{$v->goodrecommend['name']}}</a>
                         </h3>
                         <p class="desc">{{$v->goodrecommend['intro']}}</p>
                     </li>
@@ -625,11 +658,11 @@
         	<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
         	@foreach ($recommend3 as $k=>$v)
             <li>
-                	<a class="thumb" href="/home/goods/detail/{{$v->id}}" target="_blank">
+                	<a class="thumb" href="/home/goods/detail/{{$v->gid}}" target="_blank">
                     	<img src="{{$v->rimg}}" />
                     </a>
                     <h3 class="title">
-                    	<a href="/home/goods/detail/{{$v->id}}" target="_blank">{{$v->goodrecommend['name']}}</a>
+                    	<a href="/home/goods/detail/{{$v->gid}}" target="_blank">{{$v->goodrecommend['name']}}</a>
                     </h3>
                     <p class="price">{{$v->goodrecommend['price']}}<em>元</em></p>
             </li>

@@ -10,6 +10,7 @@ use App\Models\Orders;
 use App\Models\Goods;
 use DB;
 use App\Models\Address;
+use App\Models\Entrepots;
 class OrdersController extends Controller
 {
     /**
@@ -143,15 +144,28 @@ class OrdersController extends Controller
     //李银昌
     //购物车之后 生成订单页面
     public function orderCreate(){
+        //检测用户是否登陆
+        $a = 2;
+        if($a == 1){
+            //没有登陆跳转登陆页面
+           return redirect('/home/login/index')-> with('success','您还没有登陆');
+        }else{
+            //已经登陆进入区间
+            $user_id = 21; //已经登陆的用户id
+            $shops = session('goods');
 
-        //个人的收货地址
-        $address = Address::where('uid','=',21)->get();
-        // dump($address);
-        return view('home.orders.orderCreate',['address'=>$address]);
+     
+            //个人的收货地址
+            $address = Address::where('uid','=',$user_id)->get();
+            // dump($address);
+            return view('home.orders.orderCreate',['address'=>$address,'shops'=>$shops]);
+        }
     }
 
     //添加地址
     public function createSite(){
+
+
         return view('home.orders.createSite');
     }
 
@@ -181,17 +195,78 @@ class OrdersController extends Controller
     }
 
     //提交订单 扣减库存 跳转支付页面
-    public function siteSubmit()
+    public function siteSubmit(Request $request)
     {
-        
 
+
+         $data = $request -> only(['uid','addid']);
+         //收件人信息编辑
+         $address = Address::where('uid','=',$data['uid'])->where('id','=',$data['addid'])->first();
+         $recipients = $address['name'];
+         $phone = $address['phone'];
+         $address_dz = $address['address'];
+
+        //订单名称的编辑
+        $temp_name = str_random(6);
+        $dirname = date('Ymd',time());
+        $ordersnum = $dirname.'_'.$temp_name;
+
+         //session 拿数据
+         $shops = session('goods');
+         foreach ($shops as $key => $value) {
+    
+             //添加到发货表
+             $orders =new Orders;
+             $orders -> ordersnum = $ordersnum; //商品订单号
+             $orders -> gid = $value['id']; //商品
+             $orders -> uid = $data['uid']; //下单用户
+             $orders -> recipients = $recipients; //收件人
+             $orders -> phone = $phone; //收件人手机号
+             $orders -> address = $address_dz; //收货地址
+             $orders -> num = $value['num']; //商品数量
+             $orders -> total =  (($value['info']->discount)*($value['num'])); //该订单的商品金额
+             $orders -> status = 0; //当前的发货状态
+             $res1 = $orders -> save();
+
+             //减掉库存中的数量[根据商品的id找到库存数量减掉]
+            $entrepots = Entrepots::where('gid','=',$value['id'])->first();
+            $entrepots_num = ($entrepots['num'] - $value['num']);
+            $entrepots -> num = $entrepots_num;
+            $res2 = $entrepots ->save();
+
+
+            if($res1 == false || $res2 == false){
+                echo 0;
+            }
+         }
+
+         
+
+         //处理结果返回值
+         if($res1 || $res2){
+            //将订单号返回
+            echo $ordersnum;
+         }else{
+            echo 0;
+         }
 
         
     }
 
     //支付成功 正式扣除库存  否则还原库存
-    public function submitOk()
-    {
-        return view('home.orders.submitOk');
+    public function submitOk($ordsum)
+    {   
+        //去除购物车在session 中的数据
+         session(['goods'=>null]);
+         
+         //查询订单信息投放到成功页面
+          $orders = Orders::where('ordersnum','=',$ordsum)->first();
+
+          $orders_all = Orders::where('ordersnum','=',$ordsum)->get();
+          //dump($orders_all);
+          //订单金额
+          $moneys = DB::table('jc_orders') -> where('ordersnum','=',$ordsum)->sum('total');
+
+        return view('home.orders.submitOk',['orders'=>$orders,'orders_all'=>$orders_all,'moneys'=>$moneys]);
     }
 }

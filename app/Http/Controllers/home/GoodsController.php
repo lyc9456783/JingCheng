@@ -76,7 +76,7 @@ class GoodsController extends Controller
                      foreach($data as $v){
                     $seach[] = $v->id;
                     }
-              $goods = Goods::whereIn('id',$seach)->orderBy('created_at','asc')->paginate(8)->appends($request->input());
+              $goods = Goods::whereIn('id',$seach)->orderBy('id','desc')->paginate(8)->appends($request->input());
                 }
             }else{
                  foreach($data as $v){

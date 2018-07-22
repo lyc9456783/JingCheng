@@ -125,10 +125,10 @@
 	                	@foreach ($recommend as $k=>$v)
 	                	<li class="J_xm-recommend-list">
 	                        <dl>
-	                            <dt><a href="goods.php?id=27" target="_blank"><img src="{{$v->rimg}}" /></a></dt>
-	                            <dd class="xm-recommend-name"><a href="goods.php?id=27" target="_blank" title="{{$v->goodrecommend->intro}}">{{$v->goodrecommend->name}}</a></dd>
+	                            <dt><a href="/home/goods/detail/{{$v->gid}}" target="_blank"><img src="{{$v->rimg}}" /></a></dt>
+	                            <dd class="xm-recommend-name"><a href="/home/goods/detail/{{$v->gid}}" target="_blank" title="{{$v->goodrecommend->intro}}">{{$v->goodrecommend->name}}</a></dd>
 	                            <dd class="xm-recommend-price">{{$v->goodrecommend->discount}}<em>元</em></dd>
-	                            <dd class="xm-recommend-tips"> </dd>
+	                            <dd class="xm-recommend-tips"></dd>
 	                        </dl>
 	                    </li>
 	                    @endforeach

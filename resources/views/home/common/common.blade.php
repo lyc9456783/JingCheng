@@ -8,7 +8,6 @@
 		<title>京城</title>
 		<link rel="shortcut icon" href="/home/logo/favicon.ico" />
 		<link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
-		<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 		<link href="/home/css/style.css" rel="stylesheet" type="text/css" />
 		<link href="/home/css/category.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/home/js/jquery-1.9.1.min.js"></script>
@@ -85,14 +84,49 @@
 		            <span class="sep">|</span>                        <a href="goods.php?id=104"  class="snc-link snc-order">会员等级测试</a>
 		        </div>
 		<div class="topbar-cart" id="ECS_CARTINFO">
-			<a class="cart-mini " href="flow.php">
+			<a class="cart-mini " href="/home/goods/shopcar">
 			<i class="layui-icon">&#xe657;</i>  
 		    购物车
-		    <span class="mini-cart-num J_cartNum" id="hd_cartnum">(0)</span>
+		    <span class="mini-cart-num J_cartNum" id="hd_cartnum">
+		    @if(session('carcount'))
+		    	({{session('carcount')}})
+		    @else
+		     	(0)
+		    @endif 
+		    </span>
 		</a>
+		
+			@if(session('goods'))
+			<div id="J_miniCartList" class="cart-menu">
+		     <ul>
+		     	@foreach(session('goods') as $v)
+	           	<li class="clearfix first">
+		            <div class="cart-item">
+		              <a class="thumb" target="_blank" href="/home/goods/detail/{{$v['id']}}">
+		                  <img width="60" height="60" src="{{$v['info']->pic}}">
+		              </a>
+		              <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
+		              <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
+		              <a class="btn-del delItem" href="javascript:deleteCartGoods(176);">
+		                  <i class="iconfont"></i>
+		              </a>
+		            </div>
+	        	</li>
+				@endforeach
+		    </ul>
+		    <div class="count clearfix">
+		        <span class="total">
+		            共计<em id="hd_cart_count">{{session('carcount')}}</em>件商品
+		            <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}元</em></strong>
+		        </span>
+		        <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
+		    </div>   
+		</div>
+		@else
 		<div id="J_miniCartList" class="cart-menu">
 			    <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
 		</div>
+		@endif
 		<script type="text/javascript">
 			function deleteCartGoods(rec_id)
 			{
@@ -135,7 +169,7 @@
                   <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
                     <ul class="user-menu" style="display: none;">
                         <li><a target="_blank" href="/home/users/index">个人中心</a></li>
-                        <li><a target="_blank" href="">我的收藏</a></li>
+                        <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
                         <li><a target="_blank" href="">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>

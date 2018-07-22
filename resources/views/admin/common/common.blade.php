@@ -168,6 +168,29 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
+                        <i class="layui-icon">&#xe656;</i> 
+                        收藏管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admin/collect">
+                                <i class="iconfont">&#xe6a7;</i>
+                                收藏列表
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admin/collect/create">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加收藏
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list" >
+                    <a href="javascript:;">
                         <i class="layui-icon">&#xe64a;</i> 
                         商品详图管理
                         <i class="iconfont nav_right">&#xe697;</i>

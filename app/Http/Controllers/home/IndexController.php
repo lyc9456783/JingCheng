@@ -27,7 +27,7 @@ class IndexController extends Controller
         //推荐商品数据2 跳过三条获取10条
         $recommend2 = Recommends::take(10)->skip(3)->get();
         //推荐商品数据3 跳过13条获取10条
-        $recommend3 = Recommends::take(10)->skip(13)->get();
+        $recommend3 = Recommends::orderBy('id','desc')->take(10)->get();
         //手机分类
         $scate = Cates::where('path','=','0,1')->get();
         //所有手机商品
@@ -75,10 +75,12 @@ class IndexController extends Controller
     {
         if($request->has('search')){
             $search = $request->input('search');
+            // dd($search);
             $goods = Goods::where('name','like','%'.$search.'%')->paginate(8)->appends($request->input());
             $recommend = Recommends::where('rstate','1')->take(10)->skip(3)->get();
-            return view('home.goods.list',['goods'=>$goods,'id'=>0,'dir'=>'搜索','recommend'=>$recommend]);
+            return view('home.goods.list',['goods'=>$goods,'id'=>0,'dir'=>'搜索','recommend'=>$recommend]); 
         }
+        return back()->with('error','搜索内容不能为空');
     }
 
 

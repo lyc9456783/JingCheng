@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\home\ConsgineeRequest;
 class ConsigneeController extends Controller
 {
     /**
@@ -15,16 +15,14 @@ class ConsigneeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function consignee()
-    {
-        return view('home.users.consignee',['title'=>'收货人信息']);
-        // echo 'asd';
-
-    }
-
-
     public function index()
     {
+        $data = session('homeuser');
+        if($data){
+            return view('home.consignee.consignee',['title'=>'收货人信息']);
+        }else{
+            return redirect('/home/login/index')->with('success','需要登录');
+        }
         
     }
 
@@ -35,7 +33,7 @@ class ConsigneeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -44,9 +42,28 @@ class ConsigneeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function consigneestore(Request $request)
+    public function store(Request $request)
     {
-        dump($request->except(['_token']));
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'email' => 'required|regex:/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/',
+        //     'phone' => 'required|regex:/^[1][3,4,5,7,8,9][0-9]{9}$/',
+        //     'postcode' => 'required|regex:/^[\d]{6}$/',
+
+        // ],[
+        //     'name.required' => '收货人姓名必填',
+        //     'email.required' => '收货人邮箱必填',
+        //     'email.regex' => '请输入正确邮箱',
+        //     'phone.required' => '手机号必填',
+        //     'phone.regex' => '请输入11位手机号码',
+        //     'postcode.required' => '邮政编码必填',
+        //     'postcode.regex' => '邮政编码必须为6位数字'
+
+        // ]);
+
+        $req = $request -> all();
+        dump($req);
+
     }
 
     /**

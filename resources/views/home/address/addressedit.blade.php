@@ -2,46 +2,41 @@
 @section('content') 
 
 <br><br><br>
-<title>个人中心</title>
-<meta name="viewport" content="width=1226">
-<meta name="description" content="">
-<meta name="keywords" content="小米商城">
-<link href="/checkbox/right/style.css" rel="stylesheet" type="text/css">
-<link href="/checkbox/right/user.css" rel="stylesheet" type="text/css">
-
-<body>
+<link href="/home/css/style.css" rel="stylesheet" type="text/css">
+<link href="/home/css/user.css" rel="stylesheet" type="text/css">
 <div id="wrapper" class="container">    
 <div class="breadcrumbs">
-  <div class="container">
-    <a href="/">首页</a> <code>&gt;</code>用户中心</div>
-</div>
+    <div class="container">
+        <a href="/">首页</a> <code>&gt;</code>用户中心
+    </div>
+</div>        
 <div class="slidebar">
-  <ul class="slide_item">
-    <li class="item">
-      <div class="root_node">订单中心</div>
-        <ul>
-          <li>
-            <a class="" href="">我的订单</a>
-            <a class="" href="">收货地址</a>
-            <a class="" href="">缺货登记</a>   
-          </li>
-        </ul>
-    </li>
-        
-    <li class="item">
-      <div class="root_node">会员中心</div>
-      <ul>
-        <li>
-          <a class="" href="">我的个人中心</a>
-          <a class="" href="">用户信息</a>
-          <a class="" href="">我的收藏</a>
-          <a class="" href="">我的留言</a>
-          <a class="" href="">我的推荐</a>   
-          <a class="" href="">我的评论</a>
+    <ul class="slide_item">
+        <li class="item">
+            <div class="root_node">订单中心</div>
+            <ul>
+                <li>
+                    <a class="" href="/home/orders/index">我的订单</a>
+                    <a class="" href="/home/address/index">收货地址</a>
+                    <a class="" href="">缺货登记</a>
+                </li>
+            </ul>
         </li>
-      </ul>
-    </li>
-  </ul>
+        <li class="item">
+            <div class="root_node">会员中心</div>
+            <ul>
+                <li>
+                    <a class="" href="/home/users/index">我的个人中心</a>
+                    <a class="" href="/home/pass/index">修改密码</a>
+                    <a class="" href="/home/users/edit">用户信息</a>
+                    <a class="" href="/home/collect/index">我的收藏</a>
+                    <a class="" href="">我的留言</a>
+                    <a class="" href="">我的推荐</a>
+                    <a class="" href="/home/discuss/index">我的评论</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
      
 <div class="span16">
@@ -51,7 +46,7 @@
   <div class="box">
   <div class="box_1">
     <div class="text-info" style="font-size:20px;width:400px;margin:center;">{{$title}}</div>
-    <form action="/home/orders/addressupdate/{{$id}}" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+    <form action="/home/address/update/{{$id}}" method="post" name="theForm"onsubmit="return checkConsignee(this)">
       {{ csrf_field() }}
       <table width="60%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
         <tbody>
