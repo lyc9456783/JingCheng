@@ -33,11 +33,39 @@
         <div class="header-title">
           <h2>我的购物车</h2>
         </div>
-        <div class="topbar-info J_userInfo">
-        	<a class="link" href="/home/login/index" rel="nofollow">登录</a>
-          <span class="sep">|</span>
-          <a class="link" href="/home/login/create" rel="nofollow">注册</a>  
+        <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
+              
+            @if(!session('homeflag') == true)
+              <a class="link" href="/home/login/index" rel="nofollow">登录</a>
+              <span class="sep">|</span>
+              <a class="link" href="/home/login/create" rel="nofollow">注册</a>
+            @else
+                  @if(session("homeuser")['grade'] <= 2)
+                  <span class="user">
+                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                      <ul class="user-menu" style="display: none;">
+                          <li><a target="_blank" href="/admin">后台管理</a></li>
+                          <li><a href="/home/login/logout">退出登录</a></li>
+                      </ul>
+                  </span>  
+                  @else
+                  <span class="user">
+                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                    <ul class="user-menu" style="display: none;">
+                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
+                        <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
+                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
+                        <li><a href="/home/login/logout">退出登录</a></li>
+                    </ul>
+                </span>
+                <span class="sep">|</span>
+                <a href="/home/orders/index" class="link">我的订单</a> 
+                </div>
+                  @endif  
+              @endif
         </div>
+        </div>
+    </div>
     </div>
   </div>
  @if(session('goods')) 
