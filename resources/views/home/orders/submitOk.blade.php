@@ -3,6 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="/home/mis/mis_zf/base.css">
 <link rel="stylesheet" type="text/css" href="/home/mis/mis_zf/pay-confirm.css">
+
 	<div class="container">
 		<!-- 内容开始 -->
 		<div class="checkout-box">
@@ -13,24 +14,96 @@
                     <div class="fl">
                         <h2 class="title">订单提交成功！去付款咯～</h2>
                         <p class="order-time" id="J_deliverDesc"></p>
-                        <p class="order-time">请在<span class="pay-time-tip">0小时15分</span>内完成支付, 超时后将取消订单</p>
+                        <p class="order-time">请在<span class="pay-time-tip">{{ $orders['created_at'] }}</span>内完成支付, 超时后将取消订单</p>
                         <p class="post-info" id="J_postInfo">
-                            收货信息：李银昌 156****7775 &nbsp;&nbsp;
-                            北京&nbsp;&nbsp;北京市&nbsp;&nbsp;昌平区&nbsp;&nbsp;沙河镇&nbsp;&nbsp;育荣教育园 教学楼                            </p>
+                            收货信息：{{ $orders['recipients'] }} {{ $orders['phone'] }} &nbsp;&nbsp;
+                            {{ $orders['address'] }}    </p>
                     </div>
+                    <!-- 倒计时定时器 -->
+                    <script>
+                        // function run(){
+                        //      var date = new Date;
+                        //      var f = date.getMinutes();
+                        //      if(f < 10){
+                        //         f = '0'+f;
+                        //      }
+                        //      var m = date.getSeconds();
+                        //      if(m < 10){
+                        //         m = '0'+m;
+                        //      }
+                        //      var str =f+'：'+m;
+                        //      // 赋值
+                        //      var text_time = $('.pay-time-tip').text(str);
+                        // }
+                        // run();   
+                        // setInterval("run()",1000);
+
+
+                    </script>
+
                     <div class="fr">
                         <p class="total">
-                            应付总额：<span class="money"><em>2998</em>元</span>
+                            应付总额：<span class="money"><em>{{ $moneys }}</em>元</span>
                         </p>
-                        <a href="javascript:void(0);" class="show-detail" id="J_showDetail">订单详情<i class="iconfont"></i></a>
+                        <a href="javascript:void(0);" class="show-detail" id="J_showDetail" onclick="details()">订单详情<i class="iconfont"></i></a>
                     </div>
           	    </div>
             	<i class="iconfont icon-right">√</i>
+
+                <!-- 订单详情页面 -->
+                <div class="order-detail" >
+                    <ul>
+                        <li class="clearfix">
+                            <div class="label">订单号：</div>
+                            <div >
+                                <span class="order-num">{{ $orders['ordersnum'] }} </span>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="label">收货信息：</div>
+                            <div>{{ $orders['recipients'] }}&nbsp;&nbsp; {{ $orders['phone'] }} &nbsp;&nbsp;{{ $orders['address'] }}  </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="label">商品名称：</div>
+                            <div style="margin-left:100px;">
+                                <ul>
+                                    @foreach($orders_all as $k => $v)
+                                    <li>{{ $v->ordersgoods['name'] }}&nbsp;&nbsp;
+                                        {{ $v->ordersgoods->detailsgoods['color'] }}&nbsp;&nbsp;
+                                        {{ $v->ordersgoods->detailsgoods['type'] }}&nbsp;&nbsp;
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="label">配送时间：</div>
+                            <div>不限送货时间</div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="label">发票信息：</div>
+                            <div> 电子发票 个人</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 订单详情页面结束 -->
+
             </div>
 		</div>
+        <script>
+            //订单详情页面  用于切换显示订单详情
+            function details(){
+                if($('.order-detail').attr('style')){
+                   $('.order-detail').removeAttr('style');
+                   $('#J_postInfo').removeAttr('style');
+                }else{
+                   $('.order-detail').attr('style','display:block;');
+                   $('#J_postInfo').attr('style','display:none;');
+                }      
+            }
+        </script>
 
-
-
+        <!-- 支付方式开始 -->
 		<div class="section section-payment">
 			<div class="cash-title" id="J_cashTitle">
                 选择以下支付方式付款
@@ -57,6 +130,9 @@
 					<!-- 支付方式结束 -->
             </div>
 		</div>
+        <!-- 支付方式结束 -->
+
+
 	</div>
 
 @endsection 

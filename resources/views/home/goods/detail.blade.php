@@ -9,15 +9,15 @@
 <script type="text/javascript" src="/home/js/xiaomi_goods_li.js"></script>
 
 <style type="text/css">
-	/*评论区选项卡的样式*/
-	#discuss1 ul{
-		display: none;
-	}
-	#discuss1 ul:first-of-type{
-		display: block;
-		}
+  /*评论区选项卡的样式*/
+  #discuss1 ul{
+    display: none;
+  }
+  #discuss1 ul:first-of-type{
+    display: block;
+    }
 
-	.pagination li{
+  .pagination li{
         width:35px;
         height:25px;
         line-height:25px; 
@@ -67,11 +67,11 @@
 </style>
 <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 <!-- <link rel="stylesheet" href="/admins/lib/layui/css/layui.css" media="all"> -->
-		
+    
 <!-- 导航历史记录 -->
 <div class="breadcrumbs">
-	<div class="container">
-    	<a href="{{ url('/') }}">首页</a> <code>&gt;</code>         
+  <div class="container">
+      <a href="{{ url('/') }}">首页</a> <code>&gt;</code>         
     </div>
 </div>
 <!-- 导航历史记录结束 -->
@@ -81,60 +81,60 @@
 
   <!-- 参数,配置,图片,放大镜 -->
   <div class="goods-detail-info  clearfix J_goodsDetail">
-  	<div class="container">
-    	<div class="row">
+    <div class="container">
+      <div class="row">
 
           <!-- 图片,放大镜,切换图 -->
           <div class="span13  J_mi_goodsPic_block goods-detail-left-info">
           
-           	<div class="goods-pic-box" id="detail_img">
-  	          <!-- 商品中间的大图 -->
-  	          <div class="goods-big-pic"> 
-  	          	<a href="{{ $goods['pic'] }}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;" > 
-  	            	<img  alt="{{ $goods['name'] }}" src="{{ $goods['pic'] }}"> 
-  	            </a> 
-  	          </div>
+            <div class="goods-pic-box" id="detail_img">
+              <!-- 商品中间的大图 -->
+              <div class="goods-big-pic"> 
+                <a href="{{ $goods['pic'] }}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: current; zoom-distance: 60;zoom-width: 400; zoom-height: 400;" > 
+                  <img  alt="{{ $goods['name'] }}" src="{{ $goods['pic'] }}"> 
+                </a> 
+              </div>
               
               <!-- 商品图 右侧小切换图 -->
-      			  <div class="goods-small-pic" id="item-thumbs">
-      			  	<a class="prev" href="javascript:void(0);"></a>
-      			  	<a class="next" href="javascript:void(0);"></a>
-      			  	<div class="bd">
-      			    	<ul class="cle" style="position: relative; padding: 0px; margin: 0px; top: 0px;">
-      			          <!-- 商品小图左边 -->
-      			          <!--  -->
-      			          <li class="current"> 
-      			          	<a href="{{ $goods['pic'] }}" rel="zoom-id: Zoomer" rev="{{ $goods['pic'] }}"> 
-      			            	<img alt="{{ $goods['name'] }}" src="{{ $goods['pic'] }}"> 
-      			            </a>
-      			          </li>
-      			          @foreach($goods->goodimages as $gk=>$gv)
-      			          <li style="height: 60px;"class="goods_img"> 
-      			          	<a href="{{ $gv->images }}" rel="zoom-id: Zoomer" rev="{{ $gv->images }}"  style="outline: 0px; display: inline-block;"> 
-      			            	<img alt="{{ $goods->name }}"  src="{{ $gv->images }}"> 
-      			            </a>
-      			          </li>
-      					  @endforeach
-      			        </ul>           
+              <div class="goods-small-pic" id="item-thumbs">
+                <a class="prev" href="javascript:void(0);"></a>
+                <a class="next" href="javascript:void(0);"></a>
+                <div class="bd">
+                  <ul class="cle" style="position: relative; padding: 0px; margin: 0px; top: 0px;">
+                      <!-- 商品小图左边 -->
+                      <!--  -->
+                      <li class="current"> 
+                        <a href="{{ $goods['pic'] }}" rel="zoom-id: Zoomer" rev="{{ $goods['pic'] }}"> 
+                          <img alt="{{ $goods['name'] }}" src="{{ $goods['pic'] }}"> 
+                        </a>
+                      </li>
+                      @foreach($goods->goodimages as $gk=>$gv)
+                      <li style="height: 60px;"class="goods_img"> 
+                        <a href="{{ $gv->images }}" rel="zoom-id: Zoomer" rev="{{ $gv->images }}"  style="outline: 0px; display: inline-block;"> 
+                          <img alt="{{ $goods->name }}"  src="{{ $gv->images }}"> 
+                        </a>
+                      </li>
+                  @endforeach
+                    </ul>           
                         </ul>
-      			    </div>
-      			  </div>
-  			   </div>
-		      </div>
+                </div>
+              </div>
+           </div>
+          </div>
 
           <div class="span7 goods-info-rightbox">
             <form action="#" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
               {{ csrf_field() }}
               <div class="goods-info-box" id="item-info">
                 <dl class="loaded">
-                	<dt class="goods-info-head">
-                  	<dl>
-                      	<dt class="goods-name" id="goods-name">{{ $goods->name }}</dt>
+                  <dt class="goods-info-head">
+                    <dl>
+                        <dt class="goods-name" id="goods-name">{{ $goods->name }}</dt>
                           <!-- 售价 -->
                           <dd class="goods-info-head-price clearfix">
                               <span>现售价：</span> 
                                <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->discount }}<em>元</em> </b> </span>  
-                         	</dd>
+                          </dd>
                           <!-- 货号 库存 上架时间 -->
                           <dd>
                               <ul>
@@ -179,7 +179,7 @@
                                 </ul>
                               </div>
 
-  	                         
+                             
                           </dd>
                           <!-- 加入购物车 -->
                           <dd class="goods-info-head-cart">
@@ -195,7 +195,7 @@
                             <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
                             <a href="javascript:viod(0)" class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</a>
                             <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
-                         		<!-- <a href="javascript:collect(27)" class=" btn btn-gray  goods-collect-btn " id="fav-btn"><i class="iconfont"></i>喜欢</a> -->
+                            <!-- <a href="javascript:collect(27)" class=" btn btn-gray  goods-collect-btn " id="fav-btn"><i class="iconfont"></i>喜欢</a> -->
                             <!-- <a href="javascript:addToCart(27,1)" class="btn  btn-primary goods-add-cart-btn" id="buy_btn">加入购物车</a> -->
                           </dd>
                       </dl>
@@ -203,9 +203,9 @@
                 </dl>
               </div>
             </form>
-		      </div>
+          </div>
       </div>
-  	</div>
+    </div>
   </div>
   <!-- 遮盖层 -->
   <div id="overlay" style="margin: 0px; padding: 0px; border: none; width: 100%; height: 100%; background: rgb(51, 51, 51); opacity: 0.6; z-index: 98; position: fixed; top: 0px; left: 0px; display:none;">
@@ -230,18 +230,18 @@
     }
 
     $('#buy_btn').click(function(){ 
-	
+  
     //初始化laiyui
-    	var  gid =  $('#goods-id').text();
-    	// console.log(gid);
-    	var gkc = $('#goods-kc').text();
-    	if(gkc == '暂时缺货'){
+      var  gid =  $('#goods-id').text();
+      // console.log(gid);
+      var gkc = $('#goods-kc').text();
+      if(gkc == '暂时缺货'){
           layui.use('layer', function(){
           var layer = layui.layer;
           layer.msg('暂时缺货');
           });
-    		return false;
-    	}else{
+        return false;
+      }else{
         //获取商品id
         var id = $('.ghd').attr('ids');
         //获取商品数量
@@ -628,25 +628,36 @@
 
            if (cmt.content.length == 0)
            {
-              alert(cmt_empty_content);
+              layui.use('layer', function(){
+              var layer = layui.layer;
+              layer.msg(cmt_empty_content);
+              });
               return false;
            }
 
            if (cmt.captcha.length == 0 )
            {
-              alert(captcha_not_null);
+              layui.use('layer', function(){
+              var layer = layui.layer;
+              layer.msg(captcha_not_null);
+              });
               return false;
            }
           if (cmt.captcha.length != 4 )
            {
-              alert(captcha_not_num);
-
-
-
+              layui.use('layer', function(){
+              var layer = layui.layer;
+              layer.msg(captcha_not_num);
+              });
               return false;
            }
             // console.log(cmt);
+<<<<<<< HEAD
           var time = null;
+=======
+            //发布评论
+              var time = null;
+>>>>>>> origin/liyinchang
               $.ajax({
                         url:'/home/discuss/store',
                         type:'get',
@@ -655,6 +666,11 @@
                            if(msg == 1){
                     // alert('发表成功');
                       //关闭编辑窗口
+                      layui.use('layer', function(){
+                      var layer = layui.layer;
+                      layer.msg('评论发布成功');
+                      });
+                      
                       easyDialog.close({
                           container : 'commentsFrom'
                       });

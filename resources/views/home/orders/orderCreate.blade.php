@@ -25,10 +25,10 @@
                     <div class="mitv-tips hide" style="margin-left: 0;border: none;" id="J_bigproPostTip"></div>                                   
                 </div>
 
-                <div class="section-body clearfix" id="J_addressList">
+                <div class="section-body clearfix"  id="J_addressList">
                     <!-- 地址选项框 -->
 					@foreach($address as $key=>$val )
-                        <div class="address-item J_addressItem uid id">
+                        <div class="address-item J_addressItem" uid="{{$val['uid'] }}" addid="{{$val['id'] }}" >
                          <dl>
                             <dt>
                                 <span class="tag">{{ $val['postcode'] }}</span>
@@ -42,7 +42,7 @@
                          </div> 
                         </div>
 					@endforeach
-<!--                         <div class="address-item J_addressItem " data-address_id="10171211619902550" data-consignee="李银昌" data-tel="156****7775" data-province_id="2" data-province_name="北京" data-city_id="36" data-city_name="北京市" data-district_id="389" data-district_name="昌平区" data-area="389018" data-area_name="沙河镇" data-address="育荣教育园 教学楼" data-tag_name="" data-zipcode="102200" data-editable="Y" data-neededit="N">
+                    <!--                         <div class="address-item J_addressItem " data-address_id="10171211619902550" data-consignee="李银昌" data-tel="156****7775" data-province_id="2" data-province_name="北京" data-city_id="36" data-city_name="北京市" data-district_id="389" data-district_name="昌平区" data-area="389018" data-area_name="沙河镇" data-address="育荣教育园 教学楼" data-tag_name="" data-zipcode="102200" data-editable="Y" data-neededit="N">
                          <dl>
                             <dt>
                                 <span class="tag"></span>
@@ -76,23 +76,6 @@
                 </div>
             </div>
 			<!-- 地址选择卡开始 -->
-
-
-
-            <!-- 支付方式开始 -->
-            <div class="section section-options section-payment clearfix hide">
-                <div class="section-header">
-                    <h3 class="title">支付方式</h3>
-                </div>
-                <div class="section-body clearfix">
-                    <ul class="J_optionList options ">
-                        <li data-type="pay" class="J_option selected" data-value="1">
-                            在线支付<span>（支持微信支付、支付宝、银联、财付通、小米钱包等</span>
-                        </li>
-                     </ul>
-                </div>
-            </div>
-			<!-- 支付方式结束 -->
 
 			<!-- 配送方式开始 -->
             <div class="section section-options section-shipment clearfix">
@@ -164,18 +147,22 @@
                 </div>
                 <div class="section-body">
                     <ul class="goods-list" id="J_goodsList">
+                    @foreach($shops as $k => $v )
+                      
                         <li class="clearfix">
                             <div class="col col-img">
-                                <img src="/home/mis/pms_1476674302.jpg" width="30" height="30">
+                                <img src="{{ $v['info']->pic }}" width="30" height="30">
                             </div>
                             <div class="col col-name">
-                                <a href="https://item.mi.com/1163900023.html" target="_blank" data-stat-id="e357cdb65e4540e1" onclick="_msq.push(['trackEvent', '17a1f380b9d4cd2e-e357cdb65e4540e1', '//item.mi.com/1163900023.html', 'pcpid', '']);">
-                                        小米运动蓝牙耳机 黑色  </a>
+                                <a href="/home/goods/detail/{{ $v['info']->id }}" target="_blank">{{ $v['info']->name }}</a>
                             </div>
-                            <div class="col col-price">129元 x 1  </div>
+                            <div class="col col-price" num="{{ $v['num'] }}">{{ $v['info']->discount }}元 x {{ $v['num'] }}  </div>
                             <div class="col col-status">&nbsp;</div>
-                            <div class="col col-total">129元</div>
+                            <div class="col col-total" money="{{ ($v['info']->discount)*($v['num']) }}">{{ ($v['info']->discount)*($v['num']) }}元</div>
                         </li>
+                            
+                    @endforeach
+
                     </ul>
                 </div>
             </div>
@@ -188,30 +175,17 @@
                     <!-- 优惠券 -->
                     <div class="coupon-trigger" id="J_useCoupon"><i class="iconfont icon-plus"></i>使用优惠券</div>
 
-
-
-                    <!-- 购物卡 -->
-                    <div class="ecard-result hide" id="J_ecardResult">
-                        <i class="iconfont icon-selected"></i> 已使用礼品卡 <span id="J_ecardVal"></span>
-                        <a href="javascript:void(0);" id="J_ecardModify" data-stat-id="f8bf51a21c338229" onclick="_msq.push(['trackEvent', '17a1f380b9d4cd2e-f8bf51a21c338229', 'javascript:void0', 'pcpid', '']);">［修改］</a>
-                    </div>
-                    <!-- 现金券 -->
-                    <div class="ecard-trigger hide" id="J_useRecycle" data-type="recycle"><i class="iconfont icon-plus"></i>使用现金券</div>
-                    <div class="ecard-result hide" id="J_recycleResult">
-                        <i class="iconfont icon-selected"></i> 已使用现金券 <span id="J_recycleVal"></span>
-                        <a href="javascript:void(0);" id="J_recycleModify" data-stat-id="50a1b9bacbcb5078" onclick="_msq.push(['trackEvent', '17a1f380b9d4cd2e-50a1b9bacbcb5078', 'javascript:void0', 'pcpid', '']);">［修改］</a>
-                    </div>                  
                 </div>
 
                 <div class="money-box" id="J_moneyBox">
                     <ul>
                         <li class="clearfix">
                             <label>商品件数：</label>
-                            <span class="val">1件</span>
+                            <span class="val" id="good_total_num">1件</span>
                         </li>
                         <li class="clearfix">
                             <label>商品总价：</label>
-                            <span class="val">129元</span>
+                            <span class="val" id="good_total_money1">129元</span>
                         </li>
                         <li class="clearfix">
                             <label>活动优惠：</label>
@@ -227,11 +201,30 @@
                         </li>
                         <li class="clearfix total-price">
                             <label>应付总额：</label>
-                            <span class="val"><em data-id="J_totalPrice">129</em>元</span>
+                            <span class="val"><em data-id="J_totalPrice" id="good_total_money2">129</em>元</span>
                         </li>
                     </ul>
                 </div>
             </div>
+            <!-- 结算底部的价格统计 -->
+            <script>
+            // console.log($('#J_goodsList .col-total').eq(0).attr('money'));
+            // 用于统计最后结算时候的总件数 和 总金额
+             var lang = $('#J_goodsList .col-price').length;
+             var num = 0;
+             var money = 0;
+             for(var i = 0; i < lang; i++ ){
+                num += parseFloat($('#J_goodsList .col-price').eq(i).attr('num'));
+                money += parseFloat($('#J_goodsList .col-total').eq(i).attr('money'));
+             }
+             $('#good_total_num').text(num);
+             $('#good_total_money1').text(money);
+             $('#good_total_money2').text(money);
+             // console.log(num);
+             // console.log(money);
+            // console.log($('#J_goodsList .col-price').eq(1).attr('num'));
+
+            </script>            
 			<!-- 结算时的价格结算结束 -->
 
 
@@ -247,23 +240,46 @@
             </div>
         </div>
         <script>
+        //去结算
         function sitesubmit(){
-        	var site_data = $('#J_addressList .selected');
+        	// var uid = $('#J_addressList .selected').attr('uid');
+         //       var addid = $('#J_addressList .selected').attr('addid');
+               // alert(uid);alert(addid);
 
-			console.log(site_data);
+            var cmt = new Object;
+			cmt.uid      = $('#J_addressList .selected').attr('uid');//用户的id
+            cmt.addid    = $('#J_addressList .selected').attr('addid');//用户的地址id
+
+            //限制条件
+            if(cmt.addid == null){
+                layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg('请选择收货地址！');
+                });
+                return false;
+            }
+
+            console.log(cmt);
+                // 传送订单信息,并且扣减库存
 				$.ajax({
 	                url:'/home/orders/sitesubmit',
 	                type:'get',
-	                data:'state=1',
+	                data:cmt,
 	                success:function(msg){
-	                  alert(msg);
+	                  if(msg == 0){
+                        //返回错误
+                        layui.use('layer', function(){
+                            var layer = layui.layer;
+                            layer.msg('错误提示');
+                        });
+                        return false;                       
+                      }else{
+                        //成功跳转
+                        location.replace('/home/orders/submitOk/'+msg);
+                      }
 	                },
 	                async:false,
-            	});
-
-
-        	return false;
-        	location.replace('/home/orders/submitOk');
+            	});    	
         }
 
         </script>

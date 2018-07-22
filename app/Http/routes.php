@@ -648,4 +648,4 @@ Route::post('/home/orders/sitestore/{id}','home\OrdersController@siteStore');
 //提交订单最后一步[业务逻辑判断]
 Route::get('/home/orders/sitesubmit','home\OrdersController@siteSubmit');
 //成功submitOk
-Route::get('/home/orders/submitOk','home\OrdersController@submitOk');
+Route::get('/home/orders/submitOk/{ordsum}','home\OrdersController@submitOk');

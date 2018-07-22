@@ -143,7 +143,7 @@
                     <span class="total-num"></span>
                     &nbsp;&nbsp;&nbsp;合计：<b><span id="tot">{{$zsum}}</span><em>元</em></b>
                   </span>
-                  <a href="#" class="btn btn-pay btn-primary">去结算</a>
+                  <a href="/home/orders/ordercreate" class="btn btn-pay btn-primary">去结算</a>
                 </div>
         </div>
       </div>
