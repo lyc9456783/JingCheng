@@ -58,7 +58,16 @@ class OrdersController extends Controller
     {
         //获取上传的订单信息
         $data = $request -> all();
+        // dump($data);
+        //获取添加订单的商品ID
+        $gid = $data['gid'];
 
+        //查询商品表中对应的购买商品id的价格
+        $goods = Goods::where('id',$gid)->first();
+
+        //计算商品总价
+        $num = (($goods['discount'])*($data['num']));
+        // dd($num);
         //生成订单号
         $time= date('YmdHis',time());
 
@@ -85,7 +94,7 @@ class OrdersController extends Controller
             $orders -> phone = $data['phone'];
             $orders -> address = $address;
             $orders -> num = $data['num'];
-            $orders -> total = $data['total'];
+            $orders -> total = $num;
             $orders -> status = $data['status'];
             $res2 = $orders -> save();
 

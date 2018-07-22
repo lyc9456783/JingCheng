@@ -40,6 +40,8 @@ Route::get('/home/goods/minuscar','home\ShopCarController@minuscar');
 Route::get('/home/goods/delcar','home\ShopCarController@delcar');
 //ajax 清空购物车
 Route::get('/home/goods/delallcar','home\ShopCarController@delallcar');
+//前台商品收藏
+Route::get('/home/collect/addcollect','home\CollectController@addcollect');
 
 
 
@@ -223,7 +225,7 @@ Route::get('/admin/collect/delall','admin\CollectController@delall');
 
 
 
-//前台
+//		前台
 //前台密码修改
 Route::get('/home/pass/index','home\PassController@index');
 Route::post('/home/pass/update/{id}','home\PassController@update');
@@ -454,7 +456,10 @@ Route::get('/home/orders/update/{id}','home\OrdersController@update');
 Route::get('/home/orders/show/{id}','home\OrdersController@show');
 //设置更新用户收货详情的路由
 Route::post('/home/orders/store/{id}','home\OrdersController@store');
-
+//设置头像修改路由
+Route::post('/home/users/uploads/{id}','home\UsersController@uploads');
+//设置用户绑定邮箱的路由
+Route::get('/home/users/store/{id}','home\UsersController@store');
 
 
 

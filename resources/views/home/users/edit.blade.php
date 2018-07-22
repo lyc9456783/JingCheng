@@ -17,7 +17,6 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     <a class="" href="/home/address/index">收货地址</a>
-                    <a class="" href="">缺货登记</a>
                 </li>
             </ul>
         </li>
@@ -29,8 +28,6 @@
                     <a class="" href="/home/pass/index">修改密码</a>
                     <a class="" href="/home/users/edit">用户信息</a>
                     <a class="" href="/home/collect/index">我的收藏</a>
-                    <a class="" href="">我的留言</a>
-                    <a class="" href="">我的推荐</a>
                     <a class="" href="/home/discuss/index">我的评论</a>
                 </li>
             </ul>
@@ -64,15 +61,16 @@
                 <tbody>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">用户昵称： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="nickname" type="text" value="{{$details['nickname']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="nickname" type="text" value="{{$details['nickname']}}" size="25" class="inputBg"></td>
                 </tr>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">手机号： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="phone" type="text" value="{{$details['phone']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="phone" type="text" value="{{$details['phone']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span> &nbsp; <span class="err_tip">{{ $errors->first('phone') }}</span> </td>
+                  
                 </tr>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">身份证号： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="id_card" type="text" value="{{$details['id_card']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+                  <td width="72%" align="left" bgcolor="#FFFFFF"><input name="id_card" type="text" value="{{$details['id_card']}}" size="25" class="inputBg"></td>
                 </tr>
                 <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">家庭住址： </td>
@@ -95,12 +93,6 @@
                   </td>
                 </tr>
                 <tr>
-                  <td width="28%" align="right" bgcolor="#FFFFFF">用户头像： </td>
-                  <td width="72%" align="left" bgcolor="#FFFFFF">
-                  <input type="file" name="face" size="25" class="inputBg">
-                </tr>
-                
-                <tr>
                   <td width="28%" align="right" bgcolor="#FFFFFF">电子邮件地址： </td>
                   <td width="72%" align="left" bgcolor="#FFFFFF"><input name="email" type="text" value="{{$users['email']}}" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
                 </tr>
@@ -113,6 +105,36 @@
               </tbody>
        </table>
     </form>
+<<<<<<< HEAD
+=======
+     <form name="formPassword" action="/home/users/passupdate/{{ $id }}" method="post" onsubmit="return editPassword()">
+     {{ csrf_field() }}
+     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+        <tbody><tr>
+          <td width="28%" align="right" bgcolor="#FFFFFF">原密码：</td>
+          <td width="76%" align="left" bgcolor="#FFFFFF"><input name="old_password" type="password" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+        </tr>
+        <tr>
+          <td width="28%" align="right" bgcolor="#FFFFFF">新密码：</td>
+          <td align="left" bgcolor="#FFFFFF"><input name="new_password" type="password" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+        </tr>
+        <tr>
+          <td width="28%" align="right" bgcolor="#FFFFFF">确认密码：</td>
+          <td align="left" bgcolor="#FFFFFF"><input name="comfirm_password" type="password" size="25" class="inputBg"><span style="color:#FF0000"> *</span></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_password">
+            <input name="submit" type="submit" class="btn btn-primary" style="border:none;" value="确认修改">
+          </td>
+        </tr>
+      </tbody></table>
+    </form>
+          
+
+
+      </div>
+     </div>
+>>>>>>> origin/qiu
     </div>
     </div>
     </div>

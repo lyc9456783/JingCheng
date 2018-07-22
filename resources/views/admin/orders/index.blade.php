@@ -44,7 +44,7 @@
                         <td>{{$v->id}}</td>
                         <td>{{$v->gid}}</td>
                         <td>{{$v->ordersnum}}</td>
-                        <td>{{$v->users->username}}</td>
+                        <td>{{$v->users['username']}}</td>
                         @if($v->status == 0)
                             <td>未发货</td>
                         @elseif($v->status == 1)

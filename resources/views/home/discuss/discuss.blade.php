@@ -17,7 +17,6 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     <a class="" href="/home/address/index">收货地址</a>
-                    <a class="" href="">缺货登记</a>
                 </li>
             </ul>
         </li>
@@ -29,8 +28,6 @@
                     <a class="" href="/home/pass/index">修改密码</a>
                     <a class="" href="/home/users/edit">用户信息</a>
                     <a class="" href="/home/collect/index">我的收藏</a>
-                    <a class="" href="">我的留言</a>
-                    <a class="" href="">我的推荐</a>
                     <a class="" href="/home/discuss/index">我的评论</a>
                 </li>
             </ul>
@@ -66,19 +63,19 @@
                 </tr>
                 @foreach($data as $k=>$v)
                     <tr>
-                    <td>
+                    <td align="center" bgcolor="#ffffff">
                       {{ $v->gooddiscuss['name'] }}
                     </td>
-                    <td>
+                    <td align="center" bgcolor="#ffffff">
                         {{ $v->userdiscuss->Userdetails['nickname'] }}
                     </td>
-                    <td >
+                    <td align="center" bgcolor="#ffffff">
                         {{ $v['content'] }}
                     </td>
-                    <td>
+                    <td align="center" bgcolor="#ffffff">
                         {{ $v['created_at'] }}
                     </td>         
-                    <td class="td-manage">
+                    <td class="td-manage" align="center" bgcolor="#ffffff">
                         <a title="删除" href="/home/discuss/delete/{{$v['id']}}" style="text-decoration:none">
                             <i class="layui-icon">&#xe640;删除</i>
                         </a>

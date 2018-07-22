@@ -19,7 +19,6 @@
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
                     <a class="" href="/home/address/index">收货地址</a>
-                    <a class="" href="">缺货登记</a>
                 </li>
             </ul>
         </li>
@@ -31,8 +30,6 @@
                     <a class="" href="/home/pass/index">修改密码</a>
                     <a class="" href="/home/users/edit">用户信息</a>
                     <a class="" href="/home/collect/index">我的收藏</a>
-                    <a class="" href="">我的留言</a>
-                    <a class="" href="">我的推荐</a>
                     <a class="" href="/home/discuss/index">我的评论</a>
                 </li>
             </ul>
@@ -119,10 +116,14 @@
                 <td align="center" bgcolor="#ffffff">{{$v['address']}}</td>
                 <td align="center" bgcolor="#ffffff">{{$v['postcode']}}</td>
                 <td align="center" bgcolor="#ffffff">{{$v['label']}}</td>
-                <td align="center" bgcolor="#ffffff">
+                <td class="td-manage" align="center" bgcolor="#ffffff">
                     <font class="f6">
-                        <a href="/home/address/edit/{{$v['id']}}">修改地址</a>
-                        <a href="/home/address/delete/{{$v['id']}}">删除地址</a>
+                        <a title="删除" href="/home/address/edit/{{$v['id']}}" style="text-decoration:none">
+                            <i class="layui-icon">&#xe642;修改</i>
+                        </a>
+                        <a title="删除" href="/home/address/delete/{{$v['id']}}" style="text-decoration:none">
+                            <i class="layui-icon">&#xe640;删除</i>
+                        </a>
                     </font>
                 </td>
             </tr>

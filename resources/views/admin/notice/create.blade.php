@@ -59,7 +59,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">公告标题</label>
                     <div class="layui-input-block">
-                      <input type="text" name="title" lay-verify="title" autocomplete="off" required placeholder="请输入标题" class="layui-input">
+                      <input  maxlength="16" type="text" name="title" lay-verify="title" autocomplete="off" required placeholder="请输入标题" class="layui-input">
                     </div>
             </div>
 
@@ -68,7 +68,7 @@
                     <div class="layui-input-block">
                          <!-- 加载编辑器的容器 -->
                         <script id="container" name="details" type="text/plain" style="width:500px;height:150px">
-    客官老爷,请在此处输入您想嘚瑟的话......
+                        客官老爷,请在此处输入您想嘚瑟的话......
                         </script>
                          <!-- 实例化编辑器 -->
                         <script type="text/javascript">

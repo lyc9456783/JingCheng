@@ -76,16 +76,14 @@
 	           <p class="desc">{{$v->intro}}</p>
 	          <h2 class="title"><a href="/home/goods/detail/{{$v->id}}" title="{{$v->name}}">{{$v->name}}</a></h2>
 	           <p class="price">
-	                        本店价<font class="shop_s">{{$v->discount}}<em>元</em></font>
-	                                    <del>专柜价<font class="market_s">{{$v->price}}<em>元</em></font></del>
+	                本店价<font class="shop_s">{{$v->discount}}<em>元</em></font>
+	               <del>专柜价<font class="market_s">{{$v->price}}<em>元</em></font></del>
 	           </p>
 	            <div class="actions clearfix">
-	                <a href="javascript:;" class="btn-like J_likeGoods"><i class="layui-icon">&#xe600;</i><span>收藏</span></a> 
+	                <a href="javascript:onclick=collect({{$v->id}});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class="btn-like J_likeGoods"><i class="layui-icon">&#xe600;</i><span>收藏</span></a> 
 	           </div>
-	           <div class="flags">
-	           			
-				    <div class="flag flag-saleoff">8.4折促销</div>
-	                      
+	           <div class="flags"> 			
+				    <div class="flag flag-saleoff">8.4折促销</div>       
 	          </div>
 	        </div>
 			@endforeach
@@ -94,26 +92,49 @@
 	</form>
 	          
 	<script type="Text/Javascript" language="JavaScript">
-	<!--
+	//商品收藏
+	function collect(id)
+	{
+		var uid = $('a[ids]').attr('ids');
+		if(uid == 0){
+			layui.use('layer', function(){
+		         var layer = layui.layer;
+		         layer.msg("请先登录再收藏");
+		         });
+			
+		}else{
+			$.get('/home/collect/addcollect',{'gid':id,'uid':uid},function(data){
+				if(data == 1){
+					layui.use('layer', function(){
+			         var layer = layui.layer;
+			         layer.msg("收藏成功");
+		         });	
+				}else if(data == 0){
+					layui.use('layer', function(){
+			         var layer = layui.layer;
+			         layer.msg("已收藏,请至收藏夹查看");
+		         });
+				}else{
+					layui.use('layer', function(){
+			         var layer = layui.layer;
+			         layer.msg("收藏失败,请重试");
+		         });
+				}
+			});
+		}	
+	}
+
 	function selectPage(sel)
 	{
 	  sel.form.submit();
 	}
-	//-->
+
 	</script>     
-	<form name="selectPageForm" action="/category.php" method="get">
+	<form name="selectPageForm" action="#" method="get">
 	<div class="clearfix">
 	  	 <div id="page">{!! $goods->render()!!}</div>   
 	</div>
 	</form>
-	<script type="Text/Javascript" language="JavaScript">
-	<!--
-	function selectPage(sel)
-	{
-	  sel.form.submit();
-	}
-	//-->
-	</script>
 	    </div>
 	    
 	    <div id="J_renovateWrap" class="xm-recommend-container container xm-carousel-container">
