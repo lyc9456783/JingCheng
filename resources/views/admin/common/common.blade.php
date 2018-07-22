@@ -201,6 +201,27 @@
                         </li>
                     </ul>
                 </li>
+                  <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe62c;</i> 
+                        折扣管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admin/discounts/index">
+                                <i class="iconfont">&#xe6a7;</i>
+                                折扣列表
+                            </a>
+                        </li>
+                         <li>
+                            <a href="/admin/discounts/create">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加折扣商品
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="layui-icon">&#xe6b2;</i> 

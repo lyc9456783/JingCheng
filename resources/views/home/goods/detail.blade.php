@@ -117,9 +117,11 @@
                   	<dl>
                       	<dt class="goods-name" id="goods-name">{{ $goods->name }}</dt>
                           <!-- 售价 -->
+                          <dd class="goods-phone-type"><p></p></dd>
+                                <del>专柜价： <em class="cancel">{{ $goods->discount }}<em>元</em></em></del>
                           <dd class="goods-info-head-price clearfix">
                               <span>现售价：</span> 
-                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->discount }}<em>元</em> </b> </span>  
+                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $discounts['discount'] }}<em>元</em> </b> </span>  
                          	</dd>
                           <!-- 货号 库存 上架时间 -->
                           <dd>
