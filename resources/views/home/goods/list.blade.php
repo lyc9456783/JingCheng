@@ -80,7 +80,7 @@
 	               <del>专柜价<font class="market_s">{{$v->price}}<em>元</em></font></del>
 	           </p>
 	            <div class="actions clearfix">
-	                <a href="javascript:onclick=collect({{$v->id}});" ids="@if(session('homeuser')['id']){{session('homeuser')['id']}}@else 0 @endif" class="btn-like J_likeGoods"><i class="layui-icon">&#xe600;</i><span>收藏</span></a> 
+	                <a href="javascript:onclick=collect({{$v->id}});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class="btn-like J_likeGoods"><i class="layui-icon">&#xe600;</i><span>收藏</span></a> 
 	           </div>
 	           <div class="flags"> 			
 				    <div class="flag flag-saleoff">8.4折促销</div>       
@@ -92,7 +92,6 @@
 	</form>
 	          
 	<script type="Text/Javascript" language="JavaScript">
-	var time = null;
 	//商品收藏
 	function collect(id)
 	{
@@ -102,11 +101,6 @@
 		         var layer = layui.layer;
 		         layer.msg("请先登录再收藏");
 		         });
-			if(time=null){
-				time = setInterval(function(){
-				location.href="/home/login/index";
-				},3000)	
-			}
 			
 		}else{
 			$.get('/home/collect/addcollect',{'gid':id,'uid':uid},function(data){
@@ -127,9 +121,7 @@
 		         });
 				}
 			});
-		}
-
-		
+		}	
 	}
 
 	function selectPage(sel)

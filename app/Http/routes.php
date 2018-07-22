@@ -456,7 +456,10 @@ Route::get('/home/orders/update/{id}','home\OrdersController@update');
 Route::get('/home/orders/show/{id}','home\OrdersController@show');
 //设置更新用户收货详情的路由
 Route::post('/home/orders/store/{id}','home\OrdersController@store');
-
+//设置头像修改路由
+Route::post('/home/users/uploads/{id}','home\UsersController@uploads');
+//设置用户绑定邮箱的路由
+Route::get('/home/users/store/{id}','home\UsersController@store');
 
 
 

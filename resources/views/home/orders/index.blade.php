@@ -56,7 +56,7 @@
           </tr>
           @foreach($orders as $k=>$v)
           <tr>
-            <td align="center" bgcolor="#ffffff"><a href="/home/orders/show/{{$v->id}}" class="f6">{{$v->ordersnum}}</a></td>
+            <td align="center" bgcolor="#ffffff">{{$v->ordersnum}}</td>
             <td align="center" bgcolor="#ffffff">{{$v->created_at}}</td>
             <td align="center" bgcolor="#ffffff">{{$v->total}}元</td>
             @if($v->status == 0)
@@ -68,6 +68,7 @@
             @endif
             <td align="center" bgcolor="#ffffff">
                 <font class="f6">
+                    <a href="/home/orders/show/{{$v->id}}" class="f6">订单详情</a> &nbsp; || &nbsp;
                     <a href="/home/orders/update/{{$v->id}}" onclick="if (!confirm(&#39;您确认要删除该订单吗？确认后此订单将被删除&#39;)) return false;">删除订单</a>
                 </font>
             </td>

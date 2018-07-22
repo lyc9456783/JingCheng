@@ -193,7 +193,7 @@
                              <a href="javascript:viod(0)"  class="btn  btn-gray goods-add-cart-btn" id="buy_btn"> 暂时缺货 </a>
                             @endif
                             <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
-                            <a href="javascript:viod(0)" class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</a>
+                            <a href="javascript:onclick=collect({{ $goods->id }});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class=" btn btn-gray  goods-collect-btn ">收藏</a>
                             <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
                             <!-- <a href="javascript:collect(27)" class=" btn btn-gray  goods-collect-btn " id="fav-btn"><i class="iconfont"></i>喜欢</a> -->
                             <!-- <a href="javascript:addToCart(27,1)" class="btn  btn-primary goods-add-cart-btn" id="buy_btn">加入购物车</a> -->
@@ -292,6 +292,40 @@
           break;
     }
   }
+
+  //收藏的ajax
+  //商品收藏
+  function collect(id)
+  {
+    var uid = $('a[ids]').attr('ids');
+    if(uid == 0){
+      layui.use('layer', function(){
+             var layer = layui.layer;
+             layer.msg("请先登录再收藏");
+             });
+      
+    }else{
+      $.get('/home/collect/addcollect',{'gid':id,'uid':uid},function(data){
+        if(data == 1){
+          layui.use('layer', function(){
+               var layer = layui.layer;
+               layer.msg("收藏成功");
+             });  
+        }else if(data == 0){
+          layui.use('layer', function(){
+               var layer = layui.layer;
+               layer.msg("已收藏,请至收藏夹查看");
+             });
+        }else{
+          layui.use('layer', function(){
+               var layer = layui.layer;
+               layer.msg("收藏失败,请重试");
+             });
+        }
+      });
+    } 
+  }
+
   </script>
 
   <!-- 本也商品详情开始 -->
@@ -651,13 +685,9 @@
               });
               return false;
            }
-            // console.log(cmt);
-<<<<<<< HEAD
-          var time = null;
-=======
+
             //发布评论
               var time = null;
->>>>>>> origin/liyinchang
               $.ajax({
                         url:'/home/discuss/store',
                         type:'get',
