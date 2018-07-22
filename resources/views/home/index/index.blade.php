@@ -513,7 +513,6 @@
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
                           {{$v->discount}}<em>元</em></p>
-                      
                       <p class="rank">7人评价</p>
                       <div class="review-wrapper">
                           @foreach($v->discussgoods as $kk=>$vv)
