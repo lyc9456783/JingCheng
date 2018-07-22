@@ -66,19 +66,19 @@
                 </tr>
                 @foreach($data as $k=>$v)
                     <tr>
-                    <td>
+                    <td align="center" bgcolor="#ffffff">
                       {{ $v->gooddiscuss['name'] }}
                     </td>
-                    <td>
+                    <td align="center" bgcolor="#ffffff">
                         {{ $v->userdiscuss->Userdetails['nickname'] }}
                     </td>
-                    <td >
+                    <td align="center" bgcolor="#ffffff">
                         {{ $v['content'] }}
                     </td>
-                    <td>
+                    <td align="center" bgcolor="#ffffff">
                         {{ $v['created_at'] }}
                     </td>         
-                    <td class="td-manage">
+                    <td class="td-manage" align="center" bgcolor="#ffffff">
                         <a title="删除" href="/home/discuss/delete/{{$v['id']}}" style="text-decoration:none">
                             <i class="layui-icon">&#xe640;删除</i>
                         </a>

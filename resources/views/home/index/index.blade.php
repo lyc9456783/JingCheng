@@ -24,7 +24,10 @@
         .gg li{
           border-bottom:1px dashed #ccc;
           height:20px;
-          line-height:20px; 
+          line-height:20px;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+          overflow:hidden;  
         }
         .gg li span{
           display:block;
@@ -48,26 +51,25 @@
           color:orange;
         }
         </style>
+        <!-- 公共提示消息 -->
+      @if (session('success'))
+         <script type="text/javascript">
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("{{session('success')}}");
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script type="text/javascript">
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("{{session('error')}}");
+            }); 
+        </script>
+    @endif 
     </head>
     <body>
-        <script type="text/javascript">
-    
-    <!--
-    function checkSearchForm()
-    {
-        if(document.getElementById('keyword').value)
-        {
-            return true;
-        }
-        else
-        {
-            alert("请输入搜索关键词！");
-            return false;
-        }
-    }
-    -->
-    
-    </script>
     <div class="site-topbar">
       <div class="container">
           <div class="topbar-nav">
@@ -97,20 +99,20 @@
       
         @if(session('goods'))
         <div id="J_miniCartList" class="cart-menu">
-           <ul>
-            @foreach(session('goods') as $v)
-                <li class="clearfix first">
-                  <div class="cart-item">
-                    <a class="thumb" target="_blank" href="/home/goods/detail/{{$v['id']}}">
-                        <img width="60" height="60" src="{{$v['info']->pic}}">
-                    </a>
-                    <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
-                    <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
-                    <a class="btn-del delItem" href="javascript:deleteCartGoods(176);">
-                        <i class="iconfont"></i>
-                    </a>
-                  </div>
-              </li>
+          <ul>
+          @foreach(session('goods') as $v)
+              <li class="clearfix first">
+                <div class="cart-item">
+                  <a class="thumb" target="_blank" href="/home/goods/detail/{{$v['id']}}">
+                      <img width="60" height="60" src="{{$v['info']->pic}}">
+                  </a>
+                  <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
+                  <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
+                  <a class="btn-del delItem" href="javascript:deleteCartGoods({{$v['id']}});">
+                      <i class="iconfont"></i>
+                  </a>
+                </div>
+            </li>
           @endforeach
           </ul>
           <div class="count clearfix">
@@ -125,45 +127,7 @@
       <div id="J_miniCartList" class="cart-menu">
             <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
       </div>
-      @endif
-    <script type="text/javascript">
-    function deleteCartGoods(rec_id)
-    {
-      Ajax.call('delete_cart_goods.php', 'id='+rec_id, deleteCartGoodsResponse, 'POST', 'JSON');
-    }
-
-    /**
-     * 接收返回的信息
-     */
-    function deleteCartGoodsResponse(res)
-    {
-      if (res.error)
-      {
-        alert(res.err_msg);
-      }
-      else
-      {
-        $("#ECS_CARTINFO").html(res.content);
-      }
-    }
-    </script>
-
-    @if (session('success'))
-         <script type="text/javascript">
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg("{{session('success')}}");
-            });
-        </script>
-    @endif
-    @if (session('error'))
-        <script type="text/javascript">
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg("{{session('error')}}");
-            }); 
-        </script>
-    @endif         
+      @endif        
     </div>
             <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
               
@@ -185,7 +149,7 @@
                   <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
                     <ul class="user-menu" style="display: none;">
                         <li><a target="_blank" href="/home/users/index">个人中心</a></li>
-                        <li><a target="_blank" href="">我的收藏</a></li>
+                        <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
                         <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>
@@ -319,7 +283,7 @@
                 </div>
                 <ul class="gg">
                 @foreach ($notices as $k=>$v)
-                  <li><span>{{$k+1}}</span>.<a href="/home/notice/detail/{{$v->id}}">{{$v->title}}</a>　@if($k<3)<img src="/home/images/appnew.png">@endif</li>
+                  <li><span>{{$k+1}}</span>.@if($k<3)<img src="/home/images/appnew.png">@endif<a style="" href="/home/notice/detail/{{$v->id}}">{{$v->title}}</a></li>
                 @endforeach
                 </ul> 
             </div>

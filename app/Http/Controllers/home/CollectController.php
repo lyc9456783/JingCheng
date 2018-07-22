@@ -45,9 +45,25 @@ class CollectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addcollect(Request $request)
     {
-        //
+        $gid = $request->input('gid');
+        $uid = $request->input('uid');
+        $res = Collect::where('gid',$gid)->where('uid',$uid)->first();
+        if($res){
+                echo 0;
+        }else{
+            $data = $request->all();
+            // var_dump($data);
+            $collect = new Collect;
+            $collect-> uid = $data['uid'];
+            $collect-> gid = $data['gid'];
+            $res = $collect->save();
+            if($res){
+                echo 1;
+            }
+        }
+
     }
 
     /**

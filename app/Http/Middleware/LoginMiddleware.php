@@ -15,12 +15,12 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // 检测session是否存在用户名
-        if($request->session()->has('username')){
+        // 检测session是否存在用户名 
+        if($request->session()->has('adminflag')){
             return $next($request);//通过  执行下一个请求
         }else{
             // 失败返回登录页面
-            return redirect('/admin/login');
+            return redirect('/admin/login/login');
         }
     }
 }

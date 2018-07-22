@@ -100,9 +100,15 @@ body, button, input, select, textarea {
 .cart-goods-list .col-name {
 	width: 380px;
 }
+.cart-goods-list .col-check {
+	width: 50px;
+	padding-right: 30px;
+	text-align: left;
+	color: #424242;
+}
 .cart-goods-list .col-price {
-	width: 105px;
-	padding-right: 60px;
+	width: 100px;
+	padding-right: 30px;
 	text-align: right;
 	color: #424242;
 }
@@ -113,7 +119,7 @@ body, button, input, select, textarea {
 }
 .cart-goods-list .col-total {
 	width: 130px;
-	padding-right: 135px;
+	padding-right: 85px;
 	text-align: right;
 }
 .cart-goods-list .col-action {
@@ -140,8 +146,8 @@ body, button, input, select, textarea {
 .cart-goods-list .item-box .col-img {
 	width: 80px;
 	height: 80px;
-	padding-right: 39px;
-	padding-left: 13px;
+	padding-right: 49px;
+	padding-left: 0px;
 	overflow: hidden;
 	_zoom: 1;
 }

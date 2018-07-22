@@ -19,6 +19,11 @@ class ShopCarController extends Controller
     {   
         $zsum = 0;
         $shops = session('goods')?session('goods'):null;
+        if(session('homeflag')){
+            if($shops){
+                
+            }
+        }
         // dump($shops);
         if($shops){
             foreach ($shops as $key => $value) {
@@ -40,6 +45,7 @@ class ShopCarController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
+        // dd($data);
         $goods = session('goods')?session('goods'):array();
         $a = 0;
         if($goods){
@@ -142,7 +148,7 @@ class ShopCarController extends Controller
     public function delallcar(Request $request)
     {
         $shops = session('goods');
-            unset($hops);
+            unset($shops);
         $request->session()->put('goods',null);
         return redirect('/home/goods/shopcar')->with('success','清空购物车成功');
     }

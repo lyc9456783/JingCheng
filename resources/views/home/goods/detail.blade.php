@@ -425,7 +425,7 @@
       <!-- 评价晒单结束 -->
 
 
-    <!-- 评论 -->
+   <!-- 评论 -->
       <div class="goods-detail-comment-content">
         <div class="container">
 
@@ -579,6 +579,14 @@
 </div>
 
 
+
+
+
+
+
+
+
+ 
       <!-- 商品评论弹框js验证 -->
       <script type="text/javascript">
         // 表单提交事件
@@ -699,14 +707,6 @@
           easyDialog.close();
         }
       </script>
-
-
-
-
-
-
- 
-
 
       </div>
     </div>

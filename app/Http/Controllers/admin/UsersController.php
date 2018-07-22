@@ -281,10 +281,8 @@ class UsersController extends Controller
     {   
         $data = Userdetails::where('uid',$id)->first();
         $res2 = $data->delete();
-
         //设置永久删除回收站中的数据
         $res = Users::onlyTrashed()->where('id','=',$id)->forceDelete();
-
         //判断是否删除成功
          if ($res && $res2) {
             return redirect('/admin/users/index')-> with('success','删除成功');

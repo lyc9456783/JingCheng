@@ -53,22 +53,6 @@
 		</style>
 	</head>
 	<body>
-		<script type="text/javascript">
-		    
-		    function checkSearchForm()
-		    {
-		        if(document.getElementById('keyword').value)
-		        {
-		            return true;
-		        }
-		        else
-		        {
-		            alert("请输入搜索关键词！");
-		            return false;
-		        }
-		    }
-		    
-		</script>
 		<div class="site-topbar">
 			<div class="container">
 		    	<div class="topbar-nav">
@@ -107,9 +91,6 @@
 		              </a>
 		              <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
 		              <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
-		              <a class="btn-del delItem" href="javascript:deleteCartGoods(176);">
-		                  <i class="iconfont"></i>
-		              </a>
 		            </div>
 	        	</li>
 				@endforeach
@@ -126,28 +107,7 @@
 		<div id="J_miniCartList" class="cart-menu">
 			    <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
 		</div>
-		@endif
-		<script type="text/javascript">
-			function deleteCartGoods(rec_id)
-			{
-				Ajax.call('delete_cart_goods.php', 'id='+rec_id, deleteCartGoodsResponse, 'POST', 'JSON');
-			}
-
-			/**
-			 * 接收返回的信息
-			 */
-			function deleteCartGoodsResponse(res)
-			{
-			  if (res.error)
-			  {
-			    alert(res.err_msg);
-			  }
-			  else
-			  {
-				  $("#ECS_CARTINFO").html(res.content);
-			  }
-			}
-		</script>         
+		@endif        
 		</div>
 		<div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
               
@@ -170,7 +130,7 @@
                     <ul class="user-menu" style="display: none;">
                         <li><a target="_blank" href="/home/users/index">个人中心</a></li>
                         <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
-                        <li><a target="_blank" href="">我的评论</a></li>
+                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>
                 </span>

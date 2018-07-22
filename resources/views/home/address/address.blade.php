@@ -119,10 +119,14 @@
                 <td align="center" bgcolor="#ffffff">{{$v['address']}}</td>
                 <td align="center" bgcolor="#ffffff">{{$v['postcode']}}</td>
                 <td align="center" bgcolor="#ffffff">{{$v['label']}}</td>
-                <td align="center" bgcolor="#ffffff">
+                <td class="td-manage" align="center" bgcolor="#ffffff">
                     <font class="f6">
-                        <a href="/home/address/edit/{{$v['id']}}">修改地址</a>
-                        <a href="/home/address/delete/{{$v['id']}}">删除地址</a>
+                        <a title="删除" href="/home/address/edit/{{$v['id']}}" style="text-decoration:none">
+                            <i class="layui-icon">&#xe642;修改</i>
+                        </a>
+                        <a title="删除" href="/home/address/delete/{{$v['id']}}" style="text-decoration:none">
+                            <i class="layui-icon">&#xe640;删除</i>
+                        </a>
                     </font>
                 </td>
             </tr>

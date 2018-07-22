@@ -54,16 +54,23 @@
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+          @if(session('adminflag') == true)
+            <a href="javascript:;">{{ session('username') }}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="">个人信息</a></dd>
-              <dd><a href="">切换帐号</a></dd>
-              <dd><a href="/admins/login.html">退出</a></dd>
+              <dd><a href="/admin/login/change">修改密码</a></dd>
+              <dd><a href="/admin/login/loginOut">退出</a></dd>
             </dl>
+           @endif
           </li>
           <li class="layui-nav-item"><a href="/">商城首页</a></li>
         </ul>
     </div>
+    <script>
+         /*用户-添加*/
+        function member_add(title,url,w,h){
+            x_admin_show(title,url,w,h);
+        }
+    </script>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->
     <div class="wrapper">
@@ -265,6 +272,13 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="list" >
+                    <a href="/admin/shield/index">
+                        <i class="layui-icon">&#xe670;</i> 
+                        违禁字过滤设置
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
                 </li>
                 <li class="list" > 
                     <a href="javascript:;">

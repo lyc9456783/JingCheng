@@ -40,6 +40,8 @@ Route::get('/home/goods/minuscar','home\ShopCarController@minuscar');
 Route::get('/home/goods/delcar','home\ShopCarController@delcar');
 //ajax 清空购物车
 Route::get('/home/goods/delallcar','home\ShopCarController@delallcar');
+//前台商品收藏
+Route::get('/home/collect/addcollect','home\CollectController@addcollect');
 
 
 
@@ -223,7 +225,7 @@ Route::get('/admin/collect/delall','admin\CollectController@delall');
 
 
 
-//前台
+//		前台
 //前台密码修改
 Route::get('/home/pass/index','home\PassController@index');
 Route::post('/home/pass/update/{id}','home\PassController@update');
@@ -528,14 +530,16 @@ Route::get('/mail/send','MailController@send');
 //路由 李银昌
 //登陆 注册  验证用户名和密码
 Route::get('/admin/login','admin\LoginController@index');
-Route::get('/admin/dologin','admin\LoginController@index');
+Route::get('/admin/dologin/login','admin\LoginController@index');
 Route::post('/admin/login/check','admin\LoginController@check');
 
+Route::get('/admin/login/loginOut','admin\LoginController@loginOut');//后台管理员退出用户
+Route::get('/admin/login/change','admin\LoginController@change');//修改密码页面
+Route::post('/admin/login/changepass','admin\LoginController@changepass');//密码修改判断层
 //后台登陆中间件
 
 Route::group(['middleware'=>'login'],function(){
 	//路由存放------------>
-
 
 // Route::get('/admin','admin\IndexController@index');
 
@@ -608,6 +612,11 @@ Route::get('/admin/config','admin\ConfigController@index');
 //保存
 Route::post('/admin/config/store','admin\ConfigController@store');
 
+//shield 网站屏蔽字
+//后台设置页面
+Route::get('/admin/shield/index','admin\ShieldController@index');
+//屏蔽字设置
+Route::post('/admin/shield/store','admin\ShieldController@store');
 
 
 
@@ -619,9 +628,24 @@ Route::post('/admin/config/store','admin\ConfigController@store');
 
 //商品详情页
 Route::get('/home/goods/detail/{id}','home\GoodsController@goodsdetail');
+
 //保存评论
 Route::get('/home/discuss/store','home\GoodsController@store');
 //确认库存
 Route::post('/home/discuss/create','home\GoodsController@create');
 //购物车
 Route::post('/home/discuss/shopcar','home\GoodsController@shopcar');
+
+
+
+
+//生成订单页面
+Route::get('/home/orders/ordercreate','home\OrdersController@orderCreate');
+//添加地址
+Route::get('/home/orders/createsite','home\OrdersController@createSite');
+//保存地址
+Route::post('/home/orders/sitestore/{id}','home\OrdersController@siteStore');
+//提交订单最后一步[业务逻辑判断]
+Route::get('/home/orders/sitesubmit','home\OrdersController@siteSubmit');
+//成功submitOk
+Route::get('/home/orders/submitOk','home\OrdersController@submitOk');

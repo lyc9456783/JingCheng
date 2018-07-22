@@ -47,9 +47,12 @@
       <div class="container">
                 <div class="cart-goods-list">
                 <div class="list-head clearfix"> 
+                    <div class="col col-check">
+                        &nbsp; 
+                    </div>
                     <div class="col col-img" id="itemsnum-top">图片</div> 
                     <div class="col col-name">商品名称</div>
-                    <div class="col col-price">单价</div>
+                    <div class="col col-price" >单价</div>
                     <div class="col col-num">数量</div>
                     <div class="col col-total">小计</div> 
                     <div class="col col-action">操作</div>
@@ -58,7 +61,10 @@
                 @foreach ($shops as $val) 
                   <div class="item-box">
                     <div class="item-table">
-                      <div class="item-row clearfix">            
+                      <div class="item-row clearfix"> 
+                        <div class="col col-check"> 
+                          <input type="checkbox" name="check[]"  checked class="car_check"  />
+                        </div>           
                         <div class="col col-img"> 
                           <a href="/home/goods/detail/{{$val['id']}}" target="_blank"> <img alt="{{$val['info']->name}}" src="{{$val['info']->pic}}"></a>
                         </div>
@@ -74,14 +80,14 @@
                             </p>
                         </div> 
                         <div class="col col-price">
-                            {{$val['info']->discount}}<em>元</em>                  
+                            <span>{{$val['info']->discount}}</span><em>元</em>                  
                         </div>
                         <div class="col col-num"> 
                             <div class="change-goods-num clearfix">
                               <a href="javascript:void(0)" class="minus" money="{{$val['info']->discount}}"  style="background:#bbb" title="减少1个数量";>
                                 <i class="iconfont">-</i>
                               </a> 
-                                <input type="text" ids="{{$val['id']}}"  value="{{$val['num']}}">
+                              <input type="text" class="good_num" ids="{{$val['id']}}"  value="{{$val['num']}}">
                               <a href="javascript:void(0)" class="add" money="{{$val['info']->discount}}" style="background:#bbb" title="增加1个数量">
                                 <i class="iconfont">+</i>
                               </a> 
@@ -115,6 +121,43 @@
       </div>
     </div>
           <script type="text/javascript">
+            var zsum = 0;
+            //获取商品的小计
+           $('.good_num').each(function(){
+
+            var id = $(this).attr('ids');
+
+            var good_num = Number($(this).val());
+
+            var good_price = Number($(this).next().attr('money'));
+             var xsum = Number(good_price*good_num);
+            $('#money'+id).html(xsum);
+            zsum += xsum;
+           });
+           $('#tot').html(zsum);
+            //获取所有多选框
+            $('.car_check').click(function(){
+                var zsum = 0;
+                if($(this).attr('checked')){
+                  $(this).attr('checked',false);
+                }else{
+                  $(this).attr('checked',true);
+                }
+                $("input:checked").each(function(){
+                  var obj = $(this).parent().parent().find('.good_num');
+                  var id = obj.attr('ids');
+                  var good_num = obj.val(); 
+                  var good_price = Number(obj.next().attr('money'));
+                  var xsum = Number(good_price*good_num);
+                  // console.log(xsum);
+                  zsum += xsum;
+              })
+                $('#tot').html(zsum);
+            });
+
+
+           
+
                     //增加减少商品数量
                     $('.minus').click(function(){
                         //起别名
@@ -141,7 +184,11 @@
                               $('#money'+id).html(price*num);
                               var tot = Number($('#tot').html());
                               //合计的计算
-                              $('#tot').html(tot-price);
+                               var checks = obj.parent().parent().parent().find('.car_check');
+                              if(checks.attr('checked')){
+                                $('#tot').html(tot-price);
+                              }
+                              
                              }
                         });
                       });
@@ -165,7 +212,11 @@
                               $('#money'+id).html(price*num);
                                var tot = Number($('#tot').html());
                               //合计的计算
-                              $('#tot').html(tot+price);
+                              //判断是否是选中的input 是总价增加 不是总价格不增加
+                              var checks = obj.parent().parent().parent().find('.car_check');
+                              if(checks.attr('checked')){
+                                $('#tot').html(tot+price);
+                              }
                              }
                         });
                       });
@@ -179,11 +230,10 @@
                         $.get('/home/goods/delcar',{'id':id},function(data){
                              if(data){
                                 obj.parent().parent().parent().parent().remove();
+                                location.reload(true);
                              }
                         });
                       });
-
-
 
                 </script>
     @else      

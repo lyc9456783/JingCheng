@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Orders;
 use App\Models\Goods;
 use DB;
+use App\Models\Address;
 class OrdersController extends Controller
 {
     /**
@@ -134,5 +135,63 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+
+    //李银昌
+    //购物车之后 生成订单页面
+    public function orderCreate(){
+
+        //个人的收货地址
+        $address = Address::where('uid','=',21)->get();
+        // dump($address);
+        return view('home.orders.orderCreate',['address'=>$address]);
+    }
+
+    //添加地址
+    public function createSite(){
+        return view('home.orders.createSite');
+    }
+
+    //保存收货地址
+    public function siteStore(Request $request,$id)
+    {
+        $req = $request->except(['_token']);
+        $has = $request->has(['name','phone','address','postcode','s_xj']);
+        if($has){
+            $address = new Address;
+            $address -> uid = $id;
+            $address -> name = $req['name'];
+            $address -> phone = $req['phone'];
+            $address -> address = $req['s_sf'].$req['s_sq'].$req['s_xj'].$req['address'];
+            $address -> postcode = $req['postcode'];
+            $address -> label = $req['label'];
+            $res = $address->save();
+            // dump($res);
+            if($res){
+                return redirect('/home/orders/ordercreate')-> with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
+        }else{
+            return back()->with('error','请补全所有内容');
+        }
+    }
+
+    //提交订单 扣减库存 跳转支付页面
+    public function siteSubmit()
+    {
+        
+
+
+        
+    }
+
+    //支付成功 正式扣除库存  否则还原库存
+    public function submitOk()
+    {
+        return view('home.orders.submitOk');
     }
 }

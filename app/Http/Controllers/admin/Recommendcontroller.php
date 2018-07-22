@@ -176,8 +176,6 @@ class RecommendController extends Controller
             //执行数据添加
             $recommend -> rimg = $fileadd;
         }
-        
-        $recommend -> gid = $req['gid'];
         $recommend -> rstate = $req['rstate'];
         $res = $recommend -> save();
         if($res){

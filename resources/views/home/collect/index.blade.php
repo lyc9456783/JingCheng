@@ -55,11 +55,10 @@
             <tr>
                 <td align="center" bgcolor="#ffffff">{{ $v->collectgoods['name'] }}</td>
                 <td align="center" bgcolor="#ffffff">{{ $v->collectgoods['price'] }}</td>
-                <td align="center" bgcolor="#ffffff">
-                    <font class="f6">
-                        <a href="">加入购物车</a>
-                        <a href="/home/collect/delete/{{ $v['id'] }}">删除</a>
-                    </font>
+                <td class="td-manage" align="center" bgcolor="#ffffff">
+                    <a title="删除" href="/home/collect/delete/{{ $v['id'] }}" style="text-decoration:none">
+                        <i class="layui-icon">&#xe640;删除</i>
+                    </a>
                 </td>
             </tr>
             @endforeach

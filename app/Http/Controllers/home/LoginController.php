@@ -85,7 +85,7 @@ class LoginController extends Controller
         if ($res) {
             session(['homeuser'=>$user]);
             session(['homeflag'=>true]);
-            return redirect('/')-> with('success','注册成功');
+            return back('/')-> with('success','注册成功');
         }else{
             return back()->with('error','注册失败');
         }

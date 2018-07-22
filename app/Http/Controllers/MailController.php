@@ -11,25 +11,25 @@ class MailController extends Controller
 {
     public function send()
     {
-<<<<<<< HEAD
-        // $name = '京城';
-        // $flag = Mail::send('emails.test',['name'=>$name],function($message){
-        //     $to = '635197121@qq.com';
-        //     $message ->to($to)->subject('测试邮件');
+
+        $name = '京城';
+        $flag = Mail::send('emails.test',['name'=>$name],function($message){
+            $to = '635197121@qq.com';
+            $message ->to($to)->subject('测试邮件');
+        });
+
+        // $flag =Mail::raw('这是一封测试邮件', function ($message) {
+        // $to = '635197121@qq.com';
+        // $message ->to($to)->subject('测试邮件');
         // });
 
-        $flag =Mail::raw('这是一封测试邮件', function ($message) {
-        $to = '635197121@qq.com';
-        $message ->to($to)->subject('测试邮件');
-        });
-=======
 
-        $flag =Mail::raw('这是一封测试邮件内容', function ($message) { 
+        // $flag =Mail::raw('这是一封测试邮件内容', function ($message) { 
 
-        $message ->to('635197121@qq.com')->subject('邮件主题 测试');
-        });
+        // $message ->to('635197121@qq.com')->subject('测试1111111111222222222222');
+        // });
 
->>>>>>> origin/liyinchang
+
         if($flag){
             echo '发送邮件成功，请查收！';
         }else{
