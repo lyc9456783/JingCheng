@@ -31,11 +31,11 @@
                     // var date = new Date(old_time[0],old_time[1],old_time[2],old_time[3],old_time[4],old_time[5]);
                     //添加到订单的时候的时间戳
                     // var history_time = date.getTime(); 
-                    old_time[4] = (parseInt(old_time[4]));
+                    old_time[4] = (parseInt(old_time[4])+1);
 
 
 
-                    const fourthOfJuly = new Date(old_time[0],old_time[1],old_time[2],old_time[3],old_time[4],old_time[5]).getTime();
+         
 
                    // console.log(timestampToTime(fourthOfJuly););
 
@@ -53,7 +53,7 @@
                     // console.log(big_time-now);
 
                         function run(){
-                              const fourthOfJuly = new Date(old_time[0],old_time[1],old_time[2],old_time[3],(old_time[4]+5),old_time[5]).getTime();
+                              const fourthOfJuly = new Date(old_time[0],old_time[1],old_time[2],old_time[3],old_time[4],old_time[5]).getTime();
                               const today = new Date().getTime();
                               // get the difference
                               const diff = fourthOfJuly - today;
@@ -69,11 +69,11 @@
                              if(seconds < 10){
                                 seconds = '0'+seconds;
                              }
-                             if(minutes == 00 && seconds == 00 && hours = 0){
+                             if(minutes == 00 && seconds == 00 && hours == 00){
                                 clearInterval(time);
-                                alert('失败');
+                                location.replace('/home/orders/index');
                              }
-                              var str =minutes+'：'+seconds;
+                              var str =hours+'小时 '+minutes+'分钟 '+seconds+'秒';
                                 //      // 赋值
                               var text_time = $('.pay-time-tip').text(str);
                         }

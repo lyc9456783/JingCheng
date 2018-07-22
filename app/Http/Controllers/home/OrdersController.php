@@ -145,13 +145,10 @@ class OrdersController extends Controller
     //购物车之后 生成订单页面
     public function orderCreate(){
         //检测用户是否登陆
-        $a = 2;
-        if($a == 1){
-            //没有登陆跳转登陆页面
-           return redirect('/home/login/index')-> with('success','您还没有登陆');
-        }else{
+        
+        if(session('homeflag') == true){
             //已经登陆进入区间
-            $user_id = 21; //已经登陆的用户id
+            $user_id = session('homeuser.id'); //已经登陆的用户id
             $shops = session('goods');
 
      
@@ -159,6 +156,11 @@ class OrdersController extends Controller
             $address = Address::where('uid','=',$user_id)->get();
             // dump($address);
             return view('home.orders.orderCreate',['address'=>$address,'shops'=>$shops]);
+            
+        }else{
+
+            //没有登陆跳转登陆页面
+           return redirect('/home/login/index')-> with('success','您还没有登陆');
         }
     }
 
@@ -194,11 +196,42 @@ class OrdersController extends Controller
         }
     }
 
+    //修改地址
+    public function siteEdit($id)
+    {
+        //查找当前要修改的地址信息
+        $address = Address::where('id','=',$id)->first();
+
+        return view('home.orders.siteEdit',['address'=>$address]);
+    }
+
+
+    //保存修改地址
+    public function siteUpdate(Request $request,$id)
+    {
+        $req = $request->except(['_token']);
+        $has = $request->has(['name','phone','address','postcode','s_xj']); 
+
+        $address = Address::where('id','=',$id)->first();
+        $address -> name = $req['name'];
+        $address -> phone = $req['phone'];
+        $address -> address = $req['s_sf'].$req['s_sq'].$req['s_xj'].$req['address'];
+        $address -> postcode = $req['postcode'];
+        $address -> label = $req['label'];
+        $res = $address->save();
+
+        if($res){
+            return redirect('/home/orders/ordercreate')-> with('success','修改成功');
+        }else{
+            return back()->with('error','修改失败');
+        }
+    }
+
+
+
     //提交订单 扣减库存 跳转支付页面
     public function siteSubmit(Request $request)
     {
-
-
          $data = $request -> only(['uid','addid']);
          //收件人信息编辑
          $address = Address::where('uid','=',$data['uid'])->where('id','=',$data['addid'])->first();
@@ -206,17 +239,17 @@ class OrdersController extends Controller
          $phone = $address['phone'];
          $address_dz = $address['address'];
 
-        //订单名称的编辑
-        $temp_name = str_random(6);
-        $dirname = date('Ymd',time());
-        $ordersnum = $dirname.'_'.$temp_name;
+         //订单名称的编辑
+         $temp_name = str_random(6);
+         $dirname = date('Ymd',time());
+         $ordersnum = $dirname.'_'.$temp_name;
 
          //session 拿数据
          $shops = session('goods');
          foreach ($shops as $key => $value) {
     
              //添加到发货表
-             $orders =new Orders;
+             $orders = new Orders;
              $orders -> ordersnum = $ordersnum; //商品订单号
              $orders -> gid = $value['id']; //商品
              $orders -> uid = $data['uid']; //下单用户
@@ -248,10 +281,9 @@ class OrdersController extends Controller
             echo $ordersnum;
          }else{
             echo 0;
-         }
-
-        
+         }   
     }
+
 
     //支付成功 正式扣除库存  否则还原库存
     public function submitOk($ordsum)

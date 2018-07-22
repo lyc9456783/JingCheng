@@ -648,6 +648,10 @@ Route::get('/home/orders/ordercreate','home\OrdersController@orderCreate');
 Route::get('/home/orders/createsite','home\OrdersController@createSite');
 //保存地址
 Route::post('/home/orders/sitestore/{id}','home\OrdersController@siteStore');
+//修改地址页面
+Route::get('/home/orders/siteedit/{id}','home\OrdersController@siteEdit');
+//保存地址
+Route::post('/home/orders/siteupdate/{id}','home\OrdersController@siteUpdate');
 //提交订单最后一步[业务逻辑判断]
 Route::get('/home/orders/sitesubmit','home\OrdersController@siteSubmit');
 //成功submitOk
