@@ -28,7 +28,7 @@ class DiscussController extends Controller
                 ->join('jc_user_details as user','user.uid','=','u.id')
                 ->where('g.name','like','%'.$req.'%')
                 ->select('d.id','g.name','user.nickname','d.content')
-                ->paginate(5)->appends($request->input());
+                ->paginate(8)->appends($request->input());
             // dump($data);
             // $data1 = Goods::where('name','like','%'.$req.'%')->get();
             // foreach ($data1 as $k => $v)

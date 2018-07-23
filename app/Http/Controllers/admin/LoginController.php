@@ -109,10 +109,10 @@ class LoginController extends Controller
 
 
     //后台退出
-    public function loginOut()
+    public function loginOut(Request $request)
     {
-        session(['adminflag'=>false]);
-        return redirect('/admin/login/login')->with('success','退出成功');
+        $request->session()->put('adminflag',false);
+        return redirect('/admin/login')->with('success','退出成功');
 
     }
 

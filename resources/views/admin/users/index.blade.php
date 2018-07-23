@@ -21,7 +21,7 @@
             <xblock>
                 <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button> &nbsp 
                 <!-- 用户添加 -->
-                <a href="/admin/users/create"><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button></a>
+                <a href="/admin/users/create"><button class="layui-btn" onclick=""><i class="layui-icon">&#xe608;</i>添加</button></a>
                 <!-- 计算数据总数量 -->
                 <span class="x-right" style="line-height:40px">共有数据：{{ $count }}&nbsp条</span></xblock>
             <table class="layui-table">

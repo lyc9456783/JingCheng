@@ -62,7 +62,6 @@
     #choose li.GeneralAttrImg .dd .item a{padding:1px;}
     #choose li.GeneralAttrImg .dd .item a img{margin:1px;}
     #choose li.GeneralAttrImg .dd .item.selected a{padding:0;}
-  
 
 </style>
 <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
@@ -75,7 +74,6 @@
     </div>
 </div>
 <!-- 导航历史记录结束 -->
-
 <!-- 商品详情开始 -->
 <div class="goods-detail">
 

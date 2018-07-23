@@ -40,9 +40,6 @@
                            	库存数量	
                         </th>
                         <th>
-                            上下架状态
-                        </th>
-                        <th>
                             操作
                         </th>
                     </tr>
@@ -61,33 +58,10 @@
                         <td>
                             {{$v['num']}}
                         </td>
-                        <td>
-                        @if ($v['flag'] == 1)
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                已上架
-                            </span>
-                        @else
-                            <span class="layui-btn layui-btn-disabled layui-btn-mini">
-                                已下架
-                            </span>
-                        </td>
-                        @endif
                         <td class="td-manage">
-                        @if ($v['flag'] == 1)
-                            <a style="text-decoration:none" href="/admin/entrepot/show/{{$v['id']}}" title="是否下架">
-                                <i class="layui-icon">&#xe601;下架</i>
-                            </a>
                             <a title="修改" href="/admin/entrepot/edit/{{$v['id']}}" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;修改</i>
                             </a>
-                        @else
-                            <a style="text-decoration:none" href="/admin/entrepot/show/{{$v['id']}}" title="是否上架">
-                                <i class="layui-icon">&#xe601;上架</i>
-                            </a>
-                            <a title="修改" href="/admin/entrepot/edit/{{$v['id']}}" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;修改</i>
-                            </a>
-                        @endif
                         </td>
                     </tr>
                     @endforeach

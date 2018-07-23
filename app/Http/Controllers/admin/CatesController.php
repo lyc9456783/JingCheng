@@ -41,11 +41,11 @@ class CatesController extends Controller
         if($request->has('search')){
             $search = $request->input('search');
 
-            $cates = Cates::where('classname','like','%'.$search.'%')->paginate(2)->appends($request->input());
-            // dump($cates);
-            return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates]);
+            $cates = Cates::where('classname','like','%'.$search.'%')->paginate(5)->appends($request->input());
+            $count = count($cates);
+            return view('admin.cates.index',['title'=>'分类列表','cates'=>$cates,'count'=>$count]);
         }else{
-            $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(3);
+            $cates = Cates::select('id','pid','classname','path','status',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->paginate(5);
             foreach($cates as $k=>$v){
                 //统计逗号出现的次数
                 $i = substr_count($v->path,',');

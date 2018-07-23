@@ -39,9 +39,9 @@ class GoodImagesController extends Controller
         $id = $request->input('search');
         $goods = Goods::get();
         if($id){
-            $data = GoodImages::where('gid',$id)->paginate(4)->appends($request->input());
+            $data = GoodImages::where('gid',$id)->paginate(8)->appends($request->input());
         }else{   
-            $data = GoodImages::paginate(4)->appends($request->input());
+            $data = GoodImages::paginate(8)->appends($request->input());
         }
         return view('admin.goodimages.index',['title'=>'商品详图','data'=>$data,'goods'=>$goods,'count'=>$count]);
     }

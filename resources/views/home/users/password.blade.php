@@ -17,6 +17,7 @@
             <ul>
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
+                    <a class="" href="/home/address/create">新增地址</a>
                     <a class="" href="/home/address/index">收货地址</a>
                 </li>
             </ul>

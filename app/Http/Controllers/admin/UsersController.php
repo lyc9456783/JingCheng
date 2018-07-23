@@ -23,7 +23,7 @@ class UsersController extends Controller
         $search = $request -> input('search','');  //表示如果有值就进行搜索,没有值就为空
 
         //设置查询数据库中的信息
-        $data = Users::where('username','like','%'.$search.'%')->paginate(3)->appends($request->input());
+        $data = Users::where('username','like','%'.$search.'%')->paginate(8)->appends($request->input());
 
         //设置计算数据表中所有信息的数量
         $count = DB::table('jc_users')->whereNull('deleted_at')->count();

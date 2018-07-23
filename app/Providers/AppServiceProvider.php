@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             );
         }
 
-        //共享数据
+       //  //共享数据
 
 	
     }

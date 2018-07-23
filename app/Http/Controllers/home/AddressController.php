@@ -32,7 +32,12 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        //获取session中的数据
+        $data = session('homeuser');
+        //获取当前登录用户的id
+        $uid = $data['id'];
+        $address = Address::where('uid',$uid)->get();
+        return view('home.address.addresscreate',['title'=>'收货地址列表','title1'=>'添加地址','data'=>$address,'id'=>$uid]);
     }
 
     /**

@@ -19,7 +19,7 @@
 <div style="width:1250px;margin:auto;">
     <div class="shopping_mian" style="width: 100%;">
         <div class="ShoppingCart_left" style="padding-left:0px;float:left;line-height:30px;">
-            <a href="/">首页</a> &gt; <a href="/home/notice" class="blue">商城公告 &gt;</a>
+            <a href="/">首页</a> &gt; <a href="/home/notice" class="blue">商城公告</a>
         </div>
         <form action="/home/notice" method="get" style="float:right">
             <input  type="text" style="width:170px;height:32px;border-radius:10px;" placeholder="请输入标题内容" name="search" >

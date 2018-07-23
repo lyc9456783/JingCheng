@@ -41,4 +41,10 @@ class Goods extends Model
     {
         return $this -> hasOne('App\Models\Recommends','gid');
     }
+
+    //设置商品折扣与商品一对一关系
+    public function discounts()
+    {
+        return $this -> hasOne('App\Models\Discount','gid');
+    }
 }

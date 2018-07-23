@@ -179,7 +179,8 @@
                         <div class="col col-action">操作</div>
                     </div>
                     <div class="list-body"> 
-                    @foreach ($common_shopcars_data as $val) 
+                    @foreach ($common_shopcars_data as $val)
+                    @if($val['uid'] == session('homeuser')['id']) 
                       <div class="item-box">
                         <div class="item-table">
                           <div class="item-row clearfix"> 
@@ -223,7 +224,8 @@
                             </div>
                         </div>
                       </div>
-                    </div> 
+                    </div>
+                    @endif
                     @endforeach
                     <p class="clear-cart">
                       <a id="delallcar" href="/home/goods/delallcar">清空购物车</a>
@@ -250,6 +252,7 @@
         </div>
     @endif
     <script type="text/javascript">
+          // location.reload(true);
             var zsum = 0;
             //获取商品的小计
            $('.good_num').each(function(){

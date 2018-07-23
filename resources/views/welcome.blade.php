@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <title>维护中..</title>
+        <link rel="shortcut icon" href="/home/logo/favicon.ico" />
 
         <style>
             html, body {
@@ -31,14 +30,14 @@
             }
 
             .title {
-                font-size: 96px;
+                font-size: 60px;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">网站维护中,带来不便尽请谅解。。</div>
             </div>
         </div>
     </body>

@@ -39,7 +39,7 @@ class RecommendController extends Controller
             ->join('jc_goods as g','r.gid','=','g.id')
             ->where('g.name','like','%'.$req.'%')
             ->select('r.id','r.rimg','r.rstate','g.name')
-            ->paginate(5)->appends($request->input());
+            ->paginate(8)->appends($request->input());
         // dump($req);
             // dump($data);
         return view('admin.recommend.index',['title'=>'商品推荐列表','data'=>$data]);

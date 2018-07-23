@@ -34,7 +34,7 @@ class ShopCarController extends Controller
                     $shops -> gnum = $v['num'];
                     $shops -> gprice = $v['info']->discount;
                     $shops -> gcolor = $v['color'];
-                    $shops -> gcolor = $v['info']->pic;
+                    $shops -> gpic = $v['info']->pic;
                     $shops -> gtype = $v['info']->detailsgoods->type;
                     $shops -> save();   
                 }
@@ -110,7 +110,7 @@ class ShopCarController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ajax商品增加
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -140,7 +140,7 @@ class ShopCarController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     *ajax商品减少
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -158,7 +158,7 @@ class ShopCarController extends Controller
         }else{
             
             $shops = session('goods');
-            // dump($shops);
+
             foreach ($shops as $key => &$value) {
                 if($value['id']==$id){
                     $value['num'] = --$value['num'];
@@ -227,14 +227,4 @@ class ShopCarController extends Controller
   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

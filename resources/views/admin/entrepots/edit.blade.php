@@ -23,17 +23,6 @@
                 </div>
               </div>
               <div class="layui-form-item">
-                <label class="layui-form-label">开关</label>
-                <div class="layui-input-block">
-                  <input type="checkbox" name="flag" lay-skin="switch" lay-text="上架|下架" 
-                  @if($data->flag == '1')
-                  checked
-                  @endif
-                  >
-                  
-                </div>
-              </div>
-              <div class="layui-form-item">
                 <div class="layui-input-block">
                   <button class="layui-btn" lay-submit lay-filter="formDemo">立即修改</button>
                   <button type="reset" class="layui-btn layui-btn-primary">重置</button>

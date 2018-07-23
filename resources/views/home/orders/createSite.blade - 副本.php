@@ -20,7 +20,7 @@
     <div class="box_1">
         <div class="text-info" style="font-size:20px;width:400px;margin:center;"></div>
         <center>
-        <form action="/home/orders/siteupdate/{{ $address['id'] }}" method="post" name="theForm">
+        <form action="/home/orders/sitestore/{{ session('homeuser.id') }}" method="post" name="theForm">
             {{ csrf_field() }}
             <table width="70%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd"><tbody>
             <tr ><td style="margin:right;"><a href="/home/orders/ordercreate">关闭</a></td></tr>
@@ -35,27 +35,27 @@
                 <div class="row">
                 <tr>
                     <td align="center" bgcolor="#ffffff">收货人姓名：</td>
-                    <td align="left" bgcolor="#ffffff"><input name="name" type="text" class="inputBg" id="consignee" placeholder="收货人姓名" value="{{ $address['name'] }}">(必填) 
+                    <td align="left" bgcolor="#ffffff"><input name="name" type="text" class="inputBg" id="consignee" placeholder="收货人姓名" value="">(必填) 
                     </td>
                 </tr>
                 <tr>
                     <td align="center" bgcolor="#ffffff">详细地址：</td>
-                    <td align="left" bgcolor="#ffffff"><input name="address" type="text" class="inputBg" id="address_2" placeholder="详细地址" value="{{ $address['address'] }}">(必填)
+                    <td align="left" bgcolor="#ffffff"><input name="address" type="text" class="inputBg" id="address_2" placeholder="详细地址" value="">(必填)
                     </td>
                 </tr>
                 <tr>
                     <td align="center" bgcolor="#ffffff">收货人手机：</td>
-                    <td align="left" bgcolor="#ffffff"><input name="phone" type="text" class="inputBg" id="mobile_2" placeholder="11位手机号" value="{{ $address['phone'] }}">(必填)
+                    <td align="left" bgcolor="#ffffff"><input name="phone" type="text" class="inputBg" id="mobile_2" placeholder="11位手机号" value="">(必填)
                     </td>
                 </tr>
                 <tr>
                     <td align="center" bgcolor="#ffffff">邮政编码：</td>
-                    <td align="left" bgcolor="#ffffff"><input name="postcode" type="text" class="inputBg" id="mobile_2" placeholder="邮政编码" value="{{ $address['postcode'] }}">(必填)
+                    <td align="left" bgcolor="#ffffff"><input name="postcode" type="text" class="inputBg" id="mobile_2" placeholder="邮政编码" value="">(必填)
                     </td>
                 </tr>
                 <tr>
                     <td align="center" bgcolor="#ffffff">地址标签：</td>
-                    <td align="left" bgcolor="#ffffff"><input name="label" type="text" class="inputBg" id="mobile_2" placeholder="如 家,公司" value="{{ $address['label'] }}"></td>
+                    <td align="left" bgcolor="#ffffff"><input name="label" type="text" class="inputBg" id="mobile_2" placeholder="如 家,公司" value=""></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center" bgcolor="#FFFFFF">

@@ -75,21 +75,16 @@
 	         	</div>
 	          	 <p class="desc">{{$v->intro}}</p>
 	         	 <h2 class="title"><a href="/home/goods/detail/{{$v->id}}" title="{{$v->name}}">{{$v->name}}</a></h2>
-				@foreach($discounts as $kkk=>$vvv)
-					@if($vvv['gname'] == $v->name)
-					@if($vvv['gid'] == $v->id)
+					@if($v->id == $v->discounts['gid'])
 			           	<p class="price">
-			                本店价<font class="shop_s">{{$vvv['discount']}}<em>元</em></font>
-			               <del>专柜价<font class="market_s">{{$vvv['price']}}<em>元</em></font></del>
+			                本店价<font class="shop_s">{{$v->discounts['discount']}}<em>元</em></font>
+			               <del>专柜价<font class="market_s">{{$v->discounts['price']}}<em>元</em></font></del>
 			           	</p>
-			        @else
-			        
+					@else
 		        		<p class="price">
 			                本店价<font class="shop_s">{{$v->price}}<em>元</em></font>
 			           	</p>
-			        @endif
-			        @endif
-				@endforeach
+			  		@endif
 	            <div class="actions clearfix">
 	                <a href="javascript:onclick=collect({{$v->id}});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class="btn-like J_likeGoods"><i class="layui-icon">&#xe600;</i><span>收藏</span></a> 
 	           	</div>
@@ -97,7 +92,7 @@
 	          		@if($vv['gid'] === $v->id)
 						@if($vv['describe'] ==1)
 							<div class="flags"> 			
-				    			<div class="flag flag-saleoff">半价出售</div>       
+				    			<div class="flag flag-saleoff">半价</div>       
 	          				</div>
 						@elseif($vv['describe'] ==2)
 							<div class="flags"> 			

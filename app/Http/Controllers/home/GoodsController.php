@@ -13,7 +13,7 @@ use App\Models\Goods;
 use App\Models\Shields;
 use App\Models\Recommends;
 use App\Models\Collect;
-
+use App\Models\Discount;
 class GoodsController extends Controller
 {
     /**
@@ -87,7 +87,8 @@ class GoodsController extends Controller
             }
             // dd($goods);
         $recommend = Recommends::where('rstate','1')->take(10)->skip(3)->get();
-        $discounts = DB::table('js_discounts')->get();
+        $discounts = Discount::all();
+        // dump($discounts);
         // dd($discounts );
         return view('home.goods.list',['goods'=>$goods,'recommend'=>$recommend,'dir'=>$dir,'id'=>$id,'discounts'=>$discounts]);
     }

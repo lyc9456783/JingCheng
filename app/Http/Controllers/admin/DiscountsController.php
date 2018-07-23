@@ -26,7 +26,7 @@ class DiscountsController extends Controller
         $search = $request -> input('search',''); 
         
         //获取订单表中的信息查询
-        $data = Discount::where('gname','like','%'.$search.'%')->paginate(3)->appends($request->input());
+        $data = Discount::where('gname','like','%'.$search.'%')->paginate(8)->appends($request->input());
         // dd($data);
 
         //查询订单表中的数据总数量

@@ -35,9 +35,9 @@ class CollectController extends Controller
     {
         $id = $request -> input('search');
         if($id){
-            $data = Collect::where('uid',$id)->paginate(4)->appends($request->input());
+            $data = Collect::where('uid',$id)->paginate(8)->appends($request->input());
         }else{
-            $data = Collect::paginate(4)->appends($request->input());
+            $data = Collect::paginate(8)->appends($request->input());
         }
         $collect = Collect::all();
         return view('admin.collect.index',['title'=>'商品收藏列表','data'=>$data,'collect'=>$collect]);

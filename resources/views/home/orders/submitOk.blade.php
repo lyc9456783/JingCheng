@@ -71,6 +71,8 @@
                              }
                              if(minutes == 00 && seconds == 00 && hours == 00){
                                 clearInterval(time);
+
+                                alert('订单交易失败!');
                                 location.replace('/home/orders/index');
                              }
                               var str =hours+'小时 '+minutes+'分钟 '+seconds+'秒';

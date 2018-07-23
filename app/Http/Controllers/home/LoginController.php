@@ -88,17 +88,19 @@ class LoginController extends Controller
         
         //获取最后插入数据的ID号
         $uid = DB::table('jc_users')->insertGetId(['username'=>$data['username'],'token'=>str_random(50),'email'=>$data['email'],'password'=>$password,'grade'=>3]);
+
         //连接用户详情表进行存储
         $details = new Userdetails;
         $details -> uid = $uid;
         $res = ($details -> save());
+
         //查询用户数据库信息
         $users = Users::where('id',$uid)->first();
         //对数据的添加进行整体的判断
         if ($res) {
             session(['homeuser'=>$users]);
             session(['homeflag'=>true]);
-            return back('/')-> with('success','注册成功');
+            return redirect('/')-> with('success','注册成功');
         }else{
             return back()->with('error','注册失败');
         }
@@ -129,15 +131,16 @@ class LoginController extends Controller
         
         //查询数据库中的相对应的信息
         $users = DB::table('jc_users')->where('username','=',$username)->first();
+        // dd($users);
         //判断上传的密码是否正确
-        if(Hash::check($password, $users['password'])){ 
+        if(Hash::check($password, $users['password'])){
+            $user = Users::find($users['id']); 
+            $user ->login = 1;
+            $user -> save();
             //设置登录成功之后把登录的用户信息存入到session中
             session(['homeuser'=>$users]);
             session(['homeflag'=>true]);
-            $id = $users['id'];
-            $user = Users::find($id);
-            $user -> login = 1;
-            $user -> save();
+            // dd(session('homeflag'));
             return redirect('/')->with('success','登录成功');
         } else {
             return back() ->with('error','用户名或密码错误');
@@ -148,9 +151,9 @@ class LoginController extends Controller
      //退出登录
     public function logout()
     {
-        //将登陆记录消除
-        $id = session('homeuser')['id'];
-        $user = Users::find($id);
+        //消除登陆状态
+        $uid = session('homeuser')['id'];
+        $user = Users::find($uid);
         $user -> login = 0;
         $user -> save();
         //消除标记

@@ -13,6 +13,7 @@ use App\Models\Recommends;
 use App\Models\Notice;
 use App\Models\Links;
 use App\Models\Discuss;
+use App\Models\Discount;
 class IndexController extends Controller
 {
     /**
@@ -27,7 +28,7 @@ class IndexController extends Controller
         //推荐商品数据2 跳过三条获取10条
         $recommend2 = Recommends::take(10)->skip(3)->get();
         //推荐商品数据3 跳过13条获取10条
-        $recommend3 = Recommends::orderBy('id','desc')->take(10)->get();
+        $recommend3 = Recommends::orderBy('id','desc')->where('rstate','1')->take(10)->get();
         //手机分类
         $scate = Cates::where('path','=','0,1')->get();
         //所有手机商品
@@ -79,7 +80,8 @@ class IndexController extends Controller
             // dd($search);
             $goods = Goods::where('name','like','%'.$search.'%')->paginate(8)->appends($request->input());
             $recommend = Recommends::where('rstate','1')->take(10)->skip(3)->get();
-            return view('home.goods.list',['goods'=>$goods,'id'=>0,'dir'=>'搜索','recommend'=>$recommend]); 
+            $discounts = Discount::all();
+            return view('home.goods.list',['goods'=>$goods,'id'=>0,'dir'=>'搜索','recommend'=>$recommend,'discounts'=>$discounts]); 
         }
         return back()->with('error','搜索内容不能为空');
     }
@@ -95,12 +97,13 @@ class IndexController extends Controller
         if($request->has('search')){
             $_GET['page'] = empty($_GET['page'])?1:$_GET['page'];
             $search = $request->input('search');
+            $search = empty($search)?'%':$search;
             // dump($search);
-            $notices = Notice::where('title','like','%'.$search.'%')->paginate(5);
-            
+            $notices = Notice::where('title','like','%'.$search.'%')->paginate(5);      
         }else{
-              //商城公告数据
-        $notices = Notice::orderBy('created_at','desc')
+            $_GET['page'] = empty($_GET['page'])?1:$_GET['page'];
+                  //商城公告数据
+            $notices = Notice::orderBy('created_at','desc')
                 ->paginate(5)
                 ->appends($request->input());
         }

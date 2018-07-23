@@ -61,6 +61,19 @@
                             <a title="编辑" href="/admin/orders/edit/{{$v->id}}">
                                 <i class="layui-icon">&#xe642;</i>编辑
                             </a> &nbsp
+                            @if($v->status == 0)
+                            <a title="发货" href="/admin/orders/fh/{{$v->id}}">
+                                <i class="layui-icon">&#xe609;</i>发货
+                            </a> &nbsp
+                            @elseif($v->status == 1)
+                                <a title="已发货" href="javascript:;">
+                                <i class="layui-icon">&#xe609;</i>已发货
+                            </a> &nbsp
+                            @else
+                                <a title="交易完成" href="javascript:;">
+                                <i class="layui-icon">&#xe609;</i>交易完成
+                            </a> &nbsp
+                            @endif
                             <a title="删除" href="/admin/orders/del/{{$v->id}}">
                                 <i class="layui-icon">&#xe640;</i>删除
                             </a>

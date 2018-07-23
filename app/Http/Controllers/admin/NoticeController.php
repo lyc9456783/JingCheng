@@ -23,7 +23,7 @@ class NoticeController extends Controller
         $search = $request -> input('search','');
 
         //查询数据进行页面显示
-        $data = Notice::where('id','like','%'.$search.'%')->paginate(3)->appends($request->input());
+        $data = Notice::where('id','like','%'.$search.'%')->paginate(8)->appends($request->input());
         // dd($data);
 
          //设置计算数据表中所有信息的数量

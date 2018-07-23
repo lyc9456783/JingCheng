@@ -10,7 +10,7 @@ class Discount extends Model
     public $table = 'js_discounts';
 
     //与商品分类的一对一关系
-    public function disgoods()
+    public function discounts()
     {
     	return $this -> hasOne('App\Models\Goods','gid');
     }
