@@ -47,8 +47,8 @@ class IndexController extends Controller
         $notices = Notice::orderBy('created_at','desc')->take(9)->get();
         //友情链接数据
         $links = links::where('lstate','1')->get();
-        // dump($links);
-        $discuss = Discuss::where('id','<','100')->orderBy('id','desc')->take(4)->get();
+        //新评论数据
+        $discuss = Discuss::where('id','<','100000')->orderBy('id','desc')->take(4)->get();
         return view('home.index.index',
             [
                     'cates'=>$cates,

@@ -55,7 +55,29 @@ class ShopCarController extends Controller
     {
         $data = $request->all();
         if(session('homeflag')){
-            
+            $uid = session('homeuser')['id'];
+            $good_car = ShopCars::where('gid',$data['id'])->where('uid',$uid)->first(); 
+            if($good_car){
+                $good_car -> gnum = ($good_car->gnum + $data['num']);
+                $good_car -> save();
+                echo 1;
+            }else{
+                $uid = session('homeuser')['id'];
+                $goods = Goods::where('id',$data['id'])->first();
+                $shopcar = new ShopCars;
+                $shopcar -> uid = $uid;
+                $shopcar -> gid = $data['id'];
+                $shopcar -> gname = $goods['name'];
+                $shopcar -> gnum = $data['num'];
+                $shopcar -> gprice = $goods['discount'];
+                $shopcar -> gpic = $goods['pic'];
+                $shopcar -> gcolor = $goods ->detailsgoods['color'];
+                $shopcar -> gtype = $goods ->detailsgoods['type'];
+                $shopcar -> save();
+                echo 1;  
+            }
+           
+
         }else{
 
             $goods = session('goods')?session('goods'):array();
@@ -94,17 +116,27 @@ class ShopCarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addcar(Request $request)
-    {
+    {   
         $id = $request->input('id');
-        $shops = session('goods');
-        // dump($shops);
-        foreach ($shops as $key => &$value) {
-            if($value['id']==$id){
-                $value['num'] = ++$value['num'];
+        if(session('homeflag')){
+            $uid = session('homeuser')['id'];
+            $shops = ShopCars::where('gid',$id)->where('uid',$uid)->first();
+            $shops -> gnum = ++$shops->gnum;
+            $shops -> save();
+            echo 1;
+        }else{
+
+            $shops = session('goods');
+            // dump($shops);
+            foreach ($shops as $key => &$value) {
+                if($value['id']==$id){
+                    $value['num'] = ++$value['num'];
+                }
             }
+            $request->session()->put('goods',$shops);
+            echo 1;
         }
-        $request->session()->put('goods',$shops);
-        echo 1;
+        
     }
 
     /**
@@ -116,16 +148,27 @@ class ShopCarController extends Controller
     public function minuscar(Request $request)
     {
         $id = $request->input('id');
-        $shops = session('goods');
-        // dump($shops);
-        foreach ($shops as $key => &$value) {
-            if($value['id']==$id){
-                $value['num'] = --$value['num'];
+        if(session('homeflag')){
+            $uid = session('homeuser')['id'];
+            $shops = ShopCars::where('gid',$id)->where('uid',$uid)->first();
+            // dump($shops);
+            $shops ->gnum = --$shops->gnum;
+            $shops -> save();
+            echo 1;
+        }else{
+            
+            $shops = session('goods');
+            // dump($shops);
+            foreach ($shops as $key => &$value) {
+                if($value['id']==$id){
+                    $value['num'] = --$value['num'];
+                }
             }
-        }
 
-        $request->session()->put('goods',$shops);
-        echo 1;
+            $request->session()->put('goods',$shops);
+            echo 1;  
+        }
+ 
     }
 
     /**
@@ -135,20 +178,29 @@ class ShopCarController extends Controller
     public function delcar(Request $request)
     {
         $id = $request->input('id');
-        $shops = session('goods');
-        // dump($shops);
-        foreach ($shops as $key => $value) {
-            if($value['id']==$id){
-                //释放session
-                unset($shops[$key]);
+        if(session('homeflag')){
+            $uid = session('homeuser')['id'];
+            $res = ShopCars::where('gid',$id)->where('uid',$uid)->delete();
+            if($res){
+                echo 1;
             }
+        }else{
+             $shops = session('goods');
+            // dump($shops);
+            foreach ($shops as $key => $value) {
+                if($value['id']==$id){
+                    //释放session
+                    unset($shops[$key]);
+                }
+            }
+            //写入session
+            $request->session()->put('goods',$shops);
+            if(empty(session('goods'))){
+               $request->session()->put('goods',null); 
+            }
+            echo 1;
         }
-        //写入session
-        $request->session()->put('goods',$shops);
-        if(empty(session('goods'))){
-           $request->session()->put('goods',null); 
-        }
-        echo 1;
+       
     }
 
     /**
@@ -160,10 +212,19 @@ class ShopCarController extends Controller
      */
     public function delallcar(Request $request)
     {
-        $shops = session('goods');
+        if(session('homeflag')){
+            $uid = session('homeuser')['id'];
+            $res = ShopCars::where('uid',$uid)->delete();
+            if($res){
+                return redirect('/home/goods/shopcar')->with('success','清空购物车成功'); 
+            }
+        }else{
+            $shops = session('goods');
             unset($shops);
-        $request->session()->put('goods',null);
-        return redirect('/home/goods/shopcar')->with('success','清空购物车成功');
+            $request->session()->put('goods',null);
+            return redirect('/home/goods/shopcar')->with('success','清空购物车成功'); 
+        }
+  
     }
 
     /**

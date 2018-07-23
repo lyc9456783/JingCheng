@@ -678,7 +678,7 @@
 	<ul class="review-list clearfix">
     @foreach($discuss as $k=>$v)
     	 <li class="review-item review-item-first">
-        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->id}}"><img src="{{ $v->gooddiscuss['pic'] }}" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
+        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->gooddiscuss['id']}}"><img src="{{ $v->gooddiscuss['pic'] }}" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
             <p class="review" style="text-align:center"><a href="goods.php?id=45"></a>{{ $v->content }}</p>
             <p class="author" style="text-align:center">来自于 {{ $v->userdiscuss['username'] }} 的评价</p>
             <div class="info" style="text-align:center">

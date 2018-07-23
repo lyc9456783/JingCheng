@@ -49,7 +49,7 @@
                         商品名称
                     </th>
                     <th>
-                        用户昵称
+                        用户名称
                     </th>
                     <th>
                         评论内容  
@@ -67,7 +67,7 @@
                       {{ $v->gooddiscuss['name'] }}
                     </td>
                     <td align="center" bgcolor="#ffffff">
-                        {{ $v->userdiscuss->Userdetails['nickname'] }}
+                        {{ $v->userdiscuss['username'] }}
                     </td>
                     <td align="center" bgcolor="#ffffff">
                         {{ $v['content'] }}

@@ -31,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
         if($user){
             $login_uid = $user['id'];
             $common_shopcars_data = ShopCars::where('uid',$login_uid)->get();
+            if($common_shopcars_data){
+                echo 1;
+            }else{
+                echo 2;
+            }
             view()->share(
             [
                 'common_cates_data'   => $common_cates_data,

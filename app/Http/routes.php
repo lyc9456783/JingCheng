@@ -421,11 +421,11 @@ Route::get('/admin/notice/index','admin\NoticeController@index');
 Route::get('/admin/notice/edit/{id}','admin\NoticeController@edit');
 //设置信息修改提交路由
 Route::post('/admin/notice/update/{id}','admin\NoticeController@update');
-//设置订单删除
+//设置公告删除
 Route::get('/admin/notice/del/{id}','admin\NoticeController@del');
-//设置订单删除
+//设置公告删除
 Route::get('/admin/notice/destroy','admin\NoticeController@destroy');
-//设置订单信息恢复还原
+//设置公告信息恢复还原
 Route::get('/admin/notice/reset/{id}','admin\NoticeController@reset');
 //设置永久删除数据
 Route::get('/admin/notice/delete/{id}','admin\NoticeController@delete');
@@ -461,13 +461,18 @@ Route::post('/home/users/uploads/{id}','home\UsersController@uploads');
 //设置用户绑定邮箱的路由
 Route::get('/home/users/store/{id}','home\UsersController@store');
 
-
-
-
-
-
-
-
+//设置商品折扣添加
+Route::get('/admin/discounts/create','admin\DiscountsController@create');
+//设置商品折扣
+Route::post('/admin/discounts/store','admin\DiscountsController@store');
+//设置商品的折扣列表
+Route::get('/admin/discounts/index','admin\DiscountsController@index');
+//设置商品折扣信息的修改显示
+Route::get('/admin/discounts/edit/{id}','admin\DiscountsController@edit');
+//设置奢品折扣信息修改
+Route::post('/admin/discounts/update/{id}','admin\DiscountsController@update');
+//设置折扣商品的删除
+Route::get('/admin/discounts/destroy/{id}','admin\DiscountsController@destroy');
 
 
 

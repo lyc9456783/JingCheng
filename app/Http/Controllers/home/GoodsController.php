@@ -85,8 +85,11 @@ class GoodsController extends Controller
                     }
                $goods = Goods::whereIn('id',$seach)->paginate(8)->appends($request->input());
             }
+            // dd($goods);
         $recommend = Recommends::where('rstate','1')->take(10)->skip(3)->get();
-        return view('home.goods.list',['goods'=>$goods,'recommend'=>$recommend,'dir'=>$dir,'id'=>$id]);
+        $discounts = DB::table('js_discounts')->get();
+        // dd($discounts );
+        return view('home.goods.list',['goods'=>$goods,'recommend'=>$recommend,'dir'=>$dir,'id'=>$id,'discounts'=>$discounts]);
     }
 
     /**
@@ -102,16 +105,18 @@ class GoodsController extends Controller
         //dump($search);
         //单品商品详情
         $goods = Goods::find($id);
-       
+        // dd($goods);
         //评论统计
         $discuss_count = DB::table('jc_discuss')->where('gid','=',$id)->count();
         if($discuss_count == 0){$discuss_count =0.1;}
         $discuss_count_good = DB::table('jc_discuss')->where('gid','=',$id)->where('rank','=',3)->count();
         $discuss_count_between = DB::table('jc_discuss')->where('gid','=',$id)->where('rank','=',2)->count();
         $discuss_count_bad = DB::table('jc_discuss')->where('gid','=',$id)->where('rank','=',1)->count();
+
          //$data = Slids::where('surl','like','%'.$search.'%')->paginate(5)->appends($request->input());
-
-
+        //商品折扣价格
+        $discounts = DB::table('js_discounts')->where('gid',$id)->first();
+        // dd($discounts);
         //评论属于哪个用户
         $discuss= Discuss::where('gid','=',$id)->where('rank','like','%'.$search.'%')->paginate(2)->appends($request->input());
         //dump($discuss);
@@ -122,6 +127,7 @@ class GoodsController extends Controller
                                   'discuss_count_between'=>$discuss_count_between,
                                   'discuss_count_bad'=>$discuss_count_bad,
                                   'discuss'=>$discuss,
+                                  'discounts'=>$discounts
                                   ]);
     }
 

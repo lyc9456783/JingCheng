@@ -131,8 +131,6 @@
                     <dl>
                         <dt class="goods-name" id="goods-name">{{ $goods->name }}</dt>
                           <!-- 售价 -->
-                          <dd class="goods-phone-type"><p></p></dd>
-                          <del>专柜价： <em class="cancel">2640<em>元</em></em></del>
                           <dd class="goods-info-head-price clearfix">
                               <span>现售价：</span> 
                                <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->discount }}<em>元</em> </b> </span>  

@@ -86,7 +86,7 @@
                         <div class="user-actions">
                             <ul class="action-list">
                                 <li> 您的上一次查看时间：{{date('Y-m-d H:i:s',time())}}</li>
-                                <li class="rank">您的等级: 初级用户 <span>(,您还差 10000 积分达到 vip )</span></li>
+                                <li class="rank">您的等级: 初级用户 <span>(您还差 10000 积分达到 vip )</span></li>
                                 @if(empty($yx['yanzheng']))
                                     <li class="validat">您还没有通过邮件认证 <a href="/home/users/store/{{$data['id']}}" style="color:#f70;">点此发送认证邮件</a></li> 
                                 @else

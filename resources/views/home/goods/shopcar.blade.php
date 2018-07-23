@@ -161,7 +161,8 @@
     </div>
     </div>
     </div>
-     @if($common_shopcars_data) 
+    <?php var_dump(empty($common_shopcars_data)); ?>
+     @if(empty($common_shopcars_data)) 
       <div class="page-main" id="cart-box">
         	<div class="container">
             <div class="page-main" id="cart-box">
