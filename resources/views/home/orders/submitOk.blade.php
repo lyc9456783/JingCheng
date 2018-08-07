@@ -24,6 +24,7 @@
 
                     //获取时间转换格式
                     var old_time = $('.pay-time-tip').text();
+                    console.log(old_time);
                     old_time = old_time.replace(/-/g,',');
                     old_time = old_time.replace(/ /g,',');
                     old_time = old_time.replace(/:/g,',');
@@ -63,12 +64,18 @@
                               minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                               seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+                              if(hours!= 00){
+                               location.replace('/home/orders/index');
+                             }
+                             
                              if(minutes < 10){
                                 minutes = '0'+minutes;
                              }
                              if(seconds < 10){
                                 seconds = '0'+seconds;
                              }
+
+                             
                              if(minutes == 00 && seconds == 00 && hours == 00){
                                 clearInterval(time);
 

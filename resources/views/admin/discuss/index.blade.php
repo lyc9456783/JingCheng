@@ -56,7 +56,7 @@
                         	{{$v['name']}}
                         </td>
                         <td>
-                            {{$v['nickname']}}
+                            {{$v['username']}}
                         </td>
                         <td >
                             {{$v['content']}}

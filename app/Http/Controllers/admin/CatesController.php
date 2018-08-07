@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CatesRequest;
 use App\Models\Cates;
 use DB;
+use App\Models\Goods;
 
 class CatesController extends Controller
 {
@@ -208,11 +209,17 @@ class CatesController extends Controller
      */
     public function delete($id)
     {
-        $res = Cates::onlyTrashed()->where('id',$id)->forceDelete();
+        $goods = Goods::where('gcid',$id)->get();
+        if(empty($goods[0])){
+            $res = Cates::onlyTrashed()->where('id',$id)->forceDelete();
           if($res){
             return redirect('/admin/cates')->with('success','永久删除成功！！');
+            }else{
+                return back()->with('error','永久删除失败！！');
+            }
         }else{
-            return back()->with('error','永久删除失败！！');
+            return back()->with('error','分类下存在商品,请勿删除！！');
         }
+        
     }
 }

@@ -32,7 +32,6 @@
                         </th>
                         <th>ID</th>
                         <th>用户名</th>
-                        <th>邮箱</th>
                         <th>用户昵称</th>
                         <th>手机号</th>
                         <th>性别</th>
@@ -48,7 +47,6 @@
                         </td>
                         <td>{{ $v['id'] }}</td>
                         <td>{{ $v['username'] }}</td>
-                        <td>{{ $v['email'] }}</td>
                         <td>{{$v->Userdetails['nickname']}}</td>
                         <td>{{$v->Userdetails['phone']}}</td>
                         <td>@if($v->Userdetails['sex'] == 0)女@else男@endif</td>

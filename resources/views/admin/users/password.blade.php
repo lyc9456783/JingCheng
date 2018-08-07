@@ -22,7 +22,7 @@
                         <input type="text"  name="username" value="{{ $data -> username }}" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
+        <!--         <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                         <span class="x-red">*</span>旧密码
                     </label>
@@ -30,7 +30,7 @@
                         <input type="password" id="L_repass" name="oldpass" required lay-verify="required"
                         autocomplete="off" class="layui-input">
                     </div>
-                </div>
+                </div> -->
                 <div class="layui-form-item">
                     <label for="L_pass" class="layui-form-label">
                         <span class="x-red">*</span>新密码
@@ -39,8 +39,8 @@
                         <input type="password" id="L_pass" name="newpass" required lay-verify="required"
                         autocomplete="off" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        6-14位字符（支持数字/字母/符号）
+                    <div class="layui-form-mid">
+                        
                     </div>
                 </div>
                 <div class="layui-form-item">

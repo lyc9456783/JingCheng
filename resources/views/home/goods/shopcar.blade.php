@@ -161,7 +161,13 @@
     </div>
     </div>
     </div>
-     @if(!empty($common_shopcars_data[0]))
+    {{$flag = false}}
+    @foreach ($common_shopcars_data as $k=>$v)
+    @if($v['uid'] == session('homeuser')['id']) 
+      <!-- {{$flag = true}} -->
+    @endif
+    @endforeach
+     @if($flag)
       <div class="page-main" id="cart-box">
         	<div class="container">
             <div class="page-main" id="cart-box">
@@ -252,7 +258,7 @@
         </div>
     @endif
     <script type="text/javascript">
-          // location.reload(true);
+
             var zsum = 0;
             //获取商品的小计
            $('.good_num').each(function(){

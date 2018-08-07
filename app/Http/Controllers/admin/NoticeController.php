@@ -29,7 +29,7 @@ class NoticeController extends Controller
          //设置计算数据表中所有信息的数量
         $count = DB::table('jc_notice')->whereNull('deleted_at')->count();
         //设置页面显示
-        return view('admin.notice.index',['title'=>'商城公告列表','data'=>$data,'count'=>$count]);
+        return view('admin.notice.index',['title'=>'商城资讯列表','data'=>$data,'count'=>$count]);
         
     }
 
@@ -43,8 +43,8 @@ class NoticeController extends Controller
         //查询用户表中的数据
         $users = Users::all();
 
-        //设置商城公告的添加
-        return view('admin.notice.create',['users'=>$users,'title'=>'添加商城公告']);
+        //设置商城资讯的添加
+        return view('admin.notice.create',['users'=>$users,'title'=>'添加商城资讯']);
     }
 
     /**
@@ -57,14 +57,14 @@ class NoticeController extends Controller
     {
         $data = $request -> all();
         
-        //接受表单传过来的公告内容
+        //接受表单传过来的资讯内容
         $notice = new Notice;
         $notice -> uid = $data['uid'];
         $notice -> title = $data['title'];
         $notice -> details = $data['details'];
         $res = $notice -> save();
         
-        //判断添加公告是否成功
+        //判断添加资讯是否成功
         if ($res) {
             return redirect('/admin/notice/index')-> with('success','添加成功');
         }else{
@@ -95,7 +95,7 @@ class NoticeController extends Controller
         $data = Notice::find($id);
         // dd($data);
         //分配数据到模板中
-        return view('admin/notice/edit',['data'=>$data,'title'=>'公告修改']);
+        return view('admin/notice/edit',['data'=>$data,'title'=>'资讯修改']);
     }
 
     /**
@@ -186,6 +186,6 @@ class NoticeController extends Controller
         $data = Notice::onlyTrashed()->paginate(3)->appends($request->input());
 
         //分配数据到模板
-        return view('admin.notice.delete',['data'=>$data,'title'=>'公告回收站']);
+        return view('admin.notice.delete',['data'=>$data,'title'=>'资讯回收站']);
     }
 }

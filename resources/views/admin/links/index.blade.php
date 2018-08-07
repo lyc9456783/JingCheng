@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <input type="checkbox" name="" value="" name="box[]">
+                            <input type="checkbox" name="" value="" name="box[]" id="check">
                         </th>
                         <th> ID </th>
                         <th> 链接名称 </th>
@@ -41,7 +41,7 @@
                         </td>
                         <td> {{ $v->id }} </td>
                         <td> {{ $v->lname }} </td>
-                        <td> <a href="http://{{ $v->lurl }}" target="_blank">{{ $v->lurl }} </a></td>
+                        <td> <a href="{{ $v->lurl }}" target="_blank">{{ $v->lurl }} </a></td>
                         <td> {{ $v->lsay }} </td>
                         <td> {{ $v->created_at }} </td>
 						    @if( $v['lstate'] == 0 )
@@ -125,9 +125,20 @@
         });
     }
 
-    //点击全选
-    $('thead input[type="checkbox"]').click(function(){
-        $('input').attr('checked',true);
+    //批量删除全选反选
+    $(function(){
+
+        $("#check").change(function(){
+
+            var check = $(this).is(":checked");
+
+            if(check == true){
+                $('input').attr('checked',true);
+            }else{
+                $('input').attr('checked',false);
+            }
+        })
+
     })
 
     var time = null;

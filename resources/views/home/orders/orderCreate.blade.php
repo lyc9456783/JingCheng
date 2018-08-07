@@ -143,7 +143,7 @@
                 <div class="section-header clearfix">
                     <h3 class="title">商品及优惠券</h3>
                     <div class="more">
-                    	<a href="https://static.mi.com/cart/" data-stat-id="fa422fee79a3a6e2" onclick="_msq.push(['trackEvent', '17a1f380b9d4cd2e-fa422fee79a3a6e2', '//static.mi.com/cart/', 'pcpid', '']);">返回购物车<i class="iconfont"></i></a>
+                    	<a href="/home/goods/shopcar" data-stat-id="fa422fee79a3a6e2">返回购物车<i class="iconfont"></i></a>
                     </div>
                 </div>
                 <div class="section-body">

@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
 
         'login'=>\App\Http\Middleware\LoginMiddleware::class,
         'index'=>\App\Http\Middleware\IndexMiddleware::class,
+        'home'=>\App\Http\Middleware\HomeLoginMiddleware::class,
         //'login' => \App\Http\Middleware\DiscussMiddleware::class,
     ];
 }

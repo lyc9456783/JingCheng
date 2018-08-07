@@ -24,7 +24,7 @@ class SlidsInsertRequest extends Request
     public function rules()
     {
         return [
-        'surl' => 'required|unique:jc_slids|url',  //公司名称不为空 公司名称已经存在
+        'surl' => 'required|unique:jc_slids',  //公司名称不为空 公司名称已经存在
         'simg' => 'required|unique:jc_slids|mimes:jpeg,bmp,png,jpg',  //
         ];
     }
@@ -42,7 +42,6 @@ class SlidsInsertRequest extends Request
         'surl.unique' => '该网站链接已经存在!',
         'simg.unique' => '图片存在失败!请重新尝试!',
         'simg.mimes' => '图片传输格式不正确(jpeg,bmp,png,jpg)',
-        'surl.url' => '链接格式错误',
         ];
     }
 }

@@ -1,13 +1,12 @@
 @extends('admin.common.common')
 @section('content')
   <!-- 右侧主体开始 -->
-        <div class="page-content">
-          <div class="content">
-          <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
-            <hr>
+<div class="page-content">
+    <div class="content">
+        <div style="font-size:40px;width:400px;margin:center;">{{$title}}</div>
             <!-- 右侧内容框架，更改从这里开始 -->
             <div><a href="/admin/discuss"><button class="layui-btn layui-btn-success" ><i class="layui-icon">&#xe600;</i>列表</button></a></div>
-
+            <hr>
             <form class="layui-form-item" style="width:500px;text-align: center; margin:auto;" action="/admin/discuss/update/{{$data['id']}}" method="post" >
                 {{csrf_field()}}
                 <div class="layui-form-item">
@@ -24,7 +23,7 @@
                         <span class="x-red">*</span>用户名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="" required="" lay-verify="uid" value="{{$data->userdiscuss->Userdetails['nickname']}}"
+                        <input type="text" id="L_username" name="" required="" lay-verify="uid" value="{{$data->userdiscuss['username']}}"
                         autocomplete="off" class="layui-input" readonly>
 
                     </div>
@@ -47,6 +46,5 @@
           </div>
         </div>
         <!-- 右侧主体结束 -->
-    </div>
     <!-- 中部结束 -->
 @endsection

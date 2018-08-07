@@ -82,19 +82,28 @@
 		            <span class="sep">|</span>                        <a href="javascript:;"  class="snc-link snc-order">会员等级测试</a>
 		        </div>
 	@if(session('homeflag'))
+	 	{{$flag = false}}
+	 	{{$n = 0}}
+    @foreach ($common_shopcars_data as $k=>$v)
+    @if($v['uid'] == session('homeuser')['id']) 
+      	<!-- {{$flag = true}} -->
+      	<!-- {{++$n}} -->
+    @endif
+    @endforeach
+     
 	       <div class="topbar-cart" id="ECS_CARTINFO">
 	        <a class="cart-mini " href="/home/goods/shopcar">
 	        <i class="layui-icon">&#xe657;</i>  
 	          购物车
 	          <span class="mini-cart-num J_cartNum" id="hd_cartnum">
-	          @if(!empty($common_shopcars_data[0]))
-	            ({{count($common_shopcars_data)}})
+	          @if($flag)
+	            ({{$n}})
 	          @else
 	            (0)
 	          @endif 
 	          </span>
 	      </a>
-	        @if(!empty($common_shopcars_data[0]))
+	        @if($flag)
 	        <div id="J_miniCartList" class="cart-menu">
 	          <ul>
 	          @foreach($common_shopcars_data as $v)
@@ -292,7 +301,7 @@
 			                                    </a>
 			                                  </div>
 			                                  <div class="title"><a href="/home/goods/detail/{{$val->id}}">{{$val->name}}</a></div>
-			                                  <p class="price">{{$val->discount}}<em>元</em>元</p>
+			                                  <p class="price">{{$val->discount}}<em>元</em></p>
 			                              </li>
 			                              @endforeach
 			                          </ul>
@@ -469,7 +478,7 @@
 	            <p class="sites">
 		            <a  title="京城商城">友情链接</a> |
 		            @foreach ($common_links_data as $k=>$v)
-		            <a href="http://{{$v->lurl}}"  title="{{$v->lsay}}">{{$v->lname}}</a> |
+		            <a href="{{$v->lurl}}"  title="{{$v->lsay}}">{{$v->lname}}</a> |
 		            @endforeach
             	</p>
 	            <p>

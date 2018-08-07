@@ -168,7 +168,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="layui-icon">&#xe656;</i> 
+                        <i class="layui-icon">&#xe658;</i> 
                         收藏管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -296,8 +296,8 @@
                 </li>
                 <li class="list" >
                     <a href="/admin/shield/index">
-                        <i class="layui-icon">&#xe670;</i> 
-                        违禁字过滤设置
+                        <i class="layui-icon">&#x1007;</i> 
+                        违禁词管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                 </li>
@@ -386,26 +386,26 @@
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="layui-icon">&#xe62a;</i> 
-                        商城公告管理
+                        商城资讯管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
                             <a href="/admin/notice/index">
                                 <i class="iconfont">&#xe6a7;</i>
-                                商城公告列表
+                                商城资讯列表
                             </a>
                         </li>
                         <li>
                             <a href="/admin/notice/create">
                                 <i class="iconfont">&#xe6a7;</i>
-                                添加商城公告
+                                添加商城资讯
                             </a>
                         </li>
                         <li>
                             <a href="/admin/notice/destroy">
                                 <i class="iconfont">&#xe6a7;</i>
-                                商城公告回收站
+                                商城资讯回收站
                             </a>
                         </li>
 

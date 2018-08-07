@@ -71,31 +71,16 @@ class EntrepotController extends Controller
         if($res['gid'] == '0'){
             return back()->with('error','请选择商品');
         }
-
-        if($res['flag'] == '1'){
             //获取除了token以外所有上传的数据
             // $req = $request -> except(['_token']);
             //执行添加数据
-            if($res['num'] < '0'){
-                return back()->with('error','库存数量不得少于0');
-            }else{
-                $entrepots = new Entrepots;
-                $entrepots -> gid = $res['gid'];
-                $entrepots -> num = $res['num'];
-                $res = $entrepots -> save();
-            }
-            
+        if($res['num'] < '0'){
+            return back()->with('error','库存数量不得少于0');
         }else{
-            //获取除了token以外所有上传的数据
-                //执行添加数据
-            if($res['num'] < '0'){
-                return back()->with('error','库存数量不得少于0');
-            }else{
-                $entrepots = new Entrepots;
-                $entrepots -> gid = $res['gid'];
-                $entrepots -> num = $res['num'];
-                $res = $entrepots -> save();
-            }
+            $entrepots = new Entrepots;
+            $entrepots -> gid = $res['gid'];
+            $entrepots -> num = $res['num'];
+            $res = $entrepots -> save();
         }
         if($res){
             // 如果添加成功则执行

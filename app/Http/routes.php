@@ -56,6 +56,40 @@ Route::post('/home/discuss/create','home\GoodsController@create');
 Route::post('/home/discuss/shopcar','home\GoodsController@shopcar');
 
 
+
+Route::group(['middleware'=>'home'],function(){
+//前台需要登录才能查看的路由
+//前台密码修改
+Route::get('/home/pass/index','home\PassController@index');
+Route::post('/home/pass/update/{id}','home\PassController@update');
+//前台收货人信息列表
+Route::get('/home/address/index','home\AddressController@index');
+//前台收货人地址添加
+Route::get('/home/address/create','home\AddressController@create');
+Route::post('/home/address/store/{id}','home\AddressController@store');
+//前台收货人地址修改
+Route::get('/home/address/edit/{id}','home\AddressController@edit');
+Route::post('/home/address/update/{id}','home\AddressController@update');
+//删除前台收货人地址
+Route::get('/home/address/delete/{id}','home\AddressController@delete');
+//设置用户中心
+Route::get('/home/users/index','home\UsersController@index');
+//设置用户信息修改
+Route::get('/home/users/edit','home\UsersController@edit');
+//设置用户提交信息修改
+Route::post('/home/users/update/{id}','home\UsersController@update');
+//设置用户订单查看
+Route::get('/home/orders/index','home\OrdersController@index');
+//设置订单修改路由
+Route::get('/home/orders/update/{id}','home\OrdersController@update');
+//设置订单详情
+Route::get('/home/orders/show/{id}','home\OrdersController@show');
+//设置更新用户收货详情的路由
+Route::post('/home/orders/store/{id}','home\OrdersController@store');
+//设置头像修改路由
+Route::post('/home/users/uploads/{id}','home\UsersController@uploads');
+//设置用户绑定邮箱的路由
+Route::get('/home/users/store/{id}','home\UsersController@store');
 //生成订单页面
 Route::get('/home/orders/ordercreate','home\OrdersController@orderCreate');
 //添加地址
@@ -72,22 +106,9 @@ Route::get('/home/orders/sitedelete/{id}','home\OrdersController@siteDelete');
 Route::get('/home/orders/sitesubmit','home\OrdersController@siteSubmit');
 //成功submitOk
 Route::get('/home/orders/submitOk/{ordsum}','home\OrdersController@submitOk');
+});
 
-//		前台
-//前台密码修改
-Route::get('/home/pass/index','home\PassController@index');
-Route::post('/home/pass/update/{id}','home\PassController@update');
 
-//前台收货人信息列表
-Route::get('/home/address/index','home\AddressController@index');
-//前台收货人地址添加
-Route::get('/home/address/create','home\AddressController@create');
-Route::post('/home/address/store/{id}','home\AddressController@store');
-//前台收货人地址修改
-Route::get('/home/address/edit/{id}','home\AddressController@edit');
-Route::post('/home/address/update/{id}','home\AddressController@update');
-//删除前台收货人地址
-Route::get('/home/address/delete/{id}','home\AddressController@delete');
 
 //前台评论列表
 Route::get('/home/discuss/index','home\DiscussController@index');
@@ -111,24 +132,7 @@ Route::get('/home/login/create','home\LoginController@create');
 //设置用户注册信息提交
 Route::post('/home/login/store','home\LoginController@store');
 
-//设置用户中心
-Route::get('/home/users/index','home\UsersController@index');
-//设置用户信息修改
-Route::get('/home/users/edit','home\UsersController@edit');
-//设置用户提交信息修改
-Route::post('/home/users/update/{id}','home\UsersController@update');
-//设置用户订单查看
-Route::get('/home/orders/index','home\OrdersController@index');
-//设置订单修改路由
-Route::get('/home/orders/update/{id}','home\OrdersController@update');
-//设置订单详情
-Route::get('/home/orders/show/{id}','home\OrdersController@show');
-//设置更新用户收货详情的路由
-Route::post('/home/orders/store/{id}','home\OrdersController@store');
-//设置头像修改路由
-Route::post('/home/users/uploads/{id}','home\UsersController@uploads');
-//设置用户绑定邮箱的路由
-Route::get('/home/users/store/{id}','home\UsersController@store');
+
 
 });
 

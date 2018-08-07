@@ -20,17 +20,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //共享的分类数据
+        // 共享的分类数据
        $common_cates_data = Cates::where('path','!=','0')->get();
        //友情链接数据
         $common_links_data = Links::where('lstate','1')->get();
         //网站配置数据
         $common_configs_data = Config::first();
-        //当前登陆用户
-        $user = Users::where('login',1)->first();
-        if($user){
-            $login_uid = $user['id'];
-            $common_shopcars_data = ShopCars::where('uid',$login_uid)->get();
+        //购物车所有数据
+        $common_shopcars_data = ShopCars::get();
+        if($common_shopcars_data){
             view()->share(
             [
                 'common_cates_data'   => $common_cates_data,
@@ -49,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             );
         }
 
-       //  //共享数据
+        //共享数据
 
 	
     }

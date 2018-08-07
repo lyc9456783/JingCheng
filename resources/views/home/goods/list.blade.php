@@ -77,8 +77,8 @@
 	         	 <h2 class="title"><a href="/home/goods/detail/{{$v->id}}" title="{{$v->name}}">{{$v->name}}</a></h2>
 					@if($v->id == $v->discounts['gid'])
 			           	<p class="price">
-			                本店价<font class="shop_s">{{$v->discounts['discount']}}<em>元</em></font>
-			               <del>专柜价<font class="market_s">{{$v->discounts['price']}}<em>元</em></font></del>
+			                折扣价<font class="shop_s">{{$v->discounts['discount']}}<em>元</em></font>
+			               <del>本店价<font class="market_s">{{$v->discounts['price']}}<em>元</em></font></del>
 			           	</p>
 					@else
 		        		<p class="price">
@@ -92,7 +92,7 @@
 	          		@if($vv['gid'] === $v->id)
 						@if($vv['describe'] ==1)
 							<div class="flags"> 			
-				    			<div class="flag flag-saleoff">半价</div>       
+				    			<div class="flag flag-saleoff">半价优惠</div>       
 	          				</div>
 						@elseif($vv['describe'] ==2)
 							<div class="flags"> 			

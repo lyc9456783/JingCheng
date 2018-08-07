@@ -187,22 +187,19 @@ class UsersController extends Controller
         $word = $request -> all();
         
         //首先进行原密码输入的是否正确的判断
-        if(Hash::check($word['oldpass'], $pass))
-        {   
-            if($word['newpass'] == $word['repass'])
-            {
-                $users = Users::find($id);
-                // dd($users);
-                $users -> password = Hash::make($word['repass']);
-                $users -> save();
+        
+          
+        if($word['newpass'] == $word['repass'])
+        {
+            $users = Users::find($id);
+            // dd($users);
+            $users -> password = Hash::make($word['repass']);
+            $users -> save();
 
-                return redirect('/admin/users/index')-> with('success','修改成功');   
-            }else{
-                return back()->with('error','重复密码不正确'); 
-            }
+            return redirect('/admin/users/index')-> with('success','修改成功');   
         }else{
-            return back()->with('error','原密码不正确');
-        }   
+            return back()->with('error','重复密码不正确'); 
+        }
     }
 
     /**

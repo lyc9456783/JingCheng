@@ -40,9 +40,9 @@ class ShieldController extends Controller
          $res = $shields -> save();
         // 处理返回值
         if($res){
-            return redirect('/admin/shield/index') -> with('success','添加成功');
+            return redirect('/admin/shield/index') -> with('success','设置成功');
         }else{
-            return back() -> with('error','修改成功');
+            return back() -> with('error','设置出现错误');
         }
 
     }

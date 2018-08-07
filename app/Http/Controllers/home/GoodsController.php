@@ -119,7 +119,7 @@ class GoodsController extends Controller
         $discounts = DB::table('js_discounts')->where('gid',$id)->first();
         // dd($discounts);
         //评论属于哪个用户
-        $discuss= Discuss::where('gid','=',$id)->where('rank','like','%'.$search.'%')->paginate(2)->appends($request->input());
+        $discuss= Discuss::where('gid','=',$id)->where('rank','like','%'.$search.'%')->orderBy('id','desc')->paginate(3)->appends($request->input());
         //dump($discuss);
 
         return view('home.goods.detail',['goods'=>$goods,

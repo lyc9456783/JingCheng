@@ -70,7 +70,8 @@
 <!-- 导航历史记录 -->
 <div class="breadcrumbs">
   <div class="container">
-      <a href="{{ url('/') }}">首页</a> <code>&gt;</code>         
+      <a href="{{ url('/') }}">首页</a> <code>&gt;</code> 
+      <a href="/home/goods/list/{{$goods->catesgoods->id}}?dir={{$goods->catesgoods->classname}}">{{ $goods->catesgoods->classname }}</a> <code>&gt;</code> {{ $goods->name }}         
     </div>
 </div>
 <!-- 导航历史记录结束 -->
@@ -131,17 +132,15 @@
                           <!-- 售价 -->
 
                           @if(empty($discounts['discount']))
-                          <dd class="goods-phone-type"><p></p></dd>
-                                <del>专柜价： <em class="cancel">无</em></del>
                           <dd class="goods-info-head-price clearfix">
                               <span>现售价：</span> 
-                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->discount }}<em>元</em> </b> </span>  
+                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->price }}<em>元</em> </b> </span>  
                           </dd>
                           @else
                           <dd class="goods-phone-type"><p></p></dd>
-                                <del>专柜价： <em class="cancel">{{ $goods->discount }}<em>元</em></em></del>
+                                <del>本店价： <em class="cancel">{{ $goods->price }}<em>元</em></em></del>
                           <dd class="goods-info-head-price clearfix">
-                              <span>现售价：</span> 
+                              <span>折扣价：</span> 
                                <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $discounts['discount'] }}<em>元</em> </b> </span>  
                          	</dd>
                           @endif
@@ -379,7 +378,7 @@
         <div class="container">
             <div class="shape-container">
                 @foreach($goods->goodimages as $gk=>$gv)
-                <p><img  style="margin-top:50px;" alt="" src="{{ $gv->images }}" /></p>
+                <p><img  style="margin-top:50px;" alt="" src="{{ $gv->images }}" width="100%"/></p>
                 @endforeach                       
              </div>
         </div>
