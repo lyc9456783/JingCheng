@@ -14,6 +14,7 @@ use App\Models\Notice;
 use App\Models\Links;
 use App\Models\Discuss;
 use App\Models\Discount;
+use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
     /**
@@ -119,8 +120,19 @@ class IndexController extends Controller
      */
     public function noticedetail($id)
     {
-        $detail = Notice::find($id);
-        return view('home.notice.detail',['detail'=>$detail]); 
+          //拼接redis的键名
+        $key = 'notice-'.$id;        
+        $notice = Notice::find($id);
+        $user  = $notice->users['username'];
+        $notices = $notice->details;
+        if(Redis::exists($key)){
+            $detail = Redis::get($key);
+            $details = json_decode($detail);
+        }else{
+           $details = Notice::find($id); 
+           Redis::set($key,$details);
+        }
+        return view('home.notice.detail',['detail'=>$details,'user'=>$user,'notices'=>$notices]);
     }
 
     /**

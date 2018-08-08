@@ -14,13 +14,13 @@
 	<div style="width:800px;margin:auto;font-size:40px;text-align:center;color:black">{{$detail->title}}</div>
 		<div class="layui-row">
 		    <div class="layui-col-md2 layui-col-md-offset10" style="text-align:right;">
-		      发布作者：{{$detail->users['username']}}
+		      发布作者：{{$user}}
 		    </div>
 		</div>
 		<hr>
 		<div class="layui-row" id="gg" style="border:1px solid #ccc;overflow:scroll;height:800px;padding:15px;">
 			<div style="width:90%;margin:auto;margin-top:20px;padding:5px;">
-				{!! $detail->details !!}
+				{!! $notices !!}
 			</div>
 			
 		</div>

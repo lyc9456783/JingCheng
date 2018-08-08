@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <title>商城维护中。。</title>
+    <link rel="shortcut icon" href="/home/logo/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/home/css/style_error.css">
 </head>
 

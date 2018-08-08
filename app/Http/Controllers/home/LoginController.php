@@ -98,8 +98,8 @@ class LoginController extends Controller
         $users = Users::where('id',$uid)->first();
         //对数据的添加进行整体的判断
         if ($res) {
-            session(['homeuser'=>$users]);
-            session(['homeflag'=>true]);
+            // session(['homeuser'=>$users]);
+            // session(['homeflag'=>true]);
             return redirect('/')-> with('success','注册成功');
         }else{
             return back()->with('error','注册失败');
