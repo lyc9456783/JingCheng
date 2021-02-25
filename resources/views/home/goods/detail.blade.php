@@ -498,9 +498,9 @@
 
                       <!-- 评论列表 -->
                       <ul class="comment-box-list" id="discuss1">
-                        @foreach($discuss as $gk=>$gv) 
+                        @foreach($discuss as $gk=>$gv)
                          <li class="item-rainbow-1">
-                            <div class="user-image"> <img class="face_img" src="{{ $gv->userdiscuss->Userdetails['face'] }}"> </div>
+                            <div class="user-image"> <img class="face_img" src="{{ $gv->userdetails['face'] }}"> </div>
                             <div class="user-emoj">
                             @if( ($gv->rank) ==3 )
                               <img src="/home/picture/333.gif" alt="">

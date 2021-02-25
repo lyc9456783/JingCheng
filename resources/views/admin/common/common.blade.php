@@ -5,7 +5,7 @@
 	<title>京城后台管理</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/home/logo/favicon.ico" />
     <link rel="stylesheet" href="/admins/css/font.css">
 	<link rel="stylesheet" href="/admins/css/xadmin.css">
     <link rel="stylesheet" href="/admins/css/swiper.min.css">

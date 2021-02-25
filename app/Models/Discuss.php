@@ -22,6 +22,6 @@ class Discuss extends Model
     //评论属于 用户的详情
     public function userdetails()
     {
-    	return $this->belongsTo('App\Models\Userdetails','uid');
+    	return $this->belongsTo('App\Models\Userdetails','uid','uid');
     }
 }
