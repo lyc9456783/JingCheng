@@ -62,7 +62,6 @@
     #choose li.GeneralAttrImg .dd .item a{padding:1px;}
     #choose li.GeneralAttrImg .dd .item a img{margin:1px;}
     #choose li.GeneralAttrImg .dd .item.selected a{padding:0;}
-  
 
 </style>
 <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
@@ -71,11 +70,11 @@
 <!-- 导航历史记录 -->
 <div class="breadcrumbs">
   <div class="container">
-      <a href="{{ url('/') }}">首页</a> <code>&gt;</code>         
+      <a href="{{ url('/') }}">首页</a> <code>&gt;</code> 
+      <a href="/home/goods/list/{{$goods->catesgoods->id}}?dir={{$goods->catesgoods->classname}}">{{ $goods->catesgoods->classname }}</a> <code>&gt;</code> {{ $goods->name }}         
     </div>
 </div>
 <!-- 导航历史记录结束 -->
-
 <!-- 商品详情开始 -->
 <div class="goods-detail">
 
@@ -131,12 +130,20 @@
                     <dl>
                         <dt class="goods-name" id="goods-name">{{ $goods->name }}</dt>
                           <!-- 售价 -->
-                          <dd class="goods-phone-type"><p></p></dd>
-                          <del>专柜价： <em class="cancel">2640<em>元</em></em></del>
+
+                          @if(empty($discounts['discount']))
                           <dd class="goods-info-head-price clearfix">
                               <span>现售价：</span> 
-                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->discount }}<em>元</em> </b> </span>  
+                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $goods->price }}<em>元</em> </b> </span>  
                           </dd>
+                          @else
+                          <dd class="goods-phone-type"><p></p></dd>
+                                <del>本店价： <em class="cancel">{{ $goods->price }}<em>元</em></em></del>
+                          <dd class="goods-info-head-price clearfix">
+                              <span>折扣价：</span> 
+                               <span class="unit"> <b class="nala_price red" id="ECS_SHOPPRICE">{{ $discounts['discount'] }}<em>元</em> </b> </span>  
+                         	</dd>
+                          @endif
                           <!-- 货号 库存 上架时间 -->
                           <dd>
                               <ul>
@@ -189,16 +196,11 @@
                             <input type="hidden" name="discount" value="{{ $goods->discount}}">
                             <input type="hidden" name="goods_kc" value="{{$goods->entrepotsgoods['num'] or '0'}}">                            
                             @if(($goods->entrepotsgoods['num'])>0)
-                             <a href="javascript:;" class="btn  btn-primary goods-add-cart-btn" id="buy_btn"> 加入购物车</a>
+                              <a href="javascript:onclick=car_btn();" class="btn  btn-primary goods-add-cart-btn" > 加入购物车</a>
                             @else
-                             <!-- <button class="btn  btn-gray goods-add-cart-btn" id="buy_btn"></button> -->
-                             <a href="javascript:viod(0)"  class="btn  btn-gray goods-add-cart-btn" id="buy_btn"> 暂时缺货 </a>
+                              <a href="javascript:onclick=car_btn();"  class="btn  btn-gray goods-add-cart-btn"> 暂时缺货 </a>
                             @endif
-                            <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
                             <a href="javascript:onclick=collect({{ $goods->id }});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class=" btn btn-gray  goods-collect-btn ">收藏</a>
-                            <!-- <button class=" btn btn-gray  goods-collect-btn " id="fav-btn">收藏</button> -->
-                            <!-- <a href="javascript:collect(27)" class=" btn btn-gray  goods-collect-btn " id="fav-btn"><i class="iconfont"></i>喜欢</a> -->
-                            <!-- <a href="javascript:addToCart(27,1)" class="btn  btn-primary goods-add-cart-btn" id="buy_btn">加入购物车</a> -->
                           </dd>
                       </dl>
                   </dt> 
@@ -222,8 +224,48 @@
         <a href="/home/goods/shopcar" class="btn">去结算</a>
     </div>
 </div>
+  <!-- 本也商品详情开始 -->
+  <div class="full-screen-border"></div>
+  <div class="goods-detail-main">
+  
+  <!-- 详情导航栏 -->
+    <div class="goods-detail-nav" id="goodsDetail">
+      <div class="container">
+          <ul class="detail-list">
+            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
+            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
+            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
+            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
+          </ul>
+        </div>
+    </div>
 
-  <!-- 库存是否为空 -->
+    <!-- 跟随页面滚动的 头部导航 -->
+    <div class="goods-sub-bar" id="goodsDetail" style="z-index: 999999; top: -80px;">
+      <div class="container">
+          <ul class="detail-list">
+            <li class="on"> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
+            <li class=""> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
+            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
+            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
+          </ul>
+          <dl class="goods-sub-bar-info clearfix">
+          <dt><img src="{{ $goods->pic }}" alt="{{ $goods['name'] }}"></dt>
+            <dd>
+              <strong>{{ $goods['name'] }}</strong>
+                <p><em>{{ $goods->detailsgoods['type'] or '有货' }}  @if($goods->entrepotsgoods['num'] >0) 现货购买@else 暂时缺货 @endif</em></p>
+            </dd>
+        </dl>
+        @if(($goods->entrepotsgoods['num'])>0)
+          <a href="javascript:onclick=car_btn();" class="btn  btn-primary goods-add-cart-btn" > 加入购物车</a>
+        @else
+          <a href="javascript:onclick=car_btn();"  class="btn  btn-gray goods-add-cart-btn"> 暂时缺货 </a>
+        @endif
+        </div>
+    </div>
+    <!-- 详情导航栏结束 -->
+    <div class="product_tabs">
+      <!-- 库存是否为空 -->
   <script>
   // 定义函数作为显示弹框
     function carshows(){
@@ -231,7 +273,7 @@
       $('#overlay').css('display','block');
     }
 
-    $('#buy_btn').click(function(){ 
+    function car_btn(){ 
   
     //初始化laiyui
       var  gid =  $('#goods-id').text();
@@ -256,7 +298,7 @@
         });
         
       }
-    });
+    }
 
 
     //增加减少商品数量
@@ -329,44 +371,6 @@
   }
 
   </script>
-
-  <!-- 本也商品详情开始 -->
-  <div class="full-screen-border"></div>
-  <div class="goods-detail-main">
-  
-  <!-- 详情导航栏 -->
-    <div class="goods-detail-nav" id="goodsDetail">
-      <div class="container">
-          <ul class="detail-list">
-            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
-            <li> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
-            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
-            <li><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
-          </ul>
-        </div>
-    </div>
-
-    <!-- 跟随页面滚动的 头部导航 -->
-    <div class="goods-sub-bar" id="goodsDetail" style="z-index: 999999; top: -80px;">
-      <div class="container">
-          <ul class="detail-list">
-            <li class="on"> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">详情描述</a> </li>
-            <li class=""> <a class="J_scrollHref" rel="nofollow" href="javascript:void(0);">规格参数</a> </li>
-            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">评价晒单(<em>{{ round($discuss_count) }}</em>)</a></li>
-            <li class=""><a class="J_scrollHref" href="javascript:void(0);" rel="nofollow">其他</a></li>
-          </ul>
-          <dl class="goods-sub-bar-info clearfix">
-          <dt><img src="{{ $goods->pic }}" alt="{{ $goods['name'] }}"></dt>
-            <dd>
-              <strong>{{ $goods['name'] }}</strong>
-                <p><em>{{ $goods->detailsgoods['type'] or '有货' }}  @if($goods->entrepotsgoods['num'] >0) 现货购买@else 暂时缺货 @endif</em></p>
-            </dd>
-        </dl>
-        <a href="javascript:viod(0)" class="btn btn-primary goods-add-cart-btn"> 加入购物车</a>
-        </div>
-    </div>
-    <!-- 详情导航栏结束 -->
-    <div class="product_tabs">
       
       
       <!-- 详情描述 -->
@@ -374,7 +378,7 @@
         <div class="container">
             <div class="shape-container">
                 @foreach($goods->goodimages as $gk=>$gv)
-                <p><img  style="margin-top:50px;" alt="" src="{{ $gv->images }}" /></p>
+                <p><img  style="margin-top:50px;" alt="" src="{{ $gv->images }}" width="100%"/></p>
                 @endforeach                       
              </div>
         </div>
@@ -494,9 +498,9 @@
 
                       <!-- 评论列表 -->
                       <ul class="comment-box-list" id="discuss1">
-                        @foreach($discuss as $gk=>$gv) 
+                        @foreach($discuss as $gk=>$gv)
                          <li class="item-rainbow-1">
-                            <div class="user-image"> <img class="face_img" src="{{ $gv->userdiscuss->Userdetails['face'] }}"> </div>
+                            <div class="user-image"> <img class="face_img" src="{{ $gv->userdetails['face'] }}"> </div>
                             <div class="user-emoj">
                             @if( ($gv->rank) ==3 )
                               <img src="/home/picture/333.gif" alt="">

@@ -82,6 +82,8 @@ class GoodsController extends Controller
                     ->where('gcid',$gcid)
                     ->paginate(8)
                     ->appends($request->input());
+                    
+
         }
        
         
@@ -290,7 +292,7 @@ class GoodsController extends Controller
         $res = Goods::onlyTrashed()->where('id','=',$id)->forceDelete();
 
         //判断是否删除成功
-        if($res&&$res1&&$res2){
+        if(($res&&$res1)||$res2){
             return redirect('/admin/goods')->with('success','商品永久删除完成');
         }else{
             return back()->with('error','商品删除失败');

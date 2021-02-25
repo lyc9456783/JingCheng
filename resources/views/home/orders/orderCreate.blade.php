@@ -38,11 +38,12 @@
                             <dd class="uaddress">{{ $val['address'] }}</dd>
                          </dl>
                          <div class="actions">
+                         <a href="/home/orders/sitedelete/{{$val['id'] }}" class="modify J_addressModify" data-stat-id="8a158e0ee8f2f343">删除</a>
                            <a href="/home/orders/siteedit/{{$val['id'] }}" class="modify J_addressModify" data-stat-id="8a158e0ee8f2f343">修改</a>
                          </div> 
                         </div>
 					@endforeach
-                    <!--                         <div class="address-item J_addressItem " data-address_id="10171211619902550" data-consignee="李银昌" data-tel="156****7775" data-province_id="2" data-province_name="北京" data-city_id="36" data-city_name="北京市" data-district_id="389" data-district_name="昌平区" data-area="389018" data-area_name="沙河镇" data-address="育荣教育园 教学楼" data-tag_name="" data-zipcode="102200" data-editable="Y" data-neededit="N">
+                    <!--     <div class="address-item J_addressItem " data-address_id="10171211619902550" data-consignee="李银昌" data-tel="156****7775" data-province_id="2" data-province_name="北京" data-city_id="36" data-city_name="北京市" data-district_id="389" data-district_name="昌平区" data-area="389018" data-area_name="沙河镇" data-address="育荣教育园 教学楼" data-tag_name="" data-zipcode="102200" data-editable="Y" data-neededit="N">
                          <dl>
                             <dt>
                                 <span class="tag"></span>
@@ -142,7 +143,7 @@
                 <div class="section-header clearfix">
                     <h3 class="title">商品及优惠券</h3>
                     <div class="more">
-                    	<a href="https://static.mi.com/cart/" data-stat-id="fa422fee79a3a6e2" onclick="_msq.push(['trackEvent', '17a1f380b9d4cd2e-fa422fee79a3a6e2', '//static.mi.com/cart/', 'pcpid', '']);">返回购物车<i class="iconfont"></i></a>
+                    	<a href="/home/goods/shopcar" data-stat-id="fa422fee79a3a6e2">返回购物车<i class="iconfont"></i></a>
                     </div>
                 </div>
                 <div class="section-body">
@@ -151,14 +152,14 @@
                       
                         <li class="clearfix">
                             <div class="col col-img">
-                                <img src="{{ $v['info']->pic }}" width="30" height="30">
+                                <img src="{{ $v['gpic']}}" width="30" height="30">
                             </div>
                             <div class="col col-name">
-                                <a href="/home/goods/detail/{{ $v['info']->id }}" target="_blank">{{ $v['info']->name }}</a>
+                                <a href="/home/goods/detail/{{ $v['gid'] }}" target="_blank">{{ $v['gname']}}</a>
                             </div>
-                            <div class="col col-price" num="{{ $v['num'] }}">{{ $v['info']->discount }}元 x {{ $v['num'] }}  </div>
+                            <div class="col col-price" num="{{ $v['gnum'] }}">{{ $v['gprice'] }}元 x {{ $v['gnum'] }}  </div>
                             <div class="col col-status">&nbsp;</div>
-                            <div class="col col-total" money="{{ ($v['info']->discount)*($v['num']) }}">{{ ($v['info']->discount)*($v['num']) }}元</div>
+                            <div class="col col-total" money="{{ ($v['gprice'])*($v['gnum']) }}">{{ ($v['gprice'])*($v['gnum']) }}元</div>
                         </li>
                             
                     @endforeach
@@ -181,11 +182,11 @@
                     <ul>
                         <li class="clearfix">
                             <label>商品件数：</label>
-                            <span class="val" id="good_total_num">1件</span>
+                            <span class="val" id="good_total_num">0件</span>
                         </li>
                         <li class="clearfix">
                             <label>商品总价：</label>
-                            <span class="val" id="good_total_money1">129元</span>
+                            <span class="val" id="good_total_money1">0元</span>
                         </li>
                         <li class="clearfix">
                             <label>活动优惠：</label>
@@ -201,7 +202,7 @@
                         </li>
                         <li class="clearfix total-price">
                             <label>应付总额：</label>
-                            <span class="val"><em data-id="J_totalPrice" id="good_total_money2">129</em>元</span>
+                            <span class="val"><em data-id="J_totalPrice" id="good_total_money2">000</em>元</span>
                         </li>
                     </ul>
                 </div>
@@ -253,30 +254,31 @@
             //限制条件
             if(cmt.addid == null){
                 layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.msg('请选择收货地址！');
+                    var layer = layui.layer;
+                    layer.msg('请选择收货地址！');
                 });
                 return false;
             }
 
-            console.log(cmt);
+            // console.log(cmt);
                 // 传送订单信息,并且扣减库存
 				$.ajax({
 	                url:'/home/orders/sitesubmit',
 	                type:'get',
 	                data:cmt,
 	                success:function(msg){
-	                  if(msg == 0){
-                        //返回错误
-                        layui.use('layer', function(){
-                            var layer = layui.layer;
-                            layer.msg('错误提示');
-                        });
-                        return false;                       
-                      }else{
-                        //成功跳转
-                        location.replace('/home/orders/submitOk/'+msg);
-                      }
+                
+    	               if(msg == 0){
+                            //返回错误
+                            layui.use('layer', function(){
+                                var layer = layui.layer;
+                                layer.msg('错误提示');
+                            });
+                            return false;                       
+                          }else{
+                            //成功跳转
+                            location.replace('/home/orders/submitOk/'+msg);
+                          }
 	                },
 	                async:false,
             	});    	

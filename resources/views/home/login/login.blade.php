@@ -6,6 +6,7 @@
   <meta name="Description" content="" />
   <title>用户登录</title>
   <link rel="shortcut icon" href="/home/logo/favicon.ico" />
+  <link rel="icon" href="animated_favicon.gif" type="image/gif" />
   <link href="/home/css/login.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="/admins/lib/layui/css/layui.css">
   <script type="text/javascript" src="/home/js/common.js"></script>
@@ -137,10 +138,10 @@ $(function(){
   <div class="nl-footer">
   	<div class="nl-f-nav">
     	<span>
-                    <a href="xm.com" target="_blank" title="{{$common_configs_data->net_name}}">{{$common_configs_data->net_name}}</a>
+                    <a href="xm.com" target="_blank" title="XM-商城">xiaomi商城</a>
                             </span>
     </div>
-    <p class="nl-f-copyright">©<a href='xm.com'>{{$common_configs_data->net_name}}</a> 北京市昌平区育荣教育园 <a href='#'>歡迎來电{{$common_configs_data->net_phone}}本網站由 四骑士项目小组制作</a></p>
+    <p class="nl-f-copyright">©<a href='xm.com'>xiaomi商城</a> 北京市昌平区玉龙文化园 <a href='#'>歡迎來电13811478105本網站由 jingcheng项目小组制作</a></p>
   </div>
 </div>
 

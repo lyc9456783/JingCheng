@@ -98,9 +98,9 @@ class LoginController extends Controller
         $users = Users::where('id',$uid)->first();
         //对数据的添加进行整体的判断
         if ($res) {
-            session(['homeuser'=>$users]);
-            session(['homeflag'=>true]);
-            return back('/')-> with('success','注册成功');
+            // session(['homeuser'=>$users]);
+            // session(['homeflag'=>true]);
+            return redirect('/')-> with('success','注册成功');
         }else{
             return back()->with('error','注册失败');
         }
@@ -133,7 +133,10 @@ class LoginController extends Controller
         $users = DB::table('jc_users')->where('username','=',$username)->first();
         // dd($users);
         //判断上传的密码是否正确
-        if(Hash::check($password, $users['password'])){ 
+        if(Hash::check($password, $users['password'])){
+            $user = Users::find($users['id']); 
+            $user ->login = 1;
+            $user -> save();
             //设置登录成功之后把登录的用户信息存入到session中
             session(['homeuser'=>$users]);
             session(['homeflag'=>true]);
@@ -148,6 +151,11 @@ class LoginController extends Controller
      //退出登录
     public function logout()
     {
+        //消除登陆状态
+        $uid = session('homeuser')['id'];
+        $user = Users::find($uid);
+        $user -> login = 0;
+        $user -> save();
         //消除标记
         session()->flush();
         //清除session中的数据

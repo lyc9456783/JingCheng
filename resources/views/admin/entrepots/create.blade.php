@@ -32,13 +32,6 @@
                   <input type="int" name="num" required lay-verify="required" placeholder="请输入库存数量" autocomplete="off" class="layui-input" value="">
                 </div>
               </div>
-              <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">库存状态</label>
-                <div>
-                  <label class="radiobox"><input name="flag" value="1" type="radio">上架</label>
-                  <label class="radiobox"><input name="flag" value="0" type="radio" checked>下架</label>
-                </div>
-              </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
                   <button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>

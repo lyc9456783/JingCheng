@@ -5,7 +5,7 @@
 	<title>京城后台管理</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/home/logo/favicon.ico" />
     <link rel="stylesheet" href="/admins/css/font.css">
 	<link rel="stylesheet" href="/admins/css/xadmin.css">
     <link rel="stylesheet" href="/admins/css/swiper.min.css">
@@ -168,7 +168,7 @@
                 </li>
                 <li class="list" >
                     <a href="javascript:;">
-                        <i class="layui-icon">&#xe656;</i> 
+                        <i class="layui-icon">&#xe658;</i> 
                         收藏管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
@@ -231,6 +231,27 @@
                         </li>
                     </ul>
                 </li>
+                  <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe62c;</i> 
+                        折扣管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" style="display:none">
+                        <li>
+                            <a href="/admin/discounts/index">
+                                <i class="iconfont">&#xe6a7;</i>
+                                折扣列表
+                            </a>
+                        </li>
+                         <li>
+                            <a href="/admin/discounts/create">
+                                <i class="iconfont">&#xe6a7;</i>
+                                添加折扣商品
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="layui-icon">&#xe6b2;</i> 
@@ -275,8 +296,8 @@
                 </li>
                 <li class="list" >
                     <a href="/admin/shield/index">
-                        <i class="layui-icon">&#xe670;</i> 
-                        违禁字过滤设置
+                        <i class="layui-icon">&#x1007;</i> 
+                        违禁词管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                 </li>
@@ -365,26 +386,26 @@
                 <li class="list" >
                     <a href="javascript:;">
                         <i class="layui-icon">&#xe62a;</i> 
-                        商城公告管理
+                        商城资讯管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
                             <a href="/admin/notice/index">
                                 <i class="iconfont">&#xe6a7;</i>
-                                商城公告列表
+                                商城资讯列表
                             </a>
                         </li>
                         <li>
                             <a href="/admin/notice/create">
                                 <i class="iconfont">&#xe6a7;</i>
-                                添加商城公告
+                                添加商城资讯
                             </a>
                         </li>
                         <li>
                             <a href="/admin/notice/destroy">
                                 <i class="iconfont">&#xe6a7;</i>
-                                商城公告回收站
+                                商城资讯回收站
                             </a>
                         </li>
 

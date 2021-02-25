@@ -24,7 +24,7 @@
 		                <thead>
 		                    <tr>
 		                        <th>
-                                <input type="checkbox" name="" value="box[]">
+                                <input type="checkbox" name="" value="box[]" id="check">
                             </th>
 		                        <th>id</th>
 		                       	<th>图片</th>
@@ -78,9 +78,20 @@
     function member_show(title,url,id,w,h){
         x_admin_show(title,url,w,h);
     }
-    //点击全选
-    $('thead input[type="checkbox"]').click(function(){
-        $('tbody input').attr('checked',true);
+    //批量删除全选反选
+    $(function(){
+
+        $("#check").change(function(){
+
+            var check = $(this).is(":checked");
+
+            if(check == true){
+                $('input').attr('checked',true);
+            }else{
+                $('input').attr('checked',false);
+            }
+        })
+
     })
 
     var time = null;

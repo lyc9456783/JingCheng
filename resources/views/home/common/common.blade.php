@@ -41,74 +41,174 @@
 		        padding-left:15%;    
 		    	}
 		    .pagination span {
-		            position: relative;
-		            padding: 5px 14px;
-		            margin-left:-0.5px; 
-		            line-height: 1.42857143;
-		            color: #fff;
-		            text-decoration: none;
-		            background-color:#6D5C43;
-		            border-radius:5px; 
+	            position: relative;
+	            padding: 5px 14px;
+	            margin-left:-0.5px; 
+	            line-height: 1.42857143;
+	            color: #fff;
+	            text-decoration: none;
+	            background-color:#6D5C43;
+	            border-radius:5px; 
 		   	 	}
+		   	#mao_mao{
+	            width:30px;
+	            height:120px;
+	            border-radius:15px;  
+	            position:fixed;
+	            right:15px;
+	            bottom:40px;
+	            z-index:99999;  
+        		}
+        	img.c1{
+		          position:fixed;
+		          border-radius:10px; 
+		          top:80%;right:10px;
+		        }
 		</style>
 	</head>
 	<body>
 		<div class="site-topbar">
 			<div class="container">
 		    	<div class="topbar-nav">
-		        	<a href="mobile"  class="snc-link snc-order">手机版</a>
-		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">MIUI</a>
-		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">米聊</a>
-		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">游戏</a>
-		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">多看阅读</a>
-		            <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">云服务</a>
-		            <span class="sep">|</span>                        <a href="/mobile"  target="_blank"  class="snc-link snc-order">移动版商城</a>
-		            <span class="sep">|</span>                        <a href="article_cat.php?id=3"  class="snc-link snc-order">网店帮助分类</a>
-		            <span class="sep">|</span>                        <a href="message.php"  target="_blank"  class="snc-link snc-order">留言板</a>
-		            <span class="sep">|</span>                        <a href="goods.php?id=104"  class="snc-link snc-order">会员等级测试</a>
+		        	<a href="javascript:void(0)"  class="snc-link snc-order">手机版</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">MIUI</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">米聊</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">游戏</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">多看阅读</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">云服务</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">移动版商城</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"  class="snc-link snc-order">网店帮助分类</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">留言板</a>
+		            <span class="sep">|</span>                        <a href="javascript:;"  class="snc-link snc-order">会员等级测试</a>
 		        </div>
-		<div class="topbar-cart" id="ECS_CARTINFO">
-			<a class="cart-mini " href="/home/goods/shopcar">
-			<i class="layui-icon">&#xe657;</i>  
-		    购物车
-		    <span class="mini-cart-num J_cartNum" id="hd_cartnum">
-		    @if(session('carcount'))
-		    	({{session('carcount')}})
-		    @else
-		     	(0)
-		    @endif 
-		    </span>
-		</a>
-		
-			@if(session('goods'))
-			<div id="J_miniCartList" class="cart-menu">
-		     <ul>
-		     	@foreach(session('goods') as $v)
-	           	<li class="clearfix first">
-		            <div class="cart-item">
-		              <a class="thumb" target="_blank" href="/home/goods/detail/{{$v['id']}}">
-		                  <img width="60" height="60" src="{{$v['info']->pic}}">
-		              </a>
-		              <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
-		              <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
-		            </div>
-	        	</li>
-				@endforeach
-		    </ul>
-		    <div class="count clearfix">
-		        <span class="total">
-		            共计<em id="hd_cart_count">{{session('carcount')}}</em>件商品
-		            <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}元</em></strong>
-		        </span>
-		        <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
-		    </div>   
-		</div>
-		@else
-		<div id="J_miniCartList" class="cart-menu">
-			    <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
-		</div>
-		@endif        
-		</div>
+	@if(session('homeflag'))
+	 	{{$flag = false}}
+	 	{{$n = 0}}
+    @foreach ($common_shopcars_data as $k=>$v)
+    @if($v['uid'] == session('homeuser')['id']) 
+      	<!-- {{$flag = true}} -->
+      	<!-- {{++$n}} -->
+    @endif
+    @endforeach
+     
+	       <div class="topbar-cart" id="ECS_CARTINFO">
+	        <a class="cart-mini " href="/home/goods/shopcar">
+	        <i class="layui-icon">&#xe657;</i>  
+	          购物车
+	          <span class="mini-cart-num J_cartNum" id="hd_cartnum">
+	          @if($flag)
+	            ({{$n}})
+	          @else
+	            (0)
+	          @endif 
+	          </span>
+	      </a>
+	        @if($flag)
+	        <div id="J_miniCartList" class="cart-menu">
+	          <ul>
+	          @foreach($common_shopcars_data as $v)
+	          	@if($v['uid'] == session('homeuser')['id'])
+	              <li class="clearfix first">
+	                <div class="cart-item">
+	                  <a class="thumb"  href="/home/goods/detail/{{$v['gid']}}">
+	                      <img width="60" height="60" src="{{$v['gpic']}}">
+	                  </a>
+	                  <a class="name"  href="/home/goods/detail/{{$v['gid']}}">{{$v['gname']}}</a>
+	                  <span class="price" nums="{{$v['gnum']}}" prices="{{$v['gprice']}}">{{$v['gprice']}} x {{$v['gnum']}}</span>
+	                  <a class="btn-del delItem" href="javascript:;" onclick="car_del(this,{{$v['gid']}});">
+	                      <i class="iconfont"></i>
+	                  </a>
+	                </div>
+	            </li>
+	            @endif
+	          @endforeach
+	          </ul>
+	          <div class="count clearfix">
+	              <span class="total">
+	                  共计<em id="hd_cart_count">{{ count($common_shopcars_data) }}</em>件商品
+	                  <strong>合计：<em id="hd_cart_total">0</em><em>元</em></strong>
+	              </span>
+	              <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
+	          </div>   
+	      </div>
+	      @else
+	      <div id="J_miniCartList" class="cart-menu">
+	            <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
+	      </div>
+	      @endif        
+	    </div>
+	@else
+	        <div class="topbar-cart" id="ECS_CARTINFO">
+	        <a class="cart-mini " href="/home/goods/shopcar">
+	        <i class="layui-icon">&#xe657;</i>  
+	          购物车
+	          <span class="mini-cart-num J_cartNum" id="hd_cartnum">
+	          @if(session('goods'))
+	            ({{count(session('goods'))}})
+	          @else
+	            (0)
+	          @endif 
+	          </span>
+	      </a>
+	        @if(session('goods'))
+	        <div id="J_miniCartList" class="cart-menu">
+	          <ul>
+	          @foreach(session('goods') as $v)
+	              <li class="clearfix first">
+	                <div class="cart-item">
+	                  <a class="thumb"  href="/home/goods/detail/{{$v['id']}}">
+	                      <img width="60" height="60" src="{{$v['info']->pic}}">
+	                  </a>
+	                  <a class="name"  href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
+	                  <span class="price" nums="{{$v['num']}}" prices="{{$v['info']->discount}}">{{$v['info']->discount}} x {{$v['num']}}</span>
+	                  <a class="btn-del delItem" href="javascript:;" onclick="car_del(this,{{$v['id']}});">
+	                      <i class="iconfont"></i>
+	                  </a>
+	                </div>
+	            </li>
+	          @endforeach
+	          </ul>
+	          <div class="count clearfix">
+	              <span class="total">
+	                  共计<em id="hd_cart_count">{{ count(session('goods')) }}</em>件商品
+	                  <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}</em><em>元</em></strong>
+	              </span>
+	              <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
+	          </div>   
+	      </div>
+	      @else
+	      <div id="J_miniCartList" class="cart-menu">
+	            <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
+	      </div>
+	      @endif        
+	    </div>
+    @endif
+	    <script type="text/javascript">
+	      //获取总计
+	      var tot = 0;
+	      $('.cart-item .price').each(function(){
+	          var prices = Number($(this).attr('prices'));
+	          console.log(prices);
+	          var nums = Number($(this).attr('nums'));
+	          var sums = Number(prices*nums);
+	          tot += sums;
+	      });
+	        $('#hd_cart_total').html(tot);
+
+	       //移除购物车
+	       function car_del(obj,id){
+	        var ul = obj.parentNode.parentNode.parentNode;
+	        var li = obj.parentNode.parentNode;
+	        // obj.parent();
+	        // console.log(obj);
+	        $.get('/home/goods/delcar',{'id':id},function(data){
+	             if(data){
+	                ul.removeChild(li);
+	                location.reload(true);
+	             }
+	        });
+	      };
+	    </script>
 		<div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
               
             @if(!session('homeflag') == true)
@@ -118,19 +218,19 @@
             @else
                   @if(session("homeuser")['grade'] <= 2)
                   <span class="user">
-                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                    <a class="user-name"  href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
                       <ul class="user-menu" style="display: none;">
-                          <li><a target="_blank" href="/admin">后台管理</a></li>
+                          <li><a  href="/admin">后台管理</a></li>
                           <li><a href="/home/login/logout">退出登录</a></li>
                       </ul>
                   </span>  
                   @else
                   <span class="user">
-                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                  <a class="user-name"  href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
                     <ul class="user-menu" style="display: none;">
-                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
-                        <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
-                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
+                        <li><a  href="/home/users/index">个人中心</a></li>
+                        <li><a  href="/home/collect/index">我的收藏</a></li>
+                        <li><a  href="/home/discuss/index">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>
                 </span>
@@ -187,7 +287,7 @@
 		                    </div>
 		                </li>
 		                 @foreach ($common_cates_data as $k=>$v)
-		                 	@if($k<5)
+		                 	@if($k < 5)
 			                <li class="nav-item">
 			                  <a class="link" href="/home/goods/list/{{$v->id}}?dir={{$v->classname}}"  ><span>{{$v->classname}}</span></a>
 			                  <div class='item-children'>
@@ -201,7 +301,7 @@
 			                                    </a>
 			                                  </div>
 			                                  <div class="title"><a href="/home/goods/detail/{{$val->id}}">{{$val->name}}</a></div>
-			                                  <p class="price">{{$val->discount}}<em>元</em>元</p>
+			                                  <p class="price">{{$val->discount}}<em>元</em></p>
 			                              </li>
 			                              @endforeach
 			                          </ul>
@@ -218,9 +318,9 @@
 		        		<input class="search-text" type="text" name="search" id="keyword" value="" autocomplete="off">
 		        		<button type="submit" class="search-btn iconfont"><i class="layui-icon">&#xe615;</i></button>
 		                <div class="hot-words" >
-		                	<a href="/home/goods/detail/33" target="_blank">小米8</a>  
-			                <a href="/home/goods/detail/42" target="_blank">蓝牙耳机</a>  
-			                <a href="/home/goods/detail/43" target="_blank">小米手环</a>                  
+		                	<a href="/home/goods/detail/33" >小米8</a>  
+			                <a href="/home/goods/detail/42" >蓝牙耳机</a>  
+			                <a href="/home/goods/detail/43" >小米手环</a>                  
 			            </div>
 		           	</form>
 		        </div>
@@ -293,26 +393,26 @@
 	        <dl class="col-links">
 	      <dt>帮助中心</dt>
 	            <dd> 
-	        <a href="article.php?id=9" target="_blank" title="配送方式" rel="nofollow">配送方式</a>
+	        <a href="javascript:void(0)"  title="配送方式" rel="nofollow">配送方式</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=10" target="_blank" title="支付方式" rel="nofollow">支付方式</a>
+	        <a href="javascript:void(0)"  title="支付方式" rel="nofollow">支付方式</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=11" target="_blank" title="购物指南" rel="nofollow">购物指南</a>
+	        <a href="javascript:void(0)"  title="购物指南" rel="nofollow">购物指南</a>
 	      </dd>
 	       
 	    </dl>
 	        <dl class="col-links">
 	      <dt>服务支持</dt>
 	            <dd> 
-	        <a href="article.php?id=21" target="_blank" title="相关下载" rel="nofollow">相关下载</a>
+	        <a href="javascript:void(0)"  title="相关下载" rel="nofollow">相关下载</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=22" target="_blank" title="自助服务" rel="nofollow">自助服务</a>
+	        <a href="javascript:void(0)"  title="自助服务" rel="nofollow">自助服务</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=23" target="_blank" title="售后政策" rel="nofollow">售后政策</a>
+	        <a href="javascript:void(0)"  title="售后政策" rel="nofollow">售后政策</a>
 	      </dd>
 	       
 	    </dl>
@@ -321,13 +421,13 @@
 	        <dl class="col-links">
 	      <dt>小米之家</dt>
 	            <dd> 
-	        <a href="article.php?id=12" target="_blank" title="预约亲临到店服务" rel="nofollow">预约亲临到店服务</a>
+	        <a href="javascript:void(0)"  title="预约亲临到店服务" rel="nofollow">预约亲临到店服务</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=13" target="_blank" title="服务网点" rel="nofollow">服务网点</a>
+	        <a href="javascript:void(0)"  title="服务网点" rel="nofollow">服务网点</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=14" target="_blank" title="小米之家" rel="nofollow">小米之家</a>
+	        <a href="javascript:void(0)"  title="小米之家" rel="nofollow">小米之家</a>
 	      </dd>
 	       
 	    </dl>
@@ -336,13 +436,13 @@
 	        <dl class="col-links">
 	      <dt>关于小米</dt>
 	            <dd> 
-	        <a href="article.php?id=24" target="_blank" title="联系小米" rel="nofollow">联系小米</a>
+	        <a href="javascript:void(0)"  title="联系小米" rel="nofollow">联系小米</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=25" target="_blank" title="加入小米" rel="nofollow">加入小米</a>
+	        <a href="javascript:void(0)"  title="加入小米" rel="nofollow">加入小米</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=26" target="_blank" title="了解小米" rel="nofollow">了解小米</a>
+	        <a href="javascript:void(0)"  title="了解小米" rel="nofollow">了解小米</a>
 	      </dd>
 	       
 	    </dl>
@@ -351,13 +451,13 @@
 	        <dl class="col-links">
 	      <dt>关注小米</dt>
 	            <dd> 
-	        <a href="article.php?id=15" target="_blank" title="官方微信" rel="nofollow">官方微信</a>
+	        <a href="javascript:void(0)"  title="官方微信" rel="nofollow">官方微信</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=16" target="_blank" title="小米部落" rel="nofollow">小米部落</a>
+	        <a href="javascript:void(0)"  title="小米部落" rel="nofollow">小米部落</a>
 	      </dd>
 	            <dd> 
-	        <a href="article.php?id=17" target="_blank" title="新浪微博" rel="nofollow">新浪微博</a>
+	        <a href="javascript:void(0)"  title="新浪微博" rel="nofollow">新浪微博</a>
 	      </dd>
 	       
 	    </dl>
@@ -376,23 +476,32 @@
 	        <div style="float:left;margin:0px 4px;"><img src="{{$common_configs_data->logo}}" width="36px" height="36px"></div>
 	        <div class="info-text">
 	            <p class="sites">
-		            <a target="_blank" title="京城商城">友情链接</a> |
+		            <a  title="京城商城">友情链接</a> |
 		            @foreach ($common_links_data as $k=>$v)
-		            <a href="{{$v->lurl}}" target="_blank" title="{{$v->lsay}}">{{$v->lname}}</a> |
+		            <a href="{{$v->lurl}}"  title="{{$v->lsay}}">{{$v->lname}}</a> |
 		            @endforeach
             	</p>
 	            <p>
-	                ©<a href='javascript:;'>{{$common_configs_data->net_name}}</a> 北京市昌平区回龙观育荣教育 <a href='#'>歡迎來电{{$common_configs_data->net_phone}}本網站由 四骑士小组www.lzyc.com 製作。</a>    
+	                ©<a href='javascript:void(0)'>{{$common_configs_data->net_name}}</a> 北京市昌平区回龙观育荣教育 <a href='javascript:void(0)'>歡迎來电{{$common_configs_data->net_phone}}本網站由 四骑士小组www.lzyc.com 製作。</a>    
 	            </p>
 	        </div>
 	        <div class="info-links">
-	            <a href="#"><img src="/home/picture/cnnicverifyseal.png" alt="可信网站"></a>
-	            <a href="#"><img src="/home/picture/szfwverifyseal.gif" alt="诚信网站"></a>
-	            <a href="#"><img src="/home/picture/save.jpg" alt="网上交易保障中心"></a>
+	            <a href="javascript:;"><img src="/home/picture/cnnicverifyseal.png" alt="可信网站"></a>
+	            <a href="javascript:void(0)"><img src="/home/picture/szfwverifyseal.gif" alt="诚信网站"></a>
+	            <a href="javascript:void(0)"><img src="/home/picture/save.jpg" alt="网上交易保障中心"></a>
 	        </div>
 	    </div>
 	</div>
-	 
+	<!-- 快速返回顶部 -->
+   <img class="c1" src="/home/images/top_mao.gif" width="28px" height="100px"  id="fixed_img" title="返回顶部">
+   <script>
+   $('#fixed_img').click(function(){
+      $('body,html').animate({
+           scrollTop: 0
+         }, 1000);
+        return false;
+   })
+   </script>
 </body>
 </html>
 

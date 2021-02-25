@@ -50,6 +50,20 @@
         .gg li a:hover{
           color:orange;
         }
+        #mao_mao{
+          width:30px;
+          height:120px;
+          border-radius:15px;  
+          position:fixed;
+          right:15px;
+          bottom:40px;
+          z-index:99999;  
+        }
+        img.c1{
+          position:fixed;
+          border-radius:10px; 
+          top:80%;right:10px;
+        }
         </style>
         <!-- 公共提示消息 -->
       @if (session('success'))
@@ -73,52 +87,63 @@
     <div class="site-topbar">
       <div class="container">
           <div class="topbar-nav">
-                <a href="mobile"  class="snc-link snc-order">手机版</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">MIUI</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">米聊</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">游戏</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">多看阅读</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">云服务</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">移动版商城</a>
-                <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">网店帮助分类</a>
-                <span class="sep">|</span>                        <a href="#"  target="_blank"  class="snc-link snc-order">留言板</a>
-                <span class="sep">|</span>                        <a href="#"  class="snc-link snc-order">会员等级</a>
+                <a href="javascript:void(0)"  class="snc-link snc-order">手机版</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">MIUI</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">米聊</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">游戏</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">多看阅读</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">云服务</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">移动版商城</a>
+                <span class="sep">|</span>                        <a href="javascript:;"  class="snc-link snc-order">网店帮助分类</a>
+                <span class="sep">|</span>                        <a href="javascript:;"    class="snc-link snc-order">留言板</a>
+                <span class="sep">|</span>                        <a href="javascript:;"  class="snc-link snc-order">会员等级</a>
           </div>
-       <div class="topbar-cart" id="ECS_CARTINFO">
-        <a class="cart-mini " href="/home/goods/shopcar">
-        <i class="layui-icon">&#xe657;</i>  
-          购物车
-          <span class="mini-cart-num J_cartNum" id="hd_cartnum">
-          @if(session('carcount'))
-            ({{session('carcount')}})
-          @else
-            (0)
-          @endif 
-          </span>
-      </a>
-      
-        @if(session('goods'))
-        <div id="J_miniCartList" class="cart-menu">
-          <ul>
-          @foreach(session('goods') as $v)
+        @if(session('homeflag'))
+          {{$flag = false}}
+          {{$n = 0}}
+          @foreach ($common_shopcars_data as $k=>$v)
+          @if($v['uid'] == session('homeuser')['id']) 
+              <!-- {{$flag = true}} -->
+              <!-- {{++$n}} -->
+          @endif
+          @endforeach
+     
+         <div class="topbar-cart" id="ECS_CARTINFO">
+          <a class="cart-mini " href="/home/goods/shopcar">
+          <i class="layui-icon">&#xe657;</i>  
+            购物车
+            <span class="mini-cart-num J_cartNum" id="hd_cartnum">
+            @if($flag)
+              ({{$n}})
+            @else
+              (0)
+            @endif 
+            </span>
+        </a>
+          @if($flag)
+          <div id="J_miniCartList" class="cart-menu">
+            <ul>
+          @foreach($common_shopcars_data as $v)
+            @if($v['uid'] == session('homeuser')['id'])
               <li class="clearfix first">
                 <div class="cart-item">
-                  <a class="thumb" target="_blank" href="/home/goods/detail/{{$v['id']}}">
-                      <img width="60" height="60" src="{{$v['info']->pic}}">
+                  <a class="thumb"  href="/home/goods/detail/{{$v['gid']}}">
+                      <img width="60" height="60" src="{{$v['gpic']}}">
                   </a>
-                  <a class="name" target="_blank" href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
-                  <span class="price">{{$v['info']->discount}} x {{$v['num']}}</span>
-                  <a class="btn-del delItem" href="javascript:deleteCartGoods({{$v['id']}});">
+                  <a class="name"  href="/home/goods/detail/{{$v['gid']}}">{{$v['gname']}}</a>
+                  <span class="price" nums="{{$v['gnum']}}" prices="{{$v['gprice']}}">{{$v['gprice']}} x {{$v['gnum']}}</span>
+                  <a class="btn-del delItem" href="javascript:;" onclick="car_del(this,{{$v['gid']}});">
                       <i class="iconfont"></i>
                   </a>
                 </div>
             </li>
+            @endif
           @endforeach
           </ul>
           <div class="count clearfix">
               <span class="total">
-                  共计<em id="hd_cart_count">{{session('carcount')}}</em>件商品
-                  <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}元</em></strong>
+                  共计<em id="hd_cart_count">{{ count($common_shopcars_data) }}</em>件商品
+                  <strong>合计：<em id="hd_cart_total">0</em><em>元</em></strong>
               </span>
               <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
           </div>   
@@ -129,6 +154,79 @@
       </div>
       @endif        
     </div>
+    @else
+        <div class="topbar-cart" id="ECS_CARTINFO">
+        <a class="cart-mini " href="/home/goods/shopcar">
+        <i class="layui-icon">&#xe657;</i>  
+          购物车
+          <span class="mini-cart-num J_cartNum" id="hd_cartnum">
+          @if(session('goods'))
+            ({{count(session('goods'))}})
+          @else
+            (0)
+          @endif 
+          </span>
+      </a>
+        @if(session('goods'))
+        <div id="J_miniCartList" class="cart-menu">
+          <ul>
+          @foreach(session('goods') as $v)
+              <li class="clearfix first">
+                <div class="cart-item">
+                  <a class="thumb"  href="/home/goods/detail/{{$v['id']}}">
+                      <img width="60" height="60" src="{{$v['info']->pic}}">
+                  </a>
+                  <a class="name"  href="/home/goods/detail/{{$v['id']}}">{{$v['info']->name}}</a>
+                  <span class="price" nums="{{$v['num']}}" prices="{{$v['info']->discount}}">{{$v['info']->discount}} x {{$v['num']}}</span>
+                  <a class="btn-del delItem" href="javascript:;" onclick="car_del(this,{{$v['id']}});">
+                      <i class="iconfont"></i>
+                  </a>
+                </div>
+            </li>
+          @endforeach
+          </ul>
+          <div class="count clearfix">
+              <span class="total">
+                  共计<em id="hd_cart_count">{{ count(session('goods')) }}</em>件商品
+                  <strong>合计：<em id="hd_cart_total">{{session('carzsum')}}</em><em>元</em></strong>
+              </span>
+              <a class="btn btn-primary" href="/home/goods/shopcar">去购物车结算</a>
+          </div>   
+      </div>
+      @else
+      <div id="J_miniCartList" class="cart-menu">
+            <p class="loading">购物车中还没有商品，赶紧选购吧！</p>
+      </div>
+      @endif        
+    </div>
+    @endif
+    <script type="text/javascript">
+      //获取总计
+      var tot = 0;
+      $('.cart-item .price').each(function(){
+          var prices = Number($(this).attr('prices'));
+          console.log(prices);
+          var nums = Number($(this).attr('nums'));
+          var sums = Number(prices*nums);
+          tot += sums;
+      });
+        $('#hd_cart_total').html(tot);
+
+       //移除购物车
+       function car_del(obj,id){
+        var ul = obj.parentNode.parentNode.parentNode;
+        var li = obj.parentNode.parentNode;
+        // obj.parent();
+        // console.log(obj);
+        $.get('/home/goods/delcar',{'id':id},function(data){
+             if(data){
+                ul.removeChild(li);
+                location.reload(true);
+             }
+        });
+      };
+    </script>
+    
             <div class="topbar-info J_userInfo" id="ECS_MEMBERZONE">
               
             @if(!session('homeflag') == true)
@@ -138,19 +236,19 @@
             @else
                   @if(session("homeuser")['grade'] <= 2)
                   <span class="user">
-                    <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                    <a class="user-name"  href="javascript:;"><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
                       <ul class="user-menu" style="display: none;">
-                          <li><a target="_blank" href="/admin">后台管理</a></li>
+                          <li><a  href="/admin">后台管理</a></li>
                           <li><a href="/home/login/logout">退出登录</a></li>
                       </ul>
                   </span>  
                   @else
                   <span class="user">
-                  <a class="user-name" target="_blank" href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
+                  <a class="user-name"  href=""><span class="name">{{session("homeuser")['username']}}</span><i class="iconfont"></i></a>
                     <ul class="user-menu" style="display: none;">
-                        <li><a target="_blank" href="/home/users/index">个人中心</a></li>
-                        <li><a target="_blank" href="/home/collect/index">我的收藏</a></li>
-                        <li><a target="_blank" href="/home/discuss/index">我的评论</a></li>
+                        <li><a  href="/home/users/index">个人中心</a></li>
+                        <li><a  href="/home/collect/index">我的收藏</a></li>
+                        <li><a  href="/home/discuss/index">我的评论</a></li>
                         <li><a href="/home/login/logout">退出登录</a></li>
                     </ul>
                 </span>
@@ -207,6 +305,7 @@
                     </div>
                 </li>
                 @foreach ($cates as $k=>$v)
+                @if($k<5)
                 <li class="nav-item">
                   <a class="link" href="/home/goods/list/{{$v->id}}?dir={{$v->classname}}" ><span>{{$v->classname}}</span></a>
                   <div class='item-children'>
@@ -220,13 +319,14 @@
                                     </a>
                                   </div>
                                   <div class="title"><a href="/home/goods/detail/{$val->id}}">{{$val->name}}</a></div>
-                                  <p class="price">{{$val->discount}}<em>元</em>元</p>
+                                  <p class="price">{{$val->discount}}<em>元</em></p>
                               </li>
                               @endforeach
                           </ul>
                       </div>
                   </div>
                 </li>
+                @endif
                 @endforeach
               </ul>
           </div>
@@ -236,9 +336,9 @@
                 <input class="search-text" type="text" name="search" id="keyword" value="" autocomplete="off">
                 <button type="submit" class="search-btn iconfont"><i class="layui-icon">&#xe615;</i></button>
                     <div class="hot-words" >
-                      <a href="/home/goods/detail/33" target="_blank">小米8</a>  
-                      <a href="/home/goods/detail/42" target="_blank">蓝牙耳机</a>  
-                      <a href="/home/goods/detail/43" target="_blank">小米手环</a>                  
+                      <a href="/home/goods/detail/33" >小米8</a>  
+                      <a href="/home/goods/detail/42" >蓝牙耳机</a>  
+                      <a href="/home/goods/detail/43" >小米手环</a>                  
                   </div>
           </form>
         </div>
@@ -258,7 +358,7 @@
           	<div class="xm-slider-control">
                   @foreach ($slids as $k=>$v)
                   <div class="slide xm-slider-slide">
-                      <a target="_blank" href="{{$v['surl']}}">
+                      <a  href="javascript:;">
                           <img src="{{$v['simg']}}"/>
                       </a>
                   </div>
@@ -278,7 +378,7 @@
     </div>    
         <div class="home-hero-sub row">
             <div  style="border:1px solid #ccc;width:234px;height:170px;margin-left:12px;float:left;overflow:hidden;">
-                <div style="width:100%;height:30px;line-height:30px;background:#ccc;color:black;font-size:20px">商城公告&nbsp;　&nbsp;　&nbsp;　&nbsp;&nbsp;
+                <div style="width:100%;height:30px;line-height:30px;background:#ccc;color:black;font-size:20px">商城资讯&nbsp;　&nbsp;　&nbsp;　&nbsp;&nbsp;
                   　<a style="font-size:15px;text-align:right" href="/home/notice">更多</a>
                 </div>
                 <ul class="gg">
@@ -343,11 +443,11 @@
         	<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
             	      @foreach ($recommend2 as $k=>$v)
                     <li class="rainbow-item-1">
-                    	<a class="thumb" href="/home/goods/detail/{{$v->gid}}" target="_blank">
+                    	<a class="thumb" href="/home/goods/detail/{{$v->gid}}" >
                         	<img src="{{$v->rimg}}"/>
                         </a>
                         <h3 class="title">
-                        	<a href="/home/goods/detail/{{$v->gid}}" target="_blank">{{$v->goodrecommend['name']}}</a>
+                        	<a href="/home/goods/detail/{{$v->gid}}" >{{$v->goodrecommend['name']}}</a>
                         </h3>
                         <p class="desc">{{$v->goodrecommend['intro']}}</p>
                     </li>
@@ -384,7 +484,7 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                     <li class="brick-item brick-item-l">
-                      <a target="_blank" href="/home/goods/detail/27"><img src="/home/picture/shouji.jpg" width="234" height="614"/></a>
+                      <a  href="/home/goods/detail/27"><img src="/home/picture/shouji.jpg" width="234" height="614"/></a>
                     </li>
                 </ul>
           </div>
@@ -464,10 +564,10 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                     <li class="brick-item brick-item-m">
-                      <a target="_blank" href="/home/goods/detail/41"><img src="/home/picture/jiadian1.jpg" width="234" height="300"/></a>                    
+                      <a  href="/home/goods/detail/41"><img src="/home/picture/jiadian1.jpg" width="234" height="300"/></a>                    
                     </li>
                     <li class="brick-item brick-item-m">
-                      <a target="_blank" href="/home/goods/detail/32"><img src="/home/picture/jiadian2.jpg" width="234" height="300"/></a>                     
+                      <a  href="/home/goods/detail/32"><img src="/home/picture/jiadian2.jpg" width="234" height="300"/></a>                     
                     </li>
                 </ul>   
             </div>
@@ -486,12 +586,15 @@
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
                           {{$v->discount}}<em>元</em></p>
-                      <p class="rank">7人评价</p>
                       <div class="review-wrapper">
+                          @foreach($v->discussgoods as $kk=>$vv)
+                          @if($kk == 0)
                           <a href="javascript:void(0)">
-                              <span class="review"> 跟女神版超配的。颜值高。</span>
-                              <span class="author"> 来自于 匿名用户 的评价 </span>
+                              <span class="review" style="text-align:center">{{$vv->content}}</span>
+                              <span class="author" style="text-align:center"> 来自于 {{ $vv->userdiscuss['username'] }} 的评价 </span>
                           </a>
+                          @endif
+                          @endforeach
                       </div>
                   </li>
                   @endforeach
@@ -518,10 +621,10 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                    <li class="brick-item brick-item-m">
-                      <a target="_blank" href="/home/goods/detail/44"> <img src="/home/picture/jhphc.jpg" width="234" height="300"/> </a>                     
+                      <a  href="/home/goods/detail/44"> <img src="/home/picture/jhphc.jpg" width="234" height="300"/> </a>                     
                     </li>
                     <li class="brick-item brick-item-m">
-                        <a target="_blank" href="/home/goods/detail/45"> <img src="/home/picture/xqej.jpg" width="234" height="300"/> </a>                     
+                        <a  href="/home/goods/detail/45"> <img src="/home/picture/xqej.jpg" width="234" height="300"/> </a>                     
                     </li>
                 </ul>
                 
@@ -543,7 +646,6 @@
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
                           {{$v->discount}}<em>元</em></p>
-                      <p class="rank">0人评价</p>
                   </li>
                 @endforeach
             </ul>                                                                                             </div>
@@ -568,10 +670,10 @@
         	<div class="span4 span-first">
                 <ul class="brick-promo-list clearfix">
                   <li class="brick-item brick-item-m">
-                      <a target="_blank" href="/home/goods/detail/46"> <img src="/home/picture/xdd.jpg" width="234" height="300"/> </a>                     
+                      <a  href="/home/goods/detail/46"> <img src="/home/picture/xdd.jpg" width="234" height="300"/> </a>                     
                   </li>
                   <li class="brick-item brick-item-m">
-                      <a target="_blank" href="/home/goods/detail/47"> <img src="/home/picture/lsh.jpg" width="234" height="300"/> </a>                     
+                      <a  href="/home/goods/detail/47"> <img src="/home/picture/lsh.jpg" width="234" height="300"/> </a>                     
                   </li>
                 </ul>   
             </div>
@@ -589,13 +691,17 @@
                       </h3>
                       <p class="desc">{{$v->intro}}</p>
                       <p class="price">
-                          {{$v->discount}}<em>元</em>                      </p>
-                      <p class="rank">1人评价</p>
+                          {{$v->discount}}<em>元</em>
+                      </p>
                       <div class="review-wrapper">
-                          <a href="javascript:void(0)">
-                              <span class="review"> 猫儿很可爱，女朋友戴上萌萌哒</span>
-                              <span class="author"> 来自于 vip 的评价 </span>
-                          </a>
+                        @foreach($v->discussgoods as $kk=>$vv)
+                        @if($kk == 0)
+                        <a href="javascript:void(0)">
+                            <span class="review" style="text-align:center">{{$vv->content}}</span>
+                            <span class="author" style="text-align:center"> 来自于 {{ $vv->userdiscuss['username'] }} 的评价 </span>
+                        </a>
+                        @endif
+                        @endforeach
                       </div>
                   </li>
                 @endforeach
@@ -622,11 +728,11 @@
         	<ul class="xm-carousel-list xm-carousel-col-5-list goods-list rainbow-list clearfix J_carouselList">
         	@foreach ($recommend3 as $k=>$v)
             <li>
-                	<a class="thumb" href="/home/goods/detail/{{$v->gid}}" target="_blank">
+                	<a class="thumb" href="/home/goods/detail/{{$v->gid}}" >
                     	<img src="{{$v->rimg}}" />
                     </a>
                     <h3 class="title">
-                    	<a href="/home/goods/detail/{{$v->gid}}" target="_blank">{{$v->goodrecommend['name']}}</a>
+                    	<a href="/home/goods/detail/{{$v->gid}}" >{{$v->goodrecommend['name']}}</a>
                     </h3>
                     <p class="price">{{$v->goodrecommend['price']}}<em>元</em></p>
             </li>
@@ -645,47 +751,19 @@
 </div>
 <div class="box-bd J_brickBd">
 	<ul class="review-list clearfix">
+    @foreach($discuss as $k=>$v)
     	 <li class="review-item review-item-first">
-        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->id}}"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
-            <p class="review"><a href="goods.php?id=45">dsad</a></p>
-            <p class="author">来自于 匿名用户 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=45">小米活塞耳机标准版</a></h3>
+        	<div class="figure figure-img"><a href="/home/goods/detail/{{$v->gooddiscuss['id']}}"><img src="{{ $v->gooddiscuss['pic'] }}" style="width:230px;height:210px;margin:30px;" alt="小米活塞耳机标准版"></a></div>
+            <p class="review" style="text-align:center"><a href="goods.php?id=45"></a>{{ $v->content }}</p>
+            <p class="author" style="text-align:center">来自于 {{ $v->userdiscuss['username'] }} 的评价</p>
+            <div class="info" style="text-align:center">
+            	<h3 class="title"><a href="goods.php?id=45">{{ $v->gooddiscuss['name'] }}</a></h3>
                 <span class="sep">|</span>
-                <p class="price">89.00</p>
+                <p class="price">{{ $v->gooddiscuss['price'] }}</p>
             </div>
         </li>
-        <li class="review-item">
-        	<div class="figure figure-img"><a href="goods.php?id=45"><img src="/home/picture/45_thumb_g_1437092199733.jpg" width="296" height="220" alt="小米活塞耳机标准版"></a></div>
-            <p class="review"><a href="goods.php?id=45">dddd</a></p>
-            <p class="author">来自于 匿名用户 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=45">小米活塞耳机标准版</a></h3>
-                <span class="sep">|</span>
-                <p class="price">89.00</p>
-            </div>
-        </li>
-        <li class="review-item">
-        	<div class="figure figure-img"><a href="goods.php?id=93"><img src="/home/picture/93_thumb_g_1441056767939.jpg" width="296" height="220" alt="小米百变随身杯"></a></div>
-            <p class="review"><a href="goods.php?id=93">刚买就掉地上了，但是质量很坚固，没有摔坏</a></p>
-            <p class="author">来自于 vip 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=93">小米百变随身杯</a></h3>
-                <span class="sep">|</span>
-                <p class="price">39.00</p>
-            </div>
-        </li>
-        <li class="review-item">
-        	<div class="figure figure-img"><a href="goods.php?id=39"><img src="/home/picture/39_thumb_g_1437082747983.jpg" width="296" height="220" alt="小米水质TDS检测笔"></a></div>
-            <p class="review"><a href="goods.php?id=39">方便实用</a></p>
-            <p class="author">来自于 vip 的评价</p>
-            <div class="info">
-            	<h3 class="title"><a href="goods.php?id=39">小米水质TDS检测笔</a></h3>
-                <span class="sep">|</span>
-                <p class="price">39.00</p>
-            </div>
-        </li>
-    </ul>
+    @endforeach
+  </ul>
 </div>
 </div>
 </div>
@@ -737,13 +815,13 @@
         <dl class="col-links">
       <dt>帮助中心</dt>
             <dd> 
-        <a href="article.php?id=9" target="_blank" title="配送方式" rel="nofollow">配送方式</a>
+        <a href="javascript:void(0)"  title="配送方式" rel="nofollow">配送方式</a>
       </dd>
             <dd> 
-        <a href="article.php?id=10" target="_blank" title="支付方式" rel="nofollow">支付方式</a>
+        <a href="javascript:void(0)"  title="支付方式" rel="nofollow">支付方式</a>
       </dd>
             <dd> 
-        <a href="article.php?id=11" target="_blank" title="购物指南" rel="nofollow">购物指南</a>
+        <a href="javascript:void(0)"  title="购物指南" rel="nofollow">购物指南</a>
       </dd>
        
     </dl>
@@ -752,13 +830,13 @@
         <dl class="col-links">
       <dt>服务支持</dt>
             <dd> 
-        <a href="article.php?id=21" target="_blank" title="相关下载" rel="nofollow">相关下载</a>
+        <a href="javascript:void(0)"  title="相关下载" rel="nofollow">相关下载</a>
       </dd>
             <dd> 
-        <a href="article.php?id=22" target="_blank" title="自助服务" rel="nofollow">自助服务</a>
+        <a href="javascript:void(0)"  title="自助服务" rel="nofollow">自助服务</a>
       </dd>
             <dd> 
-        <a href="article.php?id=23" target="_blank" title="售后政策" rel="nofollow">售后政策</a>
+        <a href="javascript:void(0)"  title="售后政策" rel="nofollow">售后政策</a>
       </dd>
        
     </dl>
@@ -767,13 +845,13 @@
         <dl class="col-links">
       <dt>小米之家</dt>
             <dd> 
-        <a href="article.php?id=12" target="_blank" title="预约亲临到店服务" rel="nofollow">预约亲临到店服务</a>
+        <a href="javascript:void(0)"  title="预约亲临到店服务" rel="nofollow">预约亲临到店服务</a>
       </dd>
             <dd> 
-        <a href="article.php?id=13" target="_blank" title="服务网点" rel="nofollow">服务网点</a>
+        <a href="javascript:void(0)"  title="服务网点" rel="nofollow">服务网点</a>
       </dd>
             <dd> 
-        <a href="article.php?id=14" target="_blank" title="小米之家" rel="nofollow">小米之家</a>
+        <a href="javascript:void(0)"  title="小米之家" rel="nofollow">小米之家</a>
       </dd>
        
     </dl>
@@ -782,13 +860,13 @@
         <dl class="col-links">
       <dt>关于小米</dt>
             <dd> 
-        <a href="article.php?id=24" target="_blank" title="联系小米" rel="nofollow">联系小米</a>
+        <a href="javascript:void(0)"  title="联系小米" rel="nofollow">联系小米</a>
       </dd>
             <dd> 
-        <a href="article.php?id=25" target="_blank" title="加入小米" rel="nofollow">加入小米</a>
+        <a href="javascript:void(0)"  title="加入小米" rel="nofollow">加入小米</a>
       </dd>
             <dd> 
-        <a href="article.php?id=26" target="_blank" title="了解小米" rel="nofollow">了解小米</a>
+        <a href="javascript:void(0)"  title="了解小米" rel="nofollow">了解小米</a>
       </dd>
        
     </dl>
@@ -797,13 +875,13 @@
         <dl class="col-links">
       <dt>关注小米</dt>
             <dd> 
-        <a href="article.php?id=15" target="_blank" title="官方微信" rel="nofollow">官方微信</a>
+        <a href="javascript:void(0)"  title="官方微信" rel="nofollow">官方微信</a>
       </dd>
             <dd> 
-        <a href="article.php?id=16" target="_blank" title="小米部落" rel="nofollow">小米部落</a>
+        <a href="javascript:void(0)"  title="小米部落" rel="nofollow">小米部落</a>
       </dd>
             <dd> 
-        <a href="article.php?id=17" target="_blank" title="新浪微博" rel="nofollow">新浪微博</a>
+        <a href="javascript:void(0)"  title="新浪微博" rel="nofollow">新浪微博</a>
       </dd>
        
     </dl>
@@ -818,27 +896,36 @@
     </div>
 </div>
 <div class="site-info">
-    <div class="container">
-        <div style="float:left;margin:0px 4px;"><img src="{{$common_configs_data->logo}}" width="36px" height="36px"></div>
-        <div class="info-text">
-            <p class="sites">
-              <a href="javascript:;" target="_blank" title="京城商城">友情链接</a> |
-              @foreach ($links as $k=>$v)
-              <a href="{{$v->lurl}}" target="_blank" title="{{$v->lsay}}">{{$v->lname}}</a> |
-              @endforeach
-            </p>
-            <p>
-                ©<a href='javascript:;'>京城仿小米商城</a> 北京市昌平区回龙观育荣教育 <a href='#'>歡迎來电183-055-198-18本網站由 四骑士小组www.lzyc.com 製作。</a>    
-            </p>
-        </div>
-        <div class="info-links">
-            <a href="#"><img src="/home/picture/cnnicverifyseal.png" alt="可信网站"></a>
-            <a href="#"><img src="/home/picture/szfwverifyseal.gif" alt="诚信网站"></a>
-            <a href="#"><img src="/home/picture/save.jpg" alt="网上交易保障中心"></a>
-        </div>
-    </div>
-</div>
- 
+      <div class="container">
+          <div style="float:left;margin:0px 4px;"><img src="{{$common_configs_data->logo}}" width="36px" height="36px"></div>
+          <div class="info-text">
+              <p class="sites">
+                <a  title="京城商城">友情链接</a> |
+                @foreach ($common_links_data as $k=>$v)
+                <a href="{{$v->lurl}}"  title="{{$v->lsay}}">{{$v->lname}}</a> |
+                @endforeach
+              </p>
+              <p>
+                  ©<a href='javascript:void(0)'>{{$common_configs_data->net_name}}</a> 北京市昌平区回龙观育荣教育 <a href='javascript:void(0)'>歡迎來电{{$common_configs_data->net_phone}}本網站由 四骑士小组www.lzyc.com 製作。</a>    
+              </p>
+          </div>
+          <div class="info-links">
+              <a href="javascript:;"><img src="/home/picture/cnnicverifyseal.png" alt="可信网站"></a>
+              <a href="javascript:void(0)"><img src="/home/picture/szfwverifyseal.gif" alt="诚信网站"></a>
+              <a href="javascript:void(0)"><img src="/home/picture/save.jpg" alt="网上交易保障中心"></a>
+          </div>
+      </div>
+  </div>
+  <!-- 快速返回顶部 -->
+   <img class="c1" src="/home/images/top_mao.gif" width="28px" height="100px"  id="fixed_img" title="返回顶部">
+   <script>
+   $('#fixed_img').click(function(){
+      $('body,html').animate({
+           scrollTop: 0
+         }, 1000);
+        return false;
+   })
+   </script>
 </body>
 </html>
 

@@ -21,7 +21,7 @@
             <xblock>
                 <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button> &nbsp 
                 <!-- 用户添加 -->
-                <a href="/admin/users/create"><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button></a>
+                <a href="/admin/users/create"><button class="layui-btn" onclick=""><i class="layui-icon">&#xe608;</i>添加</button></a>
                 <!-- 计算数据总数量 -->
                 <span class="x-right" style="line-height:40px">共有数据：{{ $count }}&nbsp条</span></xblock>
             <table class="layui-table">
@@ -32,7 +32,6 @@
                         </th>
                         <th>ID</th>
                         <th>用户名</th>
-                        <th>邮箱</th>
                         <th>用户昵称</th>
                         <th>手机号</th>
                         <th>性别</th>
@@ -48,7 +47,6 @@
                         </td>
                         <td>{{ $v['id'] }}</td>
                         <td>{{ $v['username'] }}</td>
-                        <td>{{ $v['email'] }}</td>
                         <td>{{$v->Userdetails['nickname']}}</td>
                         <td>{{$v->Userdetails['phone']}}</td>
                         <td>@if($v->Userdetails['sex'] == 0)女@else男@endif</td>

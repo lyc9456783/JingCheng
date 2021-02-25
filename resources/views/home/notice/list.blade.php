@@ -19,7 +19,7 @@
 <div style="width:1250px;margin:auto;">
     <div class="shopping_mian" style="width: 100%;">
         <div class="ShoppingCart_left" style="padding-left:0px;float:left;line-height:30px;">
-            <a href="/">首页</a> &gt; <a href="/home/notice" class="blue">商城公告 &gt;</a>
+            <a href="/">首页</a> &gt; <a href="/home/notice" class="blue">商城资讯</a>
         </div>
         <form action="/home/notice" method="get" style="float:right">
             <input  type="text" style="width:170px;height:32px;border-radius:10px;" placeholder="请输入标题内容" name="search" >
@@ -27,11 +27,11 @@
         </form>
      	<div style="clear:both"></div>
     </div>
-    <font size="15">商城公告</font>
+    <font size="15">商城资讯</font>
     <div class="gg">
         <table width="1230" align="center">
         	<tr>
-        		<td>公告列表</td>
+        		<td>资讯列表</td>
         		<td style="text-align:right;">发布时间</td>
         	</tr>
         	@foreach ($notices as $k=>$v)

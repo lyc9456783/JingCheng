@@ -37,7 +37,7 @@ class EntrepotController extends Controller
                 ->join('jc_goods as g','e.gid','=','g.id')
                 ->where('g.name','like','%'.$req.'%')
                 ->select('e.id','g.name','e.num','e.flag')
-                ->paginate(5)->appends($request->input());
+                ->paginate(8)->appends($request->input());
                 // dump($data);
         //获取库存所有数据
         // $data = Entrepots::all();
@@ -71,33 +71,16 @@ class EntrepotController extends Controller
         if($res['gid'] == '0'){
             return back()->with('error','请选择商品');
         }
-
-        if($res['flag'] == '1'){
             //获取除了token以外所有上传的数据
             // $req = $request -> except(['_token']);
             //执行添加数据
-            if($res['num'] < '0'){
-                return back()->with('error','库存数量不得少于0');
-            }else{
-                $entrepots = new Entrepots;
-                $entrepots -> gid = $res['gid'];
-                $entrepots -> num = $res['num'];
-                $entrepots -> flag = '1';
-                $res = $entrepots -> save();
-            }
-            
+        if($res['num'] < '0'){
+            return back()->with('error','库存数量不得少于0');
         }else{
-            //获取除了token以外所有上传的数据
-                //执行添加数据
-            if($res['num'] < '0'){
-                return back()->with('error','库存数量不得少于0');
-            }else{
-                $entrepots = new Entrepots;
-                $entrepots -> gid = $res['gid'];
-                $entrepots -> num = $res['num'];
-                $entrepots -> flag = '0';
-                $res = $entrepots -> save();
-            }
+            $entrepots = new Entrepots;
+            $entrepots -> gid = $res['gid'];
+            $entrepots -> num = $res['num'];
+            $res = $entrepots -> save();
         }
         if($res){
             // 如果添加成功则执行
@@ -115,20 +98,6 @@ class EntrepotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //执行上下架功能
-        $data = Entrepots::find($id);
-        if($data->flag == '0'){
-            $data -> flag = '1';
-            $data -> save();
-            return back()->with('success','上架成功');
-        }else{
-            $data -> flag = '0';
-            $res = $data -> save();
-            return back()->with('success','下架成功');
-        }
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -165,7 +134,6 @@ class EntrepotController extends Controller
                 //执行修改数据
                 $entrepots = Entrepots::find($id);
                 $entrepots -> num = $res['num'];
-                $entrepots -> flag = '1';
                 $res = $entrepots -> save();
             }
         }else{
@@ -176,7 +144,6 @@ class EntrepotController extends Controller
             //执行修改数据
                 $entrepots = Entrepots::find($id);
                 $entrepots -> num = $res['num'];
-                $entrepots -> flag = '0';
                 $res = $entrepots -> save();
             }
         }

@@ -16,6 +16,7 @@
             <ul>
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
+                    <a class="" href="/home/address/create">新增地址</a>
                     <a class="" href="/home/address/index">收货地址</a>
                 </li>
             </ul>
@@ -49,7 +50,7 @@
                         商品名称
                     </th>
                     <th>
-                        用户昵称
+                        用户名称
                     </th>
                     <th>
                         评论内容  
@@ -67,7 +68,7 @@
                       {{ $v->gooddiscuss['name'] }}
                     </td>
                     <td align="center" bgcolor="#ffffff">
-                        {{ $v->userdiscuss->Userdetails['nickname'] }}
+                        {{ $v->userdiscuss['username'] }}
                     </td>
                     <td align="center" bgcolor="#ffffff">
                         {{ $v['content'] }}

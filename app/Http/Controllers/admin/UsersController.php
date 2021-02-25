@@ -23,7 +23,7 @@ class UsersController extends Controller
         $search = $request -> input('search','');  //表示如果有值就进行搜索,没有值就为空
 
         //设置查询数据库中的信息
-        $data = Users::where('username','like','%'.$search.'%')->paginate(3)->appends($request->input());
+        $data = Users::where('username','like','%'.$search.'%')->paginate(8)->appends($request->input());
 
         //设置计算数据表中所有信息的数量
         $count = DB::table('jc_users')->whereNull('deleted_at')->count();
@@ -187,22 +187,19 @@ class UsersController extends Controller
         $word = $request -> all();
         
         //首先进行原密码输入的是否正确的判断
-        if(Hash::check($word['oldpass'], $pass))
-        {   
-            if($word['newpass'] == $word['repass'])
-            {
-                $users = Users::find($id);
-                // dd($users);
-                $users -> password = Hash::make($word['repass']);
-                $users -> save();
+        
+          
+        if($word['newpass'] == $word['repass'])
+        {
+            $users = Users::find($id);
+            // dd($users);
+            $users -> password = Hash::make($word['repass']);
+            $users -> save();
 
-                return redirect('/admin/users/index')-> with('success','修改成功');   
-            }else{
-                return back()->with('error','重复密码不正确'); 
-            }
+            return redirect('/admin/users/index')-> with('success','修改成功');   
         }else{
-            return back()->with('error','原密码不正确');
-        }   
+            return back()->with('error','重复密码不正确'); 
+        }
     }
 
     /**

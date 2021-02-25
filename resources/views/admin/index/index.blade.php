@@ -1,6 +1,6 @@
 @extends('admin.common.common')
 
-@section('content')    
+@section('content')   
         <!-- 右侧主体开始 -->
         <div class="page-content">
           <div class="content">

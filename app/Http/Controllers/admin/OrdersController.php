@@ -23,7 +23,7 @@ class OrdersController extends Controller
         $search = $request -> input('search',''); 
         
         //获取订单表中的信息查询
-        $data = Orders::where('id','like','%'.$search.'%')->paginate(3)->appends($request->input());
+        $data = Orders::where('id','like','%'.$search.'%')->paginate(8)->appends($request->input());
         // dd($data);
 
         //查询订单表中的数据总数量
@@ -168,6 +168,21 @@ class OrdersController extends Controller
             return redirect('/admin/orders/index')-> with('success','修改成功');
         }else{
             return back()->with('error','修改失败');
+        }
+    }
+
+    //设置订单发货设置
+    public function fh(Request $request, $id)
+    {
+        $orders = Orders::find($id);
+        $orders -> status = 1;
+        $res = $orders -> save();
+
+        //判断添加订单是否成功
+        if ($res) {
+            return redirect('/admin/orders/index')-> with('success','订单已发货');
+        }else{
+            return back()->with('error','库存商品不足');
         }
     }
 

@@ -37,11 +37,11 @@ class GoodImagesController extends Controller
        //设置计算数据表中所有信息的数量
         $count = DB::table('jc_goods_images')->whereNull('deleted_at')->count();
         $id = $request->input('search');
-        $goods = Goods::get();
+        $goods = Goods::orderBy('id','desc')->get();
         if($id){
-            $data = GoodImages::where('gid',$id)->paginate(4)->appends($request->input());
+            $data = GoodImages::where('gid',$id)->orderBy('id','desc')->paginate(8)->appends($request->input());
         }else{   
-            $data = GoodImages::paginate(4)->appends($request->input());
+            $data = GoodImages::orderBy('id','desc')->paginate(8)->appends($request->input());
         }
         return view('admin.goodimages.index',['title'=>'商品详图','data'=>$data,'goods'=>$goods,'count'=>$count]);
     }

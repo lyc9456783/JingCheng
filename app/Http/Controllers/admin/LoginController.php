@@ -47,6 +47,9 @@ class LoginController extends Controller
      
         //查找用户名用户 并且权限是管理员
         $data = DB::table('jc_users')->where('grade','<','3')->where('username','=',$username)->first();
+        if($data == null){
+        	return back() ->with('error','没有权限');
+        }
 
         //检查密码
         if(Hash::check($password, $data['password'])){
@@ -109,10 +112,10 @@ class LoginController extends Controller
 
 
     //后台退出
-    public function loginOut()
+    public function loginOut(Request $request)
     {
-        session(['adminflag'=>false]);
-        return redirect('/admin/login/login')->with('success','退出成功');
+        $request->session()->put('adminflag',false);
+        return redirect('/admin/login')->with('success','退出成功');
 
     }
 

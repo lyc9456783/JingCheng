@@ -70,21 +70,53 @@
     	<div class="goods-list clearfix">
     		@foreach ($goods as $k=>$v)
             <div class="goods-item">
-	    	 <div class="figure figure-img">
-	           <a href="/home/goods/detail/{{$v->id}}"><img src="{{$v->pic}}" alt="{{$v->name}}" class="goodsimg" /></a>
-	         </div>
-	           <p class="desc">{{$v->intro}}</p>
-	          <h2 class="title"><a href="/home/goods/detail/{{$v->id}}" title="{{$v->name}}">{{$v->name}}</a></h2>
-	           <p class="price">
-	                本店价<font class="shop_s">{{$v->discount}}<em>元</em></font>
-	               <del>专柜价<font class="market_s">{{$v->price}}<em>元</em></font></del>
-	           </p>
+	    		<div class="figure figure-img">
+	           		<a href="/home/goods/detail/{{$v->id}}"><img src="{{$v->pic}}" alt="{{$v->name}}" class="goodsimg" /></a>
+	         	</div>
+	          	 <p class="desc">{{$v->intro}}</p>
+	         	 <h2 class="title"><a href="/home/goods/detail/{{$v->id}}" title="{{$v->name}}">{{$v->name}}</a></h2>
+					@if($v->id == $v->discounts['gid'])
+			           	<p class="price">
+			                折扣价<font class="shop_s">{{$v->discounts['discount']}}<em>元</em></font>
+			               <del>本店价<font class="market_s">{{$v->discounts['price']}}<em>元</em></font></del>
+			           	</p>
+					@else
+		        		<p class="price">
+			                本店价<font class="shop_s">{{$v->price}}<em>元</em></font>
+			           	</p>
+			  		@endif
 	            <div class="actions clearfix">
 	                <a href="javascript:onclick=collect({{$v->id}});" ids="@if(session('homeflag')){{session('homeuser')['id']}}@else 0 @endif" class="btn-like J_likeGoods"><i class="layui-icon">&#xe600;</i><span>收藏</span></a> 
-	           </div>
-	           <div class="flags"> 			
-				    <div class="flag flag-saleoff">8.4折促销</div>       
-	          </div>
+	           	</div>
+	          	@foreach($discounts as $kk=>$vv)
+	          		@if($vv['gid'] === $v->id)
+						@if($vv['describe'] ==1)
+							<div class="flags"> 			
+				    			<div class="flag flag-saleoff">半价优惠</div>       
+	          				</div>
+						@elseif($vv['describe'] ==2)
+							<div class="flags"> 			
+				    			<div class="flag flag-saleoff">立减1000</div>       
+	          				</div>
+	          			@elseif($vv['describe'] ==3)
+							<div class="flags"> 			
+				    			<div class="flag flag-saleoff">立减500</div>       
+	          				</div>
+	          			@elseif($vv['describe'] ==4)
+							<div class="flags"> 			
+				    			<div class="flag flag-saleoff">立减300</div>       
+	          				</div>
+	          			@elseif($vv['describe'] ==5)
+							<div class="flags"> 			
+				    			<div class="flag flag-saleoff">立减200</div>       
+	          				</div>
+	          			@else
+	          				<div class="flags"> 			
+				    			<div class="flag flag-saleoff">立减100</div>       
+	          				</div>
+	          			@endif
+	          		@endif
+	          	@endforeach
 	        </div>
 			@endforeach
 	        </div>

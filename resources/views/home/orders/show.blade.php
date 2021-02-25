@@ -17,6 +17,7 @@
             <ul>
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
+                    <a class="" href="/home/address/create">新增地址</a>
                     <a class="" href="/home/address/index">收货地址</a>
                 </li>
             </ul>
@@ -100,10 +101,10 @@
               <tr>
               @foreach($goods as $k=>$v)
                 <td align="center" bgcolor="#ffffff">
-                    商品总价: {{(($v->discount)*($data['num']))}} <em>元</em>+ 配送费用: 10.00<em>元</em>                                                                              </td>
+                    商品总价: {{(($v->discount)*($data['num']))}} <em>元</em>                                                                           </td>
               </tr>
               <tr>
-                <td align="center" bgcolor="#ffffff">应付款金额: {{(($v->discount)*($data['num'])+10)}}<em>元</em></td>
+                <td align="center" bgcolor="#ffffff">应付款金额: {{(($v->discount)*($data['num']))}}<em>元</em></td>
               </tr>
               @endforeach
             </tbody>
@@ -179,7 +180,7 @@
                 @foreach($goods as $k=>$v)
                 <tr>
                   <td bgcolor="#ffffff">
-                  所选支付方式: 支付宝。应付款金额: <strong>{{(($v->discount)*($data['num'])+10)}}<em>元</em></strong><br>
+                  所选支付方式: 支付宝。应付款金额: <strong>{{(($v->discount)*($data['num']))}}<em>元</em></strong><br>
                   支付宝网站(www.alipay.com) 是国内先进的网上支付平台。<br>支付宝收款接口：在线即可开通，<font color="red"><b>零预付，免年费</b></font>，单笔阶梯费率，无流量限制。<br><a href="" target="_blank"><font color="red">立即在线申请</font></a>                  </td>
                 </tr>
                 @endforeach

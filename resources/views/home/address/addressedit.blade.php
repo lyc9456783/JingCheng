@@ -1,7 +1,5 @@
 @extends('home.common.common')
 @section('content') 
-
-<br><br><br>
 <link href="/home/css/style.css" rel="stylesheet" type="text/css">
 <link href="/home/css/user.css" rel="stylesheet" type="text/css">
 <div id="wrapper" class="container">    
@@ -17,6 +15,7 @@
             <ul>
                 <li>
                     <a class="" href="/home/orders/index">我的订单</a>
+                    <a class="" href="/home/address/create">新增地址</a>
                     <a class="" href="/home/address/index">收货地址</a>
                 </li>
             </ul>
